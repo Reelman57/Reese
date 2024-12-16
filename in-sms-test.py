@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Load your Twilio credentials from environment variables
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
-twilio_number = "+12086034040" # Replace with your Twilio number
+twilio_number = "+12086034040" 
 
 client = Client(account_sid, auth_token)
 
@@ -22,4 +22,3 @@ def incoming_sms():
         to=from_number
     )
 
-    return str(message.sid)
