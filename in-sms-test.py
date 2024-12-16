@@ -22,5 +22,5 @@ def incoming_sms():
         to=from_number
     )
 
-if __name__ == "__main__":
+    if __name__ == "__main__":
     
