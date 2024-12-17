@@ -37,10 +37,6 @@ def incoming_sms():
             from_=twilio_number,
             to=from_number
         )
-
-def
-
-
         
 # def handle_sms():
 #     message = request.get_json()  # Access message data from request body
