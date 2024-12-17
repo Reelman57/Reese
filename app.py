@@ -20,13 +20,12 @@ def incoming_sms():
     msg = message_body.strip()
     lines = msg.splitlines()
 
-    # Skip the first line
     if len(lines) > 1:
         msg = "\n".join(lines[1:])
 
     if first_word == "dale":
         client.messages.create(
-        body=first_word,
+        body=msg,
         from_=twilio_number,
         to=from_number
         )
