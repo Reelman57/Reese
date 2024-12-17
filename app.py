@@ -52,7 +52,7 @@ def handle_default_response(message):
 
 @app.route("/healthcheck", methods=['GET'])
 def healthcheck():
-    return '{"status":"ok"}'
+    return '{"status": "ok", "from_number": "' + from_number + '"}'return 'f{"status":"ok" from_number}'
 
 if __name__ == "__main__":
     app.run()
