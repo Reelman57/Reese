@@ -1,4 +1,4 @@
-iimport os
+import os
 from flask import Flask, request
 from twilio.rest import Client
 
@@ -22,9 +22,9 @@ def incoming_sms():
         from_=twilio_number,
         to=from_number
         )
-    elif first_word == "trudy":
+    # elif first_word == "trudy":
        
-    else:
+    # else:
     
 if __name__ == "__main__":
     app.run()
