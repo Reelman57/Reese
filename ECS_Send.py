@@ -11,12 +11,15 @@ from twilio.rest import Client
 import time
 import pytz
 import re
+import sys
 
 # LIVE Credentials
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
+
+arg = sys.argv[1]
 
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
@@ -38,7 +41,6 @@ def send_texts(text_nbr, message):
         # schedule_type="fixed"
         # )
         sent_texts.add(row["Phone Number"])
-
 
 def send_voice(to_number, message):
 
@@ -74,9 +76,13 @@ def send_email(to_addr, subject, body):
 def get_message():
     subject = "Emergency Communications System"
     message = f"Hello {row["First_Name"]}, \n" 
-    message += "This is a test of the Westmond Ward, Emergency Communications System. \n"
-    message += "If this had been an actual emergency, you would have been instructed on how to respond. \n"
-    message += "This is only a test. \n"
+    
+    if sysarg(1): 
+        message += arg
+    else:
+        message += "This is a test of the Westmond Ward, Emergency Communications System. \n"
+        message += "If this had been an actual emergency, you would have been instructed on how to respond. \n"
+        message += "This is only a test. \n"
 
     return subject, message
 
