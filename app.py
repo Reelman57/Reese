@@ -42,6 +42,9 @@ def incoming_sms():
 
     return "SMS received and processed", 200
 
+def healthcheck():
+    return '{"status":"ok"}'
+
 if __name__ == "__main__":
     app.run(debug=True)
 
