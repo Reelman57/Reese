@@ -19,7 +19,10 @@ auth_token = os.environ['TWILIO_AUTH_TOKEN']
 twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 
-arg = sys.argv[1]
+if len(sys.argv) > 1:
+    arg = sys.argv[1]
+else:
+    arg = ""
 
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
@@ -77,9 +80,8 @@ def get_message(row):
     subject = "Emergency Communications System"
     message = f"Hello {row['First_Name']},\n"
 
-    if len(sys.argv) > 1:
-        custom_message = sys.argv[1]
-        message += custom_message + "\n"
+    if arg:
+        message += arg + "\n"
     else:
         message += "This is a test of the Westmond Ward, Emergency Communications System.\n"
         message += "If this had been an actual emergency, you would have been instructed on how to respond.\n"
@@ -110,7 +112,7 @@ for index,row in df_sorted.iterrows():
     #if row["Last_Name"] == "Thelin" and row["First_Name"] == "David":
     if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
 
-        subject, message = get_message()
+        subject, message = get_message(row)
         send_email(row['Email'], subject, message)
         send_texts(row['Phone Number'], message)
         send_voice(row['Phone Number'], message)
