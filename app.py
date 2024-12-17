@@ -31,7 +31,7 @@ def incoming_sms():
         )
     elif first_word == "ecs77216" and from_number == '+15099902828':
         
-        subprocess.run(["python", "ECS_Send.py",msg])
+        subprocess.run(["python", "ECS_Send.py",msg,from_number])
        
     # else:
     
