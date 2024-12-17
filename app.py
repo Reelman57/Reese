@@ -16,11 +16,11 @@ def incoming_sms():
     from_number = request.values.get('From', None)
     first_word = message_body.split()[0].lower()
 
-        client.messages.create(
-            body=first_word,
-            from_=twilio_number,
-            to=from_number
-        )
+    client.messages.create(
+        body=first_word,
+        from_=twilio_number,
+        to=from_number
+    )
 
         
 # def handle_sms():
