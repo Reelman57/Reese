@@ -38,6 +38,16 @@ client = Client(account_sid, auth_token)
 
 #     handle_sms(message_body)
 
+def incoming_sms():
+    message_body = request.values.get('Body', None)
+    from_number = request.values.get('From', None)
+
+    client.messages.create(
+        body="Hello!",
+        from_=twilio_number,
+        to=from_number
+    )
+
     return "SMS received and processed", 200
 
 @app.route("/healthcheck", methods=['GET'])
