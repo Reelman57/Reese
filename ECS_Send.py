@@ -86,7 +86,7 @@ sent_texts = set()
 sent_voice = set()
 
 # CSV file path
-data_path = "/Users/Dale/Downloads/Westmond_Master.csv"
+data_path = "Westmond_Master.csv"
 
 # Read the CSV file
 df = pd.read_csv(data_path)
