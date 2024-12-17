@@ -128,7 +128,7 @@ for index,row in df_sorted.iterrows():
     time.sleep(.125)
         
 message = client.messages.create(
-body = f'Message sent to {x} individuals' ,
+body = 'Message sent to ' + x + ' individuals.',
 from_='+12086034040',
 to = arg2
 )
