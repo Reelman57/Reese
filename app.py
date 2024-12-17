@@ -14,7 +14,7 @@ client = Client(account_sid, auth_token)
 def incoming_sms():
     message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
-    first_word = body.split()[0].lower()
+    first_word = message_body.split()[0].lower()
 
     if first_word == "Dale":
 
