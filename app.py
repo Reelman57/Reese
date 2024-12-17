@@ -33,7 +33,12 @@ def incoming_sms():
         
         subprocess.run(["python", "ECS_Send.py",msg,from_number])
        
-    # else:
+    else:
+        client.messages.create(
+        body='From: ' + msg,
+        from_=twilio_number,
+        to=from_number
+        )
     
 if __name__ == "__main__":
     app.run()
