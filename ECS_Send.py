@@ -98,8 +98,8 @@ with open('DO_NOT_SEND.txt', 'r') as file:
 
 for index,row in df_sorted.iterrows():
 
-    print(row["Last_Name"],row["First_Name"])
-    print(row["Phone Number"])
+    # print(row["Last_Name"],row["First_Name"])
+    # print(row["Phone Number"])
 
     #if row["Last_Name"] == "Thelin" and row["First_Name"] == "David":
     if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
@@ -109,4 +109,4 @@ for index,row in df_sorted.iterrows():
         send_texts(row['Phone Number'], message)
         send_voice(row['Phone Number'], message)
 
-    time.sleep(.25)
+    time.sleep(.125)
