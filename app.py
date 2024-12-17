@@ -16,7 +16,7 @@ def incoming_sms():
     message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
 
-    return message = client.messages.create(
+    return client.messages.create(
         body="Hello!",
         from_=twilio_number,
         to=from_number
