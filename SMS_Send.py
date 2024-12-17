@@ -44,8 +44,7 @@ def send_texts(text_nbr, message):
         message = client.messages.create(
         body = message,
         from_='+12086034040',
-        to = text_nbr
-        )
+        to = text_nbr,
         messaging_service_sid = messaging_sid,
         send_at=send_at.isoformat(),
         schedule_type="fixed"
