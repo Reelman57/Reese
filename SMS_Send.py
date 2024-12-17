@@ -16,6 +16,7 @@ import sys
 # LIVE Credentials
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
+messaging_sid= os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 
@@ -44,7 +45,7 @@ def send_texts(text_nbr, message):
         body=message,
         from_='+12086034040',
         to=text_nbr,
-        # messaging_service_sid = messaging_sid,
+        messaging_service_sid = messaging_sid,
         send_at=send_at.isoformat(),
         schedule_type="fixed"
     )
