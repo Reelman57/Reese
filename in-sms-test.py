@@ -22,7 +22,7 @@ def incoming_sms():
         to=from_number
     )
 @app.route("/healthcheck", methods=['GET'])
-def incoming_sms():
+def healthcheck():
     return '{"status":"ok"}'
 
 if __name__ == "__main__":
