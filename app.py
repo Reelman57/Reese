@@ -22,11 +22,9 @@ def incoming_sms():
     #     to=from_number
     # )
     if first_word == "dale":
-        client.messages.create(
-            body=first_word,
-            from_=twilio_number,
-            to=from_number
-        )
+
+        subprocess.run(['Send_Message_to_Dale.py'])
+
     elif first_word == "trudy":
         client.messages.create(
             body="elif",
@@ -39,6 +37,8 @@ def incoming_sms():
             from_=twilio_number,
             to=from_number
         )
+
+def
 
 
         
