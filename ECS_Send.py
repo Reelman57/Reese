@@ -13,10 +13,9 @@ import pytz
 import re
 
 # LIVE Credentials
-account_sid = "ACe5192182f6433969f03acfbfabeca240"
-messaging_sid = 'MGfa2a91d90fbd477cfa5a2de48d05b2be'
-auth_token  = "998e399acf35b27c418467e3c6672a4e"
-
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
+twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 
 def get_send_time():
