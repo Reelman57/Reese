@@ -35,7 +35,7 @@ def incoming_sms():
        
     else:
         client.messages.create(
-        body='From: '+ from_number + '/n' + msg,
+        body='From: ' + from_number + '\n' + msg,
         from_=twilio_number,
         to='+15099902828'
         )
