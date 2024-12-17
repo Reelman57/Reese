@@ -17,14 +17,21 @@ def incoming_sms():
     from_number = request.values.get('From', None)
     first_word = message_body.split()[0].lower()
 
+    msg = message_body.strip()
+    lines = msg.splitlines()
+
+    # Skip the first line
+    if len(lines) > 1:
+        msg = "\n".join(lines[1:])
+
     if first_word == "dale":
         client.messages.create(
         body=first_word,
         from_=twilio_number,
         to=from_number
         )
-    elif first_word == "trudy":
-        subprocess.run(["python", "ECS_Send.py"])
+    elif first_word == "ECS77216" and from_number = '+15099902828':
+        subprocess.run(["python", "ECS_Send.py",msg])
        
     # else:
     
