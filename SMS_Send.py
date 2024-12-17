@@ -32,23 +32,23 @@ else:
 x=0
 
 def get_send_time():
-    timezone = pytz.timezone('America/Los_Angeles')
-    now_utc = datetime.now(timezone)
-    send_at = now_utc + timedelta(minutes=5)
-    return send_at
+  timezone = pytz.timezone('America/Los_Angeles')
+  now_utc = datetime.now(timezone)
+  send_at = now_utc + timedelta(minutes=5)
+  return send_at
 
 def send_texts(text_nbr, message):
-
-    if text_nbr not in sent_texts and not pd.isna(text_nbr):
-        send_at = get_send_time()
-        message = client.messages.create(
-        body = message,
+  if text_nbr not in sent_texts and not pd.isna(text_nbr):
+    send_at = get_send_time()
+    message = client.messages.create(
+        body=message,
         from_='+12086034040',
-        to = text_nbr,
+        to=text_nbr,
         # messaging_service_sid = messaging_sid,
         send_at=send_at.isoformat(),
         schedule_type="fixed"
-        )
+    )
+
         sent_texts.add(row["Phone Number"])
 
 def send_voice(to_number, message):
@@ -115,7 +115,7 @@ for index,row in df_sorted.iterrows():
         subject, message = get_message(row)
         # send_email(row['Email'], subject, message)
         if arg1:
-          send_texts(row['Phone Number'], message)
+            send_texts(row['Phone Number'], message)
         # send_voice(row['Phone Number'], message)
         x+=1
         time.sleep(.1)
