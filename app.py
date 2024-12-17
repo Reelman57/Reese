@@ -27,6 +27,12 @@ def incoming_sms():
             from_=twilio_number,
             to=from_number
         )
+    elif first_word == "trudy":
+        client.messages.create(
+            body="elif",
+            from_=twilio_number,
+            to=from_number
+        )
     else:
         client.messages.create(
             body="else",
