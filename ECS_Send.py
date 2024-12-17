@@ -123,11 +123,13 @@ for index,row in df_sorted.iterrows():
         send_email(row['Email'], subject, message)
         send_texts(row['Phone Number'], message)
         send_voice(row['Phone Number'], message)
-
-    message = client.messages.create(
-    body = f'Message sent to {x} individuals' ,
-    from_='+12086034040',
-    to = arg2
-    )
+        
     x+=1
+        
+message = client.messages.create(
+body = f'Message sent to {x} individuals' ,
+from_='+12086034040',
+to = arg2
+)
+
     time.sleep(.125)
