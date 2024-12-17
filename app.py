@@ -10,8 +10,8 @@ auth_token = os.environ['TWILIO_AUTH_TOKEN']
 twilio_number = "+12086034040"
 
 client = Client(account_sid, auth_token)
-@app.route("/sms", methods=['POST'])
 
+@app.route("/sms", methods=['POST'])
 def handle_sms(message)
 
     body = message.body.strip()
