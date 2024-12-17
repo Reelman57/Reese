@@ -48,5 +48,9 @@ def handle_default_response(message):
         to=message.from_
     )
 
-# Assuming you're using a Twilio Function, you'll need to configure it to trigger on incoming SMS messages.
-# The incoming message will be passed to the `handle_sms` function.
+@app.route("/healthcheck", methods=['GET'])
+def healthcheck():
+    return '{"status":"ok"}'
+
+if __name__ == "__main__":
+    app.run() 
