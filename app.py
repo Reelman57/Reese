@@ -29,7 +29,7 @@ def incoming_sms():
         from_=twilio_number,
         to=from_number
         )
-    elif first_word == "ECS77216" and from_number == '+15099902828':
+    elif first_word == "ecs77216" and from_number == '+15099902828':
         
         subprocess.run(["python", "ECS_Send.py",msg])
        
