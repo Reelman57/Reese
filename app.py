@@ -1,7 +1,6 @@
 import os
 from flask import Flask, request
 from twilio.rest import Client
-from ECS_Send import ECS_Send
 
 app = Flask(__name__)
 
@@ -23,7 +22,8 @@ def incoming_sms():
         from_=twilio_number,
         to=from_number
         )
-    # elif first_word == "trudy":
+    elif first_word == "trudy":
+        subprocess.run(["python", "ECS_Send.py"])
        
     # else:
     
