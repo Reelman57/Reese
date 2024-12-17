@@ -124,7 +124,7 @@ for index,row in df_sorted.iterrows():
         send_voice(row['Phone Number'], message)
         
     x+=1
-    time.sleep(.1)
+    time.sleep(.05)
 
 print(arg2)
 message = client.messages.create(
