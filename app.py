@@ -1,59 +1,48 @@
-import os
-from flask import Flask, request
 from twilio.rest import Client
+import os
 
-app = Flask(__name__)
-
-# Load your Twilio credentials from environment variables
+# Your Account SID and Auth Token from twilio.com/console
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
-twilio_number = "+12086034040" 
+twilio_number = "+12086034040"
 
 client = Client(account_sid, auth_token)
 
-@app.route("/sms", methods=['POST'])
-# def handle_sms(message_body):
-#     first_word = message_body.split()[0]
+def handle_sms(message)
 
-#     match first_word:
-#         case "help":
-#             print("Help request received")
-#         case "status":
-#             print("Status request received")
-#         case "Hello":
-#             client.messages.create(
-#                 body=f"From: {message.from_}\nMessage: {message_body}",
-#                 from_= twilio_number ,
-#                 to="+15099902828"
-#             )
-#         case _:
-#             client.messages.create(
-#                 body=f"From: {message.from_}\nMessage: {message_body}",
-#                 from_= twilio_number ,
-#                 to="+15099902828"
-#             )
+    body = message.body.strip()
+    first_word = body.split()[0].lower()
 
-# def incoming_sms():
-#     message_body = request.values.get('Body', None)
+    if first_word == "help":
+        handle_help_request(message)
+    elif first_word == "order":
+        handle_order_request(message)
+    else:
+        handle_default_response(message)
 
-#     handle_sms(message_body)
-
-def incoming_sms():
-    message_body = request.values.get('Body', None)
-    from_number = request.values.get('From', None)
-
-    client.messages.create(
-        body="Hello!",
-        from_=twilio_number,
-        to=from_number
+def handle_help_request(message):
+    # Implement logic for handling help requests
+    response = client.messages.create(
+        body="You can use 'help' for assistance or 'order' to place an order.",
+        from_='twilio_number',
+        to=message.from_
     )
 
-    return "SMS received and processed", 200
+def handle_order_request(message):
+    # Implement logic for handling order requests
+    response = client.messages.create(
+        body="Thank you for your order! We'll process it shortly.",
+        from_='twilio_number',
+        to=message.from_
+    )
 
-@app.route("/healthcheck", methods=['GET'])
-def healthcheck():
-    return '{"status":"ok"}'
+def handle_default_response(message):
+    # Implement logic for handling default responses
+    response = client.messages.create(
+        body="Sorry, I didn't understand. Please try again.",
+        from_='twilio_number',
+        to=message.from_
+    )
 
-if __name__ == "__main__":
-    app.run(debug=True)
-
+# Assuming you're using a Twilio Function, you'll need to configure it to trigger on incoming SMS messages.
+# The incoming message will be passed to the `handle_sms` function.
