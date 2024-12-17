@@ -17,6 +17,7 @@ def handle_sms():
     body = message.get('body', '').strip()  # Extract body from message
     first_word = body.split()[0].lower()
 
+    message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
 
     if first_word == "help":
@@ -52,7 +53,7 @@ def handle_default_response(message):
 
 @app.route("/healthcheck", methods=['GET'])
 def healthcheck():
-    return '{"status": "ok", "from_number": "' + from_number + '"}'
+    return '{"status": "ok"}'
 
 if __name__ == "__main__":
     app.run()
