@@ -14,13 +14,17 @@ client = Client(account_sid, auth_token)
 def incoming_sms():
     message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
+    first_word = body.split()[0].lower()
 
-    client.messages.create(
-        body=message_body,
-        from_=twilio_number,
-        to=from_number
-    )
+    if first_word == "Dale":
 
+        client.messages.create(
+            body=first_word,
+            from_=twilio_number,
+            to=from_number
+        )
+
+        
 # def handle_sms():
 #     message = request.get_json()  # Access message data from request body
 #     body = message.get('body', '').strip()  # Extract body from message
