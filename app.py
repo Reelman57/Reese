@@ -42,6 +42,7 @@ def incoming_sms():
 
     return "SMS received and processed", 200
 
+@app.route("/healthcheck", methods=['GET'])
 def healthcheck():
     return '{"status":"ok"}'
 
