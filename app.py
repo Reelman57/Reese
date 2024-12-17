@@ -12,7 +12,6 @@ twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 
 @app.route("/sms", methods=['POST'])
-
 def handle_sms(message_body):
     first_word = message_body.split()[0]
 
@@ -34,7 +33,6 @@ def handle_sms(message_body):
                 to="+15099902828"
             )
 
-@app.route("/sms", methods=['POST'])
 def incoming_sms():
     message_body = request.values.get('Body', None)
 
