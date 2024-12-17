@@ -48,8 +48,7 @@ def send_texts(text_nbr, message):
         send_at=send_at.isoformat(),
         schedule_type="fixed"
     )
-
-        sent_texts.add(row["Phone Number"])
+    sent_texts.add(row["Phone Number"])
 
 def send_voice(to_number, message):
 
