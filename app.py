@@ -16,8 +16,6 @@ def incoming_sms():
     from_number = request.values.get('From', None)
     first_word = message_body.split()[0].lower()
 
-    if first_word == "Dale":
-
         client.messages.create(
             body=first_word,
             from_=twilio_number,
