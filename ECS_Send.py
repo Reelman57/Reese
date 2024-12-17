@@ -73,16 +73,17 @@ def send_email(to_addr, subject, body):
 
                 sent_email.add(row["Email"])
 
-def get_message():
+def get_message(row):
     subject = "Emergency Communications System"
-    message = f"Hello {row["First_Name"]}, \n" 
-    
-    if sysarg(1): 
-        message += arg
+    message = f"Hello {row['First_Name']},\n"
+
+    if len(sys.argv) > 1:
+        custom_message = sys.argv[1]
+        message += custom_message + "\n"
     else:
-        message += "This is a test of the Westmond Ward, Emergency Communications System. \n"
-        message += "If this had been an actual emergency, you would have been instructed on how to respond. \n"
-        message += "This is only a test. \n"
+        message += "This is a test of the Westmond Ward, Emergency Communications System.\n"
+        message += "If this had been an actual emergency, you would have been instructed on how to respond.\n"
+        message += "This is only a test.\n"
 
     return subject, message
 
