@@ -16,11 +16,14 @@ def incoming_sms():
     message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
 
-    message = client.messages.create(
+    return message = client.messages.create(
         body="Hello!",
         from_=twilio_number,
         to=from_number
     )
+@app.route("/healthcheck", methods=['GET'])
+def incoming_sms():
+    return '{"status":"ok"}'
 
 if __name__ == "__main__":
     app.run() 
