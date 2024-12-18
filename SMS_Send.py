@@ -35,7 +35,7 @@ x=0
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
-    send_at = now_utc + timedelta(minutes=5)
+    send_at = now_utc + timedelta(minutes=15)
     return send_at
 
 def send_texts(text_nbr, message):
