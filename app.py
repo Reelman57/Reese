@@ -24,11 +24,12 @@ def incoming_sms():
         msg = "\n".join(lines[1:])
 
     if first_word == "sms77216" and from_number == '+15099902828':
-        
         subprocess.run(["python", "SMS_Send.py",msg,from_number])
         
-    elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998') :
+    elif first_word == "cancel-sms" and from_number == '+15099902828' :
+        subprocess.run(["python", "SMS_Cancel.py",msg,from_number])
         
+    elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998') :
         subprocess.run(["python", "ECS_Send.py",msg,from_number])
        
     else:
