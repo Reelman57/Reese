@@ -33,6 +33,6 @@ message = client.messages.create(
 body='Messages cancelled',
 from_='+12086034040',
 to = arg2
-
+)
 # Call the function
 cancel_all_scheduled_messages()
