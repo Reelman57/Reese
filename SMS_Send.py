@@ -17,7 +17,7 @@ import sys
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 messaging_sid= os.environ['TWILIO_MSGNG_SID']
-twilio_number = "+15099902828"
+twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 
 if len(sys.argv) > 1:
@@ -43,7 +43,7 @@ def send_texts(text_nbr, message):
         send_at = get_send_time()
         message = client.messages.create(
             body=message,
-            from_='+12086034040',
+            from_=twilio_number,
             to=text_nbr,
             messaging_service_sid=messaging_sid,
             send_at=send_at.isoformat(),
@@ -58,7 +58,7 @@ def send_voice(to_number, message):
         call = client.calls.create(
             twiml = "<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + message + "Goodbye. </Say></Response>",
             to=to_number,
-            from_="+12086034040"
+            from_=twilio_number
         )
         sent_voice.add(row["Phone Number"])
 
@@ -122,6 +122,6 @@ for index,row in df_sorted.iterrows():
 
 message = client.messages.create(
 body=f'Message sent to {x} individuals.',
-from_='+12086034040',
+from_=twilio_number,
 to = arg2
 )
