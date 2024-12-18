@@ -40,14 +40,14 @@ def get_send_time():
 
 def send_texts(text_nbr, message):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
-        send_at = get_send_time()
+        # send_at = get_send_time()
         message = client.messages.create(
             body=message,
             from_='+12086034040',
-            to=text_nbr,
-            messaging_service_sid=messaging_sid,
-            send_at=send_at.isoformat(),
-            schedule_type="fixed"
+            to=text_nbr
+            # messaging_service_sid=messaging_sid,
+            # send_at=send_at.isoformat(),
+            # schedule_type="fixed"
         )
     sent_texts.add(row["Phone Number"])
 
@@ -107,7 +107,7 @@ with open('DO_NOT_SEND.txt', 'r') as file:
 
 for index,row in df_sorted.iterrows():
 
-    print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
+    print(row["Last_Name"], row["First_Name"], row["Phone Number"])
 
     #if row["Last_Name"] == "Thelin" and row["First_Name"] == "David":
     if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
