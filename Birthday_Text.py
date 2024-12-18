@@ -13,7 +13,8 @@ from Twilio_Mods import send_text
 
 twilio_creds()
 
-send_text(text_nbr, message):
+send_text(text_nbr, message)
+
     time.sleep(1)
 
 # Read the CSV file
