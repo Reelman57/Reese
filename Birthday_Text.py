@@ -8,10 +8,10 @@ import pytz
 from datetime import datetime, timedelta
 
 # LIVE Credentials
-account_sid = "ACe5192182f6433969f03acfbfabeca240"
-messaging_sid = 'MGfa2a91d90fbd477cfa5a2de48d05b2be'
-auth_token  = "1791ee1ad1571c8620e474348eaca865"
-
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
+messaging_sid= os.environ['TWILIO_MSGNG_SID']
+twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 
 def get_send_time():
@@ -20,16 +20,17 @@ def get_send_time():
     send_at = now_utc + timedelta(minutes=30)
     return send_at
 
-def send_text():
-    send_at = get_send_time()
-    message = client.messages.create(
-    body = msg,
-    from_='+12086034040',
-    to = phone_number,
-    messaging_service_sid = messaging_sid,
-    send_at=send_at.isoformat(),
-    schedule_type="fixed"
-            )
+def send_texts(text_nbr, message):
+    if text_nbr not in sent_texts and not pd.isna(text_nbr):
+        send_at = get_send_time()
+        message = client.messages.create(
+            body=message,
+            from_=twilio_number,
+            to=text_nbr,
+            messaging_service_sid=messaging_sid,
+            send_at=send_at.isoformat(),
+            schedule_type="fixed"
+        )
     time.sleep(1)
 
 # Read the CSV file
