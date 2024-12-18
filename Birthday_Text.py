@@ -68,7 +68,7 @@ for index, row in df_filtered.iterrows():
         msg += "Please let us know if there is anything we can do to help make it so.\n\n"
         msg += min_org
         
-        send_text()
+        send_text(phone_number,msg)
 
     else:
         phone = "not listed in LDS Tools"
@@ -80,7 +80,7 @@ for index, row in df_filtered.iterrows():
 
     for phone_number in Ministers12:
 
-        send_text()
+        send_text(phone_number,msg)
 
     #Ministering Sisters
 
@@ -91,7 +91,7 @@ for index, row in df_filtered.iterrows():
 
         for phone_number in Ministers34:
 
-            send_text()
+            send_text(phone_number,msg)
 
     #Bishopric
 
@@ -100,7 +100,7 @@ for index, row in df_filtered.iterrows():
 
     for phone_number in Bishopric:
 
-        send_text()
+        send_text(phone_number,msg)
 
     #Relief Society
 
@@ -111,4 +111,4 @@ for index, row in df_filtered.iterrows():
 
         for phone_number in ReliefSociety:
 
-            send_text()
+            send_text(phone_number,msg)
