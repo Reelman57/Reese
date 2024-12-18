@@ -40,14 +40,14 @@ def get_send_time():
 
 def send_texts(text_nbr, message):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
-        # send_at = get_send_time()
+        send_at = get_send_time()
         message = client.messages.create(
             body=message,
             from_='+12086034040',
             to=text_nbr
-            # messaging_service_sid=messaging_sid,
-            # send_at=send_at.isoformat(),
-            # schedule_type="fixed"
+            messaging_service_sid=messaging_sid,
+            send_at=send_at.isoformat(),
+            schedule_type="fixed"
         )
     sent_texts.add(row["Phone Number"])
 
