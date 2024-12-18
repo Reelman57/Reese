@@ -116,7 +116,7 @@ for index,row in df_sorted.iterrows():
     print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
 
     #if row["Last_Name"] == "Thelin" and row["First_Name"] == "David":
-    if (row["Last_Name"] == "Reese":
+    if row["Last_Name"] == "Reese":
 
         subject, message = get_message(row)
         send_email(row['Email'], subject, message)
