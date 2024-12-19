@@ -16,6 +16,8 @@ import sys
 from Twilio_Mods import twilio_creds
 from Twilio_Mods import get_send_time
 from Twilio_Mods import send_text
+from Twilio_Mods import send_voice
+from Twilio_Mods import send_email
 from Twilio_Mods import get_data
 
 twilio_creds()
@@ -30,16 +32,17 @@ if len(sys.argv) > 2:
 else:
     arg2 = "+15099902828"
 
+sent_email = set()
+sent_texts = set()
+sent_voice = set()
+
 x=0
 
-get_send_time()
+# get_send_time()
 
-send_texts(text_nbr, message)
-    sent_texts.add(row["Phone Number"])
-send_voice(to_number, message)
-    sent_voice.add(row["Phone Number"])
-send_email(to_addr, subject, body)
-    sent_email.add(row["Email"])
+# send_texts(text_nbr, message)
+# send_voice(to_number, message)
+# send_email(to_addr, subject, body)
 
 def get_message(row):
     subject = "Emergency Communications System"
@@ -53,13 +56,6 @@ def get_message(row):
         message += "This is only a test.\n"
 
     return subject, message
-
-sent_email = set()
-sent_texts = set()
-sent_voice = set()
-
-# CSV file path
-data_path = "Westmond_Master.csv"
 
 get_data()
 
