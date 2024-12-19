@@ -35,12 +35,6 @@ else:
 with open('DO_NOT_SEND.txt', 'r') as file:
     sent_texts = set(line.strip() for line in file)
 
-# get_send_time()
-
-# send_texts(text_nbr, message)
-# send_voice(to_number, message)
-# send_email(to_addr, subject, body)
-
 def get_message(row):
     subject = "Emergency Communications System"
     message = f"Hello {row['First_Name']},\n"
@@ -56,9 +50,6 @@ def get_message(row):
 
 data_path = "Westmond_Master.csv"
 x=0
-sent_email = set()
-sent_texts = set()
-sent_voice = set()
 
 df = pd.read_csv(data_path)
 df_filtered = df[(df['Age'] > 17)]
@@ -70,7 +61,7 @@ for index,row in df_sorted.iterrows():
         print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
     
         subject, message = get_message(row)
-        # send_email(row['Email'], subject, message)
+        send_email(row['Email'], subject, message)
         send_text(row['Phone Number'], message)
         send_voice(row['Phone Number'], message)
         
