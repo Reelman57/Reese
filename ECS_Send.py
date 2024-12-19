@@ -13,14 +13,20 @@ import pytz
 import re
 import sys
 
-from Twilio_Mods import twilio_creds
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
+messaging_sid= os.environ['TWILIO_MSGNG_SID']
+twilio_number = "+12086034040"
+Client = Client(account_sid, auth_token)
+
+# from Twilio_Mods import twilio_creds
 from Twilio_Mods import get_send_time
 from Twilio_Mods import send_text
 from Twilio_Mods import send_voice
 from Twilio_Mods import send_email
 from Twilio_Mods import get_data
 
-twilio_creds()
+# twilio_creds()
 
 if len(sys.argv) > 1:
     arg1 = sys.argv[1]
