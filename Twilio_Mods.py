@@ -18,7 +18,7 @@ def twilio_creds():
     auth_token = os.environ['TWILIO_AUTH_TOKEN']
     messaging_sid= os.environ['TWILIO_MSGNG_SID']
     twilio_number = "+12086034040"
-    client = Client(account_sid, auth_token)
+    Client = Client(account_sid, auth_token)
 
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
@@ -29,7 +29,7 @@ def get_send_time():
 def send_text(text_nbr, message, sent_texts=set(), Client=None):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         send_at = get_send_time()
-        message = client.messages.create(
+        message = Client.messages.create(
             body=message,
             from_=twilio_number,
             to=text_nbr,
@@ -40,7 +40,7 @@ def send_text(text_nbr, message, sent_texts=set(), Client=None):
 
 def send_voice(to_number, message, sent_voice=set(), Client=None):
     if to_number not in sent_voice and not pd.isna(to_number):
-        call = client.calls.create(
+        call = Client.calls.create(
             twiml = "<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + message + "Goodbye. </Say></Response>",
             to=to_number,
             from_=twilio_number
