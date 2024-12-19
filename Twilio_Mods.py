@@ -26,7 +26,7 @@ def get_send_time():
     send_at = now_utc + timedelta(minutes=15)
     return send_at
 
-def send_text(text_nbr, message):
+def send_text(text_nbr, message, sent_texts=set()):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         send_at = get_send_time()
         message = client.messages.create(
@@ -38,7 +38,7 @@ def send_text(text_nbr, message):
             schedule_type="fixed"
         )
 
-def send_voice(to_number, message):
+def send_voice(to_number, message, sent_voice=set()):
     if to_number not in sent_voice and not pd.isna(to_number):
         call = client.calls.create(
             twiml = "<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + message + "Goodbye. </Say></Response>",
@@ -46,8 +46,8 @@ def send_voice(to_number, message):
             from_=twilio_number
         )
 
-def send_email(to_addr, subject, body):
-    if to_addr not in sent_email:
+def send_email(to_addr, subject, body, sent_email=set()):
+    if to_addr not in sent_email and not pd.isna(to_addr):
 
         if isinstance(to_addr, str):
             msg = MIMEMultipart()
