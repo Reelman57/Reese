@@ -27,6 +27,7 @@ def get_send_time():
     return send_at
 
 def send_text(text_nbr, message):
+    import pandas as pd
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         send_at = get_send_time()
         message = client.messages.create(
