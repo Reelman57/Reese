@@ -73,7 +73,7 @@ for index,row in df_sorted.iterrows():
     
         subject, message = get_message(row)
         # send_email(row['Email'], subject, message)
-        send_texts(row['Phone Number'], message)
+        send_text(row['Phone Number'], message)
         send_voice(row['Phone Number'], message)
         
     x+=1
