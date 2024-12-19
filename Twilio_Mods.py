@@ -61,5 +61,3 @@ def get_data():
     with open('DO_NOT_SEND.txt', 'r') as file:
         sent_texts = set(line.strip() for line in file)
     
-    for index,row in df_sorted.iterrows():
-        if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
