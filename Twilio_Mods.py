@@ -51,7 +51,7 @@ def send_email(to_addr, subject, body):
                 smtp.sendmail(msg['From'], msg['To'], msg.as_string())
             sent_email.add(row["Email"])
 
-def get_data(():
+def get_data():
     data_path = "Westmond_Master.csv"
 
     df = pd.read_csv(data_path)
