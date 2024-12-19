@@ -27,8 +27,6 @@ def get_send_time():
     return send_at
 
 def send_text(text_nbr, message):
-    import pandas as pd
-    sent_texts = set()
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         send_at = get_send_time()
         message = client.messages.create(
@@ -39,24 +37,19 @@ def send_text(text_nbr, message):
             send_at=send_at.isoformat(),
             schedule_type="fixed"
         )
-        sent_texts.add(row["Phone Number"])
 
 def send_voice(to_number, message):
-    sent_voice = set()
     if to_number not in sent_voice and not pd.isna(to_number):
         call = client.calls.create(
             twiml = "<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + message + "Goodbye. </Say></Response>",
             to=to_number,
             from_=twilio_number
         )
-        sent_voice.add(row["Phone Number"])
 
 def send_email(to_addr, subject, body):
-    sent_email = set()
     if to_addr not in sent_email:
 
         if isinstance(to_addr, str):
-        
             msg = MIMEMultipart()
             msg['From'] = 'eqp77216@gmail.com'
             msg['To'] = to_addr
@@ -67,7 +60,6 @@ def send_email(to_addr, subject, body):
                 smtp.starttls()
                 smtp.login('eqp77216@gmail.com', 'ogla wwsg mnqw nmhn') 
                 smtp.sendmail(msg['From'], msg['To'], msg.as_string())
-            sent_email.add(row["Email"])
 
 def get_data():
     data_path = "Westmond_Master.csv"
