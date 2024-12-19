@@ -1,4 +1,4 @@
-def twilio-creds():
+def twilio_creds():
 # LIVE Credentials
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
