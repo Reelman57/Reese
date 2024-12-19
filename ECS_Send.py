@@ -65,13 +65,13 @@ for index,row in df_sorted.iterrows():
     
         subject, message = get_message(row)
         
-        send_email(row['Email'], subject, message)
+        send_email(row['Email'], subject, message, sent_email)
         sent_email.add(row["Email"])
         
-        send_text(row['Phone Number'], message)
+        send_text(row['Phone Number'], message, sent_texts)
         sent_texts.add(row["Phone Number"])
         
-        send_voice(row['Phone Number'], message)
+        send_voice(row['Phone Number'], message, sent_voice)
         sent_voice.add(row["Phone Number"])
         
     x+=1
