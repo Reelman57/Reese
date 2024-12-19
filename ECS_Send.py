@@ -72,7 +72,7 @@ for index,row in df_sorted.iterrows():
         print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
     
         subject, message = get_message(row)
-        send_email(row['Email'], subject, message)
+        # send_email(row['Email'], subject, message)
         send_texts(row['Phone Number'], message)
         send_voice(row['Phone Number'], message)
         
