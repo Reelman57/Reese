@@ -1,10 +1,9 @@
 def twilio_creds():
-# LIVE Credentials
-account_sid = os.environ['TWILIO_ACCOUNT_SID']
-auth_token = os.environ['TWILIO_AUTH_TOKEN']
-messaging_sid= os.environ['TWILIO_MSGNG_SID']
-twilio_number = "+12086034040"
-client = Client(account_sid, auth_token)
+    account_sid = os.environ['TWILIO_ACCOUNT_SID']
+    auth_token = os.environ['TWILIO_AUTH_TOKEN']
+    messaging_sid= os.environ['TWILIO_MSGNG_SID']
+    twilio_number = "+12086034040"
+    client = Client(account_sid, auth_token)
 
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
@@ -53,19 +52,14 @@ def send_email(to_addr, subject, body):
             sent_email.add(row["Email"])
 
 def get_data(():
-# CSV file path
-data_path = "Westmond_Master.csv"
+    data_path = "Westmond_Master.csv"
 
-# Read the CSV file
-df = pd.read_csv(data_path)
-df_filtered = df[(df['Age'] > 17)]
-df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
-
-with open('DO_NOT_SEND.txt', 'r') as file:
-    sent_texts = set(line.strip() for line in file)
-
-for index,row in df_sorted.iterrows():
-    if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
-
-
-        
+    df = pd.read_csv(data_path)
+    df_filtered = df[(df['Age'] > 17)]
+    df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
+    
+    with open('DO_NOT_SEND.txt', 'r') as file:
+        sent_texts = set(line.strip() for line in file)
+    
+    for index,row in df_sorted.iterrows():
+        if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
