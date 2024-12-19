@@ -58,6 +58,8 @@ def get_message(row):
     return subject, message
 
 get_data()
+    for index,row in df_sorted.iterrows():
+        if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
 
 print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
 
