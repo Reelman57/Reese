@@ -36,6 +36,9 @@ sent_email = set()
 sent_texts = set()
 sent_voice = set()
 
+with open('DO_NOT_SEND.txt', 'r') as file:
+    sent_texts = set(line.strip() for line in file)
+
 x=0
 
 # get_send_time()
@@ -57,7 +60,12 @@ def get_message(row):
 
     return subject, message
 
-get_data()
+data_path = "Westmond_Master.csv"
+
+df = pd.read_csv(data_path)
+df_filtered = df[(df['Age'] > 17)]
+df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
+    
 for index,row in df_sorted.iterrows():
     if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
 
