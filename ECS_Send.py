@@ -61,13 +61,13 @@ get_data()
 
 print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
 
-        subject, message = get_message(row)
-        send_email(row['Email'], subject, message)
-        send_texts(row['Phone Number'], message)
-        send_voice(row['Phone Number'], message)
+subject, message = get_message(row)
+send_email(row['Email'], subject, message)
+send_texts(row['Phone Number'], message)
+send_voice(row['Phone Number'], message)
         
-    x+=1
-    time.sleep(.05)
+x+=1
+time.sleep(.05)
 
 message = client.messages.create(
 body=f'Message sent to {x} individuals.',
