@@ -27,6 +27,7 @@ def get_send_time():
     return send_at
 
 def send_text(text_nbr, message, sent_texts=set()):
+    from twilio.rest import Client
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         send_at = get_send_time()
         message = client.messages.create(
@@ -39,6 +40,7 @@ def send_text(text_nbr, message, sent_texts=set()):
         )
 
 def send_voice(to_number, message, sent_voice=set()):
+    from twilio.rest import Client
     if to_number not in sent_voice and not pd.isna(to_number):
         call = client.calls.create(
             twiml = "<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + message + "Goodbye. </Say></Response>",
