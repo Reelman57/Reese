@@ -49,6 +49,9 @@ def get_message(row):
     return subject, message
 
 data_path = "Westmond_Master.csv"
+sent_texts = set()
+sent_voice = set()
+sent_email = set()
 x=0
 
 df = pd.read_csv(data_path)
@@ -62,8 +65,12 @@ for index,row in df_sorted.iterrows():
     
         subject, message = get_message(row)
         send_email(row['Email'], subject, message)
+        
         send_text(row['Phone Number'], message)
+        sent_texts.add(row["Phone Number"])
+        
         send_voice(row['Phone Number'], message)
+        sent_voice.add(row["Phone Number"])
         
     x+=1
     time.sleep(.05)
