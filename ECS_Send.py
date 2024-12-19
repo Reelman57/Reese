@@ -59,7 +59,7 @@ def get_message(row):
 
 get_data()
 
-    print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
+print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
 
         subject, message = get_message(row)
         send_email(row['Email'], subject, message)
