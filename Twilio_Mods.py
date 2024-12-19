@@ -28,6 +28,7 @@ def get_send_time():
 
 def send_text(text_nbr, message):
     import pandas as pd
+    sent_texts = set()
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         send_at = get_send_time()
         message = client.messages.create(
@@ -41,6 +42,7 @@ def send_text(text_nbr, message):
         sent_texts.add(row["Phone Number"])
 
 def send_voice(to_number, message):
+    sent_voice = set()
     if to_number not in sent_voice and not pd.isna(to_number):
         call = client.calls.create(
             twiml = "<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + message + "Goodbye. </Say></Response>",
@@ -50,7 +52,7 @@ def send_voice(to_number, message):
         sent_voice.add(row["Phone Number"])
 
 def send_email(to_addr, subject, body):
-
+    sent_email = set()
     if to_addr not in sent_email:
 
         if isinstance(to_addr, str):
