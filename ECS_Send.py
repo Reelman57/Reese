@@ -100,7 +100,7 @@ def send_voice(to_number, message):
     else:
         return None 
         
-def send_email(to_addr, subject, body()):
+def send_email(to_addr, subject, body):
   if to_addr not in sent_email and not pd.isna(to_addr):
     if isinstance(to_addr, str):
       try:
