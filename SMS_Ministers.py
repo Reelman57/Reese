@@ -30,7 +30,8 @@ if len(sys.argv) > 1:
         '+2086103066': 'D3',
     }.get(arg1) 
 
-if len(sys.argv) > 2 arg2 = sys.argv[2]  
+if len(sys.argv) > 2:
+    arg2 = sys.argv[2]  
 
 with open('DO_NOT_SEND.txt', 'r') as file:
     sent_texts = set(line.strip() for line in file)
