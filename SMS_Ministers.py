@@ -96,6 +96,7 @@ for x in range(1, 3):
     for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
 
         text_nbr = minister_phone
+        subj="Your Ministering Families"
 
         if x < 3: 
             Bro_Sis = "Brother"
@@ -117,7 +118,8 @@ for x in range(1, 3):
                 if not pd.isna(row['Phone Number']):
                     msg += f"  - {row['Phone Number']}"
                 msg += "\n"
-            
-                print(minister_phone,"  " ,minister_email,msg)
-                # send_text(text_nbr,msg)
-                # send_email(minister_email,subj,msg)
+
+                if minister_phone = "+15099902828":
+                    print(minister_phone,"  " ,minister_email,msg)
+                    # send_text(text_nbr,msg)
+                    # send_email(minister_email,subj,msg)
