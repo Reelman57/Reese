@@ -107,18 +107,18 @@ df_filtered = df[(df['Age'] > 17)]
 df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
     
 for index,row in df_sorted.iterrows():
-    if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
+# if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
 
-        print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
+    print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
+
+    subject, message = get_message(row)
     
-        subject, message = get_message(row)
-        
-        send_email(row['Email'], subject, message)
-        send_text(row['Phone Number'], message)
-        send_voice(row['Phone Number'], message)
-        
-    x+=1
-    time.sleep(.05)
+    send_email(row['Email'], subject, message)
+    send_text(row['Phone Number'], message)
+    send_voice(row['Phone Number'], message)
+    
+x+=1
+time.sleep(.05)
 
 message = Client.messages.create(
 body=f'Message sent to {x} individuals.',
