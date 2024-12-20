@@ -31,7 +31,7 @@ with open('DO_NOT_SEND.txt', 'r') as file:
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
-    send_at = now_utc + timedelta(minutes=30)
+    send_at = now_utc + timedelta(minutes=15)
     return send_at
     
 def send_text(text_nbr, message):
@@ -121,5 +121,5 @@ for x in range(1, 3):
 
             if minister_last == "Reese":
                 print(minister_phone,"  " ,minister_email,msg)
-                # send_text(text_nbr,msg)
+                send_text(text_nbr,msg)
                 # send_email(minister_email,subj,msg)
