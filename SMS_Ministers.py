@@ -119,7 +119,7 @@ for x in range(1, 3):
                     msg += f"  - {row['Phone Number']}"
                 msg += "\n"
 
-                if minister_phone == "+15099902828":
+                if minister_last == "Reese":
                     print(minister_phone,"  " ,minister_email,msg)
                     # send_text(text_nbr,msg)
                     # send_email(minister_email,subj,msg)
