@@ -7,15 +7,30 @@ import time
 import pytz
 from datetime import datetime, timedelta
 
-from Twilio_Mods import twilio_creds
-from Twilio_Mods import get_send_time
-from Twilio_Mods import send_text
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
+messaging_sid= os.environ['TWILIO_MSGNG_SID']
+twilio_number = "+12086034040"
+Client = Client(account_sid, auth_token)
 
-twilio_creds()
-
-send_text(text_nbr, message)
-
-    time.sleep(1)
+def get_send_time():
+    timezone = pytz.timezone('America/Los_Angeles')
+    now_utc = datetime.now(timezone)
+    send_at = now_utc + timedelta(minutes=30)
+    return send_at
+    
+def send_text(text_nbr, message):
+    if text_nbr not in sent_texts and not pd.isna(text_nbr):
+        send_at = get_send_time()
+        message = Client.messages.create(
+            body=message,
+            from_=twilio_number,
+            to=text_nbr,
+            messaging_service_sid=messaging_sid,
+            send_at=send_at.isoformat(),
+            schedule_type="fixed"
+        )
+        time.sleep(1)
 
 # Read the CSV file
 df = pd.read_csv('/Users/Dale/Downloads/Westmond_Master.csv')
