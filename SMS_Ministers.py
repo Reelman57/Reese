@@ -116,16 +116,8 @@ for x in range(1, 3):
                 msg += f"{row['Name']}"
                 if not pd.isna(row['Phone Number']):
                     msg += f"  - {row['Phone Number']}"
-                # if not pd.isna(row['Email']):
-                #     msg += f"{row['Email']}"
                 msg += "\n"
-
-            # if minister_phone not in Ministers_Sent:
-            #     send_text()
-            #     Ministers_Sent.add((minister_phone))
-            #     #send_email(minister_email,"Merry Christmas",msg)
             
-            if minister_phone == "(509) 990-2828":
-                print(minister_phone,"  " ,minister_email,"Merry Christmas",msg)
-                # send_text()
-                # send_email(minister_email,"Merry Christmas",msg)
+                print(minister_phone,"  " ,minister_email,subj,msg)
+                # send_text(text_nbr,msg)
+                # send_email(minister_email,subj,msg)
