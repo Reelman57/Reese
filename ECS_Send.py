@@ -22,14 +22,38 @@ Client = Client(account_sid, auth_token)
 sent_texts = set()
 sent_voice = set()
 sent_email = set()
-
 x=0
-
 arg1 = sys.argv[1] if len(sys.argv) > 1 else ""
 arg2 = sys.argv[2] if len(sys.argv) > 2 else "+15099902828"
 
 with open('DO_NOT_SEND.txt', 'r') as file:
     sent_texts = set(line.strip() for line in file)
+    
+data_path = "Westmond_Master.csv"
+
+df = pd.read_csv(data_path)
+df_filtered = df[(df['Age'] > 17)]
+df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
+    
+for index,row in df_sorted.iterrows():
+    if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
+
+        print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
+    
+        subject, message = get_message(row)
+        
+        send_email(row['Email'], subject, message)
+        send_text(row['Phone Number'], message)
+        send_voice(row['Phone Number'], message)
+        
+    x+=1
+    time.sleep(.05)
+
+message = Client.messages.create(
+body=f'Message sent to {x} individuals.',
+from_='+12086034040',
+to = arg2
+)
         
 def get_message(row):
     subject = "Emergency Communications System"
@@ -101,29 +125,3 @@ def send_email(to_addr, subject, body()):
       return False  # Indicate failure for invalid email format
   else:
     return False  # Indicate email not sent (already sent or invalid)
-      
-data_path = "Westmond_Master.csv"
-
-df = pd.read_csv(data_path)
-df_filtered = df[(df['Age'] > 17)]
-df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
-    
-for index,row in df_sorted.iterrows():
-    if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
-
-        print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
-    
-        subject, message = get_message(row)
-        
-        send_email(row['Email'], subject, message)
-        send_text(row['Phone Number'], message)
-        send_voice(row['Phone Number'], message)
-        
-    x+=1
-    time.sleep(.05)
-
-message = Client.messages.create(
-body=f'Message sent to {x} individuals.',
-from_='+12086034040',
-to = arg2
-)
