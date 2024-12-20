@@ -97,8 +97,13 @@ for x in range(1, 3):
     ministerx_phone = f"Minister{x}_Phone"  
     ministerx_email = f"Minister{x}_Email"  
 
-    df = df[df[ministerx].notnull()]
-    df[['Minister_Last', 'Minister_First']] = df[ministerx].str.split(',', expand=True)
+    df = df[df[ministerx].notnull()] 
+
+    try:
+        df[['Minister_Last', 'Minister_First']] = df[ministerx].str.split(',', expand=True)
+    except AttributeError as e:
+        print(f"Error splitting {ministerx}: {e}")
+        pass
 
     grouped_df = df.groupby (["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
 
