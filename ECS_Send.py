@@ -61,14 +61,10 @@ def get_message(row):
 
 def send_text(text_nbr, message):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
-        send_at = get_send_time()
         message = Client.messages.create(
             body=message,
             from_=twilio_number,
-            to=text_nbr,
-            messaging_service_sid=messaging_sid,
-            send_at=send_at.isoformat(),
-            schedule_type="fixed"
+            to=text_nbr
         )
         sent_texts.add(row["Phone Number"])
         
