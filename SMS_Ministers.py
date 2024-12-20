@@ -10,6 +10,7 @@ from email.mime.multipart import MIMEMultipart
 from twilio.rest import Client
 import time
 import pytz
+import sys
 
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
@@ -18,7 +19,7 @@ twilio_number = "+12086034040"
 Client = Client(account_sid, auth_token)
 
 sent_texts = set()
-sent_email
+sent_email = set()
 
 x=0
 arg1 = sys.argv[1] if len(sys.argv) > 1 else ""
@@ -45,7 +46,7 @@ def send_text(text_nbr, message):
           send_at=send_at.isoformat(),
           schedule_type="fixed"
           )
-          sent_texts.add(text_nbr)  # Add the actual phone number to the set
+          sent_texts.add(text_nbr)
           return message  # Return the message object
       except Exception as e:
           print(f"Error sending SMS to {text_nbr}: {e}")
