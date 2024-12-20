@@ -76,7 +76,7 @@ def send_voice(to_number, message):
     else:
         return None 
         
-def send_email(to_addr, subject, body, sent_email=set()):
+def send_email(to_addr, subject, body()):
   if to_addr not in sent_email and not pd.isna(to_addr):
     if isinstance(to_addr, str):
       try:
@@ -115,9 +115,9 @@ for index,row in df_sorted.iterrows():
     
         subject, message = get_message(row)
         
-        send_email(row['Email'], subject, message, sent_email)
-        send_text(row['Phone Number'], message, sent_texts, Client)
-        send_voice(row['Phone Number'], message, sent_voice, Client)
+        send_email(row['Email'], subject, message)
+        send_text(row['Phone Number'], message)
+        send_voice(row['Phone Number'], message)
         
     x+=1
     time.sleep(.05)
