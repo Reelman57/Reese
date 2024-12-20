@@ -19,14 +19,11 @@ messaging_sid= os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
 Client = Client(account_sid, auth_token)
 
-# from Twilio_Mods import twilio_creds
-from Twilio_Mods import get_send_time
-from Twilio_Mods import send_text
-from Twilio_Mods import send_voice
-from Twilio_Mods import send_email
-from Twilio_Mods import get_data
+sent_texts = set()
+sent_voice = set()
+sent_email = set()
 
-# twilio_creds()
+x=0
 
 if len(sys.argv) > 1:
     arg1 = sys.argv[1]
@@ -41,6 +38,14 @@ else:
 with open('DO_NOT_SEND.txt', 'r') as file:
     sent_texts = set(line.strip() for line in file)
 
+def send_text(text_nbr, message):
+    if text_nbr not in sent_texts and not pd.isna(text_nbr):
+        message = Client.messages.create(
+            body=message,
+            from_=twilio_number,
+            to=text_nbr
+        )
+        
 def get_message(row):
     subject = "Emergency Communications System"
     message = f"Hello {row['First_Name']},\n"
@@ -54,11 +59,46 @@ def get_message(row):
 
     return subject, message
 
+def send_text(text_nbr, message):
+    if text_nbr not in sent_texts and not pd.isna(text_nbr):
+        send_at = get_send_time()
+        message = Client.messages.create(
+            body=message,
+            from_=twilio_number,
+            to=text_nbr,
+            messaging_service_sid=messaging_sid,
+            send_at=send_at.isoformat(),
+            schedule_type="fixed"
+        )
+        sent_texts.add(row["Phone Number"])
+        
+def send_voice(to_number, message):
+    if to_number not in sent_voice and not pd.isna(to_number):
+        call = Client.calls.create(
+            twiml = "<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + message + "Goodbye. </Say></Response>",
+            to=to_number,
+            from_=twilio_number
+        )
+        sent_voice.add(row["Phone Number"])
+        
+def send_email(to_addr, subject, body, sent_email=set()):
+    if to_addr not in sent_email and not pd.isna(to_addr):
+
+        if isinstance(to_addr, str):
+            msg = MIMEMultipart()
+            msg['From'] = 'eqp77216@gmail.com'
+            msg['To'] = to_addr
+            msg['Subject'] = subject
+            msg.attach(MIMEText(body, 'plain'))
+
+            with smtplib.SMTP('smtp.gmail.com', 587) as smtp:  
+                smtp.starttls()
+                smtp.login('eqp77216@gmail.com', 'ogla wwsg mnqw nmhn') 
+                smtp.sendmail(msg['From'], msg['To'], msg.as_string())
+
+            sent_email.add(row["Email"])
+
 data_path = "Westmond_Master.csv"
-sent_texts = set()
-sent_voice = set()
-sent_email = set()
-x=0
 
 df = pd.read_csv(data_path)
 df_filtered = df[(df['Age'] > 17)]
@@ -72,13 +112,8 @@ for index,row in df_sorted.iterrows():
         subject, message = get_message(row)
         
         send_email(row['Email'], subject, message, sent_email)
-        sent_email.add(row["Email"])
-        
         send_text(row['Phone Number'], message, sent_texts, Client)
-        sent_texts.add(row["Phone Number"])
-        
         send_voice(row['Phone Number'], message, sent_voice, Client)
-        sent_voice.add(row["Phone Number"])
         
     x+=1
     time.sleep(.05)
