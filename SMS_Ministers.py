@@ -90,8 +90,8 @@ def send_email(to_addr, subject, body):
 
 for x in range(1, 3):
 
-df = pd.read_csv("Westmond_Master.csv")
-df = df[df['B_district'] == district] 
+    df = pd.read_csv("Westmond_Master.csv")
+    df = df[df['B_district'] == district] 
 
     ministerx = f"Minister{x}" 
     ministerx_phone = f"Minister{x}_Phone"  
