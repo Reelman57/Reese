@@ -52,7 +52,7 @@ def send_text(text_nbr, message):
                 from_=twilio_number,
                 to=text_nbr
             )
-            sent_texts.add(to_number)  # Add the actual phone number to the set
+            sent_texts.add(text_nbr)  # Add the actual phone number to the set
             return message  # Return the message object
         except Exception as e:
             print(f"Error sending SMS to {text_nbr}: {e}")
