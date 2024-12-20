@@ -118,6 +118,6 @@ for x in range(1, 3):
                     msg += f"  - {row['Phone Number']}"
                 msg += "\n"
             
-                print(minister_phone,"  " ,minister_email,subj,msg)
+                print(minister_phone,"  " ,minister_email,msg)
                 # send_text(text_nbr,msg)
                 # send_email(minister_email,subj,msg)
