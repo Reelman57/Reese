@@ -5,6 +5,7 @@ from datetime import datetime
 from twilio.rest import Client
 import time
 import pytz
+import os
 from datetime import datetime, timedelta
 
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
