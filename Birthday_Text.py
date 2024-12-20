@@ -20,7 +20,7 @@ def get_send_time():
     return send_at
     
 def send_text(text_nbr, message):
-    if text_nbr not in sent_texts and not pd.isna(text_nbr):
+    if text_nbr not pd.isna(text_nbr):
         send_at = get_send_time()
         message = Client.messages.create(
             body=message,
