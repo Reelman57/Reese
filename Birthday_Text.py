@@ -30,7 +30,7 @@ def send_text(text_nbr, message):
             send_at=send_at.isoformat(),
             schedule_type="fixed"
         )
-        time.sleep(1)
+    time.sleep(1)
 
 # Read the CSV file
 df = pd.read_csv('/Users/Dale/Downloads/Westmond_Master.csv')
