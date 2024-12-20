@@ -22,16 +22,17 @@ sent_texts = set()
 sent_email = set()
 
 x=0
-if len(sys.argv) > 1:
+
+if len(sys.argv) > 2:
     arg1 = sys.argv[1]
+    
+if len(sys.argv) > 1:
+    arg2 = sys.argv[2]
     district = {
         '+15099902828': 'D1',
         '+19722819991': 'D2',
-        '+2086103066': 'D3',
-    }.get(arg1) 
-
-if len(sys.argv) > 2:
-    arg2 = sys.argv[2]  
+        '+12086103066': 'D3',
+    }.get(arg2) 
 
 with open('DO_NOT_SEND.txt', 'r') as file:
     sent_texts = set(line.strip() for line in file)
