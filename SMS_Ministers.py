@@ -119,7 +119,7 @@ for x in range(1, 3):
 
         msg = f"{Bro_Sis} {minister_last}, \n"
         msg += f"{arg1}\n\n"
-        msg += f"Your {min_org},\n\n"
+        # msg += f"Your {min_org},\n\n"
         
         msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
         # msg += f"{minister_phone}\n\n"
@@ -133,5 +133,5 @@ for x in range(1, 3):
 
             # if minister_last == "Reese":
                 print(minister_phone,"  " ,minister_email,msg)
-                # send_text(text_nbr,msg)
+                send_text(text_nbr,msg)
                 # send_email(minister_email,subj,msg)
