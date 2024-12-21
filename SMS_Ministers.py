@@ -59,6 +59,7 @@ def send_text(text_nbr, message):
           schedule_type="fixed"
           )
           sent_texts.add(text_nbr)
+          time.sleep(1)
           return message  # Return the message object
       except Exception as e:
           print(f"Error sending SMS to {text_nbr}: {e}")
