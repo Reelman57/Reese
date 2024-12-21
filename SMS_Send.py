@@ -62,13 +62,14 @@ df = pd.read_csv(data_path)
 df_filtered = df[(df['Age'] > 17)]
 df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
 
-for index,row in df_sorted.iterrows():
+for index, row in df_sorted.iterrows():
+    print(row["Last_Name"], row["First_Name"], row["Phone Number"]) 
 
-    print(row["Last_Name"], row["First_Name"], row["Phone Number"])
+    message = get_message(row)
 
-    subject, message = get_message(row)
     if arg1:
-        send_text(row['Phone Number'], message)
+        if not pd.isna(row['Phone Number']):  # Check for missing phone numbers
+            send_text(row['Phone Number'], message)
     
     x+=1
     time.sleep(.5)
