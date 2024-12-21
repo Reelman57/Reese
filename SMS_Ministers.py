@@ -94,12 +94,17 @@ def send_email(to_addr, subject, body):
 
 df = pd.read_csv("Westmond_Master.csv") 
 
-for x in range(1, 5):
-    if district and district[0] == 'S' and x > 2:
-        df_filtered = df[df['S_District'] == district]
-    else:
-        df_filtered = df[df['B_District'] == district]
+if district and district[0] == 'S' and x > 2:
+    df_filtered = df[df['S_District'] == district]
+    y==3
+    z==5
+else:
+    df_filtered = df[df['B_District'] == district]
+    y==1
+    z==3
 
+for x in range(y, z):
+    
     ministerx = f"Minister{x}"
     ministerx_phone = f"Minister{x}_Phone"
     ministerx_email = f"Minister{x}_Email"
