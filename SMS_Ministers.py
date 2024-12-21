@@ -97,10 +97,10 @@ sent_to = "Your message has been sent to the following:\n"
 df = pd.read_csv("Westmond_Master.csv") 
 
 if district and district[0] == 'S':
-    df_filtered = df[df['S_District'] == district]
+    df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
     r = range(3, 5)  
 else:
-    df_filtered = df[df['B_District'] == district]
+    df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
     r = range(1, 3)
 
 for x in r: 
@@ -150,7 +150,7 @@ for x in r:
             print(minister_phone,"  " ,minister_email,msg)
             send_text(text_nbr,msg)
             # send_email(minister_email,subj,msg)
-            sent_to += f"{minister_last}, {minister_first}"
+            sent_to += f"{minister_last}, {minister_first}\n"
 
 sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
 message = Client.messages.create(
