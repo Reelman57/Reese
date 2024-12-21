@@ -96,12 +96,12 @@ df = pd.read_csv("Westmond_Master.csv")
 
 if district and district[0] == 'S' and x > 2:
     df_filtered = df[df['S_District'] == district]
-    y==3
-    z==5
+    y=3
+    z=5
 else:
     df_filtered = df[df['B_District'] == district]
-    y==1
-    z==3
+    y=1
+    z=3
 
 for x in range(y, z):
     
