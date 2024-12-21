@@ -92,14 +92,19 @@ def send_email(to_addr, subject, body):
   else:
     return False  # Indicate email not sent (already sent or invalid)
 
+sent_to = "Your message has been sent to the following:\n"
+
 df = pd.read_csv("Westmond_Master.csv") 
 
-for x in range(1, 5):
-    if district and district[0] == 'S':
-        df_filtered = df[df['S_District'] == district]
-    else:
-        df_filtered = df[df['B_District'] == district]
+if district and district[0] == 'S':
+    df_filtered = df[df['S_District'] == district]
+    r = range(3, 5)  
+else:
+    df_filtered = df[df['B_District'] == district]
+    r = range(1, 3)
 
+for x in r: 
+    
     ministerx = f"Minister{x}"
     ministerx_phone = f"Minister{x}_Phone"
     ministerx_email = f"Minister{x}_Email"
@@ -145,9 +150,11 @@ for x in range(1, 5):
             print(minister_phone,"  " ,minister_email,msg)
             send_text(text_nbr,msg)
             # send_email(minister_email,subj,msg)
+            sent_to += f"{minister_last}, {minister_first}"
 
+sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
 message = Client.messages.create(
-body=f'Your messages have been scheduled.',
+body= sent_to,
 from_='+12086034040',
 to = arg2
 )
