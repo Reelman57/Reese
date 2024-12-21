@@ -98,11 +98,11 @@ for x in range(1, 5):
     if district and district[0] == 'S' and x > 2:
         df_filtered = df[df['S_District'] == district]
     else:
-        df_filtered = df[df['B_District'] == district] 
+        df_filtered = df[df['B_District'] == district]
 
-    ministerx = f"Minister{x}" 
-    ministerx_phone = f"Minister{x}_Phone"  
-    ministerx_email = f"Minister{x}_Email"  
+    ministerx = f"Minister{x}"
+    ministerx_phone = f"Minister{x}_Phone"
+    ministerx_email = f"Minister{x}_Email"
 
     df = df_filtered[df_filtered[ministerx].notnull()] 
 
