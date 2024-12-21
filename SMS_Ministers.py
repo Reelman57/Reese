@@ -92,7 +92,7 @@ def send_email(to_addr, subject, body):
   else:
     return False  # Indicate email not sent (already sent or invalid)
 
-for x in range(1, 5):
+for x in range(1, 3):
 
     df = pd.read_csv("Westmond_Master.csv")
     if district and district[0] == 'S': 
