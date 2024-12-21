@@ -26,10 +26,10 @@ def incoming_sms():
     if first_word == "sms77216" and from_number == '+15099902828':
         subprocess.run(["python", "SMS_Send.py",msg,from_number])
         
-    elif first_word == "min77216" and from_number == '+15099902828' :
+    elif first_word == "min77216":
         subprocess.run(["python", "SMS_Ministers.py",msg,from_number])
 
-    elif first_word == "cancel-sms" and from_number == '+15099902828' :
+    elif first_word == "cancel-sms":
         subprocess.run(["python", "SMS_Cancel.py",msg,from_number])
         
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998') :
