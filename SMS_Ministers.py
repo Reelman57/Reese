@@ -94,31 +94,29 @@ def send_email(to_addr, subject, body):
 
 df = pd.read_csv("Westmond_Master.csv") 
 
-for x in range(1, 3):
-
-    if district and district[0] == 'S' and x > 2:
+for x in range(1, 5):
+    if district and district[0] == 'S':
         df_filtered = df[df['S_District'] == district]
     else:
         df_filtered = df[df['B_District'] == district]
-  
-        ministerx = f"Minister{x}"
-        ministerx_phone = f"Minister{x}_Phone"
-        ministerx_email = f"Minister{x}_Email"
-    
-        df = df_filtered[df_filtered[ministerx].notnull()]
-    
-        df[ministerx] = df[ministerx].fillna('')
-    
-        try:
-            df[['Minister_Last', 'Minister_First']] = df[ministerx].str.split(',', expand=True)
-        except AttributeError as e:
-            print(f"Error splitting {ministerx} for {index}: {e}")
-            continue  # Skip to the next iteration of the outer for loop
-    
-        grouped_df = df.groupby (["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
+
+    ministerx = f"Minister{x}"
+    ministerx_phone = f"Minister{x}_Phone"
+    ministerx_email = f"Minister{x}_Email"
+
+    df_filtered = df_filtered[df_filtered[ministerx].notnull()]
+    df_filtered[ministerx] = df_filtered[ministerx].fillna('')
+
+    try:
+        df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True) 
+    except AttributeError as e:
+        print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
+        continue  # Skip to the next iteration of the outer for loop
+
+    grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
 
     for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
-
+  
         text_nbr = minister_phone
         subj="Your Ministering Families"
 
@@ -148,6 +146,11 @@ for x in range(1, 3):
             send_text(text_nbr,msg)
             # send_email(minister_email,subj,msg)
 
+message = Client.messages.create(
+body=f'Your messages have been scheduled.',
+from_='+12086034040',
+to = arg2
+)
 message = Client.messages.create(
 body=f'Messages have been scheduled by {arg2}',
 from_='+12086034040',
