@@ -92,22 +92,27 @@ def send_email(to_addr, subject, body):
   else:
     return False  # Indicate email not sent (already sent or invalid)
 
-for x in range(1, 3):
+df = pd.read_csv("Westmond_Master.csv") 
 
-    df = pd.read_csv("Westmond_Master.csv")
-    if district and district[0] == 'S': 
-        df = df[df['S_District'] == district]
+for x in range(1, 5):
+    if district and district[0] == 'S' and x > 2:
+        df_filtered = df[df['S_District'] == district]
     else:
-        df = df[df['B_District'] == district] 
+        df_filtered = df[df['B_District'] == district] 
 
-    ministerx = f"Minister{x}" 
-    ministerx_phone = f"Minister{x}_Phone"  
-    ministerx_email = f"Minister{x}_Email"  
+    ministerx = f"Minister{x}" 
+    ministerx_phone = f"Minister{x}_Phone"  
+    ministerx_email = f"Minister{x}_Email"  
 
-    df = df[df[ministerx].notnull()] 
+    df = df_filtered[df_filtered[ministerx].notnull()] 
 
     df[ministerx] = df[ministerx].fillna('')
-    df[['Minister_Last', 'Minister_First']] = df[ministerx].str.split(',', expand=True)
+
+    try:
+        df[['Minister_Last', 'Minister_First']] = df[ministerx].str.split(',', expand=True)
+    except AttributeError as e:
+        print(f"Error splitting {ministerx} for {index}: {e}")
+        continue  # Skip to the next iteration of the outer for loop
 
     grouped_df = df.groupby (["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
 
