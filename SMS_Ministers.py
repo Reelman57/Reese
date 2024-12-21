@@ -104,7 +104,7 @@ for x in range(1, 5):
     ministerx_phone = f"Minister{x}_Phone"
     ministerx_email = f"Minister{x}_Email"
 
-    df = df_filtered[df_filtered[ministerx].notnull()] 
+    df = df_filtered[df_filtered[ministerx].notnull()]
 
     df[ministerx] = df[ministerx].fillna('')
 
@@ -121,7 +121,7 @@ for x in range(1, 5):
         text_nbr = minister_phone
         subj="Your Ministering Families"
 
-        if x < 3: 
+        if x < 3:
             Bro_Sis = "Brother"
             min_org = "Elders Quorum Presidency"
         else:
