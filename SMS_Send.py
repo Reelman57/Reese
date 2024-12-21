@@ -55,7 +55,7 @@ def get_message(row):
 data_path = "Westmond_Master.csv"
 
 df = pd.read_csv(data_path)
-df_filtered = df[(df['Age'] > 17) & (df['Last_Name(0)'] < "M")]
+df_filtered = df[(df['Age'] > 17) & (df['Last_Name'].str[0] < "M")]
 df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
 
 for index, row in df_sorted.iterrows():
