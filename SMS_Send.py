@@ -27,22 +27,27 @@ def get_send_time():
     now_utc = datetime.now(timezone)
     send_at = now_utc + timedelta(minutes=15)
     return send_at
-
+    
 def send_text(text_nbr, message):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
-        try:
-            message = Client.messages.create(
-                body=message,
-                from_=twilio_number,
-                to=text_nbr
-            )
-            sent_texts.add(text_nbr)  # Add the actual phone number to the set
-            return message  # Return the message object
-        except Exception as e:
-            print(f"Error sending SMS to {text_nbr}: {e}")
-            return None  # Return None to indicate failure
+      try:
+          send_at = get_send_time()
+          message = Client.messages.create(
+          body=message,
+          from_=twilio_number,
+          to=text_nbr,
+          messaging_service_sid=messaging_sid,
+          send_at=send_at.isoformat(),
+          schedule_type="fixed"
+          )
+          sent_texts.add(text_nbr)
+          time.sleep(1)
+          return message  # Return the message object
+      except Exception as e:
+          print(f"Error sending SMS to {text_nbr}: {e}")
+          return None  # Return None to indicate failure
     else:
-        return None 
+      return None 
 
 def get_message(row):
     message = f"Hello {row['First_Name']},\n"
@@ -61,17 +66,16 @@ for index,row in df_sorted.iterrows():
 
     print(row["Last_Name"], row["First_Name"], row["Phone Number"])
 
-    if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
-
-        subject, message = get_message(row)
-        if arg1:
-            send_text(row['Phone Number'], message)
-       
-        x+=1
-        time.sleep(.1)
+    subject, message = get_message(row)
+    if arg1:
+        send_text(row['Phone Number'], message)
+    
+    x+=1
+    time.sleep(.5)
 
 message = Client.messages.create(
 body=f'Message sent to {x} individuals.',
 from_=twilio_number,
 to = arg2
 )
+
