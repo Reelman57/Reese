@@ -32,6 +32,9 @@ if len(sys.argv) > 1:
         '+15099902828': 'D1',
         '+19722819991': 'D2',
         '+12086103066': 'D3',
+        '+12086102929': 'SD1,
+        '+12089201618': 'SD2,
+        '+15093449400': 'SD3
     }.get(arg2) 
 
 with open('DO_NOT_SEND.txt', 'r') as file:
@@ -89,10 +92,13 @@ def send_email(to_addr, subject, body):
   else:
     return False  # Indicate email not sent (already sent or invalid)
 
-for x in range(1, 3):
+for x in range(1, 5):
 
     df = pd.read_csv("Westmond_Master.csv")
-    df = df[df['B_District'] == district] 
+    if district and district[0] == 'S': 
+        df = df[df['S_District'] == district]
+    else:
+        df = df[df['B_District'] == district] 
 
     ministerx = f"Minister{x}" 
     ministerx_phone = f"Minister{x}_Phone"  
@@ -135,3 +141,9 @@ for x in range(1, 3):
             print(minister_phone,"  " ,minister_email,msg)
             send_text(text_nbr,msg)
             # send_email(minister_email,subj,msg)
+
+message = Client.messages.create(
+body=f'Messages have been scheduled by {arg2}',
+from_='+12086034040',
+to = '+15099902828'
+)
