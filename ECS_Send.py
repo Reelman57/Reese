@@ -109,7 +109,7 @@ df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
 for index,row in df_sorted.iterrows():
 # if row["Last_Name"] == "Reese" and row["First_Name"] == "Dale":
 
-    print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
+    # print(x, row["Last_Name"], row["First_Name"], row["Phone Number"])
 
     subject, message = get_message(row)
     
