@@ -88,27 +88,27 @@ def incoming_sms():
             msg += msg_in + "\n"
 
             if not pd.isna(row['Phone Number']):
-                # send_text(row['Phone Number'], msg)
+                send_text(row['Phone Number'], msg)
                 x += 1
 
-            Client.messages.create(
-                body=f'Message sent to {x} individuals.',
-                from_=twilio_number,
-                to=from_number
-            )
+        Client.messages.create(
+            body=f'Message scheduled to {x} individuals.',
+            from_=twilio_number,
+            to=from_number
+        )
     # ----------------------------------------------------------------
     elif first_word == "min77216":
-        subprocess.run(["python", "SMS_Ministers.py", msg, from_number])
+        subprocess.run(["python", "SMS_Ministers.py", msg_in, from_number])
 
     elif first_word == "cancel-sms":
-        subprocess.run(["python", "SMS_Cancel.py", msg, from_number])
+        subprocess.run(["python", "SMS_Cancel.py", msg_in, from_number])
 
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
-        subprocess.run(["python", "SMS_Send.py", msg, from_number])
+        subprocess.run(["python", "SMS_Send.py", msg_in, from_number])
 
     else:
         Client.messages.create(
-            body='From: ' + from_number + '\n' + msg,
+            body='From: ' + from_number + '\n' + msg_in,
             from_=twilio_number,
             to='+15099902828'
         )
