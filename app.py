@@ -18,8 +18,6 @@ messaging_sid = os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
 Client = Client(account_sid, auth_token)
 
-@app.route("/sms", methods=['POST'])
-
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
@@ -63,6 +61,7 @@ def is_valid_phone_number(phone_number):
     except phonenumbers.NumberParseException:
         return False
         
+@app.route("/sms", methods=['POST'])        
 def incoming_sms():
     message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
