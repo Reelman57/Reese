@@ -77,7 +77,7 @@ def incoming_sms():
     if first_word == "sms77216" and from_number == '+15099902828':
         
         with open('DO_NOT_SEND.txt', 'r') as file:
-        sent_texts = set(line.strip() for line in file)
+            sent_texts = set(line.strip() for line in file)
         x = 0
         data_path = "Westmond_Master.csv"
         df_filtered = process_data(data_path)
@@ -106,7 +106,7 @@ def incoming_sms():
         subprocess.run(["python", "ECS_Send.py",msg,from_number])
        
     else:
-        client.messages.create(
+        Client.messages.create(
         body='From: ' + from_number + '\n' + msg,
         from_=twilio_number,
         to='+15099902828'
