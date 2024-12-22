@@ -26,7 +26,6 @@ def get_send_time():
     send_at = now_utc + timedelta(minutes=15)
     return send_at.isoformat()
 
-
 def send_text(text_nbr, message):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         try:
@@ -46,12 +45,6 @@ def send_text(text_nbr, message):
             return None  # Return None to indicate failure
     else:
         return None
-
-def get_message(row):
-    message = f"Hello {row['First_Name']},\n"
-    if arg1:
-        message += arg1 + "\n"
-    return message
 
 def process_data(data_path):
     df = pd.read_csv(data_path)
@@ -90,13 +83,12 @@ def incoming_sms():
         df_filtered = process_data(data_path)
 
         for index, row in df_filtered.iterrows():
-            message = get_message(row)
-
-            if message:
-                if not pd.isna(row['Phone Number']):  # Check for missing phone numbers
-                    print(["Last_Name"])
-                    send_text(row['Phone Number'], message)
-                    x+=1
+            message = f"Hello {row['First_Name']},\n"
+            message += msg + "\n"
+            if not pd.isna(row['Phone Number']):  # Check for missing phone numbers
+                print(["Last_Name"])
+                send_text(row['Phone Number'], message)
+                x+=1
 
         message = Client.messages.create(
         body=f'Message sent to {x} individuals.',
