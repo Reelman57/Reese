@@ -102,14 +102,14 @@ def incoming_sms():
         
     if first_word == "sms77216" and from_number == '+15099902828':
    
-    data_list = process_data("Westmond_Master.csv")
-    num_messages_sent = sms_send(msg_in, data_list)
-
-    Client.messages.create(
-        body=f'Message scheduled to {num_messages_sent} individuals.',
-        from_=twilio_number,
-        to=from_number
-    )
+        data_list = process_data("Westmond_Master.csv")
+        num_messages_sent = sms_send(msg_in, data_list)
+    
+        Client.messages.create(
+            body=f'Message scheduled to {num_messages_sent} individuals.',
+            from_=twilio_number,
+            to=from_number
+        )
         
     elif first_word == "min77216":
         subprocess.run(["python", "SMS_Ministers.py", msg_in, from_number])
