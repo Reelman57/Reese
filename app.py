@@ -74,8 +74,8 @@ def incoming_sms():
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
 
-    # with open('DO_NOT_SEND.txt', 'r') as file:
-    #     sent_texts = set(line.strip() for line in file)
+    with open('DO_NOT_SEND.txt', 'r') as file:
+        sent_texts = set(line.strip() for line in file)
     x = 0
 
     # ----------------------------------------------------------------
@@ -86,10 +86,8 @@ def incoming_sms():
         for index, row in df_filtered.iterrows():
             msg = f"Hello {row['First_Name']},\n"
             msg += msg_in + "\n"
-
-            if not pd.isna(row['Phone Number']):
-                send_text(row['Phone Number'], msg)
-                x += 1
+            send_text(row['Phone Number'], msg)
+            x += 1
 
         Client.messages.create(
             body=f'Message scheduled to {x} individuals.',
