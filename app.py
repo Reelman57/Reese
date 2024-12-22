@@ -18,7 +18,7 @@ account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 messaging_sid = os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
-Client = Client(account_sid, auth_token)
+client = Client(account_sid, auth_token)
 sent_texts = set()
 
 def get_send_time():
@@ -31,8 +31,8 @@ def send_text(text_nbr, message):
    
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         try:
-            Client = Client(account_sid, auth_token) 
-            message = Client.messages.create(
+            client = Client(account_sid, auth_token) 
+            message = client.messages.create(
                 body=message,
                 from_=twilio_number,
                 to=text_nbr,
@@ -83,7 +83,7 @@ def sms_send(msg_in, data_list):
         x += 1 
   return x 
 
-    # Client.messages.create(
+    # client.messages.create(
     #     body=f'Message scheduled to {x} individuals.',
     #     from_=twilio_number,
     #     to=from_number
@@ -105,7 +105,7 @@ def incoming_sms():
         data_list = process_data("Westmond_Master.csv")
         num_messages_sent = sms_send(msg_in, data_list)
     
-        Client.messages.create(
+        client.messages.create(
             body=f'Message scheduled to {num_messages_sent} individuals.',
             from_=twilio_number,
             to=from_number
@@ -121,7 +121,7 @@ def incoming_sms():
         subprocess.run(["python", "SMS_Send.py", msg_in, from_number])
 
     else:
-        Client.messages.create(
+        client.messages.create(
             body='From: ' + from_number + '\n' + msg_in,
             from_=twilio_number,
             to='+15099902828'
