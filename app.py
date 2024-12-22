@@ -41,6 +41,7 @@ def send_text(text_nbr, message):
                 schedule_type="fixed"
             )
             sent_texts.add(text_nbr)
+            print(f"DEBUG: Added {text_nbr} to sent_texts") 
             return True
         except Exception as e:
             print(f"Error sending SMS to {text_nbr}: {e}")
@@ -67,7 +68,7 @@ def is_valid_phone_number(phone_number):
         return False
 
 def sms_send(msg_in, data_list):
-  x = 0
+
   with ThreadPoolExecutor(max_workers=10) as executor:
     futures = []
     for data in data_list:
@@ -80,14 +81,7 @@ def sms_send(msg_in, data_list):
     for future in futures:
       result = future.result()
       if result: 
-        x += 1 
-  return x 
-
-    # client.messages.create(
-    #     body=f'Message scheduled to {x} individuals.',
-    #     from_=twilio_number,
-    #     to=from_number
-    # )
+  return
  
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
@@ -110,6 +104,7 @@ def incoming_sms():
             from_=twilio_number,
             to=from_number
         )
+        return f"Successfully sent SMS to {num_messages_sent} recipients."
         
     elif first_word == "min77216":
         subprocess.run(["python", "SMS_Ministers.py", msg_in, from_number])
