@@ -59,9 +59,9 @@ def process_data(data_path):
     df_filtered = df[df['Age'] > 17]
     df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number']]
     df_filtered = df_filtered.dropna(subset=['Phone Number'])
-# Filter out invalid phone numbers
     df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
-    df_filtered = df_filtered[df_filtered['is_valid_phone']]
+    df_filtered = df_filtered[df_filtered['is_valid_phone']]  # Keep only valid phone numbers
+
     return df_filtered
 
 def is_valid_phone_number(phone_number):
