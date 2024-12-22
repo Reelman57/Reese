@@ -20,11 +20,13 @@ arg2 = sys.argv[2] if len(sys.argv) > 2 else "+15099902828"
 with open('DO_NOT_SEND.txt', 'r') as file:
     sent_texts = set(line.strip() for line in file)
 
+
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
     send_at = now_utc + timedelta(minutes=15)
     return send_at.isoformat()
+
 
 def send_text(text_nbr, message):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
@@ -55,18 +57,18 @@ def get_message(row):
 data_path = "Westmond_Master.csv"
 
 df = pd.read_csv(data_path)
-df_filtered = df[(df['Age'] > 17) & (df['Last_Name'].str[0] >= "M")]
-df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
+# df_filtered = df[(df['Age'] > 17) & (df['Last_Name'].str[0] >= "M")]
+df_filtered = df[(df['Age'] > 17)]
+# df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
 
-for index, row in df_sorted.iterrows():
+for index, row in df_filtered.iterrows():
     print(row["Last_Name"], row["First_Name"], row["Phone Number"]) 
 
     message = get_message(row)
 
     if arg1:
         if not pd.isna(row['Phone Number']):  # Check for missing phone numbers
-            send_text(row['Phone Number'], message)
-    
+            # send_text(row['Phone Number'], message)
     x+=1
 
 message = Client.messages.create(
