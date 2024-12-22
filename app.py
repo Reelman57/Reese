@@ -52,13 +52,13 @@ def process_data(data_path):
     df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number']]
     df_filtered = df_filtered.dropna(subset=['Phone Number'])
     df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
-    df_filtered = df_filtered[df_filtered['is_valid_phone']]  # Keep only valid phone numbers
+    df_filtered = df_filtered[df_filtered['is_valid_phone']]
 
     return df_filtered
 
 def is_valid_phone_number(phone_number):
     try:
-        parsed_number = phonenumbers.parse(phone_number, region="US")  # Replace "US" with the appropriate region code
+        parsed_number = phonenumbers.parse(phone_number, region="US")
         return phonenumbers.is_valid_number(parsed_number)
     except phonenumbers.NumberParseException:
         return False
@@ -75,8 +75,8 @@ def incoming_sms():
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
         
-    with open('DO_NOT_SEND.txt', 'r') as file:
-        sent_texts = set(line.strip() for line in file)
+    # with open('DO_NOT_SEND.txt', 'r') as file:
+    #     sent_texts = set(line.strip() for line in file)
     x = 0
 # ----------------------------------------------------------------
     if first_word == "sms77216" and from_number == '+15099902828':
@@ -88,7 +88,7 @@ def incoming_sms():
         msg += msg_in + "\n"
 
         if not pd.isna(row['Phone Number']):
-            send_text(row['Phone Number'], msg)
+            # send_text(row['Phone Number'], msg)
             x += 1
 
     message = Client.messages.create(
