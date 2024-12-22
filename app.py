@@ -90,7 +90,7 @@ def incoming_sms():
             msg = f"Hello {row['First_Name']},\n"
             msg += msg_in + "\n"
             print(row['Last_Name'], "-", row['Phone Number']) 
-            # send_text(row['Phone Number'], msg)
+            send_text(row['Phone Number'], msg)
             x += 1
             
         Client.messages.create(
