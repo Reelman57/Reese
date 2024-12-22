@@ -4,4 +4,4 @@ pip==24.3.1
 twilio==9.3.7
 gunicorn
 pandas
-phonenumbers-=8.13.52
+phonenumbers
