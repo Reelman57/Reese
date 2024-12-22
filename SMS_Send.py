@@ -54,16 +54,24 @@ def get_message(row):
         message += arg1 + "\n"
     return message
 
-data_path = "Westmond_Master.csv"
+def process_data(Westmond_Master.csv):
+    df = pd.read_csv(data_path)
+    df_filtered = df[df['Age'] > 17]
+    df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number']]
+    df_filtered = df_filtered.dropna(subset=['Phone Number']) 
+    return df_filtered
 
-df = pd.read_csv(data_path)
-# df_filtered = df[(df['Age'] > 17) & (df['Last_Name'].str[0] >= "M")]
-df_filtered = df[(df['Age'] > 17)]
-# df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
+# data_path = "Westmond_Master.csv"
+
+# df = pd.read_csv(data_path)
+# # df_filtered = df[(df['Age'] > 17) & (df['Last_Name'].str[0] >= "M")]
+# df_filtered = df[(df['Age'] > 17)]
+# # df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
+
+df_filtered = process_data(data_path)
 
 for index, row in df_filtered.iterrows():
-    print(row["Last_Name"]) 
-
+    print(row["Last_Name"])
     message = get_message(row)
 
     if arg1:
