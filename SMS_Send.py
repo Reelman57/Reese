@@ -58,20 +58,24 @@ def process_data(data_path):
     df = pd.read_csv(data_path)
     df_filtered = df[df['Age'] > 17]
     df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number']]
-    df_filtered = df_filtered.dropna(subset=['Phone Number']) 
+    df_filtered = df_filtered.dropna(subset=['Phone Number'])
+# Filter out invalid phone numbers
+    df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
+    df_filtered = df_filtered[df_filtered['is_valid_phone']]
     return df_filtered
 
-data_path = "Westmond_Master.csv"
+def is_valid_phone_number(phone_number):
+    try:
+        parsed_number = phonenumbers.parse(phone_number, region="US")  # Replace "US" with the appropriate region code
+        return phonenumbers.is_valid_number(parsed_number)
+    except phonenumbers.NumberParseException:
+        return False
 
-# df = pd.read_csv(data_path)
-# # df_filtered = df[(df['Age'] > 17) & (df['Last_Name'].str[0] >= "M")]
-# df_filtered = df[(df['Age'] > 17)]
-# # df_sorted = df_filtered.sort_values(by='Last_Name', ascending=True)
+data_path = "Westmond_Master.csv"
 
 df_filtered = process_data(data_path)
 
 for index, row in df_filtered.iterrows():
-    print(row["Last_Name"])
     message = get_message(row)
 
     if arg1:
@@ -79,6 +83,7 @@ for index, row in df_filtered.iterrows():
             send_text(row['Phone Number'], message)
     x+=1
 
+print(["Last_Name"])
 message = Client.messages.create(
 body=f'Message sent to {x} individuals.',
 from_=twilio_number,
