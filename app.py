@@ -80,7 +80,9 @@ def sms_send(msg_in):
     #     print(row['Last_Name'], "-", row['Phone Number']) 
     #     send_text(row['Phone Number'], msg)
     #     x += 1
-
+    
+    datalist = process_data(data_path)
+    
     for data in data_list:
         msg = f"Hello {data['First_Name']},\n"
         msg += msg_in + "\n"
