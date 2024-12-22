@@ -18,6 +18,8 @@ auth_token = os.environ['TWILIO_AUTH_TOKEN']
 messaging_sid = os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
 Client = Client(account_sid, auth_token)
+sent_texts = set()
+x = 0
 
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
@@ -53,16 +55,31 @@ def is_valid_phone_number(phone_number):
         return phonenumbers.is_valid_number(parsed_number)
     except phonenumbers.NumberParseException:
         return False
+
+def sms_send(msg_in):
+    data_path = "Westmond_Master.csv"
+    df_filtered = process_data(data_path)
+
+    for index, row in df_filtered.iterrows():
+        msg = f"Hello {row['First_Name']},\n"
+        msg += msg_in + "\n"
+        print(row['Last_Name'], "-", row['Phone Number']) 
+        send_text(row['Phone Number'], msg)
+        x += 1
         
+    Client.messages.create(
+        body=f'Message scheduled to {x} individuals.',
+        from_=twilio_number,
+        to=from_number
+    )
+ 
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
     message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
     first_word = message_body.split()[0].lower()
-
     msg_in = message_body.strip()
     lines = msg_in.splitlines()
-    sent_texts = set()
 
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
@@ -71,26 +88,9 @@ def incoming_sms():
         sent_texts = set(line.strip() for line in file)
     time.sleep(1)
         
-    x = 0
-
-    # ----------------------------------------------------------------
     if first_word == "sms77216" and from_number == '+15099902828':
-        data_path = "Westmond_Master.csv"
-        df_filtered = process_data(data_path)
-
-        for index, row in df_filtered.iterrows():
-            msg = f"Hello {row['First_Name']},\n"
-            msg += msg_in + "\n"
-            print(row['Last_Name'], "-", row['Phone Number']) 
-            send_text(row['Phone Number'], msg)
-            x += 1
-            
-        Client.messages.create(
-            body=f'Message scheduled to {x} individuals.',
-            from_=twilio_number,
-            to=from_number
-        )
-    # ----------------------------------------------------------------
+        sms_send(msg_in)
+        
     elif first_word == "min77216":
         subprocess.run(["python", "SMS_Ministers.py", msg_in, from_number])
 
