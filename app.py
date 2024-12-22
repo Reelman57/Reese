@@ -19,7 +19,6 @@ messaging_sid = os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
 Client = Client(account_sid, auth_token)
 sent_texts = set()
-x = 0
 
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
@@ -59,6 +58,7 @@ def is_valid_phone_number(phone_number):
 def sms_send(msg_in):
     data_path = "Westmond_Master.csv"
     df_filtered = process_data(data_path)
+    x=0
 
     for index, row in df_filtered.iterrows():
         msg = f"Hello {row['First_Name']},\n"
