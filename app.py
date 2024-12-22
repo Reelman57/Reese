@@ -68,33 +68,34 @@ def incoming_sms():
     from_number = request.values.get('From', None)
     first_word = message_body.split()[0].lower()
 
-    msg = message_body.strip()
-    lines = msg.splitlines()
-
+    msg_in = message_body.strip()
+    lines = msg_in.splitlines()
+    sent_texts = set()
+    
     if len(lines) > 1:
-        msg = "\n".join(lines[1:])
+        msg_in = "\n".join(lines[1:])
         
     with open('DO_NOT_SEND.txt', 'r') as file:
         sent_texts = set(line.strip() for line in file)
     x = 0
 # ----------------------------------------------------------------
     if first_word == "sms77216" and from_number == '+15099902828':
-        
         data_path = "Westmond_Master.csv"
         df_filtered = process_data(data_path)
 
-        for index, row in df_filtered.iterrows():
-            message = f"Hello {row['First_Name']},\n"
-            message += msg + "\n"
-            print(["Last_Name"])
-            # send_text(row['Phone Number'], message)
-            x+=1
+    for index, row in df_filtered.iterrows():
+        msg = f"Hello {row['First_Name']},\n"
+        msg += msg_in + "\n"
 
-        message = Client.messages.create(
+        if not pd.isna(row['Phone Number']):
+            send_text(row['Phone Number'], msg)
+            x += 1
+
+    message = Client.messages.create(
         body=f'Message sent to {x} individuals.',
         from_=twilio_number,
-        to = from_number
-        )
+        to=from_number
+    )
  # ----------------------------------------------------------------
     elif first_word == "min77216":
         subprocess.run(["python", "SMS_Ministers.py",msg,from_number])
