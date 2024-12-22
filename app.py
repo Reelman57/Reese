@@ -86,7 +86,8 @@ def incoming_sms():
         for index, row in df_filtered.iterrows():
             msg = f"Hello {row['First_Name']},\n"
             msg += msg_in + "\n"
-            send_text(row['Phone Number'], msg)
+            print(row['Last_Name')
+            # send_text(row['Phone Number'], msg)
             x += 1
 
         Client.messages.create(
