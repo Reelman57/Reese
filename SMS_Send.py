@@ -54,14 +54,14 @@ def get_message(row):
         message += arg1 + "\n"
     return message
 
-def process_data(Westmond_Master.csv):
+def process_data(data_path):
     df = pd.read_csv(data_path)
     df_filtered = df[df['Age'] > 17]
     df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number']]
     df_filtered = df_filtered.dropna(subset=['Phone Number']) 
     return df_filtered
 
-# data_path = "Westmond_Master.csv"
+data_path = "Westmond_Master.csv"
 
 # df = pd.read_csv(data_path)
 # # df_filtered = df[(df['Age'] > 17) & (df['Last_Name'].str[0] >= "M")]
