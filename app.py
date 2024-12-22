@@ -32,7 +32,7 @@ def send_text(text_nbr, message):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         try:
             Client = Client(account_sid, auth_token) 
-            message = client.messages.create(
+            message = Client.messages.create(
                 body=message,
                 from_=twilio_number,
                 to=text_nbr,
