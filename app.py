@@ -71,14 +71,15 @@ def incoming_sms():
     msg_in = message_body.strip()
     lines = msg_in.splitlines()
     sent_texts = set()
-    
+
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
-        
+
     # with open('DO_NOT_SEND.txt', 'r') as file:
     #     sent_texts = set(line.strip() for line in file)
     x = 0
-# ----------------------------------------------------------------
+
+    # ----------------------------------------------------------------
     if first_word == "sms77216" and from_number == '+15099902828':
         data_path = "Westmond_Master.csv"
         df_filtered = process_data(data_path)
@@ -86,32 +87,35 @@ def incoming_sms():
         for index, row in df_filtered.iterrows():
             msg = f"Hello {row['First_Name']},\n"
             msg += msg_in + "\n"
-    
+
             if not pd.isna(row['Phone Number']):
                 # send_text(row['Phone Number'], msg)
                 x += 1
-    
+
             Client.messages.create(
-            body=f'Message sent to {x} individuals.',
-            from_=twilio_number,
-            to=from_number
+                body=f'Message sent to {x} individuals.',
+                from_=twilio_number,
+                to=from_number
             )
- # ----------------------------------------------------------------
-            elif first_word == "min77216":
-                subprocess.run(["python", "SMS_Ministers.py",msg,from_number])
-        
-            elif first_word == "cancel-sms":
-                subprocess.run(["python", "SMS_Cancel.py",msg,from_number])
-                
-            elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998') :
-                subprocess.run(["python", "ECS_Send.py",msg,from_number])
-               
-            else:
-                Client.messages.create(
+    # ----------------------------------------------------------------
+        elif first_word == "min77216":
+            subprocess.run(["python", "SMS_Ministers.py", msg, from_number])
+
+        elif first_word == "cancel-sms":
+            subprocess.run(["python", "SMS_Cancel.py", msg, from_number])
+
+        elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
+            subprocess.run(["python", "SMS_Send.py", msg, from_number])
+
+        else:
+            Client.messages.create(
                 body='From: ' + from_number + '\n' + msg,
                 from_=twilio_number,
                 to='+15099902828'
-                )
+            )
+
+if __name__ == "__main__":
+    app.run()
         
 if __name__ == "__main__":
     app.run()
