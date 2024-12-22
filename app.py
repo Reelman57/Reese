@@ -9,6 +9,7 @@ import pytz
 import re
 import sys
 import phonenumbers
+import time
 
 app = Flask(__name__)
 
@@ -73,9 +74,11 @@ def incoming_sms():
 
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
-
+        
     with open('DO_NOT_SEND.txt', 'r') as file:
         sent_texts = set(line.strip() for line in file)
+    time.sleep(1)
+        
     x = 0
 
     # ----------------------------------------------------------------
@@ -86,10 +89,10 @@ def incoming_sms():
         for index, row in df_filtered.iterrows():
             msg = f"Hello {row['First_Name']},\n"
             msg += msg_in + "\n"
-            print(row['Last_Name')
+            print(row['Last_Name'], "-", row['Phone Number']) 
             # send_text(row['Phone Number'], msg)
             x += 1
-
+            
         Client.messages.create(
             body=f'Message scheduled to {x} individuals.',
             from_=twilio_number,
