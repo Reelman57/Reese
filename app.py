@@ -97,21 +97,21 @@ def incoming_sms():
         to=from_number
     )
  # ----------------------------------------------------------------
-    elif first_word == "min77216":
-        subprocess.run(["python", "SMS_Ministers.py",msg,from_number])
-
-    elif first_word == "cancel-sms":
-        subprocess.run(["python", "SMS_Cancel.py",msg,from_number])
-        
-    elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998') :
-        subprocess.run(["python", "ECS_Send.py",msg,from_number])
-       
-    else:
-        Client.messages.create(
-        body='From: ' + from_number + '\n' + msg,
-        from_=twilio_number,
-        to='+15099902828'
-        )
+        elif first_word == "min77216":
+            subprocess.run(["python", "SMS_Ministers.py",msg,from_number])
+    
+        elif first_word == "cancel-sms":
+            subprocess.run(["python", "SMS_Cancel.py",msg,from_number])
+            
+        elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998') :
+            subprocess.run(["python", "ECS_Send.py",msg,from_number])
+           
+        else:
+            Client.messages.create(
+            body='From: ' + from_number + '\n' + msg,
+            from_=twilio_number,
+            to='+15099902828'
+            )
     
 if __name__ == "__main__":
     app.run()
