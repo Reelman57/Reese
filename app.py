@@ -86,10 +86,9 @@ def incoming_sms():
         for index, row in df_filtered.iterrows():
             message = f"Hello {row['First_Name']},\n"
             message += msg + "\n"
-            if not pd.isna(row['Phone Number']):  # Check for missing phone numbers
-                print(["Last_Name"])
-                # send_text(row['Phone Number'], message)
-                x+=1
+            print(["Last_Name"])
+            # send_text(row['Phone Number'], message)
+            x+=1
 
         message = Client.messages.create(
         body=f'Message sent to {x} individuals.',
