@@ -90,4 +90,3 @@ body=f'Message sent to {x} individuals.',
 from_=twilio_number,
 to = arg2
 )
-
