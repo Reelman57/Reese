@@ -28,16 +28,7 @@ def get_send_time():
     return send_at.isoformat()
 
 def send_text(text_nbr, message):
-    # if text_nbr not in sent_texts and not pd.isna(text_nbr):
-    #     Client.messages.create(
-    #         body=message,
-    #         from_=twilio_number,
-    #         to=text_nbr,
-    #         messaging_service_sid=messaging_sid,
-    #         send_at=get_send_time(),
-    #         schedule_type="fixed"
-    #     )
-    #     sent_texts.add(text_nbr)
+   
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         try:
             client = Client(account_sid, auth_token) 
@@ -75,42 +66,22 @@ def is_valid_phone_number(phone_number):
     except phonenumbers.NumberParseException:
         return False
 
-def sms_send(msg_in):
-    data_path = "Westmond_Master.csv"
-    df_filtered = process_data(data_path)
-    x=0
-    with open('DO_NOT_SEND.txt', 'r') as file:
-        sent_texts = set(line.strip() for line in file)
-    
-    data_list = process_data(data_path)
+def sms_send(msg_in, data_list):
+  x = 0
+  with ThreadPoolExecutor(max_workers=10) as executor:
+    futures = []
+    for data in data_list:
+      msg = f"Hello {data['First_Name']},\n" 
+      msg += msg_in + "\n"
+      print(data['Last_Name'], "-", data['Phone Number']) 
+      future = executor.submit(send_text, data['Phone Number'], msg) 
+      futures.append(future)
 
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        futures = []
-        for data in data_list:
-            msg = f"Hello {row['First_Name']},\n"
-            msg += msg_in + "\n"
-            print(data['Last_Name'], "-", data['Phone Number'])
-            future = executor.submit(send_text, row['Phone Number'], msg)
-            futures.append(future)
-
-        for future in futures:
-            result = future.result()  # Wait for the result of each future
-            # Handle the result (e.g., log successes/failures) 
-            if result: 
-                # Log success or increment a counter
-                pass 
-            else:
-                # Log the error
-                pass
-    
-    # for data in data_list:
-    #     msg = f"Hello {data['First_Name']},\n"
-    #     msg += msg_in + "\n"
-    #     print(data['Last_Name'], "-", data['Phone Number'])
-    #     send_text(data['Phone Number'], msg)
-        x += 1
-
-    # return x 
+    for future in futures:
+      result = future.result()
+      if result: 
+        x += 1 
+  return x 
 
     Client.messages.create(
         body=f'Message scheduled to {x} individuals.',
@@ -130,7 +101,15 @@ def incoming_sms():
         msg_in = "\n".join(lines[1:])
         
     if first_word == "sms77216" and from_number == '+15099902828':
-        sms_send(msg_in)
+   
+    data_list = process_data("Westmond_Master.csv")
+    num_messages_sent = sms_send(msg_in, data_list)
+
+    Client.messages.create(
+        body=f'Message scheduled to {num_messages_sent} individuals.',
+        from_=twilio_number,
+        to=from_number
+    )
         
     elif first_word == "min77216":
         subprocess.run(["python", "SMS_Ministers.py", msg_in, from_number])
