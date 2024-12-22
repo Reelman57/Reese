@@ -39,6 +39,15 @@ def send_text(text_nbr, message):
         sent_texts.add(text_nbr)
 
 def process_data(data_path):
+    # df = pd.read_csv(data_path)
+    # df_filtered = df[df['Age'] > 17]
+    # df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number']]
+    # df_filtered = df_filtered.dropna(subset=['Phone Number'])
+    # df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
+    # df_filtered = df_filtered[df_filtered['is_valid_phone']]
+
+    # return df_filtered
+    
     df = pd.read_csv(data_path)
     df_filtered = df[df['Age'] > 17]
     df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number']]
@@ -46,7 +55,10 @@ def process_data(data_path):
     df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
     df_filtered = df_filtered[df_filtered['is_valid_phone']]
 
-    return df_filtered
+    data_list = df_filtered.to_dict('records') 
+
+    return data_list
+
 
 def is_valid_phone_number(phone_number):
     try:
@@ -59,14 +71,25 @@ def sms_send(msg_in):
     data_path = "Westmond_Master.csv"
     df_filtered = process_data(data_path)
     x=0
+    with open('DO_NOT_SEND.txt', 'r') as file:
+        sent_texts = set(line.strip() for line in file)
 
-    for index, row in df_filtered.iterrows():
-        msg = f"Hello {row['First_Name']},\n"
+    # for index, row in df_filtered.iterrows():
+    #     msg = f"Hello {row['First_Name']},\n"
+    #     msg += msg_in + "\n"
+    #     print(row['Last_Name'], "-", row['Phone Number']) 
+    #     send_text(row['Phone Number'], msg)
+    #     x += 1
+
+    for data in data_list:
+        msg = f"Hello {data['First_Name']},\n"
         msg += msg_in + "\n"
-        print(row['Last_Name'], "-", row['Phone Number']) 
-        send_text(row['Phone Number'], msg)
+        print(data['Last_Name'], "-", data['Phone Number']) 
+        # send_text(data['Phone Number'], msg)  # Assuming send_text function exists
         x += 1
-        
+
+    return x 
+
     Client.messages.create(
         body=f'Message scheduled to {x} individuals.',
         from_=twilio_number,
@@ -83,10 +106,6 @@ def incoming_sms():
 
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
-        
-    with open('DO_NOT_SEND.txt', 'r') as file:
-        sent_texts = set(line.strip() for line in file)
-    time.sleep(1)
         
     if first_word == "sms77216" and from_number == '+15099902828':
         sms_send(msg_in)
