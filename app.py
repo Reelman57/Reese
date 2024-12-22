@@ -27,23 +27,15 @@ def get_send_time():
 
 def send_text(text_nbr, message):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
-        try:
-            message = Client.messages.create(
-                body=message,
-                from_=twilio_number,
-                to=text_nbr,
-                messaging_service_sid=messaging_sid,
-                send_at=get_send_time(),
-                schedule_type="fixed"
-            )
-            sent_texts.add(text_nbr)
-            return message  # Return the message object
-        except Exception as e:
-            # Log the error (consider using a logging library)
-            print(f"Error sending SMS to {text_nbr}: {e}")
-            return None  # Return None to indicate failure
-    else:
-        return None
+        Client.messages.create(
+            body=message,
+            from_=twilio_number,
+            to=text_nbr,
+            messaging_service_sid=messaging_sid,
+            send_at=get_send_time(),
+            schedule_type="fixed"
+        )
+        sent_texts.add(text_nbr)
 
 def process_data(data_path):
     df = pd.read_csv(data_path)
