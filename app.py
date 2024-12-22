@@ -73,12 +73,13 @@ def incoming_sms():
 
     if len(lines) > 1:
         msg = "\n".join(lines[1:])
+        
+    with open('DO_NOT_SEND.txt', 'r') as file:
+        sent_texts = set(line.strip() for line in file)
+    x = 0
 # ----------------------------------------------------------------
     if first_word == "sms77216" and from_number == '+15099902828':
         
-        with open('DO_NOT_SEND.txt', 'r') as file:
-            sent_texts = set(line.strip() for line in file)
-        x = 0
         data_path = "Westmond_Master.csv"
         df_filtered = process_data(data_path)
 
@@ -87,7 +88,7 @@ def incoming_sms():
             message += msg + "\n"
             if not pd.isna(row['Phone Number']):  # Check for missing phone numbers
                 print(["Last_Name"])
-                send_text(row['Phone Number'], message)
+                # send_text(row['Phone Number'], message)
                 x+=1
 
         message = Client.messages.create(
