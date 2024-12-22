@@ -91,11 +91,11 @@ def incoming_sms():
                 # send_text(row['Phone Number'], msg)
                 x += 1
     
-        message = Client.messages.create(
+            Client.messages.create(
             body=f'Message sent to {x} individuals.',
             from_=twilio_number,
             to=from_number
-        )
+            )
  # ----------------------------------------------------------------
             elif first_word == "min77216":
                 subprocess.run(["python", "SMS_Ministers.py",msg,from_number])
