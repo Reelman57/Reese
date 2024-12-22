@@ -83,11 +83,11 @@ def sms_send(msg_in, data_list):
         x += 1 
   return x 
 
-    Client.messages.create(
-        body=f'Message scheduled to {x} individuals.',
-        from_=twilio_number,
-        to=from_number
-    )
+    # Client.messages.create(
+    #     body=f'Message scheduled to {x} individuals.',
+    #     from_=twilio_number,
+    #     to=from_number
+    # )
  
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
