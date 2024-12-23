@@ -235,67 +235,68 @@ def incoming_sms():
         else:
             df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
             r = range(1, 3)
-            
-        for x in r:
-            ministerx = f"Minister{x}"
-            ministerx_phone = f"Minister{x}_Phone"
-            ministerx_email = f"Minister{x}_Email"
     
-            df_filtered = df_filtered[df_filtered[ministerx].notnull()]
-            df_filtered[ministerx] = df_filtered[ministerx].fillna('')
+        for data in data_list: 
+            for x in r:
+                ministerx = f"Minister{x}"
+                ministerx_phone = f"Minister{x}_Phone"
+                ministerx_email = f"Minister{x}_Email"
     
-            try:
-                df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True)
-            except AttributeError as e:
-                print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
-                continue  # Skip to the next iteration of the outer for loop
+                df_filtered = df_filtered[df_filtered[ministerx].notnull()]
+                df_filtered[ministerx] = df_filtered[ministerx].fillna('')
     
-            grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
+                try:
+                    df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True)
+                except AttributeError as e:
+                    print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
+                    continue  # Skip to the next iteration of the outer for loop
     
-            for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
-                if minister_phone and minister_phone != "":
-                    sent_to = "" 
-                    text_nbr = minister_phone 
-                    subj = "Your Ministering Families"
+                grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
     
-                    if x < 3:
-                        Bro_Sis = "Brother"
-                        min_org = "Elders Quorum Presidency"
-                    else:
-                        Bro_Sis = "Sister"
-                        min_org = "Relief Society Presidency"
+                for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
+                    if minister_phone and minister_phone != "":
+                        sent_to = "" 
+                        text_nbr = minister_phone 
+                        subj = "Your Ministering Families"
     
-                    msg = f"{Bro_Sis} {minister_last}, \n"
-                    msg += f"{msg_in}\n\n" 
+                        if x < 3:
+                            Bro_Sis = "Brother"
+                            min_org = "Elders Quorum Presidency"
+                        else:
+                            Bro_Sis = "Sister"
+                            min_org = "Relief Society Presidency"
     
-                    msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
+                        msg = f"{Bro_Sis} {minister_last}, \n"
+                        msg += f"{msg_in}\n\n" 
     
-                if not group.empty:
-                    for index, row in group.iterrows():
-                        msg += f"{row['Name']}"
-                        if not pd.isna(row['Phone Number']):
-                            msg += f"  - {row['Phone Number']}"
-                        msg += "\n"
+                        msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
     
-                    print(minister_phone,"  " ,minister_email,msg)
-                    #send_text(text_nbr,msg, now=False) 
-                    # send_email(minister_email,subj,msg) 
-                    sent_to = f"Your message has been scheduled for the following: \n"
-                    sent_to += f"{minister_last}, {minister_first}\n"
+                        if not group.empty:
+                            for index, row in group.iterrows():
+                                msg += f"{row['Name']}"
+                                if not pd.isna(row['Phone Number']):
+                                    msg += f"  - {row['Phone Number']}"
+                                msg += "\n"
     
-            sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
+                        print(minister_phone,"  " ,minister_email,msg)
+                        #send_text(text_nbr,msg, now=False) 
+                        # send_email(minister_email,subj,msg) 
+                        sent_to += f"Your message has been scheduled for the following: \n"
+                        sent_to += f"{minister_last}, {minister_first}\n"
     
-            message = client.messages.create(
-                body=sent_to,
-                from_='+12086034040', 
-                to=from_number 
-            )
-        
-    notification_message = client.messages.create(
-        body=f'Messages have been scheduled by {from_number}',
-        from_='+12086034040',
-        to='+15099902828'
-    )
+                    sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
+    
+                    message = client.messages.create(
+                        body=sent_to,
+                        from_='+12086034040', 
+                        to=from_number 
+                    )
+    
+        notification_message = client.messages.create(
+            body=f'Messages have been scheduled by {from_number}',
+            from_='+12086034040',
+            to='+15099902828'
+        )
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
