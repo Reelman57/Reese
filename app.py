@@ -114,17 +114,21 @@ def incoming_sms():
 
     elif first_word == "cancel-sms":
         messages = client.messages.list(limit=300)  # Adjust limit as needed
+        canceled_count = 0 
         for message in messages:
             if message.status == 'scheduled':
-                client.messages(message.sid).update(status='canceled')
-                x += 1
-                
-        message = client.messages.create(
-        body= x, ' Messages cancelled',
-        from_='+12086034040',
-        to = from_number
+                try:
+                    client.messages(message.sid).update(status='canceled')
+                    canceled_count += 1
+                except Exception as e:
+                    print(f"Error canceling message {message.sid}: {e}") 
+    
+        client.messages.create(
+            body=f'{canceled_count} Messages canceled',
+            from_='+12086034040',
+            to=from_number
         )
-        return x
+        return canceled_count 
         
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
         subprocess.run(["python", "SMS_Send.py", msg_in, from_number])
