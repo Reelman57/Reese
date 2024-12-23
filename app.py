@@ -41,7 +41,7 @@ def send_text(text_nbr, message):
                 schedule_type="fixed"
             )
             sent_texts.add(text_nbr)
-            print(data['Last_Name'], "-", data['Phone Number'])
+            print(x, ". ", data['Last_Name'], "-", data['Phone Number'])
             x += 1
             return True
         except Exception as e:
@@ -69,6 +69,7 @@ def is_valid_phone_number(phone_number):
         return False
 
 def sms_send(msg_in, data_list):
+    success_count = 0
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         for data in data_list:
@@ -79,8 +80,10 @@ def sms_send(msg_in, data_list):
 
         for future in futures:
             result = future.result()
-            if result:
-    return
+            if result: 
+                success_count += 1
+
+    return success_count
  
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
