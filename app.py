@@ -291,7 +291,7 @@ def incoming_sms():
             to = from_number
         )
         message = Client.messages.create(
-            body=f'Messages have been scheduled by from_number,
+            body='Messages have been scheduled by ',from_number,
             from_='+12086034040',
             to = '+15099902828'
         )
