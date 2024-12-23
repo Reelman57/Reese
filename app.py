@@ -114,7 +114,7 @@ def incoming_sms():
         except Exception as e:
             return f"An error occurred while processing the request: {str(e)}", 500
 
-    return "Invalid command", 400
+        return "Invalid command", 400
         
     elif first_word == "min77216":
         subprocess.run(["python", "SMS_Ministers.py", msg_in, from_number])
