@@ -64,7 +64,7 @@ def send_voice(msg_in, data_list):
         msg += msg_in + "\n"
         if to_number not in sent_voice and not pd.isna(to_number):
             try:
-                call = Client.calls.create(
+                call = client.calls.create(
                     twiml="<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + msg + " Goodbye. </Say></Response>",
                     to=to_number,
                     from_=twilio_number
@@ -104,7 +104,7 @@ def send_email(subject, body, data_list):
 def process_data(data_path):
     df = pd.read_csv(data_path)
     df_filtered = df[df['Age'] > 17]
-    df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number']]
+    df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email']]
     df_filtered = df_filtered.dropna(subset=['Phone Number'])
     df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
     df_filtered = df_filtered[df_filtered['is_valid_phone']]
