@@ -25,7 +25,6 @@ twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 sent_texts = set()
 sent_voice = set()
-sent_email = set()
 with open('DO_NOT_SEND.txt', 'r') as file:
     sent_texts = set(line.strip() for line in file)
 x=0
@@ -56,6 +55,49 @@ def send_text(text_nbr, message):
             print(f"Error sending SMS to {text_nbr}: {e}")
             return False
     return False
+
+def send_voice(to_number, message):
+    if to_number not in sent_voice and not pd.isna(to_number):
+        try:
+            call = Client.calls.create(
+                twiml="<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + message + " Goodbye. </Say></Response>",
+                to=to_number,
+                from_=twilio_number
+            )
+            sent_voice.add(to_number)  # Add the actual phone number to the set
+            return call  # Return the call object for potential further processing
+        except Exception as e:
+            print(f"Error sending voice call to {to_number}: {e}")
+            return None
+    else:
+        return None 
+        
+def send_email(subject, body, data_list):
+    sent_email = set()
+    for data in data_list:
+        if data['Email'] not in sent_email and not pd.isna(data['Email']):
+          try:
+            msg = MIMEMultipart()
+            msg['From'] = os.environ.get('EMAIL_ADDRESS')
+            msg['To'] = data['Email']
+            msg['Subject'] = subject
+            msg.attach(MIMEText(body, 'plain'))
+    
+            with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+              smtp.starttls()
+              smtp.login(os.environ.get('EMAIL_ADDRESS'), os.environ.get('EMAIL_PASSWORD'))
+              smtp.sendmail(msg['From'], msg['To'], msg.as_string())
+    
+            sent_email.add(to_addr)
+            return True  # Indicate successful email sending
+          except Exception as e:
+            print(f"Error sending email to {data['Email']}: {e}")
+            return False  # Indicate failure
+        else:
+          print(f"Invalid email address format: {data['Email']}")
+          return False  # Indicate failure for invalid email format
+      else:
+        return False  # Indicate email not sent (already sent or invalid)
 
 def process_data(data_path):
     df = pd.read_csv(data_path)
@@ -89,12 +131,17 @@ def sms_send(msg_in, data_list):
             success_count += 1
             print(success_count, ". ", data['Last_Name'], "-", data['Phone Number'])
 
-        # for future in futures:
-        #     try:
-        #         result = future.result() 
-        #     except Exception as e:
-        #         app.logger.error(f"Error processing future: {e}")
+        for future in futures:
+            try:
+                result = future.result() 
+            except Exception as e:
+                app.logger.error(f"Error processing future: {e}")
                 
+    client.messages.create(
+        body=f'Message scheduled to {success_count} individuals.',
+        from_=twilio_number,
+        to=from_number
+    )       
     return success_count
  
 @app.route("/sms", methods=['POST'])        
@@ -116,23 +163,16 @@ def incoming_sms():
         try:
             data_list = process_data("Westmond_Master.csv")
             num_messages_sent = sms_send(msg_in, data_list)
-            client.messages.create(
-                body=f'Message scheduled to {num_messages_sent} individuals.',
-                from_=twilio_number,
-                to=from_number
-            )
-            return f"Successfully sent SMS to {num_messages_sent} recipients."
+            return num_messages_sent 
         except Exception as e:
-            return f"An error occurred while processing the request: {str(e)}", 500
-
-        return "Invalid command", 400
+            return f"An error occurred: {str(e)}", 500
         
     elif first_word == "min77216":
         subprocess.run(["python", "SMS_Ministers.py", msg_in, from_number])
 
     elif first_word == "cancel-sms":
         messages = client.messages.list(limit=300)  # Adjust limit as needed
-        canceled_count = 0 
+        canceled_count = 0
         for message in messages:
             if message.status == 'scheduled':
                 try:
@@ -146,10 +186,19 @@ def incoming_sms():
             from_='+12086034040',
             to=from_number
         )
-        return canceled_count 
+        return canceled_count
         
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
-        subprocess.run(["python", "SMS_Send.py", msg_in, from_number])
+        subject = "Emergency Communications System"
+
+        try:
+            data_list = process_data("Westmond_Master.csv")
+            sms_send(msg_in, data_list)    
+            send_email(subject, msg_in, data_list)
+   
+    send_voice(row['Phone Number'], message)
+
+    return subject,msg_in
 
     else:
         client.messages.create(
