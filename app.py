@@ -90,24 +90,31 @@ def sms_send(msg_in, data_list):
 def incoming_sms():
     message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
+
+    if message_body is None or from_number is None:
+        return "Invalid request: Missing message body or sender number", 400
+
     first_word = message_body.split()[0].lower()
     msg_in = message_body.strip()
     lines = msg_in.splitlines()
 
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
-        
+
     if first_word == "sms77216" and from_number == '+15099902828':
-   
-        data_list = process_data("Westmond_Master.csv")
-        num_messages_sent = sms_send(msg_in, data_list)
-    
-        client.messages.create(
-            body=f'Message scheduled to {num_messages_sent} individuals.',
-            from_=twilio_number,
-            to=from_number
-        )
-        return f"Successfully sent SMS to {num_messages_sent} recipients."
+        try:
+            data_list = process_data("Westmond_Master.csv")
+            num_messages_sent = sms_send(msg_in, data_list)
+            client.messages.create(
+                body=f'Message scheduled to {num_messages_sent} individuals.',
+                from_=twilio_number,
+                to=from_number
+            )
+            return f"Successfully sent SMS to {num_messages_sent} recipients."
+        except Exception as e:
+            return f"An error occurred while processing the request: {str(e)}", 500
+
+    return "Invalid command", 400
         
     elif first_word == "min77216":
         subprocess.run(["python", "SMS_Ministers.py", msg_in, from_number])
