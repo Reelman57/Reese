@@ -65,13 +65,14 @@ def send_voice(msg_in, data_list):
         if to_number not in sent_voice and not pd.isna(to_number):
             try:
                 msg = f"Hello {data['First_Name']},\n" + msg_in + "\n"
-                send_at = get_send_time()
-                if send_at:
+                send_time = get_send_time()
+                print(send_time)
+                if send_time:
                     call = client.calls.create(
                         twiml=f"<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">{msg} Goodbye. </Say></Response>",
                         to=to_number,
                         from_=twilio_number,
-                        send_at=send_at,
+                        send_at=send_time,
                         schedule_type="fixed"
                     )
                     sent_voice.add(to_number)
