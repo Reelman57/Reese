@@ -87,11 +87,11 @@ def sms_send(msg_in, data_list):
             success_count += 1
             print(success_count, ". ", data['Last_Name'], "-", data['Phone Number'])
 
-        # for future in futures:
-        #     try:
-        #         result = future.result() 
-        #     except Exception as e:
-        #         app.logger.error(f"Error processing future: {e}")
+        for future in futures:
+            try:
+                result = future.result() 
+            except Exception as e:
+                app.logger.error(f"Error processing future: {e}")
                 
     return success_count
  
