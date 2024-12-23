@@ -194,16 +194,10 @@ def incoming_sms():
 # --------------------------------------------------------------------------        
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
         subject = "Emergency Communications System"
-    
-        try:
-            sms_send(msg_in, data_list)
-            send_email(subject, msg_in, data_list) 
-            send_voice(msg_in, data_list) 
-        except Exception as e:
-            # Handle the exception (e.g., log the error, send an error message)
-            return f"An error occurred: {str(e)}", 500
-    
-        return subject, msg_in, data_list  # Return after all functions have been called
+        sms_send(msg_in, data_list)
+        send_email(subject, msg_in, data_list) 
+        send_voice(msg_in, data_list)
+    return
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
