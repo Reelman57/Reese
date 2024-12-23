@@ -22,25 +22,27 @@ client = Client(account_sid, auth_token)
 sent_texts = set()
 x=0
 
-def get_send_time(x):
+def get_send_time():
+    x+=1
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
     send_at = now_utc + timedelta(minutes=15, seconds = x)
     return send_at.isoformat()
 
-def send_text(text_nbr, message, x):
+def send_text(text_nbr, message):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         try:
-            client = Client(account_sid, auth_token) 
             message = client.messages.create(
                 body=message,
                 from_=twilio_number,
                 to=text_nbr,
                 messaging_service_sid=messaging_sid,
-                send_at=get_send_time(x),
+                send_at=get_send_time(),
                 schedule_type="fixed"
             )
             sent_texts.add(text_nbr)
+            print(data['Last_Name'], "-", data['Phone Number'])
+            x += 1
             return True
         except Exception as e:
             print(f"Error sending SMS to {text_nbr}: {e}")
@@ -73,14 +75,12 @@ def sms_send(msg_in, data_list):
         for data in data_list:
             msg = f"Hello {data['First_Name']},\n"
             msg += msg_in + "\n"
-            future = executor.submit(send_text, data['Phone Number'], msg, x)
+            future = executor.submit(send_text, data['Phone Number'], msg)
             futures.append(future)
 
         for future in futures:
             result = future.result()
             if result:
-                x += 1
-                print(data['Last_Name'], "-", data['Phone Number'])
     return x
  
 @app.route("/sms", methods=['POST'])        
