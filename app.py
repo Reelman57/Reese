@@ -59,26 +59,24 @@ def send_text(text_nbr, message):
 # --------------------------------------------------------------------------
 def send_voice(msg_in, data_list):
     sent_voice = set()
+    calls = []
     for data in data_list:
         to_number = data.get('Phone Number')
-        msg = f"Hello {data['First_Name']},\n"
-        msg += msg_in + "\n"
         if to_number not in sent_voice and not pd.isna(to_number):
             try:
+                msg = f"Hello {data['First_Name']},\n" + msg_in + "\n"
                 call = client.calls.create(
-                    twiml="<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + msg + " Goodbye. </Say></Response>",
+                    twiml=f"<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">{msg} Goodbye. </Say></Response>",
                     to=to_number,
                     from_=twilio_number,
                     send_at=get_send_time(),
                     schedule_type="fixed"
                 )
                 sent_voice.add(to_number)
-                return call
+                calls.append(call) 
             except Exception as e:
                 print(f"Error sending voice call to {to_number}: {e}")
-                return None
-        else:
-            return None 
+    return calls 
 # --------------------------------------------------------------------------        
 def send_email(subject, body, data_list):
     sent_emails = set()
