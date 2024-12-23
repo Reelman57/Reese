@@ -159,7 +159,8 @@ def sms_send(from_number, msg_in, data_list, now):
 def incoming_sms():
     message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
-    data_list = process_data("Westmond_Master_Test.csv")
+    data_file = "Westmond_Master_Test.csv"
+    data_list = process_data(data_file)
 
     if message_body is None or from_number is None:
         return "Invalid request: Missing message body or sender number", 400
@@ -177,9 +178,6 @@ def incoming_sms():
             return num_messages_sent 
         except Exception as e:
             return f"An error occurred: {str(e)}", 500
-# --------------------------------------------------------------------------       
-    elif first_word == "min77216":
-        subprocess.run(["python", "SMS_Ministers.py", msg_in, from_number])
 # --------------------------------------------------------------------------
     elif first_word == "cancel-sms":
         messages = client.messages.list(limit=300)  # Adjust limit as needed
@@ -207,6 +205,90 @@ def incoming_sms():
         send_voice(msg_in, data_list)
         now=""
     return
+# --------------------------------------------------------------------------       
+    elif first_word == "min77216":
+        district = {
+            '+15099902828': 'D1',
+            '+19722819991': 'D2',
+            '+12086103066': 'D3',
+            '+12086102929': 'SD1',
+            '+12089201618': 'SD2',
+            '+15093449400': 'SD3'
+        }
+        try:
+            district = district.get(from_number) 
+        except AttributeError:
+            district = None
+            
+    df = pd.read_csv(data_file)
+
+    if district and district[0] == 'S':
+        df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
+        r = range(3, 5)  
+    else:
+        df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
+        r = range(1, 3)
+
+    for x in r: 
+    
+    ministerx = f"Minister{x}"
+    ministerx_phone = f"Minister{x}_Phone"
+    ministerx_email = f"Minister{x}_Email"
+
+    df_filtered = df_filtered[df_filtered[ministerx].notnull()]
+    df_filtered[ministerx] = df_filtered[ministerx].fillna('')
+
+        try:
+            df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True) 
+        except AttributeError as e:
+            print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
+            continue  # Skip to the next iteration of the outer for loop
+    
+        grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
+    
+        for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
+      
+            text_nbr = minister_phone
+            subj="Your Ministering Families"
+    
+                if x < 3:
+                    Bro_Sis = "Brother"
+                    min_org = "Elders Quorum Presidency"
+                else:
+                    Bro_Sis = "Sister"
+                    min_org = "Relief Society Presidency"
+        
+                msg = f"{Bro_Sis} {minister_last}, \n"
+                msg += f"{arg1}\n\n"
+                # msg += f"Your {min_org},\n\n"
+                
+                msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
+                # msg += f"{minister_phone}\n\n"
+        
+                if not group.empty:
+                    for index, row in group.iterrows():
+                        msg += f"{row['Name']}"
+                        if not pd.isna(row['Phone Number']):
+                            msg += f"  - {row['Phone Number']}"
+                        msg += "\n"
+        
+                    if minister_last == "Reese":
+                    print(minister_phone,"  " ,minister_email,msg)
+                    #send_text(text_nbr,msg)
+                    # send_email(minister_email,subj,msg)
+                    sent_to += f"{minister_last}, {minister_first}\n"
+
+    sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
+    message = Client.messages.create(
+    body= sent_to,
+    from_='+12086034040',
+    to = arg2
+    )
+    message = Client.messages.create(
+    body=f'Messages have been scheduled by {arg2}',
+    from_='+12086034040',
+    to = '+15099902828'
+    )
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
