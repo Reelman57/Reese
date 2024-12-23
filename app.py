@@ -82,8 +82,8 @@ def send_email(subject, body, data_list):
     sent_emails = set()
     for data in data_list:
         email = data.get('Email')
-        messasge = f"Hello {data['First_Name']},\n"
-        messasge += body + "\n"
+        message = f"Hello {data['First_Name']},\n"
+        message += body + "\n"
         if email and not pd.isna(email):
             try:
                 msg = MIMEMultipart()
