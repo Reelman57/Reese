@@ -290,10 +290,10 @@ def incoming_sms():
             from_='+12086034040',
             to = from_number
         )
-        message = Client.messages.create(
-            body='Messages have been scheduled by ',from_number,
+        message = client.messages.create(
+            body=f'Messages have been scheduled by {from_number}', 
             from_='+12086034040',
-            to = '+15099902828'
+            to='+15099902828'
         )
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
