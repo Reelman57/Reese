@@ -196,7 +196,7 @@ def incoming_sms():
             to=from_number
         )
         return canceled_count
-# --------------------------------------------------------------------------        
+# --------------------------------------------------------------------------
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
         subject = "Emergency Communications System"
         now=True
@@ -204,8 +204,8 @@ def incoming_sms():
         send_email(subject, msg_in, data_list) 
         send_voice(msg_in, data_list)
         now=""
-    return
-# --------------------------------------------------------------------------       
+        return
+# --------------------------------------------------------------------------
     elif first_word == "min77216":
         district = {
             '+15099902828': 'D1',
@@ -288,10 +288,10 @@ def incoming_sms():
         message = Client.messages.create(
             body= sent_to,
             from_='+12086034040',
-            to = arg2
+            to = from_number
         )
         message = Client.messages.create(
-            body=f'Messages have been scheduled by {arg2}',
+            body=f'Messages have been scheduled by from_number,
             from_='+12086034040',
             to = '+15099902828'
         )
