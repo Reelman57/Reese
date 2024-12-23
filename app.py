@@ -69,13 +69,13 @@ def is_valid_phone_number(phone_number):
         return False
 
 def sms_send(msg_in, data_list):
-    success_count = 0
+    success_count = 1
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         for data in data_list:
             msg = f"Hello {data['First_Name']},\n"
             msg += msg_in + "\n"
-            print(data['Last_Name'], "-", data['Phone Number'])
+            print(success_count, ". ", data['Last_Name'], "-", data['Phone Number'])
             future = executor.submit(send_text, data['Phone Number'], msg, success_count)
             futures.append(future)
 
@@ -124,6 +124,7 @@ def incoming_sms():
             from_=twilio_number,
             to='+15099902828'
         )
+    return
 
 if __name__ == "__main__":
     app.run()
