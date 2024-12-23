@@ -8,6 +8,7 @@ import os
 from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import smtplib
 from twilio.rest import Client
 import pytz
 import re
@@ -196,7 +197,7 @@ def incoming_sms():
         try:
             # sms_send(msg_in, data_list) 
             send_email(subject, msg_in, data_list)
-            send_voice(msg_in, data_list)
+            # send_voice(msg_in, data_list)
     
             return subject, msg_in, data_list  # Indented here
         except Exception as e:
