@@ -161,7 +161,6 @@ def incoming_sms():
     from_number = request.values.get('From', None)
     data_file = "Westmond_Master.csv"
     data_list = process_data(data_file)
-    sent_to = ""
 
     if message_body is None or from_number is None:
         return "Invalid request: Missing message body or sender number", 400
@@ -236,8 +235,7 @@ def incoming_sms():
         else:
             df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
             r = range(1, 3)
-    
-        sent_to = "" 
+            
         for x in r:
             ministerx = f"Minister{x}"
             ministerx_phone = f"Minister{x}_Phone"
@@ -256,6 +254,7 @@ def incoming_sms():
     
             for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
                 if minister_phone and minister_phone != "":
+                    sent_to = "" 
                     text_nbr = minister_phone 
                     subj = "Your Ministering Families"
     
