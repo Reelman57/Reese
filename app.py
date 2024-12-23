@@ -266,7 +266,7 @@ def incoming_sms():
                         min_org = "Relief Society Presidency"
     
                     msg = f"{Bro_Sis} {minister_last}, \n"
-                    msg += f"{arg1}\n\n" 
+                    msg += f"{msg_in}\n\n" 
     
                     msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
     
