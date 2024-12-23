@@ -159,7 +159,7 @@ def sms_send(from_number, msg_in, data_list, now):
 def incoming_sms():
     message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
-    data_file = "Westmond_Master_Test.csv"
+    data_file = "Westmond_Master.csv"
     data_list = process_data(data_file)
 
     if message_body is None or from_number is None:
