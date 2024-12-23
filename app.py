@@ -81,12 +81,12 @@ def sms_send(msg_in, data_list):
             success_count += 1
 
         for future in futures:
-    try:
-        result = future.result() 
-    except Exception as e:
-        app.logger.error(f"Error processing future: {e}")
-
-    return
+            try:
+                result = future.result() 
+            except Exception as e:
+                app.logger.error(f"Error processing future: {e}")
+                
+    return success_count
  
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
