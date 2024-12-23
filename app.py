@@ -42,14 +42,20 @@ def send_text(text_nbr, message, now):
     global sent_texts
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         try:
+            if not now:
+                send_at = get_send_time()
+                schedule_type = "fixed" 
+            else:
+                send_at = None 
+                schedule_type = None 
+
             message = client.messages.create(
                 body=message,
                 from_=twilio_number,
                 to=text_nbr,
                 messaging_service_sid=messaging_sid,
-                if not now:
-                    send_at=get_send_time(),
-                    schedule_type="fixed"
+                send_at=send_at, 
+                schedule_type=schedule_type
             )
             sent_texts.add(text_nbr)
             return True
