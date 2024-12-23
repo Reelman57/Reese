@@ -73,31 +73,28 @@ def send_voice(to_number, message):
         return None 
         
 def send_email(subject, body, data_list):
-    sent_email = set()
+    sent_emails = set()
     for data in data_list:
-        if data['Email'] not in sent_email and not pd.isna(data['Email']):
-          try:
-            msg = MIMEMultipart()
-            msg['From'] = os.environ.get('EMAIL_ADDRESS')
-            msg['To'] = data['Email']
-            msg['Subject'] = subject
-            msg.attach(MIMEText(body, 'plain'))
-    
-            with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
-              smtp.starttls()
-              smtp.login(os.environ.get('EMAIL_ADDRESS'), os.environ.get('EMAIL_PASSWORD'))
-              smtp.sendmail(msg['From'], msg['To'], msg.as_string())
-    
-            sent_email.add(to_addr)
-            return True  # Indicate successful email sending
-          except Exception as e:
-            print(f"Error sending email to {data['Email']}: {e}")
-            return False  # Indicate failure
+        email = data.get('Email')  # Use get() to handle missing key gracefully
+        if email and not pd.isna(email):  # Check for email and non-empty value
+            try:
+                msg = MIMEMultipart()
+                msg['From'] = os.environ.get('EMAIL_ADDRESS')
+                msg['To'] = email
+                msg['Subject'] = subject
+                msg.attach(MIMEText(body, 'plain'))
+
+                with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+                    smtp.starttls()
+                    smtp.login(os.environ.get('EMAIL_ADDRESS'), os.environ.get('EMAIL_PASSWORD'))
+                    smtp.sendmail(msg['From'], msg['To'], msg.as_string())
+                    sent_emails.add(email)
+                print(f"Successfully sent email to {email}")
+            except Exception as e:
+                print(f"Error sending email to {email}: {e}")
         else:
-          print(f"Invalid email address format: {data['Email']}")
-          return False  # Indicate failure for invalid email format
-      else:
-        return False  # Indicate email not sent (already sent or invalid)
+            print(f"Invalid or missing email address for {data}")
+    return len(sent_emails)  # Return the number of successfully sent emails
 
 def process_data(data_path):
     df = pd.read_csv(data_path)
