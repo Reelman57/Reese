@@ -23,12 +23,15 @@ sent_texts = set()
 x=0
 
 def get_send_time(secs):
+    wait_secs=secs
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
-    send_at = now_utc + timedelta(minutes=15, seconds = secs)
+    send_at = now_utc + timedelta(minutes=15, seconds = wait_secs)
+    print(wait_secs)
     return send_at.isoformat()
 
 def send_text(text_nbr, message, secs):
+    delayed_send = secs
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         try:
             message = client.messages.create(
@@ -36,7 +39,7 @@ def send_text(text_nbr, message, secs):
                 from_=twilio_number,
                 to=text_nbr,
                 messaging_service_sid=messaging_sid,
-                send_at=get_send_time(secs),
+                send_at=get_send_time(delayed_send),
                 schedule_type="fixed"
             )
             sent_texts.add(text_nbr)
@@ -54,10 +57,10 @@ def process_data(data_path):
     df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
     df_filtered = df_filtered[df_filtered['is_valid_phone']]
 
-    data_list = df_filtered.to_dict('records') 
+    df_filtered = df_filtered.drop_duplicates(subset=['Phone Number']) 
 
+    data_list = df_filtered.to_dict('records')
     return data_list
-
 def is_valid_phone_number(phone_number):
     try:
         parsed_number = phonenumbers.parse(phone_number, region="US")
