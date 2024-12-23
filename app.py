@@ -1,9 +1,13 @@
+from itertools import count
 from flask import Flask, request, make_response
 from twilio.rest import Client
 import subprocess
 import pandas as pd
+import numpy as np
 import os
 from datetime import datetime, timedelta
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from twilio.rest import Client
 import pytz
 import re
@@ -20,6 +24,10 @@ messaging_sid = os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 sent_texts = set()
+sent_voice = set()
+sent_email = set()
+with open('DO_NOT_SEND.txt', 'r') as file:
+    sent_texts = set(line.strip() for line in file)
 x=0
 
 def get_send_time(secs):
@@ -30,6 +38,7 @@ def get_send_time(secs):
     return send_at.isoformat()
 
 def send_text(text_nbr, message, secs):
+    global sent_texts
     delayed_send = secs
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         try:
@@ -73,18 +82,16 @@ def sms_send(msg_in, data_list):
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         for data in data_list:
-            msg = f"Hello {data['First_Name']},\n"
-            msg += msg_in + "\n"
             future = executor.submit(send_text, data['Phone Number'], msg, success_count)
             futures.append(future)
             success_count += 1
             print(success_count, ". ", data['Last_Name'], "-", data['Phone Number'])
 
-        for future in futures:
-            try:
-                result = future.result() 
-            except Exception as e:
-                app.logger.error(f"Error processing future: {e}")
+        # for future in futures:
+        #     try:
+        #         result = future.result() 
+        #     except Exception as e:
+        #         app.logger.error(f"Error processing future: {e}")
                 
     return success_count
  
@@ -105,6 +112,8 @@ def incoming_sms():
 
     if first_word == "sms77216" and from_number == '+15099902828':
         try:
+            msg = f"Hello {data['First_Name']},\n"
+            msg += msg_in + "\n"
             data_list = process_data("Westmond_Master.csv")
             num_messages_sent = sms_send(msg_in, data_list)
             client.messages.create(
