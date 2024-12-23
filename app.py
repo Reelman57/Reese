@@ -38,7 +38,7 @@ def get_send_time():
     x+=1
     return send_at.isoformat()
 # --------------------------------------------------------------------------
-def send_text(text_nbr, message):
+def send_text(text_nbr, message, now):
     global sent_texts
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         try:
@@ -47,8 +47,9 @@ def send_text(text_nbr, message):
                 from_=twilio_number,
                 to=text_nbr,
                 messaging_service_sid=messaging_sid,
-                send_at=get_send_time(),
-                schedule_type="fixed"
+                if now != True
+                    send_at=get_send_time(),
+                    schedule_type="fixed"
             )
             sent_texts.add(text_nbr)
             return True
@@ -96,7 +97,7 @@ def send_email(subject, body, data_list):
                     smtp.login(os.environ.get('EMAIL_ADDRESS'), os.environ.get('EMAIL_PASSWORD'))
                     smtp.sendmail(msg['From'], msg['To'], msg.as_string())
                     sent_emails.add(email)
-                    print("Email - ", data['Last_Name'], "-", email) 
+                print("Email - ", data['Last_Name'], "-", email) 
             except Exception as e:
                 print(f"Error sending email to {email}: {e}")
         else:
@@ -123,14 +124,14 @@ def is_valid_phone_number(phone_number):
     except phonenumbers.NumberParseException:
         return False
 # --------------------------------------------------------------------------
-def sms_send(from_number, msg_in, data_list):
+def sms_send(from_number, msg_in, data_list, now):
     success_count = 0
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         for data in data_list:
             msg = f"Hello {data['First_Name']},\n"
             msg += msg_in + "\n"
-            future = executor.submit(send_text, data['Phone Number'], msg)
+            future = executor.submit(send_text, data['Phone Number'], msg, now)
             futures.append(future)
             success_count += 1
             print("SMS - ", data['Last_Name'], "-", data['Phone Number'])
@@ -194,9 +195,11 @@ def incoming_sms():
 # --------------------------------------------------------------------------        
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
         subject = "Emergency Communications System"
-        sms_send(from_number, msg_in, data_list)
+        now=True
+        sms_send(from_number, msg_in, data_list, now)
         send_email(subject, msg_in, data_list) 
         send_voice(msg_in, data_list)
+        now=""
     return
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
