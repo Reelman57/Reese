@@ -73,7 +73,8 @@ def send_voice(msg_in, data_list):
                     schedule_type="fixed"
                 )
                 sent_voice.add(to_number)
-                calls.append(call) 
+                calls.append(call)
+                print(data['Last_Name'], "-", data['Phone Number'])
             except Exception as e:
                 print(f"Error sending voice call to {to_number}: {e}")
     return calls 
