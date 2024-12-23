@@ -69,7 +69,6 @@ def is_valid_phone_number(phone_number):
         return False
 
 def sms_send(msg_in, data_list):
-    x = 0
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         for data in data_list:
@@ -81,7 +80,7 @@ def sms_send(msg_in, data_list):
         for future in futures:
             result = future.result()
             if result:
-    return x
+    return
  
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
@@ -104,7 +103,6 @@ def incoming_sms():
             from_=twilio_number,
             to=from_number
         )
-        print (sent_texts)
         return f"Successfully sent SMS to {num_messages_sent} recipients."
         
     elif first_word == "min77216":
