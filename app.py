@@ -278,7 +278,7 @@ def incoming_sms():
                             msg += f"  - {row['Phone Number']}"
                         msg += "\n"
     
-                    #print(minister_phone,"  " ,minister_email,msg)
+                    print(minister_phone,"  " ,minister_email,msg)
                     send_text(text_nbr,msg, now=False) 
                     # send_email(minister_email,subj,msg) 
                     sent_to = f"Your message has been scheduled for the following: \n"
