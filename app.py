@@ -78,11 +78,10 @@ def sms_send(msg_in, data_list):
             print(success_count, ". ", data['Last_Name'], "-", data['Phone Number'])
             future = executor.submit(send_text, data['Phone Number'], msg, success_count)
             futures.append(future)
+            success_count += 1
 
         for future in futures:
             result = future.result()
-            if result: 
-                success_count += 1
 
     return success_count
  
@@ -114,6 +113,7 @@ def incoming_sms():
 
     elif first_word == "cancel-sms":
         subprocess.run(["python", "SMS_Cancel.py", msg_in, from_number])
+    return
 
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
         subprocess.run(["python", "SMS_Send.py", msg_in, from_number])
