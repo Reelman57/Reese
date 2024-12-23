@@ -40,8 +40,7 @@ def get_send_time():
 
 def send_text(text_nbr, message):
     global sent_texts
-    # if text_nbr not in sent_texts and not pd.isna(text_nbr):
-    if not pd.isna(text_nbr):
+    if text_nbr not in sent_texts and not pd.isna(text_nbr):
         try:
             message = client.messages.create(
                 body=message,
@@ -83,6 +82,8 @@ def sms_send(msg_in, data_list):
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         for data in data_list:
+            msg = f"Hello {data['First_Name']},\n"
+            msg += msg_in + "\n"
             future = executor.submit(send_text, data['Phone Number'], msg)
             futures.append(future)
             success_count += 1
@@ -113,8 +114,6 @@ def incoming_sms():
 
     if first_word == "sms77216" and from_number == '+15099902828':
         try:
-            msg = f"Hello {data['First_Name']},\n"
-            msg += msg_in + "\n"
             data_list = process_data("Westmond_Master.csv")
             num_messages_sent = sms_send(msg_in, data_list)
             client.messages.create(
