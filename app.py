@@ -61,6 +61,7 @@ def process_data(data_path):
 
     data_list = df_filtered.to_dict('records')
     return data_list
+    
 def is_valid_phone_number(phone_number):
     try:
         parsed_number = phonenumbers.parse(phone_number, region="US")
@@ -83,7 +84,7 @@ def sms_send(msg_in, data_list):
         for future in futures:
             result = future.result()
 
-    return success_count
+    return
  
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
