@@ -284,19 +284,19 @@ def incoming_sms():
                     sent_to = f"Your message has been scheduled for the following: \n"
                     sent_to += f"{minister_last}, {minister_first}\n"
     
-        sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
-
-    message = client.messages.create(
-        body=sent_to,
-        from_='+12086034040', 
-        to=from_number 
-    )
+            sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
     
-    notification_message = client.messages.create(
-        body=f'Messages have been scheduled by {from_number}',
-        from_='+12086034040',
-        to='+15099902828'
-    )
+            message = client.messages.create(
+                body=sent_to,
+                from_='+12086034040', 
+                to=from_number 
+            )
+        
+        notification_message = client.messages.create(
+            body=f'Messages have been scheduled by {from_number}',
+            from_='+12086034040',
+            to='+15099902828'
+        )
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
