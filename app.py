@@ -82,20 +82,22 @@ def send_email(subject, body, data_list):
     sent_emails = set()
     for data in data_list:
         email = data.get('Email')
+        messasge = f"Hello {data['First_Name']},\n"
+        messasge += body + "\n"
         if email and not pd.isna(email):
             try:
                 msg = MIMEMultipart()
                 msg['From'] = os.environ.get('EMAIL_ADDRESS')
                 msg['To'] = email
                 msg['Subject'] = subject
-                msg.attach(MIMEText(body, 'plain'))
+                msg.attach(MIMEText(message, 'plain'))
 
                 with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
                     smtp.starttls()
                     smtp.login(os.environ.get('EMAIL_ADDRESS'), os.environ.get('EMAIL_PASSWORD'))
                     smtp.sendmail(msg['From'], msg['To'], msg.as_string())
                     sent_emails.add(email)
-                print(f"Successfully sent email to {email}")
+                    print(f"Successfully sent email to {email}")
             except Exception as e:
                 print(f"Error sending email to {email}: {e}")
         else:
