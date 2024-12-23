@@ -28,7 +28,7 @@ sent_voice = set()
 with open('DO_NOT_SEND.txt', 'r') as file:
     sent_texts = set(line.strip() for line in file)
 x=0
-
+# --------------------------------------------------------------------------
 def get_send_time():
     global x
     timezone = pytz.timezone('America/Los_Angeles')
@@ -36,7 +36,7 @@ def get_send_time():
     send_at = now_utc + timedelta(minutes=15, seconds = x)
     x+=1
     return send_at.isoformat()
-
+# --------------------------------------------------------------------------
 def send_text(text_nbr, message):
     global sent_texts
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
@@ -55,28 +55,33 @@ def send_text(text_nbr, message):
             print(f"Error sending SMS to {text_nbr}: {e}")
             return False
     return False
-
-def send_voice(to_number, message):
-    if to_number not in sent_voice and not pd.isna(to_number):
-        try:
-            call = Client.calls.create(
-                twiml="<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + message + " Goodbye. </Say></Response>",
-                to=to_number,
-                from_=twilio_number
-            )
-            sent_voice.add(to_number)  # Add the actual phone number to the set
-            return call  # Return the call object for potential further processing
-        except Exception as e:
-            print(f"Error sending voice call to {to_number}: {e}")
-            return None
-    else:
-        return None 
-        
+# --------------------------------------------------------------------------
+def send_voice(msg_in, data_list):
+    sent_voice = set()
+    for data in data_list:
+        to_number = data.get('Phone Number')
+        msg = f"Hello {data['First_Name']},\n"
+        msg += msg_in + "\n"
+        if to_number not in sent_voice and not pd.isna(to_number):
+            try:
+                call = Client.calls.create(
+                    twiml="<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + msg + " Goodbye. </Say></Response>",
+                    to=to_number,
+                    from_=twilio_number
+                )
+                sent_voice.add(to_number)
+                return call
+            except Exception as e:
+                print(f"Error sending voice call to {to_number}: {e}")
+                return None
+        else:
+            return None 
+# --------------------------------------------------------------------------        
 def send_email(subject, body, data_list):
     sent_emails = set()
     for data in data_list:
-        email = data.get('Email')  # Use get() to handle missing key gracefully
-        if email and not pd.isna(email):  # Check for email and non-empty value
+        email = data.get('Email')
+        if email and not pd.isna(email):
             try:
                 msg = MIMEMultipart()
                 msg['From'] = os.environ.get('EMAIL_ADDRESS')
@@ -94,8 +99,8 @@ def send_email(subject, body, data_list):
                 print(f"Error sending email to {email}: {e}")
         else:
             print(f"Invalid or missing email address for {data}")
-    return len(sent_emails)  # Return the number of successfully sent emails
-
+    return len(sent_emails)
+# --------------------------------------------------------------------------
 def process_data(data_path):
     df = pd.read_csv(data_path)
     df_filtered = df[df['Age'] > 17]
@@ -108,14 +113,14 @@ def process_data(data_path):
 
     data_list = df_filtered.to_dict('records')
     return data_list
-    
+# --------------------------------------------------------------------------    
 def is_valid_phone_number(phone_number):
     try:
         parsed_number = phonenumbers.parse(phone_number, region="US")
         return phonenumbers.is_valid_number(parsed_number)
     except phonenumbers.NumberParseException:
         return False
-
+# --------------------------------------------------------------------------
 def sms_send(msg_in, data_list):
     success_count = 0
     with ThreadPoolExecutor(max_workers=10) as executor:
@@ -140,11 +145,12 @@ def sms_send(msg_in, data_list):
         to=from_number
     )       
     return success_count
- 
+# -------------------------------------------------------------------------- 
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
     message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
+    data_list = process_data("Westmond_Master_Test.csv")
 
     if message_body is None or from_number is None:
         return "Invalid request: Missing message body or sender number", 400
@@ -155,18 +161,17 @@ def incoming_sms():
 
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
-
+# --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number == '+15099902828':
         try:
-            data_list = process_data("Westmond_Master.csv")
             num_messages_sent = sms_send(msg_in, data_list)
             return num_messages_sent 
         except Exception as e:
             return f"An error occurred: {str(e)}", 500
-        
+# --------------------------------------------------------------------------       
     elif first_word == "min77216":
         subprocess.run(["python", "SMS_Ministers.py", msg_in, from_number])
-
+# --------------------------------------------------------------------------
     elif first_word == "cancel-sms":
         messages = client.messages.list(limit=300)  # Adjust limit as needed
         canceled_count = 0
@@ -184,26 +189,20 @@ def incoming_sms():
             to=from_number
         )
         return canceled_count
-        
+# --------------------------------------------------------------------------        
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
         subject = "Emergency Communications System"
-
+    
         try:
             data_list = process_data("Westmond_Master.csv")
-            sms_send(msg_in, data_list)    
+            sms_send(msg_in, data_list) 
             send_email(subject, msg_in, data_list)
-   
-    # send_voice(row['Phone Number'], message)
-
-    return subject, msg_in, data_list
-
-    else:
-        client.messages.create(
-            body='From: ' + from_number + '\n' + msg_in,
-            from_=twilio_number,
-            to='+15099902828'
-        )
-    return
-
+            send_voice(msg_in, data_list)
+    
+            return subject, msg_in, data_list  # Indented here
+        except Exception as e:
+            # Handle the exception (e.g., log the error, send an error message)
+            return f"An error occurred: {str(e)}", 500
+# --------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
