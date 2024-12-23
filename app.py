@@ -68,7 +68,9 @@ def send_voice(msg_in, data_list):
                 call = client.calls.create(
                     twiml="<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">" + msg + " Goodbye. </Say></Response>",
                     to=to_number,
-                    from_=twilio_number
+                    from_=twilio_number,
+                    send_at=get_send_time(),
+                    schedule_type="fixed"
                 )
                 sent_voice.add(to_number)
                 return call
@@ -197,9 +199,9 @@ def incoming_sms():
         subject = "Emergency Communications System"
     
         try:
-            # sms_send(msg_in, data_list) 
+            sms_send(msg_in, data_list) 
             send_email(subject, msg_in, data_list)
-            # send_voice(msg_in, data_list)
+            send_voice(msg_in, data_list)
     
             return subject, msg_in, data_list  # Indented here
         except Exception as e:
