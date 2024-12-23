@@ -47,7 +47,7 @@ def send_text(text_nbr, message, now):
                 from_=twilio_number,
                 to=text_nbr,
                 messaging_service_sid=messaging_sid,
-                if now != True
+                if not now:
                     send_at=get_send_time(),
                     schedule_type="fixed"
             )
