@@ -123,7 +123,7 @@ def is_valid_phone_number(phone_number):
     except phonenumbers.NumberParseException:
         return False
 # --------------------------------------------------------------------------
-def sms_send(msg_in, data_list):
+def sms_send(from_number, msg_in, data_list):
     success_count = 0
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
@@ -194,7 +194,7 @@ def incoming_sms():
 # --------------------------------------------------------------------------        
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
         subject = "Emergency Communications System"
-        sms_send(msg_in, data_list)
+        sms_send(from_number, msg_in, data_list)
         send_email(subject, msg_in, data_list) 
         send_voice(msg_in, data_list)
     return
