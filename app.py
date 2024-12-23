@@ -65,16 +65,18 @@ def send_voice(msg_in, data_list):
         if to_number not in sent_voice and not pd.isna(to_number):
             try:
                 msg = f"Hello {data['First_Name']},\n" + msg_in + "\n"
-                call = client.calls.create(
-                    twiml=f"<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">{msg} Goodbye. </Say></Response>",
-                    to=to_number,
-                    from_=twilio_number,
-                    send_at=get_send_time(),
-                    schedule_type="fixed"
-                )
-                sent_voice.add(to_number)
-                calls.append(call)
-                print(data['Last_Name'], "-", data['Phone Number'])
+                send_at = get_send_time()
+                if send_at:
+                    call = client.calls.create(
+                        twiml=f"<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">{msg} Goodbye. </Say></Response>",
+                        to=to_number,
+                        from_=twilio_number,
+                        send_at=send_at,
+                        schedule_type="fixed"
+                    )
+                    sent_voice.add(to_number)
+                    calls.append(call)
+                    print(data['Last_Name'], "-", data['Phone Number']) 
             except Exception as e:
                 print(f"Error sending voice call to {to_number}: {e}")
     return calls 
@@ -198,7 +200,7 @@ def incoming_sms():
         subject = "Emergency Communications System"
     
         try:
-            sms_send(msg_in, data_list) 
+            #sms_send(msg_in, data_list) 
             # send_email(subject, msg_in, data_list)
             send_voice(msg_in, data_list)
     
