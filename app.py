@@ -30,24 +30,25 @@ with open('DO_NOT_SEND.txt', 'r') as file:
     sent_texts = set(line.strip() for line in file)
 x=0
 
-def get_send_time(secs):
-    wait_secs=secs
+def get_send_time():
+    global x
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
-    send_at = now_utc + timedelta(minutes=15, seconds = wait_secs)
+    send_at = now_utc + timedelta(minutes=15, seconds = x)
+    x+=1
     return send_at.isoformat()
 
-def send_text(text_nbr, message, secs):
+def send_text(text_nbr, message):
     global sent_texts
-    delayed_send = secs
-    if text_nbr not in sent_texts and not pd.isna(text_nbr):
+    # if text_nbr not in sent_texts and not pd.isna(text_nbr):
+    if not pd.isna(text_nbr):
         try:
             message = client.messages.create(
                 body=message,
                 from_=twilio_number,
                 to=text_nbr,
                 messaging_service_sid=messaging_sid,
-                send_at=get_send_time(delayed_send),
+                send_at=get_send_time(),
                 schedule_type="fixed"
             )
             sent_texts.add(text_nbr)
@@ -82,16 +83,16 @@ def sms_send(msg_in, data_list):
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         for data in data_list:
-            future = executor.submit(send_text, data['Phone Number'], msg, success_count)
+            future = executor.submit(send_text, data['Phone Number'], msg)
             futures.append(future)
             success_count += 1
             print(success_count, ". ", data['Last_Name'], "-", data['Phone Number'])
 
-        for future in futures:
-            try:
-                result = future.result() 
-            except Exception as e:
-                app.logger.error(f"Error processing future: {e}")
+        # for future in futures:
+        #     try:
+        #         result = future.result() 
+        #     except Exception as e:
+        #         app.logger.error(f"Error processing future: {e}")
                 
     return success_count
  
