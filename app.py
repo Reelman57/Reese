@@ -280,7 +280,7 @@ def incoming_sms():
                     #print(minister_phone,"  " ,minister_email,msg)
                     send_text(text_nbr,msg, now=False) 
                     # send_email(minister_email,subj,msg) 
-                    sent_to = "Your message has been scheduled for the following: \n"
+                    sent_to = f"Your message has been scheduled for the following: \n"
                     sent_to += f"{minister_last}, {minister_first}\n"
     
         sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
