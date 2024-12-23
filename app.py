@@ -27,7 +27,6 @@ def get_send_time(secs):
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
     send_at = now_utc + timedelta(minutes=15, seconds = wait_secs)
-    print(wait_secs)
     return send_at.isoformat()
 
 def send_text(text_nbr, message, secs):
@@ -82,7 +81,10 @@ def sms_send(msg_in, data_list):
             success_count += 1
 
         for future in futures:
-            result = future.result()
+    try:
+        result = future.result() 
+    except Exception as e:
+        app.logger.error(f"Error processing future: {e}")
 
     return
  
