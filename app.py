@@ -133,7 +133,7 @@ def sms_send(msg_in, data_list):
             future = executor.submit(send_text, data['Phone Number'], msg)
             futures.append(future)
             success_count += 1
-            print(SMS - ", data['Last_Name'], "-", data['Phone Number'])
+            print("SMS - ", data['Last_Name'], "-", data['Phone Number'])
 
         for future in futures:
             try:
