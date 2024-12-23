@@ -113,8 +113,19 @@ def incoming_sms():
         subprocess.run(["python", "SMS_Ministers.py", msg_in, from_number])
 
     elif first_word == "cancel-sms":
-        subprocess.run(["python", "SMS_Cancel.py", msg_in, from_number])
-
+        messages = client.messages.list(limit=300)  # Adjust limit as needed
+        for message in messages:
+            if message.status == 'scheduled':
+                client.messages(message.sid).update(status='canceled')
+                x += 1
+                
+        message = client.messages.create(
+        body= x, ' Messages cancelled',
+        from_='+12086034040',
+        to = from_number
+        )
+        return x
+        
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
         subprocess.run(["python", "SMS_Send.py", msg_in, from_number])
 
