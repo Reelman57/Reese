@@ -20,15 +20,15 @@ messaging_sid = os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 sent_texts = set()
+x=0
 
-def get_send_time():
+def get_send_time(x):
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
-    send_at = now_utc + timedelta(minutes=15, seconds = 1)
+    send_at = now_utc + timedelta(minutes=15, seconds = x)
     return send_at.isoformat()
 
-def send_text(text_nbr, message):
-   
+def send_text(text_nbr, message, x):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         try:
             client = Client(account_sid, auth_token) 
@@ -37,7 +37,7 @@ def send_text(text_nbr, message):
                 from_=twilio_number,
                 to=text_nbr,
                 messaging_service_sid=messaging_sid,
-                send_at=get_send_time(),
+                send_at=get_send_time(x),
                 schedule_type="fixed"
             )
             sent_texts.add(text_nbr)
@@ -67,21 +67,38 @@ def is_valid_phone_number(phone_number):
     except phonenumbers.NumberParseException:
         return False
 
+# def sms_send(msg_in, data_list):
+
+#   with ThreadPoolExecutor(max_workers=10) as executor:
+#     futures = []
+#     for data in data_list:
+#       msg = f"Hello {data['First_Name']},\n" 
+#       msg += msg_in + "\n"
+#       print(data['Last_Name'], "-", data['Phone Number']) 
+#       future = executor.submit(send_text, data['Phone Number'], msg) 
+#       futures.append(future)
+
+#     for future in futures:
+#       result = future.result()
+#       if result: 
+#           return
+
 def sms_send(msg_in, data_list):
+    x = 0
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        futures = []
+        for data in data_list:
+            msg = f"Hello {data['First_Name']},\n"
+            msg += msg_in + "\n"
+            future = executor.submit(send_text, data['Phone Number'], msg, x)
+            futures.append(future)
 
-  with ThreadPoolExecutor(max_workers=10) as executor:
-    futures = []
-    for data in data_list:
-      msg = f"Hello {data['First_Name']},\n" 
-      msg += msg_in + "\n"
-      print(data['Last_Name'], "-", data['Phone Number']) 
-      future = executor.submit(send_text, data['Phone Number'], msg) 
-      futures.append(future)
-
-    for future in futures:
-      result = future.result()
-      if result: 
-          return
+        for future in futures:
+            result = future.result()  # Wait for the result of each future
+            if result:
+                x += 1
+                print(data['Last_Name'], "-", data['Phone Number'])
+    return x
  
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
