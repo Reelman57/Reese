@@ -193,9 +193,9 @@ def incoming_sms():
             sms_send(msg_in, data_list)    
             send_email(subject, msg_in, data_list)
    
-    send_voice(row['Phone Number'], message)
+    # send_voice(row['Phone Number'], message)
 
-    return subject,msg_in
+    return subject, msg_in, data_list
 
     else:
         client.messages.create(
