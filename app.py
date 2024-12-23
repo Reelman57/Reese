@@ -24,7 +24,7 @@ sent_texts = set()
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
-    send_at = now_utc + timedelta(minutes=15)
+    send_at = now_utc + timedelta(minutes=15, seconds = 1)
     return send_at.isoformat()
 
 def send_text(text_nbr, message):
@@ -81,7 +81,7 @@ def sms_send(msg_in, data_list):
     for future in futures:
       result = future.result()
       if result: 
-  return
+          return
  
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
