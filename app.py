@@ -194,8 +194,7 @@ def incoming_sms():
         subject = "Emergency Communications System"
     
         try:
-            data_list = process_data("Westmond_Master.csv")
-            sms_send(msg_in, data_list) 
+            # sms_send(msg_in, data_list) 
             send_email(subject, msg_in, data_list)
             send_voice(msg_in, data_list)
     
