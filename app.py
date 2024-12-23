@@ -41,7 +41,6 @@ def send_text(text_nbr, message, x):
                 schedule_type="fixed"
             )
             sent_texts.add(text_nbr)
-            print(f"DEBUG: Added {text_nbr} to sent_texts") 
             return True
         except Exception as e:
             print(f"Error sending SMS to {text_nbr}: {e}")
@@ -67,22 +66,6 @@ def is_valid_phone_number(phone_number):
     except phonenumbers.NumberParseException:
         return False
 
-# def sms_send(msg_in, data_list):
-
-#   with ThreadPoolExecutor(max_workers=10) as executor:
-#     futures = []
-#     for data in data_list:
-#       msg = f"Hello {data['First_Name']},\n" 
-#       msg += msg_in + "\n"
-#       print(data['Last_Name'], "-", data['Phone Number']) 
-#       future = executor.submit(send_text, data['Phone Number'], msg) 
-#       futures.append(future)
-
-#     for future in futures:
-#       result = future.result()
-#       if result: 
-#           return
-
 def sms_send(msg_in, data_list):
     x = 0
     with ThreadPoolExecutor(max_workers=10) as executor:
@@ -94,7 +77,7 @@ def sms_send(msg_in, data_list):
             futures.append(future)
 
         for future in futures:
-            result = future.result()  # Wait for the result of each future
+            result = future.result()
             if result:
                 x += 1
                 print(data['Last_Name'], "-", data['Phone Number'])
@@ -121,6 +104,7 @@ def incoming_sms():
             from_=twilio_number,
             to=from_number
         )
+        print (sent_texts)
         return f"Successfully sent SMS to {num_messages_sent} recipients."
         
     elif first_word == "min77216":
