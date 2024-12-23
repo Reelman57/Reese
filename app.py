@@ -199,7 +199,7 @@ def incoming_sms():
     
         try:
             sms_send(msg_in, data_list) 
-            send_email(subject, msg_in, data_list)
+            # send_email(subject, msg_in, data_list)
             send_voice(msg_in, data_list)
     
             return subject, msg_in, data_list  # Indented here
