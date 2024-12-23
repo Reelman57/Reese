@@ -40,7 +40,6 @@ def send_text(text_nbr, message, secs):
                 schedule_type="fixed"
             )
             sent_texts.add(text_nbr)
-            print(data['Last_Name'], "-", data['Phone Number'])
             return True
         except Exception as e:
             print(f"Error sending SMS to {text_nbr}: {e}")
@@ -73,6 +72,7 @@ def sms_send(msg_in, data_list):
         for data in data_list:
             msg = f"Hello {data['First_Name']},\n"
             msg += msg_in + "\n"
+            print(data['Last_Name'], "-", data['Phone Number'])
             future = executor.submit(send_text, data['Phone Number'], msg, success_count)
             futures.append(future)
 
