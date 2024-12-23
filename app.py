@@ -113,7 +113,6 @@ def incoming_sms():
 
     elif first_word == "cancel-sms":
         subprocess.run(["python", "SMS_Cancel.py", msg_in, from_number])
-    return
 
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
         subprocess.run(["python", "SMS_Send.py", msg_in, from_number])
