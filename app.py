@@ -28,7 +28,7 @@ def get_send_time(secs):
     send_at = now_utc + timedelta(minutes=15, seconds = secs)
     return send_at.isoformat()
 
-def send_text(text_nbr, message,secs):
+def send_text(text_nbr, message, secs):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         try:
             message = client.messages.create(
