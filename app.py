@@ -161,6 +161,7 @@ def incoming_sms():
     from_number = request.values.get('From', None)
     data_file = "Westmond_Master.csv"
     data_list = process_data(data_file)
+    sent_to = ""
 
     if message_body is None or from_number is None:
         return "Invalid request: Missing message body or sender number", 400
