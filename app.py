@@ -155,6 +155,7 @@ def incoming_sms():
     '+15093449400'
     ]
     message_body = request.values.get('Body', None)
+    global from_number
     from_number = request.values.get('From', None)
     data_file = "Westmond_Master.csv"
     data_list = process_data(data_file)
@@ -177,7 +178,7 @@ def incoming_sms():
     x=0
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
-        sms_send(from_number, msg_in, data_list, True)
+        sms_send(msg_in, data_list, True)
         return
 # --------------------------------------------------------------------------
     elif first_word == "cancel-sms":
@@ -234,7 +235,7 @@ def incoming_sms():
                     print(f"{x}. {data['First_Name']} {data['Last_Name']}")
                     msg = f"Brother {data['Last_Name']}, \n\n"
                     msg += msg_in
-                    send_text(from_number, data['Phone Number'], msg, False) 
+                    send_text(data['Phone Number'], msg, False) 
     
         except Exception as e:
             print(f"An error occurred while processing the request: {e}")
@@ -311,7 +312,7 @@ def incoming_sms():
                             msg += "\n"
             
                         print(minister_phone,"  " ,minister_email,msg)
-                        send_text(from_number, text_nbr,msg, False)
+                        send_text(text_nbr, msg, False)
                         # send_email(minister_email,subj,msg)
            
             return sent_to, 200
