@@ -274,7 +274,7 @@ def incoming_sms():
                             msg += "\n"
             
                         print(minister_phone,"  " ,minister_email,msg)
-                        #send_text(text_nbr,msg)
+                        send_text(text_nbr,msg, False)
                         # send_email(minister_email,subj,msg)
                         sent_to += f"{minister_last}, {minister_first}\n"
             
@@ -285,7 +285,7 @@ def incoming_sms():
             to = from_number
             )
             message = client.messages.create(
-            body=f'Messages have been scheduled by from_number',
+            body=f'Messages have been scheduled by {from_number}',
             from_='+12086034040',
             to = '+15099902828'
             )
