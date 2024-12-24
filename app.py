@@ -333,7 +333,7 @@ def incoming_sms():
             )
             return sent_to, 200
 # --------------------------------------------------------------------------
-    elif first_word == "help":
+    elif first_word == "?" or first_word == "instructions":
         instructions = "To send a message to any of the following groups.  Simply type the group code on the 1st line followed by your message on subsequent lines.  The message will already have a salutation on it, ie. 'Brother Jones' or 'Hello John'.  Do not use emojis or pictures.  The app is authenticated by your phone number and will only work on your phone."
         instructions += "Group codes"
         instructions += "min77216 - Your Ministering District with assignments"
