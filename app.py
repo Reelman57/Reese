@@ -215,7 +215,7 @@ def incoming_sms():
             ministerx_phone = f"Minister{x}_Phone"
             ministerx_email = f"Minister{x}_Email"
         
-            df_filtered = df_filtered[df_filtered[ministerx].notnull()]
+            df_filtered = df[df[ministerx].notnull()]
             df_filtered[ministerx] = df_filtered[ministerx].fillna('')
         
             try:
