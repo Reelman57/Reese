@@ -18,6 +18,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 
 app = Flask(__name__)
+global twilio_number
 account_sid = os.environ['TWILIO_TEST_SID']
 auth_token = os.environ['TWILIO_TEST_TOKEN']
 # account_sid = os.environ['TWILIO_ACCOUNT_SID']
