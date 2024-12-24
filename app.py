@@ -42,6 +42,7 @@ def send_text(text_nbr, message, now):
         if not now:
             send_at = get_send_time()
             schedule_type = "fixed"
+            print("To be sent later")
         else:
             send_at = None
             schedule_type = None
