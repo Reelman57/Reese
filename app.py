@@ -48,14 +48,14 @@ def send_text(text_nbr, message, now):
             schedule_type = None
 
         try:
-            # message = client.messages.create(
-            #     body=message,
-            #     from_=twilio_number,
-            #     to=f"+1{text_nbr}",
-            #     messaging_service_sid=messaging_sid,
-            #     send_at=send_at,
-            #     schedule_type=schedule_type
-            # )
+            message = client.messages.create(
+                body=message,
+                from_=twilio_number,
+                to=f"+1{text_nbr}",
+                messaging_service_sid=messaging_sid,
+                send_at=send_at,
+                schedule_type=schedule_type
+            )
             sent_texts.add(text_nbr)
             x+=1
             return True
@@ -162,7 +162,7 @@ def incoming_sms():
     message_body = request.values.get('Body', None)
     global from_number
     from_number = request.values.get('From', None)
-    data_file = "Westmond_Master.csv"
+    data_file = "Westmond_Master_Test.csv"
     data_list = process_data(data_file)
 
     if message_body is None or from_number is None:
@@ -252,78 +252,78 @@ def incoming_sms():
         return "Messages sent successfully."
 # --------------------------------------------------------------------------
     elif first_word == "min77216" and from_number in authorized_list:
-            district = {
-                '+15099902828': 'D1',
-                '+19722819991': 'D2',
-                '+12086103066': 'D3',
-                '+12086102929': 'SD1',
-                '+12089201618': 'SD2',
-                '+15093449400': 'SD3'
-            }
-            try:
-                district = district.get(from_number)
-            except AttributeError:
-                district = None
-    
-            df = pd.read_csv(data_file) 
-            
-            if district and district[0] == 'S':
-                df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
-                r = range(3, 5)  
-            else:
-                df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
-                r = range(1, 3)
-            
-            for x in r: 
-                
-                ministerx = f"Minister{x}"
-                ministerx_phone = f"Minister{x}_Phone"
-                ministerx_email = f"Minister{x}_Email"
-            
-                df_filtered = df_filtered[df_filtered[ministerx].notnull()]
-                df_filtered[ministerx] = df_filtered[ministerx].fillna('')
-            
-                try:
-                    df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True) 
-                except AttributeError as e:
-                    print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
-                    continue  # Skip to the next iteration of the outer for loop
-            
-                grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
-            
-                for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
-              
-                    text_nbr = minister_phone
-                    subj="Your Ministering Families"
-            
-                    if x < 3:
-                        Bro_Sis = "Brother"
-                        min_org = "Elders Quorum Presidency"
-                    else:
-                        Bro_Sis = "Sister"
-                        min_org = "Relief Society Presidency"
-            
-                    msg = f"{Bro_Sis} {minister_last}, \n"
-                    msg += f"{msg_in} \n\n"
-                    # msg += f"Your {min_org},\n\n"
-                    
-                    msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
-                    # msg += f"{minister_phone}\n\n"
-            
-                    if not group.empty:
-                        for index, row in group.iterrows():
-                            msg += f"{row['Name']}"
-                            if not pd.isna(row['Phone Number']):
-                                msg += f"  - {row['Phone Number']}"
-                            msg += "\n"
-            
-                        print(minister_phone,"  " ,minister_email,msg)
-                        send_text(text_nbr, msg, False)
-                        # send_email(minister_email,subj,msg)
+        district = {
+            '+15099902828': 'D1',
+            '+19722819991': 'D2',
+            '+12086103066': 'D3',
+            '+12086102929': 'SD1',
+            '+12089201618': 'SD2',
+            '+15093449400': 'SD3'
+        }
+        try:
+            district = district.get(from_number)
+        except AttributeError:
+            district = None
 
-                confirm_send()
-           
-            return sent_to, 200
+        df = pd.read_csv(data_file) 
+        
+        if district and district[0] == 'S':
+            df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
+            r = range(3, 5)  
+        else:
+            df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
+            r = range(1, 3)
+        
+        for x in r: 
+            
+            ministerx = f"Minister{x}"
+            ministerx_phone = f"Minister{x}_Phone"
+            ministerx_email = f"Minister{x}_Email"
+        
+            df_filtered = df_filtered[df_filtered[ministerx].notnull()]
+            df_filtered[ministerx] = df_filtered[ministerx].fillna('')
+        
+            try:
+                df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True) 
+            except AttributeError as e:
+                print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
+                continue  # Skip to the next iteration of the outer for loop
+        
+            grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
+        
+            for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
+          
+                text_nbr = minister_phone
+                subj="Your Ministering Families"
+        
+                if x < 3:
+                    Bro_Sis = "Brother"
+                    min_org = "Elders Quorum Presidency"
+                else:
+                    Bro_Sis = "Sister"
+                    min_org = "Relief Society Presidency"
+        
+                msg = f"{Bro_Sis} {minister_last}, \n"
+                msg += f"{msg_in} \n\n"
+                # msg += f"Your {min_org},\n\n"
+                
+                msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
+                # msg += f"{minister_phone}\n\n"
+        
+                if not group.empty:
+                    for index, row in group.iterrows():
+                        msg += f"{row['Name']}"
+                        if not pd.isna(row['Phone Number']):
+                            msg += f"  - {row['Phone Number']}"
+                        msg += "\n"
+        
+                    print(minister_phone,"  " ,minister_email,msg)
+                    send_text(text_nbr, msg, False)
+                    # send_email(minister_email,subj,msg)
+
+            confirm_send()
+       
+        return
 # --------------------------------------------------------------------------
     elif (first_word == "?" or first_word == "instructions") and from_number in authorized_list:
         instructions = "To send a message to any of the following groups.  Simply type the group code on the 1st line followed by your message on subsequent lines.  The message will already have a salutation on it, ie. 'Brother Jones' or 'Hello John'.  Do not use emojis or pictures.  The app is authenticated by your phone number and will only work on your phone.\n\n"
