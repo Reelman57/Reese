@@ -222,81 +222,78 @@ def incoming_sms():
     
         try:
             df = pd.read_csv(data_file) 
-        except FileNotFoundError:
-            print(f"Error: File not found: {data_file}")
-            return "Error: File not found.", 500
-        except Exception as e: 
-            print(f"Error reading CSV file: {e}")
-            return "Error reading data file.", 500 
     
-        if district and district[0] == 'S':
-            df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
-            r = range(3, 5) 
-        else:
-            df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
-            r = range(1, 3)
+            if district and district[0] == 'S':
+                df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
+                r = range(3, 5) 
+            else:
+                df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
+                r = range(1, 3)
+                
+                data_list = df_filtered.to_dict('records')
     
         for data in data_list: 
-            for x in r: 
-                ministerx = f"Minister{x}"
-                ministerx_phone = f"Minister{x}_Phone"
-                ministerx_email = f"Minister{x}_Email"
+            print(data)
+        #     for x in r: 
+        #         ministerx = f"Minister{x}"
+        #         ministerx_phone = f"Minister{x}_Phone"
+        #         ministerx_email = f"Minister{x}_Email"
     
-                df_filtered = df_filtered[df_filtered[ministerx].notnull()]
-                df_filtered[ministerx] = df_filtered[ministerx].fillna('')
+        #         df_filtered = df_filtered[df_filtered[ministerx].notnull()]
+        #         df_filtered[ministerx] = df_filtered[ministerx].fillna('')
     
-                try:
-                    df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True)
-                except AttributeError as e:
-                    print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
-                    continue  # Skip to the next iteration of the outer for loop
+        #         try:
+        #             df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True)
+        #         except AttributeError as e:
+        #             print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
+        #             continue  # Skip to the next iteration of the outer for loop
     
-                grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
+        #         grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
     
-                for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
-                    if minister_phone and minister_phone != "":
-                        sent_to = "" 
-                        text_nbr = minister_phone 
-                        subj = "Your Ministering Families"
+        #         for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
+        #             if minister_phone and minister_phone != "":
+        #                 sent_to = "" 
+        #                 text_nbr = minister_phone 
+        #                 subj = "Your Ministering Families"
     
-                        if x < 3:
-                            Bro_Sis = "Brother"
-                            min_org = "Elders Quorum Presidency"
-                        else:
-                            Bro_Sis = "Sister"
-                            min_org = "Relief Society Presidency"
+        #                 if x < 3:
+        #                     Bro_Sis = "Brother"
+        #                     min_org = "Elders Quorum Presidency"
+        #                 else:
+        #                     Bro_Sis = "Sister"
+        #                     min_org = "Relief Society Presidency"
     
-                        msg = f"{Bro_Sis} {minister_last}, \n"
-                        msg += f"{msg_in}\n\n" 
+        #                 msg = f"{Bro_Sis} {minister_last}, \n"
+        #                 msg += f"{msg_in}\n\n" 
     
-                        msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
+        #                 msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
     
-                        if not group.empty:
-                            for index, row in group.iterrows():
-                                msg += f"{row['Name']}"
-                                if not pd.isna(row['Phone Number']):
-                                    msg += f"  - {row['Phone Number']}"
-                                msg += "\n"
+        #                 if not group.empty:
+        #                     for index, row in group.iterrows():
+        #                         msg += f"{row['Name']}"
+        #                         if not pd.isna(row['Phone Number']):
+        #                             msg += f"  - {row['Phone Number']}"
+        #                         msg += "\n"
     
-                        print(minister_phone,"  " ,minister_email,msg)
-                        #send_text(text_nbr,msg, now=False) 
-                        # send_email(minister_email,subj,msg) 
-                        sent_to += f"Your message has been scheduled for the following: \n"
-                        sent_to += f"{minister_last}, {minister_first}\n"
+        #                 print(minister_phone,"  " ,minister_email,msg)
+        #                 #send_text(text_nbr,msg, now=False) 
+        #                 # send_email(minister_email,subj,msg) 
+        #                 sent_to += f"Your message has been scheduled for the following: \n"
+        #                 sent_to += f"{minister_last}, {minister_first}\n"
     
-                    sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
+        #             sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
     
-                    message = client.messages.create(
-                        body=sent_to,
-                        from_='+12086034040', 
-                        to=from_number 
-                    )
+        #             message = client.messages.create(
+        #                 body=sent_to,
+        #                 from_='+12086034040', 
+        #                 to=from_number 
+        #             )
     
-        notification_message = client.messages.create(
-            body=f'Messages have been scheduled by {from_number}',
-            from_='+12086034040',
-            to='+15099902828'
-        )
+        # notification_message = client.messages.create(
+        #     body=f'Messages have been scheduled by {from_number}',
+        #     from_='+12086034040',
+        #     to='+15099902828'
+        # )
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
