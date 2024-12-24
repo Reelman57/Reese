@@ -28,7 +28,6 @@ sent_texts = set()
 sent_voice = set()
 with open('DO_NOT_SEND.txt', 'r') as file:
     sent_texts = set(line.strip() for line in file)
-x=0
 # --------------------------------------------------------------------------
 def get_send_time():
     global x
@@ -41,27 +40,35 @@ def get_send_time():
 def send_text(text_nbr, message, now):
     global sent_texts
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
-        try:
-            if not now:
-                send_at = get_send_time()
-                schedule_type = "fixed" 
-            else:
-                send_at = None 
-                schedule_type = None 
+    
+        if not now:
+            send_at = get_send_time()
+            schedule_type = "fixed" 
+        else:
+            send_at = None 
+            schedule_type = None 
 
-            message = client.messages.create(
-                body=message,
-                from_=twilio_number,
-                to=text_nbr,
-                messaging_service_sid=messaging_sid,
-                send_at=send_at, 
-                schedule_type=schedule_type
-            )
-            sent_texts.add(text_nbr)
-            return True
-        except Exception as e:
-            print(f"Error sending SMS to {text_nbr}: {e}")
-            return False
+        message = client.messages.create(
+            body=message,
+            from_=twilio_number,
+            to=text_nbr,
+            messaging_service_sid=messaging_sid,
+            send_at=send_at, 
+            schedule_type=schedule_type
+        )
+        sent_texts.add(text_nbr)
+        x+=1
+        return True
+    client.messages.create(
+        body=f'Message scheduled to {x} individuals.',
+        from_=twilio_number,
+        to=from_number
+    )
+    client.messages.create(
+        body=f'Messages have been scheduled by {from_number}',
+        from_='+12086034040',
+        to = '+15099902828'
+        )
     return False
 # --------------------------------------------------------------------------
 def send_voice(msg_in, data_list):
@@ -146,13 +153,7 @@ def sms_send(from_number, msg_in, data_list, now):
             try:
                 result = future.result() 
             except Exception as e:
-                app.logger.error(f"Error processing future: {e}")
-                
-    client.messages.create(
-        body=f'Message scheduled to {success_count} individuals.',
-        from_=twilio_number,
-        to=from_number
-    )       
+                app.logger.error(f"Error processing future: {e}")     
     return success_count
 # -------------------------------------------------------------------------- 
 @app.route("/sms", methods=['POST'])        
@@ -164,7 +165,7 @@ def incoming_sms():
     '+12086102929',
     '+12089201618',
     '+15093449400'
-]
+    ]
     message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
     data_file = "Westmond_Master.csv"
@@ -179,6 +180,7 @@ def incoming_sms():
 
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
+    x=0
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
         try:
@@ -242,17 +244,6 @@ def incoming_sms():
                 msg += msg_in
                 send_text(data['Phone Number'], msg, False)
                 x+=1
-
-        message = client.messages.create(
-        body= f"{x} Messages have been sent.",
-        from_='+12086034040',
-        to = from_number
-        )
-        message = client.messages.create(
-        body=f'Messages have been scheduled by {from_number}',
-        from_='+12086034040',
-        to = '+15099902828'
-        )
         return
 # --------------------------------------------------------------------------
     elif first_word == "min77216" and from_number in authorized_list:
