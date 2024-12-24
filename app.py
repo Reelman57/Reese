@@ -31,7 +31,7 @@ def get_send_time(secs):
     send_at = now_utc + timedelta(minutes=15, seconds = secs)
     return send_at.isoformat()
 # --------------------------------------------------------------------------
-def send_text(text_nbr, message, now):
+def send_text(from_number, text_nbr, message, now):
     x=0
     global sent_texts
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
@@ -61,7 +61,7 @@ def send_text(text_nbr, message, now):
     )
     client.messages.create(
         body=f'Messages have been scheduled by {from_number}',
-        from_='+12086034040',
+        from_=twilio_number,
         to = '+15099902828'
         )
     return False
@@ -139,7 +139,7 @@ def sms_send(from_number, msg_in, data_list, now):
         for data in data_list:
             msg = f"Hello {data['First_Name']},\n"
             msg += msg_in + "\n"
-            future = executor.submit(send_text, data['Phone Number'], msg, now)
+            future = executor.submit(send_text, from_number, data['Phone Number'], msg, now)
             futures.append(future)
             success_count += 1
             print("SMS - ", data['Last_Name'], "-", data['Phone Number'])
@@ -215,33 +215,40 @@ def incoming_sms():
         return "Emergency Communications System messages sent", 200
 # --------------------------------------------------------------------------
     elif first_word == "eld77216" and from_number in authorized_list:
-        
-        df = pd.read_csv(data_file)
-        df_filtered = df[df['Age'] > 17]
-        df_filtered = df_filtered[df_filtered['Gender'] == "M"]
-        df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email']]
-        df_filtered = df_filtered.dropna(subset=['Phone Number'])
-        df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
-        df_filtered = df_filtered[df_filtered['is_valid_phone']]
-        df_filtered = df_filtered.drop_duplicates(subset=['Phone Number']) 
+        try:
+            df = pd.read_csv(data_file)
+        except FileNotFoundError:
+            print(f"Error: File not found: {data_file}")
+            return "Error: File not found.", 500
+        except Exception as e: 
+            print(f"Error reading CSV file: {e}")
+            return "Error reading data file.", 500 
     
-        data_list = df_filtered.to_dict('records')
-        
-        df = pd.read_csv(data_file)
-        ministers=set()
-       
-        for value in df['Minister1_Phone']:
-            ministers.add(value)
-        for value in df['Minister2_Phone']:
-            ministers.add(value)
-        
-        for data in data_list:
-            if data['Phone Number'] in ministers:
-                print(f"{data['First_Name']} {data['Last_Name']}")
-                msg = f"Brother {data['Last_Name']}, \n\n"
-                msg += msg_in
-                send_text(data['Phone Number'], msg, False)
-        return
+        try:
+            df_filtered = df[df['Age'] > 17]
+            df_filtered = df_filtered[df_filtered['Gender'] == "M"]
+            df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email']]
+            df_filtered = df_filtered.dropna(subset=['Phone Number'])
+            df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x)) 
+            df_filtered = df_filtered[df_filtered['is_valid_phone']]
+            df_filtered = df_filtered.drop_duplicates(subset=['Phone Number']) 
+    
+            data_list = df_filtered.to_dict('records')
+    
+            ministers = set(df['Minister1_Phone'].dropna().tolist() + df['Minister2_Phone'].dropna().tolist()) 
+    
+            for data in data_list:
+                if data['Phone Number'] in ministers:
+                    print(f"{data['First_Name']} {data['Last_Name']}")
+                    msg = f"Brother {data['Last_Name']}, \n\n"
+                    msg += msg_in
+                    send_text(from_number, data['Phone Number'], msg, False) 
+    
+        except Exception as e:
+            print(f"An error occurred while processing the request: {e}")
+            return "An error occurred.", 500
+    
+        return "Messages sent successfully."
 # --------------------------------------------------------------------------
     elif first_word == "min77216" and from_number in authorized_list:
             district = {
@@ -256,8 +263,6 @@ def incoming_sms():
                 district = district.get(from_number)
             except AttributeError:
                 district = None
-        
-            sent_to = "Your message has been sent to the following:\n"
     
             df = pd.read_csv(data_file) 
             
@@ -312,21 +317,9 @@ def incoming_sms():
                             msg += "\n"
             
                         print(minister_phone,"  " ,minister_email,msg)
-                        send_text(text_nbr,msg, False)
+                        send_text(from_number, text_nbr,msg, False)
                         # send_email(minister_email,subj,msg)
-                        sent_to += f"{minister_last}, {minister_first}\n"
-            
-            sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
-            message = client.messages.create(
-            body= sent_to,
-            from_='+12086034040',
-            to = from_number
-            )
-            message = client.messages.create(
-            body=f'Messages have been scheduled by {from_number}',
-            from_='+12086034040',
-            to = '+15099902828'
-            )
+           
             return sent_to, 200
 # --------------------------------------------------------------------------
     elif (first_word == "?" or first_word == "instructions") and from_number in authorized_list:
