@@ -24,7 +24,7 @@ auth_token = os.environ['TWILIO_TEST_TOKEN']
 # auth_token = os.environ['TWILIO_AUTH_TOKEN']
 messaging_sid = os.environ['TWILIO_MSGNG_SID']
 # twilio_number = "+12086034040"
-twilio_number = "+15005550006"
+twilio_number = "+15005550000"
 
 client = Client(account_sid, auth_token)
 # --------------------------------------------------------------------------
