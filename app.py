@@ -36,7 +36,7 @@ def send_text(text_nbr, message, now):
     global x
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         if not now:
-            send_at = get_send_time(x)
+            send_at = get_send_time()
             schedule_type = "fixed"
         else:
             send_at = None
