@@ -32,28 +32,33 @@ def get_send_time(secs):
     return send_at.isoformat()
 # --------------------------------------------------------------------------
 def send_text(from_number, text_nbr, message, now):
-    x=0
+    x = 0
     global sent_texts
+
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
-    
         if not now:
             send_at = get_send_time(x)
-            schedule_type = "fixed" 
+            schedule_type = "fixed"
         else:
-            send_at = None 
-            schedule_type = None 
+            send_at = None
+            schedule_type = None
 
-        message = client.messages.create(
-            body=message,
-            from_=twilio_number,
-            to=text_nbr,
-            messaging_service_sid=messaging_sid,
-            send_at=send_at, 
-            schedule_type=schedule_type
-        )
-        sent_texts.add(text_nbr)
-        x+=1
-        return True
+        try:
+            message = client.messages.create(
+                body=message,
+                from_=twilio_number,
+                to=text_nbr,
+                messaging_service_sid=messaging_sid,
+                send_at=send_at,
+                schedule_type=schedule_type
+            )
+            sent_texts.add(text_nbr)
+            x += 1
+            return True
+        except Exception as e:
+            print(f"Error sending SMS to {text_nbr}: {e}")
+            return False
+
     client.messages.create(
         body=f'Message scheduled to {x} individuals.',
         from_=twilio_number,
@@ -62,8 +67,8 @@ def send_text(from_number, text_nbr, message, now):
     client.messages.create(
         body=f'Messages have been scheduled by {from_number}',
         from_=twilio_number,
-        to = '+15099902828'
-        )
+        to='+15099902828'
+    )
     return False
 # --------------------------------------------------------------------------
 def send_voice(msg_in, data_list):
