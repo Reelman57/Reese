@@ -261,7 +261,7 @@ def incoming_sms():
                     min_org = "Relief Society Presidency"
         
                 msg = f"{Bro_Sis} {minister_last}, \n"
-                msg += f"{arg1}\n\n"
+                msg += f"{msg_in} \n\n"
                 # msg += f"Your {min_org},\n\n"
                 
                 msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
@@ -284,13 +284,14 @@ def incoming_sms():
         message = Client.messages.create(
         body= sent_to,
         from_='+12086034040',
-        to = arg2
+        to = from_number
         )
         message = Client.messages.create(
-        body=f'Messages have been scheduled by {arg2}',
+        body=f'Messages have been scheduled by from_number',
         from_='+12086034040',
         to = '+15099902828'
         )
+        return sent_to
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
