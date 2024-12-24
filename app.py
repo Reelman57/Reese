@@ -273,19 +273,18 @@ def incoming_sms():
                                 msg += f"  - {row['Phone Number']}"
                             msg += "\n"
             
-                    # if minister_last == "Reese":
                         print(minister_phone,"  " ,minister_email,msg)
                         #send_text(text_nbr,msg)
                         # send_email(minister_email,subj,msg)
                         sent_to += f"{minister_last}, {minister_first}\n"
             
             sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
-            message = Client.messages.create(
+            message = client.messages.create(
             body= sent_to,
             from_='+12086034040',
             to = from_number
             )
-            message = Client.messages.create(
+            message = client.messages.create(
             body=f'Messages have been scheduled by from_number',
             from_='+12086034040',
             to = '+15099902828'
