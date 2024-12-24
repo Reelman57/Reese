@@ -220,6 +220,7 @@ def incoming_sms():
         
         df = pd.read_csv(data_file)
         ministers=set()
+        x=1
        
         for value in df['Minister1_Phone']:
             ministers.add(value)
@@ -228,14 +229,14 @@ def incoming_sms():
         
         for data in data_list:
             if data['Phone Number'] in ministers:
-                print(f"{data['First_Name']} {data['Last_Name']}")
-                
-            
-            #send_text(text_nbr,msg, False)
-            # send_email(minister_email,subj,msg)
+                print(f"{x}. {data['First_Name']} {data['Last_Name']}")
+                msg = f"Brother {data['Last_Name'],\n\n}"
+                msg += msg_in
+                send_text(data['Phone Number'], msg, False)
+                x+=1
 
         message = client.messages.create(
-        body= "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'",
+        body= x + " Messages have been sent",
         from_='+12086034040',
         to = from_number
         )
@@ -244,7 +245,7 @@ def incoming_sms():
         from_='+12086034040',
         to = '+15099902828'
         )
-        return sent_to, 200
+        return
 # --------------------------------------------------------------------------
     elif first_word == "min77216":
             district = {
