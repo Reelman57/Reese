@@ -24,7 +24,7 @@ auth_token = os.environ['TWILIO_TEST_TOKEN']
 # auth_token = os.environ['TWILIO_AUTH_TOKEN']
 messaging_sid = os.environ['TWILIO_MSGNG_SID']
 # twilio_number = "+12086034040"
-twilio_number = "+15005550000"
+twilio_number = "+15005550006"
 
 client = Client(account_sid, auth_token)
 # --------------------------------------------------------------------------
@@ -50,7 +50,7 @@ def send_text(text_nbr, message, now):
                 body=message,
                 from_=twilio_number,
                 to=text_nbr,
-                messaging_service_sid=messaging_sid,
+                # messaging_service_sid=messaging_sid,
                 send_at=send_at,
                 schedule_type=schedule_type
             )
