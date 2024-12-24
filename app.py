@@ -31,8 +31,7 @@ def get_send_time(secs):
     send_at = now_utc + timedelta(minutes=15, seconds = secs)
     return send_at.isoformat()
 # --------------------------------------------------------------------------
-def send_text(from_number, text_nbr, message, now):
-    x = 0
+def send_text(x, text_nbr, message, now):
     global sent_texts
 
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
@@ -53,22 +52,11 @@ def send_text(from_number, text_nbr, message, now):
                 schedule_type=schedule_type
             )
             sent_texts.add(text_nbr)
-            x += 1
+            x+=1
             return True
         except Exception as e:
             print(f"Error sending SMS to {text_nbr}: {e}")
             return False
-
-    client.messages.create(
-        body=f'Message scheduled to {x} individuals.',
-        from_=twilio_number,
-        to=from_number
-    )
-    client.messages.create(
-        body=f'Messages have been scheduled by {from_number}',
-        from_=twilio_number,
-        to='+15099902828'
-    )
     return False
 # --------------------------------------------------------------------------
 def send_voice(msg_in, data_list):
@@ -137,14 +125,14 @@ def is_valid_phone_number(phone_number):
     except phonenumbers.NumberParseException:
         return False
 # --------------------------------------------------------------------------
-def sms_send(from_number, msg_in, data_list, now):
+def sms_send(x, msg_in, data_list, now):
     success_count = 0
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         for data in data_list:
             msg = f"Hello {data['First_Name']},\n"
             msg += msg_in + "\n"
-            future = executor.submit(send_text, from_number, data['Phone Number'], msg, now)
+            future = executor.submit(send_text, x, data['Phone Number'], msg, now)
             futures.append(future)
             success_count += 1
             print("SMS - ", data['Last_Name'], "-", data['Phone Number'])
@@ -185,13 +173,12 @@ def incoming_sms():
     sent_texts = set()
     with open('DO_NOT_SEND.txt', 'r') as file:
         sent_texts = set(line.strip() for line in file)
+    global x
+    x=0
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
-        try:
-            num_messages_sent = sms_send(from_number, msg_in, data_list, True)
-            return num_messages_sent 
-        except Exception as e:
-            return f"An error occurred: {str(e)}", 500
+        sms_send(x, from_number, msg_in, data_list, True)
+        return
 # --------------------------------------------------------------------------
     elif first_word == "cancel-sms":
         messages = client.messages.list(limit=300)  # Adjust limit as needed
@@ -214,7 +201,7 @@ def incoming_sms():
     elif first_word == "ecs77216" and (from_number in authorized_list or from_number == '+13607428998'):
         subject = "Emergency Communications System"
         now = True
-        sms_send(from_number, msg_in, data_list, now)
+        sms_send(x, msg_in, data_list, now)
         send_email(subject, msg_in, data_list)
         send_voice(msg_in, data_list)
         return "Emergency Communications System messages sent", 200
@@ -245,13 +232,15 @@ def incoming_sms():
             for data in data_list:
                 if data['Phone Number'] in ministers:
                     print(f"{data['First_Name']} {data['Last_Name']}")
-                    msg = f"Brother {data['Last_Name']}, \n\n"
+                    msg = f"{x}. Brother {data['Last_Name']}, \n\n"
                     msg += msg_in
                     send_text(from_number, data['Phone Number'], msg, False) 
     
         except Exception as e:
             print(f"An error occurred while processing the request: {e}")
             return "An error occurred.", 500
+
+        confirm_send(from_number,x)
     
         return "Messages sent successfully."
 # --------------------------------------------------------------------------
@@ -322,7 +311,7 @@ def incoming_sms():
                             msg += "\n"
             
                         print(minister_phone,"  " ,minister_email,msg)
-                        send_text(from_number, text_nbr,msg, False)
+                        send_text(x, from_number, text_nbr,msg, False)
                         # send_email(minister_email,subj,msg)
            
             return sent_to, 200
@@ -341,5 +330,17 @@ def incoming_sms():
             to = from_number
             )
 # --------------------------------------------------------------------------
+def confirm_send(from_number,x)
+    client.messages.create(
+        body=f"{x} Messages scheduled. Send 'cancel-sms' within 10 mins to cancel them",
+        from_=twilio_number,
+        to=from_number
+    )
+    client.messages.create(
+        body=f'{x} Messages have been scheduled by {from_number}',
+        from_=twilio_number,
+        to='+15099902828'
+    )
+
 if __name__ == "__main__":
     app.run()
