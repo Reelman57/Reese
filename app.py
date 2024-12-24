@@ -176,10 +176,10 @@ def incoming_sms():
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
         
+    global sent_texts        
     sent_texts = set()
     with open('DO_NOT_SEND.txt', 'r') as file:
         sent_texts = set(line.strip() for line in file)
-    global sent_texts
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
         try:
