@@ -333,5 +333,19 @@ def incoming_sms():
             )
             return sent_to, 200
 # --------------------------------------------------------------------------
+    elif first_word == "help":
+        instructions = "To send a message to any of the following groups.  Simply type the group code on the 1st line followed by your message on subsequent lines.  The message will already have a salutation on it, ie. 'Brother Jones' or 'Hello John'.  Do not use emojis or pictures.  The app is authenticated by your phone number and will only work on your phone."
+        instructions += "Group codes"
+        instructions += "min77216 - Your Ministering District with assignments"
+        instructions += "eld77216 - Active Adult Priesthood holders"
+        instructions += "sms77216 - Entire Ward"
+        instructions += "These messages have a 15 minute delay before they go out.  Should you choose to cancel them you may send the command 'cancel-sms' within that 15 minutes"
+
+        message = client.messages.create(
+            body= instructions,
+            from_='+12086034040',
+            to = from_number
+            )
+# --------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
