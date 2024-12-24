@@ -25,15 +25,15 @@ messaging_sid = os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 # --------------------------------------------------------------------------
-def get_send_time(secs):
+def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
-    send_at = now_utc + timedelta(minutes=15, seconds = secs)
+    send_at = now_utc + timedelta(minutes=15, seconds = x)
     return send_at.isoformat()
 # --------------------------------------------------------------------------
-def send_text(x, text_nbr, message, now):
+def send_text(text_nbr, message, now):
     global sent_texts
-
+    global x
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         if not now:
             send_at = get_send_time(x)
@@ -125,14 +125,14 @@ def is_valid_phone_number(phone_number):
     except phonenumbers.NumberParseException:
         return False
 # --------------------------------------------------------------------------
-def sms_send(x, msg_in, data_list, now):
+def sms_send(msg_in, data_list, now):
     success_count = 0
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         for data in data_list:
             msg = f"Hello {data['First_Name']},\n"
             msg += msg_in + "\n"
-            future = executor.submit(send_text, x, data['Phone Number'], msg, now)
+            future = executor.submit(send_text, data['Phone Number'], msg, now)
             futures.append(future)
             success_count += 1
             print("SMS - ", data['Last_Name'], "-", data['Phone Number'])
@@ -177,7 +177,7 @@ def incoming_sms():
     x=0
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
-        sms_send(x, from_number, msg_in, data_list, True)
+        sms_send(from_number, msg_in, data_list, True)
         return
 # --------------------------------------------------------------------------
     elif first_word == "cancel-sms":
@@ -201,7 +201,7 @@ def incoming_sms():
     elif first_word == "ecs77216" and (from_number in authorized_list or from_number == '+13607428998'):
         subject = "Emergency Communications System"
         now = True
-        sms_send(x, msg_in, data_list, now)
+        sms_send(msg_in, data_list, now)
         send_email(subject, msg_in, data_list)
         send_voice(msg_in, data_list)
         return "Emergency Communications System messages sent", 200
@@ -231,8 +231,8 @@ def incoming_sms():
     
             for data in data_list:
                 if data['Phone Number'] in ministers:
-                    print(f"{data['First_Name']} {data['Last_Name']}")
-                    msg = f"{x}. Brother {data['Last_Name']}, \n\n"
+                    print(f"{x}. {data['First_Name']} {data['Last_Name']}")
+                    msg = f"Brother {data['Last_Name']}, \n\n"
                     msg += msg_in
                     send_text(from_number, data['Phone Number'], msg, False) 
     
@@ -240,7 +240,7 @@ def incoming_sms():
             print(f"An error occurred while processing the request: {e}")
             return "An error occurred.", 500
 
-        confirm_send(from_number,x)
+        confirm_send(from_number)
     
         return "Messages sent successfully."
 # --------------------------------------------------------------------------
@@ -311,7 +311,7 @@ def incoming_sms():
                             msg += "\n"
             
                         print(minister_phone,"  " ,minister_email,msg)
-                        send_text(x, from_number, text_nbr,msg, False)
+                        send_text(from_number, text_nbr,msg, False)
                         # send_email(minister_email,subj,msg)
            
             return sent_to, 200
@@ -330,7 +330,7 @@ def incoming_sms():
             to = from_number
             )
 # --------------------------------------------------------------------------
-def confirm_send(from_number,x):
+def confirm_send(from_number):
     client.messages.create(
         body=f"{x} Messages scheduled. Send 'cancel-sms' within 10 mins to cancel them",
         from_=twilio_number,
