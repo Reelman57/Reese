@@ -157,6 +157,14 @@ def sms_send(from_number, msg_in, data_list, now):
 # -------------------------------------------------------------------------- 
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
+    authorized_list = [
+    '+15099902828',
+    '+19722819991',
+    '+12086103066',
+    '+12086102929',
+    '+12089201618',
+    '+15093449400'
+]
     message_body = request.values.get('Body', None)
     from_number = request.values.get('From', None)
     data_file = "Westmond_Master.csv"
@@ -172,7 +180,7 @@ def incoming_sms():
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
 # --------------------------------------------------------------------------
-    if first_word == "sms77216" and from_number == '+15099902828':
+    if first_word == "sms77216" and from_number in authorized_list:
         try:
             num_messages_sent = sms_send(from_number, msg_in, data_list, True)
             return num_messages_sent 
@@ -197,7 +205,7 @@ def incoming_sms():
         )
         return canceled_count
 # --------------------------------------------------------------------------
-    elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
+    elif first_word == "ecs77216" and (from_number in authorized_list or from_number == '+13607428998'):
         subject = "Emergency Communications System"
         now = True
         sms_send(from_number, msg_in, data_list, now)
@@ -205,7 +213,7 @@ def incoming_sms():
         send_voice(msg_in, data_list)
         return "Emergency Communications System messages sent", 200
 # --------------------------------------------------------------------------
-    elif first_word == "eld77216":
+    elif first_word == "eld77216" and from_number in authorized_list:
         
         df = pd.read_csv(data_file)
         df_filtered = df[df['Age'] > 17]
@@ -247,7 +255,7 @@ def incoming_sms():
         )
         return
 # --------------------------------------------------------------------------
-    elif first_word == "min77216":
+    elif first_word == "min77216" and from_number in authorized_list:
             district = {
                 '+15099902828': 'D1',
                 '+19722819991': 'D2',
@@ -333,7 +341,7 @@ def incoming_sms():
             )
             return sent_to, 200
 # --------------------------------------------------------------------------
-    elif first_word == "?" or first_word == "instructions":
+    elif (first_word == "?" or first_word == "instructions") and from_number in authorized_list:
         instructions = "To send a message to any of the following groups.  Simply type the group code on the 1st line followed by your message on subsequent lines.  The message will already have a salutation on it, ie. 'Brother Jones' or 'Hello John'.  Do not use emojis or pictures.  The app is authenticated by your phone number and will only work on your phone.\n\n"
         instructions += "Group codes\n"
         instructions += "min77216 - Your Ministering District with assignments\n"
