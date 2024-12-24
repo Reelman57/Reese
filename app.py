@@ -206,32 +206,36 @@ def incoming_sms():
         return "Emergency Communications System messages sent", 200
 # --------------------------------------------------------------------------
     elif first_word == "eld77216":
-            
-        df = pd.read_csv(data_file) 
+        
+        df = pd.read_csv(data_path)
+        df_filtered = df[df['Age'] > 17]
+        df_filtered = df_filtered[df_filtered['Gender'] = "M"]
+        df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email']]
+        df_filtered = df_filtered.dropna(subset=['Phone Number'])
+        df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
+        df_filtered = df_filtered[df_filtered['is_valid_phone']]
+        df_filtered = df_filtered.drop_duplicates(subset=['Phone Number']) 
+    
+        data_list = df_filtered.to_dict('records')
+        
+        df = pd.read_csv(data_file)
+        ministers=set()
        
-        for x in range(1, 3): 
-            
-            ministerx = f"Minister{x}"
-            ministerx_phone = f"Minister{x}_Phone"
-            ministerx_email = f"Minister{x}_Email"
+        for value in df['Minister1_Phone']:
+            ministers.add(value)
+        for value in df['Minister2_Phone']:
+            ministers.add(value)
         
-            df_filtered = df[df[ministerx].notnull()]
-            df_filtered[ministerx] = df_filtered[ministerx].fillna('')
-        
-            try:
-                df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True) 
-            except AttributeError as e:
-                print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
-                continue  # Skip to the next iteration of the outer for loop
+        for data in data_list:
+            if data['Phone Number'] in ministers:
+                print(f"{data['First_Name']} {data['Last_Name']}")
                 
-            print(minister_phone,"  " ,minister_email,msg)
+            
             #send_text(text_nbr,msg, False)
             # send_email(minister_email,subj,msg)
-            sent_to += f"{minister_last}, {minister_first}\n"
 
-        sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
         message = client.messages.create(
-        body= sent_to,
+        body= "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'",
         from_='+12086034040',
         to = from_number
         )
