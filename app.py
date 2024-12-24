@@ -207,7 +207,7 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     elif first_word == "eld77216":
         
-        df = pd.read_csv(data_path)
+        df = pd.read_csv(data_file)
         df_filtered = df[df['Age'] > 17]
         df_filtered = df_filtered[df_filtered['Gender'] == "M"]
         df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email']]
