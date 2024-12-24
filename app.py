@@ -209,7 +209,7 @@ def incoming_sms():
         
         df = pd.read_csv(data_path)
         df_filtered = df[df['Age'] > 17]
-        df_filtered = df_filtered[df_filtered['Gender'] = "M"]
+        df_filtered = df_filtered[df_filtered['Gender'] == "M"]
         df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email']]
         df_filtered = df_filtered.dropna(subset=['Phone Number'])
         df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
