@@ -232,8 +232,8 @@ def incoming_sms():
                 
                 data_list = df_filtered.to_dict('records')
     
-        for data in data_list: 
-            print(data)
+         
+            print(data_list)
         #     for x in r: 
         #         ministerx = f"Minister{x}"
         #         ministerx_phone = f"Minister{x}_Phone"
