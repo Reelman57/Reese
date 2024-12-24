@@ -51,7 +51,7 @@ def send_text(text_nbr, message, now):
                 body=message,
                 from_=twilio_number,
                 to=text_nbr,
-                # messaging_service_sid=messaging_sid,
+                messaging_service_sid=messaging_sid,
                 send_at=send_at,
                 schedule_type=schedule_type
             )
