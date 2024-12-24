@@ -48,8 +48,8 @@ def send_text(text_nbr, message, now):
                 from_=twilio_number,
                 to=text_nbr,
                 messaging_service_sid=messaging_sid,
-                send_at=send_at,
-                schedule_type=schedule_type
+                # send_at=send_at,
+                # schedule_type=schedule_type
             )
             sent_texts.add(text_nbr)
             x+=1
@@ -178,7 +178,7 @@ def incoming_sms():
     x=0
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
-        sms_send(msg_in, data_list, True)
+        sms_send(msg_in, data_list, False)
         return
 # --------------------------------------------------------------------------
     elif first_word == "cancel-sms":
@@ -202,7 +202,7 @@ def incoming_sms():
     elif first_word == "ecs77216" and (from_number in authorized_list or from_number == '+13607428998'):
         subject = "Emergency Communications System"
         now = True
-        sms_send(msg_in, data_list, now)
+        sms_send(msg_in, data_list, False)
         send_email(subject, msg_in, data_list)
         send_voice(msg_in, data_list)
         return "Emergency Communications System messages sent", 200
