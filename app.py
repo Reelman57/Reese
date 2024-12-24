@@ -18,9 +18,10 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 
 app = Flask(__name__)
-
-account_sid = os.environ['TWILIO_ACCOUNT_SID']
-auth_token = os.environ['TWILIO_AUTH_TOKEN']
+account_sid = AC0bc2defad66e3b834b2cbd65269c532a
+auth_token = 53dd87bb31787303be72923319c6159a
+# account_sid = os.environ['TWILIO_ACCOUNT_SID']
+# auth_token = os.environ['TWILIO_AUTH_TOKEN']
 messaging_sid = os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
@@ -43,14 +44,14 @@ def send_text(text_nbr, message, now):
             schedule_type = None
 
         try:
-            # message = client.messages.create(
-            #     body=message,
-            #     from_=twilio_number,
-            #     to=text_nbr,
-            #     messaging_service_sid=messaging_sid,
-            #     send_at=send_at,
-            #     schedule_type=schedule_type
-            # )
+            message = client.messages.create(
+                body=message,
+                from_=twilio_number,
+                to=text_nbr,
+                messaging_service_sid=messaging_sid,
+                send_at=send_at,
+                schedule_type=schedule_type
+            )
             sent_texts.add(text_nbr)
             x+=1
             return True
