@@ -24,25 +24,20 @@ auth_token = os.environ['TWILIO_AUTH_TOKEN']
 messaging_sid = os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
-sent_texts = set()
-sent_voice = set()
-with open('DO_NOT_SEND.txt', 'r') as file:
-    sent_texts = set(line.strip() for line in file)
 # --------------------------------------------------------------------------
-def get_send_time():
-    global x
+def get_send_time(secs):
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
-    send_at = now_utc + timedelta(minutes=15, seconds = x)
-    x+=1
+    send_at = now_utc + timedelta(minutes=15, seconds = secs)
     return send_at.isoformat()
 # --------------------------------------------------------------------------
 def send_text(text_nbr, message, now):
+    x=0
     global sent_texts
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
     
         if not now:
-            send_at = get_send_time()
+            send_at = get_send_time(x)
             schedule_type = "fixed" 
         else:
             send_at = None 
@@ -180,7 +175,11 @@ def incoming_sms():
 
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
-    x=0
+        
+    sent_texts = set()
+    with open('DO_NOT_SEND.txt', 'r') as file:
+        sent_texts = set(line.strip() for line in file)
+    global sent_texts
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
         try:
@@ -230,7 +229,6 @@ def incoming_sms():
         
         df = pd.read_csv(data_file)
         ministers=set()
-        x=1
        
         for value in df['Minister1_Phone']:
             ministers.add(value)
@@ -239,11 +237,10 @@ def incoming_sms():
         
         for data in data_list:
             if data['Phone Number'] in ministers:
-                print(f"{x}. {data['First_Name']} {data['Last_Name']}")
+                print(f"{data['First_Name']} {data['Last_Name']}")
                 msg = f"Brother {data['Last_Name']}, \n\n"
                 msg += msg_in
                 send_text(data['Phone Number'], msg, False)
-                x+=1
         return
 # --------------------------------------------------------------------------
     elif first_word == "min77216" and from_number in authorized_list:
