@@ -228,15 +228,15 @@ def incoming_sms():
             ministers.add(value)
         
         for data in data_list:
-            if data['Phone Number'] in ministers:
+            if data['Phone Number'] not in ministers:
                 print(f"{x}. {data['First_Name']} {data['Last_Name']}")
                 msg = f"Brother {data['Last_Name']}, \n\n"
                 msg += msg_in
-                send_text(data['Phone Number'], msg, False)
+                # send_text(data['Phone Number'], msg, False)
                 x+=1
 
         message = client.messages.create(
-        body= x + " Messages have been sent",
+        body= f"{x} Messages have been sent.",
         from_='+12086034040',
         to = from_number
         )
