@@ -330,7 +330,7 @@ def incoming_sms():
             to = from_number
             )
 # --------------------------------------------------------------------------
-def confirm_send(from_number,x)
+def confirm_send(from_number,x):
     client.messages.create(
         body=f"{x} Messages scheduled. Send 'cancel-sms' within 10 mins to cancel them",
         from_=twilio_number,
