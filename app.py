@@ -174,7 +174,7 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number == '+15099902828':
         try:
-            num_messages_sent = sms_send(msg_in, data_list)
+            num_messages_sent = sms_send(from_number, msg_in, data_list, True)
             return num_messages_sent 
         except Exception as e:
             return f"An error occurred: {str(e)}", 500
@@ -199,12 +199,11 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     elif first_word == "ecs77216" and (from_number == '+15099902828' or from_number == '+13607428998'):
         subject = "Emergency Communications System"
-        now=True
+        now = True
         sms_send(from_number, msg_in, data_list, now)
-        send_email(subject, msg_in, data_list) 
+        send_email(subject, msg_in, data_list)
         send_voice(msg_in, data_list)
-        now=""
-        return
+        return "Emergency Communications System messages sent", 200
 # --------------------------------------------------------------------------
     elif first_word == "min77216":
         district = {
