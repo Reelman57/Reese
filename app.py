@@ -206,34 +206,46 @@ def incoming_sms():
         now=""
         return
 # --------------------------------------------------------------------------
-    elif first_word == "min77216":
-        district = {
-            '+15099902828': 'D1',
-            '+19722819991': 'D2',
-            '+12086103066': 'D3',
-            '+12086102929': 'SD1',
-            '+12089201618': 'SD2',
-            '+15093449400': 'SD3'
-        }
-        try:
-            district = district.get(from_number)
-        except AttributeError:
-            district = None
-    
-        try:
-            df = pd.read_csv(data_file) 
-    
-            if district and district[0] == 'S':
-                df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
-                r = range(3, 5) 
-            else:
-                df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
-                r = range(1, 3)
-                
-                data_list = df_filtered.to_dict('records')
-    
-         
-            print(data_list)
+ elif first_word == "min77216":
+    district = {
+        '+15099902828': 'D1',
+        '+19722819991': 'D2',
+        '+12086103066': 'D3',
+        '+12086102929': 'SD1',
+        '+12089201618': 'SD2',
+        '+15093449400': 'SD3'
+    }
+    try:
+        district = district.get(from_number)
+    except AttributeError:
+        district = None
+
+    try:
+        df = pd.read_csv(data_file) 
+
+        if district and district[0] == 'S':
+            df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
+            r = range(3, 5) 
+        else:
+            df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
+            r = range(1, 3)
+
+        # Convert DataFrame to a list of dictionaries
+        data_list = df_filtered.to_dict('records') 
+
+        # Print the data_list for inspection
+        print(data_list) 
+
+        # Rest of your logic using data_list 
+        # ... (your original code using data_list can be uncommented here) ... 
+
+    except FileNotFoundError:
+        print(f"Error: File not found: {data_file}")
+        return "Error: File not found.", 500
+    except Exception as e: 
+        print(f"Error reading CSV file: {e}")
+        return "Error reading data file.", 500
+        
         #     for x in r: 
         #         ministerx = f"Minister{x}"
         #         ministerx_phone = f"Minister{x}_Phone"
@@ -294,7 +306,6 @@ def incoming_sms():
         #     from_='+12086034040',
         #     to='+15099902828'
         # )
-        return
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
