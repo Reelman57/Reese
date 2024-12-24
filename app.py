@@ -205,6 +205,43 @@ def incoming_sms():
         send_voice(msg_in, data_list)
         return "Emergency Communications System messages sent", 200
 # --------------------------------------------------------------------------
+    elif first_word == "eld77216":
+            
+        df = pd.read_csv(data_file) 
+       
+        for x in range(1, 3): 
+            
+            ministerx = f"Minister{x}"
+            ministerx_phone = f"Minister{x}_Phone"
+            ministerx_email = f"Minister{x}_Email"
+        
+            df_filtered = df_filtered[df_filtered[ministerx].notnull()]
+            df_filtered[ministerx] = df_filtered[ministerx].fillna('')
+        
+            try:
+                df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True) 
+            except AttributeError as e:
+                print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
+                continue  # Skip to the next iteration of the outer for loop
+                
+            print(minister_phone,"  " ,minister_email,msg)
+            #send_text(text_nbr,msg, False)
+            # send_email(minister_email,subj,msg)
+            sent_to += f"{minister_last}, {minister_first}\n"
+
+        sent_to += "You may cancel these messages by sending the following 1-word text within 10 minutes. 'cancel-sms'"
+        message = client.messages.create(
+        body= sent_to,
+        from_='+12086034040',
+        to = from_number
+        )
+        message = client.messages.create(
+        body=f'Messages have been scheduled by {from_number}',
+        from_='+12086034040',
+        to = '+15099902828'
+        )
+        return sent_to, 200
+# --------------------------------------------------------------------------
     elif first_word == "min77216":
             district = {
                 '+15099902828': 'D1',
