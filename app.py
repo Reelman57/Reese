@@ -184,6 +184,7 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
         sms_send(msg_in, data_list, False)
+        confirm_send()
         return
 # --------------------------------------------------------------------------
     elif first_word == "cancel-sms":
@@ -246,7 +247,7 @@ def incoming_sms():
             print(f"An error occurred while processing the request: {e}")
             return "An error occurred.", 500
 
-        confirm_send(from_number)
+        confirm_send()
     
         return "Messages sent successfully."
 # --------------------------------------------------------------------------
@@ -319,6 +320,8 @@ def incoming_sms():
                         print(minister_phone,"  " ,minister_email,msg)
                         send_text(text_nbr, msg, False)
                         # send_email(minister_email,subj,msg)
+
+                confirm_send()
            
             return sent_to, 200
 # --------------------------------------------------------------------------
@@ -336,7 +339,7 @@ def incoming_sms():
             to = from_number
             )
 # --------------------------------------------------------------------------
-def confirm_send(from_number):
+def confirm_send():
     client.messages.create(
         body=f"{x} Messages scheduled. Send 'cancel-sms' within 10 mins to cancel them",
         from_=twilio_number,
