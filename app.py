@@ -336,7 +336,7 @@ def incoming_sms():
             )
 # --------------------------------------------------------------------------
     elif first_word == "DNC77216" and from_number in authorized_list:
-        do_not_send_file = "DO_NOT_SEND.TXT"
+        do_not_send_file = "DO_NOT_SEND.txt"
         data_file = "Westmond_Master.csv"
     
         try:
