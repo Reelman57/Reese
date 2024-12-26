@@ -249,8 +249,7 @@ def incoming_sms():
 
         confirm_send()
         return "Messages sent successfully.", 200
-        
-   return "Command not recognized or unauthorized.", 400
+    return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
     elif first_word == "min77216" and from_number in authorized_list:
         district = {
