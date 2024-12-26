@@ -337,43 +337,43 @@ def incoming_sms():
     
     return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
-elif first_word == "DNC77216" and from_number in authorized_list:
-    do_not_send_file = "DO_NOT_SEND.TXT"
-    data_file = "Westmond_Master.csv"
-
-    try:
-        with open(do_not_send_file, 'r') as f:
-            do_not_send_numbers = set(line.strip() for line in f)
-
-        df = pd.read_csv(data_file)
-        matching_numbers = df[df['Phone Number'].isin(do_not_send_numbers)]
-        names = matching_numbers[['First_Name', 'Last_Name']].values.tolist() 
-
-    except FileNotFoundError:
-        print(f"Error: File not found: {do_not_send_file} or {data_file}")
-        return "Error: File not found.", 500 
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return "An error occurred.", 500
-
-    if names:
-        message = "Names associated with phone numbers in DO_NOT_SEND.TXT:\n"
-        for name in names:
-            message += f"{name[0]} {name[1]}\n" 
-        
-        client.messages.create(
-            body=message,
-            from_=twilio_number,
-            to=from_number
-        )
-        return "List of names sent successfully.", 200
-    else:
-        client.messages.create(
-            body="No matching phone numbers found.",
-            from_=twilio_number,
-            to=from_number
-        )
-        return "No matching phone numbers found.", 200
+    elif first_word == "DNC77216" and from_number in authorized_list:
+        do_not_send_file = "DO_NOT_SEND.TXT"
+        data_file = "Westmond_Master.csv"
+    
+        try:
+            with open(do_not_send_file, 'r') as f:
+                do_not_send_numbers = set(line.strip() for line in f)
+    
+            df = pd.read_csv(data_file)
+            matching_numbers = df[df['Phone Number'].isin(do_not_send_numbers)]
+            names = matching_numbers[['First_Name', 'Last_Name']].values.tolist() 
+    
+        except FileNotFoundError:
+            print(f"Error: File not found: {do_not_send_file} or {data_file}")
+            return "Error: File not found.", 500 
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return "An error occurred.", 500
+    
+        if names:
+            message = "Names associated with phone numbers in DO_NOT_SEND.TXT:\n"
+            for name in names:
+                message += f"{name[0]} {name[1]}\n" 
+            
+            client.messages.create(
+                body=message,
+                from_=twilio_number,
+                to=from_number
+            )
+            return "List of names sent successfully.", 200
+        else:
+            client.messages.create(
+                body="No matching phone numbers found.",
+                from_=twilio_number,
+                to=from_number
+            )
+            return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------
 def confirm_send():
     client.messages.create(
