@@ -334,8 +334,6 @@ def incoming_sms():
             from_='+12086034040',
             to = from_number
             )
-    
-    return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
     elif first_word == "DNC77216" and from_number in authorized_list:
         do_not_send_file = "DO_NOT_SEND.TXT"
@@ -374,6 +372,7 @@ def incoming_sms():
                 to=from_number
             )
             return "No matching phone numbers found.", 200
+    return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
 def confirm_send():
     client.messages.create(
