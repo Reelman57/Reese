@@ -1,21 +1,20 @@
 from itertools import count
-from flask import Flask, request, make_response
-from twilio.rest import Client
-import subprocess
-import pandas as pd
-import numpy as np
-import os
 from datetime import datetime, timedelta
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-import smtplib
-from twilio.rest import Client
-import pytz
+import os
 import re
 import sys
-import phonenumbers
 import time
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from concurrent.futures import ThreadPoolExecutor
+
+import pandas as pd
+import numpy as np
+import pytz
+import phonenumbers
+from flask import Flask, request, make_response
+from twilio.rest import Client
 
 app = Flask(__name__)
 global twilio_number
@@ -29,20 +28,19 @@ twilio_number = "+12086034040"
 
 client = Client(account_sid, auth_token)
 # --------------------------------------------------------------------------
-def get_send_time():
+def get_send_time(x):
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
     send_at = now_utc + timedelta(minutes=15, seconds = x)
-    return send_at.isoformat()
+    return send_at.isoformat(), x
 # --------------------------------------------------------------------------
 def send_text(text_nbr, message, now):
     global sent_texts
     global x
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         if not now:
-            send_at = get_send_time()
+            send_at = get_send_time(x)
             schedule_type = "fixed"
-            print("To be sent later")
         else:
             send_at = None
             schedule_type = None
@@ -135,29 +133,30 @@ def sms_send(msg_in, data_list, now):
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         for data in data_list:
-            msg = f"Hello {data['First_Name']},\n"
-            msg += msg_in + "\n"
+            msg = f"Hello {data['First_Name']},\n{msg_in}\n"
             future = executor.submit(send_text, data['Phone Number'], msg, now)
             futures.append(future)
-            success_count += 1
             print("SMS - ", data['Last_Name'], "-", data['Phone Number'])
 
         for future in futures:
             try:
-                result = future.result() 
+                result = future.result()
+                if result:
+                    success_count += 1
             except Exception as e:
-                app.logger.error(f"Error processing future: {e}")     
+                app.logger.error(f"Error processing future: {e}")
+    
     return success_count
 # -------------------------------------------------------------------------- 
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
     authorized_list = [
-    '+15099902828',
-    '+19722819991',
-    '+12086103066',
-    '+12086102929',
-    '+12089201618',
-    '+15093449400'
+        '+15099902828',
+        '+19722819991',
+        '+12086103066',
+        '+12086102929',
+        '+12089201618',
+        '+15093449400'
     ]
     message_body = request.values.get('Body', None)
     global from_number
@@ -177,15 +176,19 @@ def incoming_sms():
         
     global sent_texts        
     sent_texts = set()
-    with open('DO_NOT_SEND.txt', 'r') as file:
-        sent_texts = set(line.strip() for line in file)
+    try:
+        with open('DO_NOT_SEND.txt', 'r') as file:
+            sent_texts = set(line.strip() for line in file)
+    except FileNotFoundError:
+        return "Error: DO_NOT_SEND.txt file not found.", 500
+
     global x
-    x=0
+    x = 0
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
         sms_send(msg_in, data_list, False)
         confirm_send()
-        return
+        return "SMS messages scheduled.", 200
 # --------------------------------------------------------------------------
     elif first_word == "cancel-sms":
         messages = client.messages.list(limit=300)  # Adjust limit as needed
@@ -203,7 +206,7 @@ def incoming_sms():
             from_='+12086034040',
             to=from_number
         )
-        return canceled_count
+        return f'{canceled_count} messages canceled.', 200
 # --------------------------------------------------------------------------
     elif first_word == "ecs77216" and (from_number in authorized_list or from_number == '+13607428998'):
         subject = "Emergency Communications System"
@@ -211,17 +214,15 @@ def incoming_sms():
         send_email(subject, msg_in, data_list)
         send_voice(msg_in, data_list)
         confirm_send()
-        return "Emergency Communications System messages sent", 200
+        return "Emergency Communications System messages sent.", 200
 # --------------------------------------------------------------------------
     elif first_word == "eld77216" and from_number in authorized_list:
         try:
             df = pd.read_csv(data_file)
         except FileNotFoundError:
-            print(f"Error: File not found: {data_file}")
             return "Error: File not found.", 500
         except Exception as e: 
-            print(f"Error reading CSV file: {e}")
-            return "Error reading data file.", 500 
+            return f"Error reading data file: {e}", 500 
     
         try:
             df_filtered = df[df['Age'] > 17]
@@ -244,12 +245,12 @@ def incoming_sms():
                     send_text(data['Phone Number'], msg, False) 
     
         except Exception as e:
-            print(f"An error occurred while processing the request: {e}")
-            return "An error occurred.", 500
+             return f"An error occurred while processing the request: {e}", 500
 
         confirm_send()
-    
-        return "Messages sent successfully."
+        return "Messages sent successfully.", 200
+        
+   return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
     elif first_word == "min77216" and from_number in authorized_list:
         district = {
@@ -260,12 +261,14 @@ def incoming_sms():
             '+12089201618': 'SD2',
             '+15093449400': 'SD3'
         }
-        try:
-            district = district.get(from_number)
-        except AttributeError:
-            district = None
+        district = district.get(from_number)
 
-        df = pd.read_csv(data_file) 
+        try:
+            df = pd.read_csv(data_file)
+        except FileNotFoundError:
+            return "Error: File not found.", 500
+        except Exception as e:
+            return f"Error reading data file: {e}", 500
         
         if district and district[0] == 'S':
             df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
@@ -298,17 +301,12 @@ def incoming_sms():
         
                 if x < 3:
                     Bro_Sis = "Brother"
-                    min_org = "Elders Quorum Presidency"
                 else:
                     Bro_Sis = "Sister"
-                    min_org = "Relief Society Presidency"
-        
+                    
                 msg = f"{Bro_Sis} {minister_last}, \n"
                 msg += f"{msg_in} \n\n"
-                # msg += f"Your {min_org},\n\n"
-                
                 msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
-                # msg += f"{minister_phone}\n\n"
         
                 if not group.empty:
                     for index, row in group.iterrows():
@@ -321,9 +319,8 @@ def incoming_sms():
                     send_text(text_nbr, msg, False)
                     # send_email(minister_email,subj,msg)
 
-            confirm_send()
-       
-        return
+        confirm_send()
+        return "Ministering district messages sent.", 200
 # --------------------------------------------------------------------------
     elif (first_word == "?" or first_word == "instructions") and from_number in authorized_list:
         instructions = "To send a message to any of the following groups.  Simply type the group code on the 1st line followed by your message on subsequent lines.  The message will already have a salutation on it, ie. 'Brother Jones' or 'Hello John'.  Do not use emojis or pictures.  The app is authenticated by your phone number and will only work on your phone.\n\n"
