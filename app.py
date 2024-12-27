@@ -50,7 +50,7 @@ def send_text(text_nbr, message, now):
             message = client.messages.create(
                 body=message,
                 from_=twilio_number,
-                to=f"+1{text_nbr}",
+                to=text_nbr,
                 messaging_service_sid=messaging_sid,
                 send_at=send_at,
                 schedule_type=schedule_type
