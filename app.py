@@ -29,18 +29,18 @@ twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 
 # --------------------------------------------------------------------------
-def get_send_time(x):
+def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
     send_at = now_utc + timedelta(minutes=15, seconds = x)
-    return send_at.isoformat(), x
+    return send_at.isoformat()
 # --------------------------------------------------------------------------
 def send_text(text_nbr, message, now):
     global sent_texts
     global x
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         if not now:
-            send_at = get_send_time(x)
+            send_at = get_send_time()
             schedule_type = "fixed"
         else:
             send_at = None
