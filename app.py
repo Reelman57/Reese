@@ -33,7 +33,6 @@ def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
     send_at = now_utc + timedelta(minutes=15, seconds = x)
-    print (x)
     return send_at.isoformat()
 # --------------------------------------------------------------------------
 def send_text(text_nbr, message, now):
@@ -48,14 +47,14 @@ def send_text(text_nbr, message, now):
             schedule_type = None
 
         try:
-            # message = client.messages.create(
-            #     body=message,
-            #     from_=twilio_number,
-            #     to=text_nbr,
-            #     messaging_service_sid=messaging_sid,
-            #     send_at=send_at,
-            #     schedule_type=schedule_type
-            # )
+            message = client.messages.create(
+                body=message,
+                from_=twilio_number,
+                to=text_nbr,
+                messaging_service_sid=messaging_sid,
+                send_at=send_at,
+                schedule_type=schedule_type
+            )
             sent_texts.add(text_nbr)
             x+=1
             return True
