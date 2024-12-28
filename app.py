@@ -374,6 +374,13 @@ def incoming_sms():
             return "No matching phone numbers found.", 200
     return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
+    else
+        client.messages.create(
+        body=msg_in,
+        from_=twilio_number,
+        to='+15099902828'
+    )
+# --------------------------------------------------------------------------
 def confirm_send():
     client.messages.create(
         body=f"{x} Messages scheduled. Send 'cancel-sms' within 10 mins to cancel them",
