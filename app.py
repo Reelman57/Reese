@@ -372,7 +372,6 @@ def incoming_sms():
                 to=from_number
             )
             return "No matching phone numbers found.", 200
-    return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
 else:
         client.messages.create(
@@ -380,7 +379,7 @@ else:
         from_=twilio_number,
         to='+15099902828'
     )
-        return msg_in
+    return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
 def confirm_send():
     client.messages.create(
