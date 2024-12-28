@@ -373,13 +373,13 @@ def incoming_sms():
             )
             return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------
-else:
-        client.messages.create(
-        body=msg_in,
-        from_=twilio_number,
-        to='+15099902828'
-    )
-    return "Command not recognized or unauthorized.", 400
+    else:
+            client.messages.create(
+            body=msg_in,
+            from_=twilio_number,
+            to='+15099902828'
+        )
+        return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
 def confirm_send():
     client.messages.create(
