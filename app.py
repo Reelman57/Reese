@@ -379,7 +379,7 @@ def incoming_sms():
             from_=twilio_number,
             to='+15099902828'
         )
-        return "Command not recognized or unauthorized.", 400
+    return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
 def confirm_send():
     client.messages.create(
