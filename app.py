@@ -321,6 +321,62 @@ def incoming_sms():
         confirm_send()
         return "Ministering district messages sent.", 200
 # --------------------------------------------------------------------------
+    elif first_word == "minall77216" and from_number in authorized_list:
+       
+        try:
+            df = pd.read_csv(data_file)
+        except FileNotFoundError:
+            return "Error: File not found.", 500
+        except Exception as e:
+            return f"Error reading data file: {e}", 500
+        
+        r = range(1, 3)
+        
+        for x in r: 
+            
+            ministerx = f"Minister{x}"
+            ministerx_phone = f"Minister{x}_Phone"
+            ministerx_email = f"Minister{x}_Email"
+        
+            df_filtered = df_filtered[df_filtered[ministerx].notnull()]
+            df_filtered[ministerx] = df_filtered[ministerx].fillna('')
+        
+            try:
+                df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True) 
+            except AttributeError as e:
+                print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
+                continue  # Skip to the next iteration of the outer for loop
+        
+            grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
+        
+            for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
+          
+                text_nbr = minister_phone
+                subj="Your Ministering Families"
+        
+                if x < 3:
+                    Bro_Sis = "Brother"
+                else:
+                    Bro_Sis = "Sister"
+                    
+                msg = f"{Bro_Sis} {minister_last}, \n"
+                msg += f"{msg_in} \n\n"
+                msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
+        
+                if not group.empty:
+                    for index, row in group.iterrows():
+                        msg += f"{row['Name']}"
+                        if not pd.isna(row['Phone Number']):
+                            msg += f"  - {row['Phone Number']}"
+                        msg += "\n"
+        
+                    print(minister_last," - ", minister_phone,"  " ,minister_email,msg)
+                    # send_text(text_nbr, msg, False)
+                    # send_email(minister_email,subj,msg)
+
+        confirm_send()
+        return "Ministering district messages sent.", 200
+# --------------------------------------------------------------------------
     elif (first_word == "?" or first_word == "instructions") and from_number in authorized_list:
         instructions = "To send a message to any of the following groups.  Simply type the group code on the 1st line followed by your message on subsequent lines.  The message will already have a salutation on it, ie. 'Brother Jones' or 'Hello John'.  Do not use emojis or pictures.  The app is authenticated by your phone number and will only work on your phone.\n\n"
         instructions += "Group codes\n"
