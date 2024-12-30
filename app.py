@@ -339,6 +339,7 @@ def incoming_sms():
             ministerx_email = f"Minister{x}_Email"
         
             df_filtered = df[df[ministerx].notnull()]
+            df_filtered = df_filtered[df_filtered['Age'] > 17]
             df_filtered[ministerx] = df_filtered[ministerx].fillna('')
         
             try:
@@ -363,7 +364,7 @@ def incoming_sms():
                 msg += f"{msg_in} \n\n"
                 msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
         
-                if not group.empty & row['Age'] > 17:
+                if not group.empty:
                     for index, row in group.iterrows():
                         msg += f"{row['Name']}"
                         if not pd.isna(row['Phone Number']):
