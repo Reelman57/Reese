@@ -283,6 +283,7 @@ def incoming_sms():
             ministerx_email = f"Minister{x}_Email"
         
             df_filtered = df_filtered[df_filtered[ministerx].notnull()]
+            df_filtered = df_filtered[df_filtered['Age'] > 17]
             df_filtered[ministerx] = df_filtered[ministerx].fillna('')
         
             try:
@@ -314,7 +315,7 @@ def incoming_sms():
                             msg += f"  - {row['Phone Number']}"
                         msg += "\n"
         
-                    print(minister_phone,"  " ,minister_email,msg)
+                    # print(minister_phone,"  " ,minister_email,msg)
                     send_text(text_nbr, msg, False)
                     # send_email(minister_email,subj,msg)
 
