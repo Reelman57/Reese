@@ -430,10 +430,15 @@ def incoming_sms():
             return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------
     else:
-            client.messages.create(
-            body=msg_in,
-            from_=twilio_number,
-            to='+15099902828'
+        df = pd.read_csv("Westmond_Master.csv") 
+        row = df[df['Phone Number'] == from_number] 
+        if not row.empty:
+            lname = row['Last_Name'].values[0] 
+    
+        client.messages.create(
+        body=f"{from_number} - {lname} \n{msg_in}",
+        from_=twilio_number,
+        to='+15099902828'
         )
     return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
