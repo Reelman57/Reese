@@ -331,32 +331,30 @@ def incoming_sms():
         except Exception as e:
             return f"Error reading data file: {e}", 500
         
-        r = range(1, 3)
-        
-        for x in r: 
+        for r in range(1, 3): 
             
-            ministerx = f"Minister{x}"
-            ministerx_phone = f"Minister{x}_Phone"
-            ministerx_email = f"Minister{x}_Email"
+            ministerr = f"Minister{r}"
+            ministerr_phone = f"Minister{r}_Phone"
+            ministerr_email = f"Minister{r}_Email"
         
-            df_filtered = df[df[ministerx].notnull()]
+            df_filtered = df[df[ministerr].notnull()]
             df_filtered = df_filtered[df_filtered['Age'] > 17]
-            df_filtered[ministerx] = df_filtered[ministerx].fillna('')
+            df_filtered[ministerr] = df_filtered[ministerr].fillna('')
         
             try:
-                df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True) 
+                df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerr].str.split(',', expand=True) 
             except AttributeError as e:
-                print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
+                print(f"Error splitting {ministerr} for potential missing or invalid data: {e}")
                 continue  # Skip to the next iteration of the outer for loop
         
-            grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
+            grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerr_phone, ministerr_email])
         
             for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
           
                 text_nbr = minister_phone
                 subj="Your Ministering Families"
         
-                if x > 2:
+                if r > 2:
                     Bro_Sis = "Sister"
                 else:
                     Bro_Sis = "Brother"
