@@ -356,10 +356,10 @@ def incoming_sms():
                 text_nbr = minister_phone
                 subj="Your Ministering Families"
         
-                if x < 3:
-                    Bro_Sis = "Brother"
-                else:
+                if x > 2:
                     Bro_Sis = "Sister"
+                else:
+                    Bro_Sis = "Brother"
                     
                 msg = f"{Bro_Sis} {minister_last}, \n"
                 msg += f"{msg_in} \n\n"
@@ -372,8 +372,8 @@ def incoming_sms():
                             msg += f"  - {row['Phone Number']}"
                         msg += "\n"
         
-                    # print(minister_last," - ", minister_phone,"  " ,minister_email,msg)
-                    send_text(text_nbr, msg, False)
+                    print(minister_last," - ", minister_phone,"  " ,minister_email,msg)
+                    # send_text(text_nbr, msg, False)
                     # send_email(minister_email,subj,msg)
 
         confirm_send()
