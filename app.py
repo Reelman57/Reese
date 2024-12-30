@@ -276,23 +276,23 @@ def incoming_sms():
             df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
             r = range(1, 3)
         
-        for x in r: 
+        for xr in r: 
             
-            ministerx = f"Minister{x}"
-            ministerx_phone = f"Minister{x}_Phone"
-            ministerx_email = f"Minister{x}_Email"
+            ministerxr = f"Minister{xr}"
+            ministerxr_phone = f"Minister{xr}_Phone"
+            ministerxr_email = f"Minister{xr}_Email"
         
-            df_filtered = df_filtered[df_filtered[ministerx].notnull()]
+            df_filtered = df_filtered[df_filtered[ministerxr].notnull()]
             df_filtered = df_filtered[df_filtered['Age'] > 17]
-            df_filtered[ministerx] = df_filtered[ministerx].fillna('')
+            df_filtered[ministerxr] = df_filtered[ministerxr].fillna('')
         
             try:
-                df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerx].str.split(',', expand=True) 
+                df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerxr].str.split(',', expand=True) 
             except AttributeError as e:
-                print(f"Error splitting {ministerx} for potential missing or invalid data: {e}")
+                print(f"Error splitting {ministerxr} for potential missing or invalid data: {e}")
                 continue  # Skip to the next iteration of the outer for loop
         
-            grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerx_phone, ministerx_email])
+            grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerxr_phone, ministerxr_email])
         
             for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
           
