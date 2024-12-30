@@ -430,13 +430,14 @@ def incoming_sms():
             return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------
     else:
-        df = pd.read_csv("Westmond_Master.csv") 
-        row = df[df['Phone Number'] == from_number] 
+        df = pd.read_csv("Westmond_Master.csv")
+        row = df[df['Phone Number'] == from_number]
+
         if not row.empty:
-            lname = row['Last_Name'].values[0] 
-    
+            lname = row['Last_Name'].values[0]
+        
         client.messages.create(
-        body=from_number," - ",lname,"\n" , msg_in,
+        body=f"{from_number} - {lname}\n{msg_in}",
         from_=twilio_number,
         to='+15099902828'
         )
