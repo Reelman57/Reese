@@ -436,7 +436,7 @@ def incoming_sms():
             lname = row['Last_Name'].values[0] 
     
         client.messages.create(
-        body=f"{from_number} - {lname} \n{msg_in}",
+        body=from_number," - ",lname,"\n" , msg_in,
         from_=twilio_number,
         to='+15099902828'
         )
