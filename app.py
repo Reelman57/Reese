@@ -373,7 +373,7 @@ def incoming_sms():
                         msg += "\n"
         
                     print(minister_last," - ", minister_phone,"  " ,minister_email,msg)
-                    # send_text(text_nbr, msg, False)
+                    send_text(text_nbr, msg, False)
                     # send_email(minister_email,subj,msg)
 
         confirm_send()
@@ -440,6 +440,7 @@ def incoming_sms():
     return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
 def confirm_send():
+    global x
     client.messages.create(
         body=f"{x} Messages scheduled. Send 'cancel-sms' within 10 mins to cancel them",
         from_=twilio_number,
