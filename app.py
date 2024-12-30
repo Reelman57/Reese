@@ -363,7 +363,7 @@ def incoming_sms():
                 msg += f"{msg_in} \n\n"
                 msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
         
-                if not group.empty:
+                if not group.empty & row['Age'] > 17:
                     for index, row in group.iterrows():
                         msg += f"{row['Name']}"
                         if not pd.isna(row['Phone Number']):
