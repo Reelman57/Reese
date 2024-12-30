@@ -371,8 +371,8 @@ def incoming_sms():
                             msg += f"  - {row['Phone Number']}"
                         msg += "\n"
         
-                    print(minister_last," - ", minister_phone,"  " ,minister_email,msg)
-                    # send_text(text_nbr, msg, False)
+                    # print(minister_last," - ", minister_phone,"  " ,minister_email,msg)
+                    send_text(text_nbr, msg, False)
                     # send_email(minister_email,subj,msg)
 
         confirm_send()
