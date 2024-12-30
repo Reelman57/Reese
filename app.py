@@ -433,11 +433,11 @@ def incoming_sms():
         df = pd.read_csv("Westmond_Master.csv")
         row = df[df['Phone Number'] == from_number]
 
-        if not row.empty:
-            lname = row['Last_Name'].values[0]
+        # if not row.empty:
+        #     lname = row['Last_Name'].values[0]
         
         client.messages.create(
-        body=f"{from_number} - {lname}\n{msg_in}",
+        body=f"{from_number} - {row['Last_Name'].values[0]}\n{msg_in}",
         from_=twilio_number,
         to='+15099902828'
         )
