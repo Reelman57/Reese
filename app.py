@@ -315,8 +315,8 @@ def incoming_sms():
                             msg += f"  - {row['Phone Number']}"
                         msg += "\n"
         
-                    # print(minister_phone,"  " ,minister_email,msg)
-                    send_text(text_nbr, msg, False)
+                    print(minister_phone,"  " ,minister_email,msg)
+                    # send_text(text_nbr, msg, False)
                     # send_email(minister_email,subj,msg)
 
         confirm_send()
@@ -439,9 +439,9 @@ def incoming_sms():
         row = df[df['Phone Number'] == cleaned_number]
         
         try:
-            lname = row['Last_Name'].values[0] 
+            name = row['First_Name'] + " " + row['Last_Name'].values[0] 
             client.messages.create(
-                body=f"{cleaned_number} - {lname}\n{msg_in}",
+                body=f"{cleaned_number} - {name}\n{msg_in}",
                 from_=twilio_number,
                 to='+15099902828'
             )
