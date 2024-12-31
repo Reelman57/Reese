@@ -432,33 +432,31 @@ def incoming_sms():
     else:
         
         if from_number.startswith('+1'):
-            from_number = from_number[2:]
+            from_number = from_number[2:] 
             cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
         
-        df = pd.read_csv("Westmond_Master.csv")
-        row = df[df['Phone Number'] == cleaned_number]
+            df = pd.read_csv("Westmond_Master.csv")
+            row = df[df['Phone Number'] == cleaned_number]
         
-        try:
-            full_name = f"{row['First_Name']} {row['Last_Name']}" 
-            client.messages.create(
-                body=f"{cleaned_number} - {full_name}\n{msg_in}",
-                from_=twilio_number,
-                to='+15099902828'
-            )
-        except IndexError:
-           
-            client.messages.create(
-                body=f"No matching name found for {from_number}",
-                from_=twilio_number,
-                to='+15099902828'
-            )
-        except Exception as e:
-            
-            client.messages.create(
-                body=f"An error occurred: {e}",
-                from_=twilio_number,
-                to='+15099902828'
-            ) 
+            try:
+                full_name = f"{row['First_Name'].values[0]} {row['Last_Name'].values[0]}"  
+                client.messages.create(
+                    body=f"{cleaned_number} - {full_name}\n{msg_in}",
+                    from_=twilio_number,
+                    to='+15099902828' 
+                )
+            except IndexError:
+                client.messages.create(
+                    body=f"No matching name found for {cleaned_number}",
+                    from_=twilio_number,
+                    to='+15099902828'
+                )
+            except Exception as e:
+                client.messages.create(
+                    body=f"An error occurred: {e}",
+                    from_=twilio_number,
+                    to='+15099902828'
+                )
     return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
 def confirm_send():
