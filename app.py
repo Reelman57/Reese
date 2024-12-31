@@ -432,15 +432,28 @@ def incoming_sms():
     else:
         df = pd.read_csv("Westmond_Master.csv")
         row = df[df['Phone Number'] == from_number]
-
-        # if not row.empty:
-        #     lname = row['Last_Name'].values[0]
         
-        client.messages.create(
-        body=f"{from_number} - {row['Last_Name'].values[0]}\n{msg_in}",
-        from_=twilio_number,
-        to='+15099902828'
-        )
+        try:
+            lname = row['Last_Name'].values[0] 
+            client.messages.create(
+                body=f"{from_number} - {lname}\n{msg_in}",
+                from_=twilio_number,
+                to='+15099902828'
+            )
+        except IndexError:
+           
+            client.messages.create(
+                body=f"No matching name found for {from_number}",
+                from_=twilio_number,
+                to='+15099902828'
+            )
+        except Exception as e:
+            
+            client.messages.create(
+                body=f"An error occurred: {e}",
+                from_=twilio_number,
+                to='+15099902828'
+            ) 
     return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
 def confirm_send():
