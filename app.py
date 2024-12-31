@@ -430,13 +430,18 @@ def incoming_sms():
             return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------
     else:
+        
+        if from_number.startswith('+1'):
+            from_number = from_number[2:]
+            cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
+        
         df = pd.read_csv("Westmond_Master.csv")
-        row = df[df['Phone Number'] == from_number]
+        row = df[df['Phone Number'] == cleaned_number]
         
         try:
             lname = row['Last_Name'].values[0] 
             client.messages.create(
-                body=f"{from_number} - {lname}\n{msg_in}",
+                body=f"{cleaned_number} - {lname}\n{msg_in}",
                 from_=twilio_number,
                 to='+15099902828'
             )
