@@ -22,7 +22,7 @@ def get_send_time():
     return send_at
     
 def send_text(text_nbr, message):
-    if not pd.isna(text_nbr):
+    if text_nbr not in sent_texts and not pd.isna(text_nbr):
         send_at = get_send_time()
         message = Client.messages.create(
             body=message,
@@ -32,10 +32,15 @@ def send_text(text_nbr, message):
             send_at=send_at.isoformat(),
             schedule_type="fixed"
         )
+        sent_texts.add(text_nbr)
+    print (sent_texts):
     time.sleep(1)
 
 # Read the CSV file
-df = pd.read_csv('Westmond_Master.csv')
+df = pd.read_csv('Westmond_Master.csv')      
+    sent_texts = set()
+    with open('DO_NOT_SEND.txt', 'r') as file:
+        sent_texts = set(line.strip() for line in file)
 
 df['Birth Date'] = pd.to_datetime(df['Birth Date'])
 today = datetime.today()
