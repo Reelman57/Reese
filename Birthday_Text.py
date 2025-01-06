@@ -45,7 +45,7 @@ with open('DO_NOT_SEND.txt', 'r') as file:
 df['Birth Date'] = pd.to_datetime(df['Birth Date'])
 today = datetime.today()
 today_month = today.month
-today_day = today.day 
+today_day = today.day
 
 # Filter for adults with today's birthday
 df_filtered = df[(df['Age'] > 17)
