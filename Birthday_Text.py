@@ -32,7 +32,7 @@ def send_text(text_nbr, message):
             send_at=send_at.isoformat(),
             schedule_type="fixed"
         )
-        sent_texts.add(text_nbr)
+    sent_texts.add(text_nbr)
     print (sent_texts)
     time.sleep(1)
 
