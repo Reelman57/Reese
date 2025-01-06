@@ -212,7 +212,7 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     elif first_word == "ecs77216" and (from_number in authorized_list or from_number == '+13607428998'):
         subject = "Emergency Communications System"
-        sms_send(msg_in, data_list, False)
+        sms_send(msg_in, data_list, True)
         # send_email(subject, msg_in, data_list)
         # send_voice(msg_in, data_list)
         # confirm_send()
