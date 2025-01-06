@@ -163,7 +163,7 @@ def incoming_sms():
     message_body = request.values.get('Body', None)
     global from_number
     from_number = request.values.get('From', None)
-    data_file = "Westmond_Master_Test.csv"
+    data_file = "Westmond_Master.csv"
     data_list = process_data(data_file)
 
     if message_body is None or from_number is None:
@@ -213,9 +213,9 @@ def incoming_sms():
     elif first_word == "ecs77216" and (from_number in authorized_list or from_number == '+13607428998'):
         subject = "Emergency Communications System"
         sms_send(msg_in, data_list, True)
-        # send_email(subject, msg_in, data_list)
-        # send_voice(msg_in, data_list)
-        # confirm_send()
+        send_email(subject, msg_in, data_list)
+        send_voice(msg_in, data_list)
+        confirm_send()
         return "Emergency Communications System messages sent.", 200
 # --------------------------------------------------------------------------
     elif first_word == "eld77216" and from_number in authorized_list:
