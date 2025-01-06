@@ -55,6 +55,7 @@ def send_text(text_nbr, message, now):
                 send_at=send_at,
                 schedule_type=schedule_type
             )
+            print(now)
             sent_texts.add(text_nbr)
             x+=1
             return True
@@ -132,9 +133,10 @@ def sms_send(msg_in, data_list, now):
     success_count = 0
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
+        sendnow = now
         for data in data_list:
             msg = f"Hello {data['First_Name']},\n{msg_in}\n"
-            future = executor.submit(send_text, data['Phone Number'], msg, now)
+            future = executor.submit(send_text, data['Phone Number'], msg, sendnow)
             futures.append(future)
             print("SMS - ", data['Last_Name'], "-", data['Phone Number'])
 
@@ -186,7 +188,7 @@ def incoming_sms():
     x = 0
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
-        sms_send(msg_in, data_list, False)
+        sms_send(msg_in, data_list, True)
         confirm_send()
         return "SMS messages scheduled.", 200
 # --------------------------------------------------------------------------
@@ -211,9 +213,9 @@ def incoming_sms():
     elif first_word == "ecs77216" and (from_number in authorized_list or from_number == '+13607428998'):
         subject = "Emergency Communications System"
         sms_send(msg_in, data_list, False)
-        send_email(subject, msg_in, data_list)
-        send_voice(msg_in, data_list)
-        confirm_send()
+        # send_email(subject, msg_in, data_list)
+        # send_voice(msg_in, data_list)
+        # confirm_send()
         return "Emergency Communications System messages sent.", 200
 # --------------------------------------------------------------------------
     elif first_word == "eld77216" and from_number in authorized_list:
