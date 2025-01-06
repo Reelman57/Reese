@@ -89,7 +89,7 @@ def send_email(subject, body, data_list):
         email = data.get('Email')
         message = f"Hello {data['First_Name']},\n"
         message += body + "\n"
-        if email and not pd.isna(email):
+        if email not in sent_emails and email not pd.isna(email):
             try:
                 msg = MIMEMultipart()
                 msg['From'] = os.environ.get('EMAIL_ADDRESS')
