@@ -33,7 +33,7 @@ def send_text(text_nbr, message):
             schedule_type="fixed"
         )
         sent_texts.add(text_nbr)
-    print (sent_texts):
+    print (sent_texts)
     time.sleep(1)
 
 # Read the CSV file
