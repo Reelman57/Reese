@@ -53,7 +53,7 @@ df_filtered = df[(df['Age'] > 17)
                  & (df['Birth Date'].dt.month == today_month)]
 
 # Filter out phone numbers in sent_texts
-df_filtered = df_filtered[~df_filtered['Phone Number'].isin(sent_texts)
+df_filtered = df_filtered[~df_filtered['Phone Number'].isin(sent_texts)]
 
 for index, row in df_filtered.iterrows():
     name = row['First_Name'] + ' ' + row['Last_Name']
