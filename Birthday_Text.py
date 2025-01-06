@@ -37,19 +37,23 @@ def send_text(text_nbr, message):
     time.sleep(1)
 
 # Read the CSV file
-df = pd.read_csv('Westmond_Master.csv')      
+df = pd.read_csv('Westmond_Master.csv')      
 sent_texts = set()
 with open('DO_NOT_SEND.txt', 'r') as file:
-    sent_texts = set(line.strip() for line in file)
+  sent_texts = set(line.strip() for line in file)
 
 df['Birth Date'] = pd.to_datetime(df['Birth Date'])
 today = datetime.today()
 today_month = today.month
-today_day = today.day 
+today_day = today.day 
 
-df_filtered = df[(df['Age'] > 17)
-            & (df['Birth Date'].dt.day == today_day)
-            & (df['Birth Date'].dt.month == today_month)]
+# Filter for adults with today's birthday
+df_filtered = df[(df['Age'] > 17) 
+                 & (df['Birth Date'].dt.day == today_day) 
+                 & (df['Birth Date'].dt.month == today_month)]
+
+# Filter out phone numbers in sent_texts
+df_filtered = df_filtered[~df_filtered['Phone Number'].isin(sent_texts)
 
 for index, row in df_filtered.iterrows():
     name = row['First_Name'] + ' ' + row['Last_Name']
