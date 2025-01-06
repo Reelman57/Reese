@@ -38,9 +38,9 @@ def send_text(text_nbr, message):
 
 # Read the CSV file
 df = pd.read_csv('Westmond_Master.csv')      
-    sent_texts = set()
-    with open('DO_NOT_SEND.txt', 'r') as file:
-        sent_texts = set(line.strip() for line in file)
+sent_texts = set()
+with open('DO_NOT_SEND.txt', 'r') as file:
+    sent_texts = set(line.strip() for line in file)
 
 df['Birth Date'] = pd.to_datetime(df['Birth Date'])
 today = datetime.today()
