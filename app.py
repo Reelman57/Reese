@@ -229,7 +229,7 @@ def incoming_sms():
         filtered_data_list = filter_gender(data_list, "M")
         
         for data in filtered_data_list:
-            print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}"")
+            print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
             msg = f"Brother {data['Last_Name']}, \n\n"
             msg += msg_in
             # send_text(data['Phone Number'], msg, False)
