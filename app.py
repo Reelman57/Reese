@@ -111,6 +111,7 @@ def send_email(subject, body, data_list):
     return len(sent_emails)
 # --------------------------------------------------------------------------
 def process_data(data_path):
+    global sent_texts
     df = pd.read_csv(data_path)
     df_filtered = df[df['Age'] > 17]
     df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email']]
