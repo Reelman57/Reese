@@ -232,9 +232,9 @@ def incoming_sms():
             print(f"{x}. {data['First_Name']} {data['Last_Name']}")
             msg = f"Brother {data['Last_Name']}, \n\n"
             msg += msg_in
-            # send_text(data['Phone Number'], msg, False)
+            send_text(data['Phone Number'], msg, False)
 
-        # confirm_send()
+        confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
     elif first_word == "min77216" and from_number in authorized_list:
