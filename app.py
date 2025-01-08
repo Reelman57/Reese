@@ -111,7 +111,6 @@ def send_email(subject, body, data_list):
     return len(sent_emails)
 # --------------------------------------------------------------------------
 def process_data(data_path):
-    global sent_texts
     df = pd.read_csv(data_path)
     df_filtered = df[df['Age'] > 17]
     df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email']]
@@ -120,8 +119,9 @@ def process_data(data_path):
     df_filtered = df_filtered[df_filtered['is_valid_phone']]
     df_filtered = df_filtered.drop_duplicates(subset=['Phone Number']) 
 
-    # Exclude records with phone numbers in DO_NOT_SEND.txt
-    df_filtered = df_filtered[~df_filtered['Phone Number'].isin(sent_texts)]
+    with open('DO_NOT_SEND.txt', 'r') as f:
+        do_not_send_numbers = set(line.strip() for line in f)
+    df_filtered = df_filtered[~df_filtered['Phone Number'].isin(do_not_send_numbers)]
 
     data_list = df_filtered.to_dict('records')
     return data_list
