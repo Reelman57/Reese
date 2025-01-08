@@ -30,31 +30,21 @@ def get_numbers_not_in_csv(do_not_send_file, csv_file, phone_number_column):
     return set()
 
 def remove_numbers_from_file(file_path, numbers_to_remove):
-  """
-  Removes the specified numbers from the given file.
+   
+    try:
+        with open(file_path, 'r') as f:
+            lines = f.readlines()
 
-  Args:
-    file_path: Path to the file to modify.
-    numbers_to_remove: A set of numbers to be removed from the file.
+        with open(file_path, 'w') as f:
+            for line in lines:
+                if line.strip() not in numbers_to_remove:
+                    f.write(line)
 
-  Returns:
-    True if the file was modified successfully, False otherwise.
-  """
-  try:
-    with open(file_path, 'r') as f:
-      lines = f.readlines()
+        return True
+    except Exception as e:
+        print(f"Error modifying file: {e}")
+        return False
 
-    with open(file_path, 'w') as f:
-      for line in lines:
-        if line.strip() not in numbers_to_remove:
-          f.write(line + '\n')  # Add newline character
-
-    return True
-  except Exception as e:
-    print(f"Error modifying file: {e}")
-    return False
-
-# Example usage:
 do_not_send_file = "DO_NOT_SEND.txt"
 csv_file = "Westmond_Master.csv"
 phone_number_column = "Phone Number" 
