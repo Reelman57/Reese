@@ -19,7 +19,7 @@ def get_numbers_not_in_csv(do_not_send_file, csv_file, phone_number_column):
     return set()
 
 # Example usage:
-do_not_send_file = "DO_NOT_SEND.TXT"
+do_not_send_file = "DO_NOT_SEND.txt"
 csv_file = "Westmond_Master.csv"
 phone_number_column = "Phone Number" 
 
