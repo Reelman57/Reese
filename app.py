@@ -170,7 +170,7 @@ def incoming_sms():
     message_body = request.values.get('Body', None)
     global from_number
     from_number = request.values.get('From', None)
-    data_file = "Westmond_Master.csv"
+    data_file = "Westmond_Master_Test.csv"
     data_list = process_data(data_file)
 
     if message_body is None or from_number is None:
@@ -195,7 +195,7 @@ def incoming_sms():
     x = 0
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
-        sms_send(msg_in, data_list, True)
+        sms_send(msg_in, data_list, False)
         confirm_send()
         return "SMS messages scheduled.", 200
 # --------------------------------------------------------------------------
