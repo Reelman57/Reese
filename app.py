@@ -55,7 +55,6 @@ def send_text(text_nbr, message, now):
                 send_at=send_at,
                 schedule_type=schedule_type
             )
-            print(now)
             sent_texts.add(text_nbr)
             x+=1
             return True
@@ -137,7 +136,7 @@ def is_valid_phone_number(phone_number):
         return False
 # --------------------------------------------------------------------------
 def sms_send(msg_in, data_list, now):
-    success_count = 0
+    success_count = 1
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         sendnow = now
@@ -145,7 +144,7 @@ def sms_send(msg_in, data_list, now):
             msg = f"Hello {data['First_Name']},\n{msg_in}\n"
             future = executor.submit(send_text, data['Phone Number'], msg, sendnow)
             futures.append(future)
-            print("SMS - ", data['Last_Name'], "-", data['Phone Number'])
+            print(success_count, ". SMS - ", data['Last_Name'], "-", data['Phone Number'])
 
         for future in futures:
             try:
