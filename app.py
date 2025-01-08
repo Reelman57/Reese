@@ -119,6 +119,9 @@ def process_data(data_path):
     df_filtered = df_filtered[df_filtered['is_valid_phone']]
     df_filtered = df_filtered.drop_duplicates(subset=['Phone Number']) 
 
+    # Exclude records with phone numbers in DO_NOT_SEND.txt
+    df_filtered = df_filtered[~df_filtered['Phone Number'].isin(sent_texts)]
+
     data_list = df_filtered.to_dict('records')
     return data_list
 # --------------------------------------------------------------------------    
@@ -163,7 +166,7 @@ def incoming_sms():
     message_body = request.values.get('Body', None)
     global from_number
     from_number = request.values.get('From', None)
-    data_file = "Westmond_Master.csv"
+    data_file = "Westmond_Master_Test.csv"
     data_list = process_data(data_file)
 
     if message_body is None or from_number is None:
