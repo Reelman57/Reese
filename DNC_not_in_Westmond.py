@@ -55,6 +55,24 @@ def remove_numbers_from_file(file_path, numbers_to_remove):
         print(f"Error modifying file: {e}")
         return False
 
+def remove_duplicates_and_sort(file_path):
+   
+    try:
+        with open(file_path, 'r') as f:
+            lines = f.readlines()
+
+        unique_lines = sorted(set(line.strip() for line in lines))
+
+        with open(file_path, 'w') as f:
+            for line in unique_lines:
+                f.write(line + '\n')
+
+        print(f"Modified file: {file_path}")
+        return True
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+
 # Example usage:
 do_not_send_file = "DO_NOT_SEND.txt"
 csv_file = "Westmond_Master.csv"
@@ -73,3 +91,5 @@ if missing_numbers:
         print("Failed to remove numbers from DO_NOT_SEND.txt.")
 else:
     print("All phone numbers in DO_NOT_SEND.txt are found in Westmond_Master.csv.")
+
+remove_duplicates_and_sort(do_not_send_file)
