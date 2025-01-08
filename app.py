@@ -125,6 +125,9 @@ def process_data(data_path):
 
     data_list = df_filtered.to_dict('records')
     return data_list
+    
+def filter_gender(data_list, gender="M"):
+    return [record for record in data_list if record.get('Gender') == gender]
 # --------------------------------------------------------------------------    
 def is_valid_phone_number(phone_number):
     try:
@@ -223,35 +226,14 @@ def incoming_sms():
         return "Emergency Communications System messages sent.", 200
 # --------------------------------------------------------------------------
     elif first_word == "eld77216" and from_number in authorized_list:
-        try:
-            df = pd.read_csv(data_file)
-        except FileNotFoundError:
-            return "Error: File not found.", 500
-        except Exception as e:
-            return f"Error reading data file: {e}", 500
-
-        try:
-            df_filtered = df[df['Age'] > 17]
-            df_filtered = df_filtered[df_filtered['Gender'] == "M"]
-            df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email']]
-            df_filtered = df_filtered.dropna(subset=['Phone Number'])
-            df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
-            df_filtered = df_filtered[df_filtered['is_valid_phone']]
-            df_filtered = df_filtered.drop_duplicates(subset=['Phone Number'])
-
-            data_list = df_filtered.to_dict('records')
-
-            ministers = set(df['Minister1_Phone'].dropna().tolist() + df['Minister2_Phone'].dropna().tolist())
-    
-            for data in data_list:
-                if data['Phone Number'] in ministers:
-                    print(f"{x}. {data['First_Name']} {data['Last_Name']}")
-                    msg = f"Brother {data['Last_Name']}, \n\n"
-                    msg += msg_in
-                    send_text(data['Phone Number'], msg, False)
-    
-        except Exception as e:
-             return f"An error occurred while processing the request: {e}", 500
+        data_list = process_data(data_file)
+        filtered_data_list = filter_gender(data_list, "M")
+        
+        for data in filtered_data_list:
+            print(f"{x}. {data['First_Name']} {data['Last_Name']}")
+            msg = f"Brother {data['Last_Name']}, \n\n"
+            msg += msg_in
+            # send_text(data['Phone Number'], msg, False)
 
         confirm_send()
         return "Messages sent successfully.", 200
