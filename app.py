@@ -126,7 +126,7 @@ def process_data(data_path):
     data_list = df_filtered.to_dict('records')
     return data_list
     
-def filter_gender(data_list, gender="M"):
+def filter_gender(data_list, Gender="M"):
     return [record for record in data_list if record.get('Gender') == gender]
 # --------------------------------------------------------------------------    
 def is_valid_phone_number(phone_number):
@@ -226,7 +226,6 @@ def incoming_sms():
         return "Emergency Communications System messages sent.", 200
 # --------------------------------------------------------------------------
     elif first_word == "eld77216" and from_number in authorized_list:
-        data_list = process_data(data_file)
         filtered_data_list = filter_gender(data_list, "M")
         
         for data in filtered_data_list:
@@ -235,7 +234,7 @@ def incoming_sms():
             msg += msg_in
             # send_text(data['Phone Number'], msg, False)
 
-        confirm_send()
+        # confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
     elif first_word == "min77216" and from_number in authorized_list:
