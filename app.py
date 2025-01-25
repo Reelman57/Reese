@@ -279,10 +279,9 @@ def incoming_sms():
     
             msg += f"{District_Leader}\n\n"
     
-            print(msg)
-            # send_text(data['Phone Number'], msg, False) 
+            send_text(data['Phone Number'], msg, False) 
     
-        # confirm_send() 
+        confirm_send() 
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
     elif first_word == "min77216" and from_number in authorized_list:
