@@ -240,34 +240,39 @@ def incoming_sms():
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
     elif first_word == "fam77216" and from_number in authorized_list:
-        filtered_data_list = filter_minister(data_list)
-        
-        for data in filtered_data_list:
-            print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
-            if data['Gender'] == "M"
-                msg = f"Brother {data['Last_Name']}, \n\n"
-            elif data['Gender'] == "F"
-                msg = f"Sister {data['Last_Name']}, \n\n"
+    filtered_data_list = filter_minister(data_list)
+
+    for x, data in enumerate(filtered_data_list, start=1): 
+        if data.get('Gender') == "M":
+            msg = f"Brother {data['Last_Name']}, \n\n"
+        elif data.get('Gender') == "F":
+            msg = f"Sister {data['Last_Name']}, \n\n"
+        else: 
+            msg = f"{data['First_Name']} {data['Last_Name']}, \n\n"  # Handle cases where Gender is missing or invalid
+
+        msg += "Your assigned ministering brothers are as follows:" \n
+        msg += f"{data['Minister1']} - {data['Minister1_Phone']},\n"
+        msg += f"{data['Minister2']} - {data['Minister2_Phone']},\n"
+        msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have." \n
+        msg += "If you are unable to reach your Ministering Brothers then please contact the member of the Elders Quorum Presidency that serves your area which is:" \n
+
+        if data.get('B_District') == 'D1':
+            District_Leader = "Dale Reese - 509-990-2828"
+        elif data.get('B_District') == 'D2':
+            District_Leader = "Ghent Bailey - 972-281-9991"
+        elif data.get('B_District') == 'D3':
+            District_Leader = "Glen Bailey - 208-610-3066"
             
-            msg += "Your assigned ministering brothers are as follows:" \n
-            msg += f"{data['Minister1']} - {data['Minister1_Phone']},\n
-            msg += f"{data['Minister2']} - {data['Minister2_Phone']},\n
-            msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have." \n
-            msg += "If you are unable to reach your Ministering Brothers then please contact the member of the Elders Quorum Presidency that serves your area which is:" \n
+        else:
+            District_Leader = "Dale Reese - 509-990-2828"
 
-            if B_District = 'D1':
-                District_Leader = "Dale Reese - 509-990-2828"
-            elif B_District = 'D2':
-                District_Leader = "Ghent Bailey - 972-281-9991"
-            elif B_District = 'D3':
-                District_Leader = "Glen Bailey - 208-610-3066"
+        msg += District_Leader \n
 
-            print(msg)
-                
-            # send_text(data['Phone Number'], msg, False)
+        print(msg)
+        # send_text(data['Phone Number'], msg, False) 
 
-        # confirm_send()
-        return "Messages sent successfully.", 200
+    # confirm_send() 
+    return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
     elif first_word == "min77216" and from_number in authorized_list:
         district = {
