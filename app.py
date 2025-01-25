@@ -251,17 +251,20 @@ def incoming_sms():
                 msg = f"{data['First_Name']} {data['Last_Name']}, \n\n"  # Handle cases where Gender is missing or invalid
     
             msg += "Your assigned ministering brothers are as follows: \n"
+
             if pd.notna(data.get('Minister1')):
-                msg += f"{data['Minister1']}
-            if pd.notna(data.get('Minister1_Phone')):
-                msg += f" - {data['Minister1_Phone']},\n"
+                msg += f"{data['Minister1']}"
+                if pd.notna(data.get('Minister1_Phone')):
+                    msg += f" - {data['Minister1_Phone']}\n"
+            
             if pd.notna(data.get('Minister2')):
-                msg += f"{data['Minister2']}
-            if pd.notna(data.get('Minister2_Phone')):
-                msg += f" - {data['Minister2_Phone']},\n"
+                msg += f"{data['Minister2']}"
+                if pd.notna(data.get('Minister2_Phone')):
+                    msg += f" - {data['Minister2_Phone']}\n"
+            
             msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have. \n"
             msg += "If you are unable to reach your Ministering Brothers then please contact the member of the Elders Quorum Presidency that serves your area which is: \n"
-    
+            
             if data.get('B_District') == 'D1':
                 District_Leader = "Dale Reese - 509-990-2828"
             elif data.get('B_District') == 'D2':
