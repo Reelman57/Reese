@@ -266,7 +266,7 @@ def incoming_sms():
             else:
                 District_Leader = "Dale Reese - 509-990-2828"
     
-            msg += District_Leader \n
+            msg += f"{District_Leader},\n"
     
             print(msg)
             # send_text(data['Phone Number'], msg, False) 
