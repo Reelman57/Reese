@@ -112,7 +112,7 @@ def send_email(subject, body, data_list):
 def process_data(data_path):
     df = pd.read_csv(data_path)
     df_filtered = df[df['Age'] > 17]
-    df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email', 'Gender']]
+    df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email', 'Gender','B_District','Minister1','Minister1_Phone','Minister2','Minister2_Phone']]
     df_filtered = df_filtered.dropna(subset=['Phone Number'])
     df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
     df_filtered = df_filtered[df_filtered['is_valid_phone']]
@@ -125,6 +125,9 @@ def process_data(data_path):
     data_list = df_filtered.to_dict('records')
     return data_list
     
+def filter_minister(data_list):
+  return [record for record in data_list if record.get('Minister1')]
+
 def filter_gender(data_list, gender="M"):
     return [record for record in data_list if record.get('Gender') == gender]
 # --------------------------------------------------------------------------    
@@ -234,6 +237,36 @@ def incoming_sms():
             send_text(data['Phone Number'], msg, False)
 
         confirm_send()
+        return "Messages sent successfully.", 200
+# --------------------------------------------------------------------------
+    elif first_word == "fam77216" and from_number in authorized_list:
+        filtered_data_list = filter_minister(data_list)
+        
+        for data in filtered_data_list:
+            print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
+            if data['Gender'] == "M"
+                msg = f"Brother {data['Last_Name']}, \n\n"
+            elif data['Gender'] == "F"
+                msg = f"Sister {data['Last_Name']}, \n\n"
+            
+            msg += "Your assigned ministering brothers are as follows:" \n
+            msg += f"{data['Minister1']} - {data['Minister1_Phone']},\n
+            msg += f"{data['Minister2']} - {data['Minister2_Phone']},\n
+            msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have." \n
+            msg += "If you are unable to reach your Ministering Brothers then please contact the member of the Elders Quorum Presidency that serves your area which is:" \n
+
+            if B_District = 'D1':
+                District_Leader = "Dale Reese - 509-990-2828"
+            elif B_District = 'D2':
+                District_Leader = "Ghent Bailey - 972-281-9991"
+            elif B_District = 'D3':
+                District_Leader = "Glen Bailey - 208-610-3066"
+
+            print(msg)
+                
+            # send_text(data['Phone Number'], msg, False)
+
+        # confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
     elif first_word == "min77216" and from_number in authorized_list:
