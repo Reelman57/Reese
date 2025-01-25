@@ -255,12 +255,14 @@ def incoming_sms():
             if pd.notna(data.get('Minister1')):
                 msg += f"{data['Minister1']}"
                 if pd.notna(data.get('Minister1_Phone')):
-                    msg += f" - {data['Minister1_Phone']}\n"
+                    msg += f" - {data['Minister1_Phone']}"
+            msg += "\n"
             
             if pd.notna(data.get('Minister2')):
                 msg += f"{data['Minister2']}"
                 if pd.notna(data.get('Minister2_Phone')):
-                    msg += f" - {data['Minister2_Phone']}\n"
+                    msg += f" - {data['Minister2_Phone']}"
+            msg += "\n"
             
             msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have. \n"
             msg += "If you are unable to reach your Ministering Brothers then please contact the member of the Elders Quorum Presidency that serves your area which is: \n"
