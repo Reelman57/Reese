@@ -239,6 +239,18 @@ def incoming_sms():
         confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
+    elif first_word == "sis77216" and from_number in authorized_list:
+        filtered_data_list = filter_gender(data_list, "F")
+        
+        for data in filtered_data_list:
+            print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
+            msg = f"Sister {data['Last_Name']}, \n\n"
+            msg += msg_in
+            send_text(data['Phone Number'], msg, False)
+
+        confirm_send()
+        return "Messages sent successfully.", 200
+# --------------------------------------------------------------------------
     elif first_word == "fam77216" and from_number in authorized_list:
         filtered_data_list = filter_minister(data_list)
 
