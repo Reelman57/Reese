@@ -128,7 +128,7 @@ def process_data(data_path):
 def filter_minister(data_list):
   return [record for record in data_list if record.get('Minister1')]
 
-def filter_gender(data_list, gender="M"):
+def filter_gender(data_list, gender):
     return [record for record in data_list if record.get('Gender') == gender]
 # --------------------------------------------------------------------------    
 def is_valid_phone_number(phone_number):
