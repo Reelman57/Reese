@@ -361,10 +361,10 @@ def incoming_sms():
                         msg += "\n"
         
                     print(minister_phone,"  " ,minister_email,msg)
-                    #send_text(text_nbr, msg, False)
-                    # send_email(minister_email,subj,msg)
+                    send_text(text_nbr, msg, False)
+                    #send_email(minister_email,subj,msg)
 
-       # confirm_send()
+        confirm_send()
         return "Ministering district messages sent.", 200
 # --------------------------------------------------------------------------
     elif first_word == "minall77216" and from_number in authorized_list:
@@ -416,10 +416,10 @@ def incoming_sms():
                         msg += "\n"
         
                     print(minister_last," - ", minister_phone,"  " ,minister_email,msg)
-                    send_text(text_nbr, msg, False)
+                    #send_text(text_nbr, msg, False)
                     # send_email(minister_email,subj,msg)
 
-        confirm_send()
+        #confirm_send()
         return "Ministering district messages sent.", 200
 # --------------------------------------------------------------------------
     elif (first_word == "?" or first_word == "instructions") and from_number in authorized_list:
