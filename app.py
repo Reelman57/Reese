@@ -344,7 +344,7 @@ def incoming_sms():
                 text_nbr = minister_phone
                 subj="Your Ministering Families"
         
-                if x < 3:
+                if r < 3:
                     Bro_Sis = "Brother"
                 else:
                     Bro_Sis = "Sister"
@@ -360,11 +360,11 @@ def incoming_sms():
                             msg += f"  - {row['Phone Number']}"
                         msg += "\n"
         
-                    # print(minister_phone,"  " ,minister_email,msg)
-                    send_text(text_nbr, msg, False)
+                    print(minister_phone,"  " ,minister_email,msg)
+                    #send_text(text_nbr, msg, False)
                     # send_email(minister_email,subj,msg)
 
-        confirm_send()
+       # confirm_send()
         return "Ministering district messages sent.", 200
 # --------------------------------------------------------------------------
     elif first_word == "minall77216" and from_number in authorized_list:
