@@ -344,7 +344,7 @@ def incoming_sms():
                 text_nbr = minister_phone
                 subj="Your Ministering Families"
         
-                if r < 3:
+                if xr < 3:
                     Bro_Sis = "Brother"
                 else:
                     Bro_Sis = "Sister"
