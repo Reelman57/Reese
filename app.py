@@ -442,9 +442,9 @@ def incoming_sms():
             df_filtered[ministerr] = df_filtered[ministerr].fillna('')
 
             if r==1:
-                Comp=f"Minister2"
+                Comp=df_filtered['Minister2']
             else:
-                Comp=f"Minister1"
+                Comp=df_filtered['Minister1']
             
             try:
                 df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerr].str.split(',', expand=True) 
