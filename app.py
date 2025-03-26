@@ -441,7 +441,7 @@ def incoming_sms():
                     if CompPhone and not pd.isna(CompPhone):  # Check if phone number exists and is not NaN
                         msg += f"\nYour Companion is {Comp_First} {Comp_Last} - {CompPhone}\n"
                     else:
-                        msg += f"\nYour Companion is {Comp_First} {Comp_Last} - Phone number unavailable.\n"
+                        msg += f"\nYour Companion is {Comp_First} {Comp_Last}\n"
                         
                     print(minister_last, " - ", minister_phone, "  ", minister_email, msg)
                     send_text(text_nbr, msg, False)
