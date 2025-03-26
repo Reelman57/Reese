@@ -529,9 +529,9 @@ def incoming_sms():
                             msg += "\n"
 
                     if r == 1:
-                    Comp = {row['Minister2']}
+                        Comp = {row['Minister2']}
                     else:
-                    Comp = {row['Minister1']}
+                        Comp = {row['Minister1']}
     
                     print(Comp, " ", minister_last, " - ", minister_phone, "  ", minister_email, msg)
                     # send_text(text_nbr, msg, False)
