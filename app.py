@@ -532,8 +532,10 @@ def incoming_sms():
                             if not pd.isna(row['Phone Number']):
                                 msg += f"  - {row['Phone Number']}"
                             msg += "\n"
+
+                    print(row)
     
-                    print(Comp, " ", minister_last, " - ", minister_phone, "  ", minister_email, msg)
+                    # print(Comp, " ", minister_last, " - ", minister_phone, "  ", minister_email, msg)
                     # send_text(text_nbr, msg, False)
                     # send_email(minister_email, subj, msg)
             try:
