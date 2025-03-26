@@ -441,7 +441,7 @@ def incoming_sms():
             df_filtered = df_filtered[df_filtered['Age'] > 17]
             df_filtered[ministerr] = df_filtered[ministerr].fillna('')
 
-            if ministerr==Minister1:
+            if r==1:
                 Comp=f"Minister2"
             else:
                 Comp=f"Minister1"
