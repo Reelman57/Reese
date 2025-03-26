@@ -529,11 +529,20 @@ def incoming_sms():
                             msg += "\n"
 
                     if r == 1:
-                        Comp = {row['Minister2']}
+                        Comp = row['Minister2']
                     else:
-                        Comp = {row['Minister1']}
+                        Comp = row['Minister1']
+                    
+                    try:
+                        Comp_Last, Comp_First = Comp.split(',')  # Corrected syntax
+                    except AttributeError as e:
+                        print(f"Error splitting {Comp} for potential missing or invalid data: {e}")
+                        continue  # Skip to the next iteration
+                    except ValueError as e:
+                        print (f"Value error when splitting {Comp}: {e}")
+                        continue
     
-                    print(Comp, " ", minister_last, " - ", minister_phone, "  ", minister_email, msg)
+                    print(Comp_First," ",Comp_Last, " - ", minister_last, " - ", minister_phone, "  ", minister_email, msg)
                     # send_text(text_nbr, msg, False)
                     # send_email(minister_email, subj, msg)
             try:
