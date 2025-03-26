@@ -411,7 +411,7 @@ def incoming_sms():
                             msg += f"{row['Name']}"
                             if not pd.isna(row['Phone Number']):
                                 msg += f"  - {row['Phone Number']}"
-                            msg += "\n\n"
+                            msg += "\n"
 
                     if r == 1:
                         Comp = row['Minister2']
@@ -435,9 +435,9 @@ def incoming_sms():
                         continue
                     
                     if CompPhone: #check if phone number exists.
-                        msg += f"Your Companion is {Comp_First} {Comp_Last} - {CompPhone}\n"
+                        msg += f"\nYour Companion is {Comp_First} {Comp_Last} - {CompPhone}\n"
                     else:
-                        msg += f"Your Companion is {Comp_First} {Comp_Last} - Phone number unavailable.\n"
+                        msg += f"\nYour Companion is {Comp_First} {Comp_Last} \n"
                         
                     print(minister_last, " - ", minister_phone, "  ", minister_email, msg)
                     send_text(text_nbr, msg, False)
