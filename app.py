@@ -387,8 +387,8 @@ def incoming_sms():
     
                 try:
                     df_filtered[['Minister_Last', 'Minister_FirstMiddle']] = df_filtered[ministerr].str.split(',', expand=True)
-                    first_name = Minister_FirstMiddle.split()
-                    Minister_First=first_name[0]
+                    df_filtered['Minister_First'] = df_filtered['Minister_FirstMiddle'].str.split().str[0]
+                    df_filtered = df_filtered.drop(columns=['Minister_FirstMiddle'])
                 except AttributeError as e:
                     print(f"Error splitting {ministerr} for potential missing or invalid data: {e}")
                     continue
