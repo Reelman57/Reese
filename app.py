@@ -411,7 +411,7 @@ def incoming_sms():
                             msg += f"{row['Name']}"
                             if not pd.isna(row['Phone Number']):
                                 msg += f"  - {row['Phone Number']}"
-                            msg += "\n"
+                            msg += "\n\n"
 
                     if r == 1:
                         Comp = row['Minister2']
@@ -440,7 +440,7 @@ def incoming_sms():
                         msg += f"Your Companion is {Comp_First} {Comp_Last} - Phone number unavailable.\n"
                         
                     print(minister_last, " - ", minister_phone, "  ", minister_email, msg)
-                    # send_text(text_nbr, msg, False)
+                    send_text(text_nbr, msg, False)
                     # send_email(minister_email, subj, msg)
             try:
                 confirm_send()
