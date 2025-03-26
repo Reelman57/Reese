@@ -500,11 +500,6 @@ def incoming_sms():
                 df_filtered = df_filtered[df_filtered['Age'] > 17]
                 df_filtered[ministerr] = df_filtered[ministerr].fillna('')
     
-                if r == 1:
-                    Comp = df_filtered['Minister2']
-                else:
-                    Comp = df_filtered['Minister1']
-    
                 try:
                     df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerr].str.split(',', expand=True)
                 except AttributeError as e:
@@ -533,9 +528,12 @@ def incoming_sms():
                                 msg += f"  - {row['Phone Number']}"
                             msg += "\n"
 
-                    print(row)
+                    if r == 1:
+                    Comp = {row['Minister2']}
+                    else:
+                    Comp = {row['Minister1']}
     
-                    # print(Comp, " ", minister_last, " - ", minister_phone, "  ", minister_email, msg)
+                    print(Comp, " ", minister_last, " - ", minister_phone, "  ", minister_email, msg)
                     # send_text(text_nbr, msg, False)
                     # send_email(minister_email, subj, msg)
             try:
