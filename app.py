@@ -422,8 +422,10 @@ def incoming_sms():
                     
                     if Comp:  # Check if Comp is not None or empty
                         try:
-                            Comp_Last, Comp_First = Comp.split(',')
-                            Comp_First = Comp_First.strip()  # Clean up whitespace
+                            Comp_Last, Comp_FirstMiddle = Comp.split(',')
+                            Comp_FirstMiddle = Comp_FirstMiddle.strip()  # Clean up whitespace
+                            firstnameparts = Comp_FirstMiddle.split()
+                            Comp_First = first_name_parts[0]
                         except ValueError as e:
                             print(f"Value error when splitting {Comp}: {e}")
                             continue
