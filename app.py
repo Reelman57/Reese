@@ -424,7 +424,7 @@ def incoming_sms():
                         try:
                             Comp_Last, Comp_FirstMiddle = Comp.split(',')
                             Comp_FirstMiddle = Comp_FirstMiddle.strip()  # Clean up whitespace
-                            firstnameparts = Comp_FirstMiddle.split()
+                            first_name_parts = Comp_FirstMiddle.split()
                             Comp_First = first_name_parts[0]
                         except ValueError as e:
                             print(f"Value error when splitting {Comp}: {e}")
