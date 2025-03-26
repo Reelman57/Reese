@@ -419,17 +419,26 @@ def incoming_sms():
                     else:
                         Comp = row['Minister1']
                         CompPhone = row['Minister1_Phone']
-                    try:
-                        Comp_Last, Comp_First = Comp.split(',')  # Corrected syntax
-                    except AttributeError as e:
-                        print(f"Error splitting {Comp} for potential missing or invalid data: {e}")
-                        continue  # Skip to the next iteration
-                    except ValueError as e:
-                        print (f"Value error when splitting {Comp}: {e}")
+                    
+                    if Comp:  # Check if Comp is not None or empty
+                        try:
+                            Comp_Last, Comp_First = Comp.split(',')
+                            Comp_First = Comp_First.strip()  # Clean up whitespace
+                        except ValueError as e:
+                            print(f"Value error when splitting {Comp}: {e}")
+                            continue
+                        except AttributeError as e:
+                            print(f"Error splitting {Comp}: {e}")
+                            continue
+                    else:
+                        print("Comp value was null")
                         continue
-
-                         msg += "Your Companion is ",Comp_First.strip()," ",Comp_Last," - ",CompPhone, " \n"
-    
+                    
+                    if CompPhone: #check if phone number exists.
+                        msg += f"Your Companion is {Comp_First} {Comp_Last} - {CompPhone}\n"
+                    else:
+                        msg += f"Your Companion is {Comp_First} {Comp_Last} - Phone number unavailable.\n"
+                        
                     print(minister_last, " - ", minister_phone, "  ", minister_email, msg)
                     # send_text(text_nbr, msg, False)
                     # send_email(minister_email, subj, msg)
