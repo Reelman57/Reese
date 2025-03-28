@@ -33,7 +33,6 @@ def send_text(text_nbr, message):
             schedule_type="fixed"
         )
     sent_texts.add(text_nbr)
-    print (sent_texts)
     time.sleep(1)
 
 # Read the CSV file
@@ -100,26 +99,6 @@ for index, row in df_filtered.iterrows():
     else:
         phone = "not listed in LDS Tools"
 
-    #Ministering Brothers
-
-    msg = f"A person whom you minister to, {name}, has a birthday today. {UC_pronoun2} phone number is {phone}\n"
-    msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
-
-    for phone_number in Ministers12:
-
-        send_text(phone_number,msg)
-
-    #Ministering Sisters
-
-    if row['Gender'] == 'F':
-
-        msg = f"A person whom you minister to, {name}, has a birthday today. {UC_pronoun2} phone number is {phone}\n"
-        msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
-
-        for phone_number in Ministers34:
-
-            send_text(phone_number,msg)
-
     #Bishopric
 
     msg = f"{name} has a birthday today, {pronoun2} phone number is {phone}\n\n"
@@ -137,5 +116,25 @@ for index, row in df_filtered.iterrows():
         msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
 
         for phone_number in ReliefSociety:
+
+            send_text(phone_number,msg)
+            
+    #Ministering Brothers
+
+    msg = f"A person whom you minister to, {name}, has a birthday today. {UC_pronoun2} phone number is {phone}\n"
+    msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
+
+    for phone_number in Ministers12:
+
+        send_text(phone_number,msg)
+
+    #Ministering Sisters
+
+    if row['Gender'] == 'F':
+
+        msg = f"A person whom you minister to, {name}, has a birthday today. {UC_pronoun2} phone number is {phone}\n"
+        msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
+
+        for phone_number in Ministers34:
 
             send_text(phone_number,msg)
