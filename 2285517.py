@@ -111,7 +111,7 @@ def send_email(subject, body, data_list):
 def process_data(data_path):
     df = pd.read_csv(data_path)
     df_filtered = df[df['Age'] > 17]
-    df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email', 'Gender','B_District','Minister1','Minister1_Phone','Minister2','Minister2_Phone']]
+    df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number']]
     df_filtered = df_filtered.dropna(subset=['Phone Number'])
     df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
     df_filtered = df_filtered[df_filtered['is_valid_phone']]
@@ -222,14 +222,15 @@ def incoming_sms():
         confirm_send()
         return "Emergency Communications System messages sent.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "eld77216" and from_number in authorized_list:
+    elif first_word == "eld2285517" and from_number in authorized_list:
         filtered_data_list = filter_gender(data_list, "M")
         
         for data in filtered_data_list:
             print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
             msg = f"Brother {data['Last_Name']}, \n\n"
             msg += msg_in
-            send_text(data['Phone Number'], msg, False)
+            #send_text(data['Phone Number'], msg, False)
+            print msg
 
         confirm_send()
         return "Messages sent successfully.", 200
