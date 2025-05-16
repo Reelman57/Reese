@@ -24,7 +24,6 @@ account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 messaging_sid = os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
-# twilio_number = "+15005550006"
 
 client = Client(account_sid, auth_token)
 
@@ -118,7 +117,7 @@ def process_data(data_path):
     df_filtered = df_filtered[df_filtered['is_valid_phone']]
     df_filtered = df_filtered.drop_duplicates(subset=['Phone Number']) 
 
-    with open('DO_NOT_SEND.txt', 'r') as f:
+    with open('DO_NOT_SEND_2285517.txt', 'r') as f:
         do_not_send_numbers = set(line.strip() for line in f)
     df_filtered = df_filtered[~df_filtered['Phone Number'].isin(do_not_send_numbers)]
 
@@ -163,16 +162,12 @@ def sms_send(msg_in, data_list, now):
 def incoming_sms():
     authorized_list = [
         '+15099902828',
-        '+19722819991',
-        '+12086103066',
-        '+12086102929',
-        '+12089201618',
-        '+15093449400'
+        '+15099900248'
     ]
     message_body = request.values.get('Body', None)
     global from_number
     from_number = request.values.get('From', None)
-    data_file = "Westmond_Master.csv"
+    data_file = "2285517_Master.csv"
     data_list = process_data(data_file)
 
     if message_body is None or from_number is None:
@@ -188,10 +183,10 @@ def incoming_sms():
     global sent_texts        
     sent_texts = set()
     try:
-        with open('DO_NOT_SEND.txt', 'r') as file:
+        with open('DO_NOT_SEND_2285517.txt', 'r') as file:
             sent_texts = set(line.strip() for line in file)
     except FileNotFoundError:
-        return "Error: DO_NOT_SEND.txt file not found.", 500
+        return "Error: DO_NOT_SEND_2285517.txt file not found.", 500
 
     global x
     x = 0
@@ -219,7 +214,7 @@ def incoming_sms():
         )
         return f'{canceled_count} messages canceled.', 200
 # --------------------------------------------------------------------------
-    elif first_word == "ecs77216" and (from_number in authorized_list or from_number == '+13607428998'):
+    elif first_word == "ecs77216" and from_number in authorized_list:
         subject = "Emergency Communications System"
         send_voice(msg_in, data_list)
         sms_send(msg_in, data_list, True)
@@ -515,7 +510,7 @@ def incoming_sms():
             from_number = from_number[2:] 
             cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
         
-            df = pd.read_csv("Westmond_Master.csv")
+            df = pd.read_csv("2285517_Master.csv")
             row = df[df['Phone Number'] == cleaned_number]
         
             try:
