@@ -467,8 +467,8 @@ def incoming_sms():
 
         message = client.messages.create(
             body=instructions,
-            from_='+12083063370',
-            to='+15099902828'
+            from_=twilio_number,
+            to=from_number
             )
 # --------------------------------------------------------------------------
     elif first_word == "dnc77216" and from_number in authorized_list:
