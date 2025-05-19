@@ -535,7 +535,8 @@ def incoming_sms():
                 client.messages.create(
                     body=f"An error occurred: {e}",
                     from_=twilio_number,
-                    to='+15099902828'
+                    #to='+15099902828'
+                    to='+12083063370'
                 )
     return "Command not recognized or unauthorized.", 400
 # --------------------------------------------------------------------------
