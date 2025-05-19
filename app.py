@@ -466,9 +466,9 @@ def incoming_sms():
         instructions += "These messages have a 15 minute delay before they go out.  Should you choose to cancel them you may send the command 'cancel-sms' within that 15 minutes"
 
         message = client.messages.create(
-            body= instructions,
+            body=instructions,
             from_='+12083063370',
-            to = '+15099902828'
+            to='+15099902828'
             )
 # --------------------------------------------------------------------------
     elif first_word == "dnc77216" and from_number in authorized_list:
