@@ -467,8 +467,8 @@ def incoming_sms():
 
         message = client.messages.create(
             body= instructions,
-            from_='+12086034040',
-            to = from_number
+            from_='+12083063370',
+            to = '+12083063370'
             )
 # --------------------------------------------------------------------------
     elif first_word == "dnc77216" and from_number in authorized_list:
