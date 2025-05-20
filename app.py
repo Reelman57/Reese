@@ -535,8 +535,9 @@ def incoming_sms():
               msg = f"Brother {last_name}, \n\n"
               msg += msg_in  # Ensure msg_in is defined elsewhere
               send_text(data['Phone Number'], msg, False) 
-"""
+              
 # --------------------------------------------------------------------------
+    """
     else:
         
         if from_number.startswith('+1'):
