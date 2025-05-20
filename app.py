@@ -515,11 +515,12 @@ def incoming_sms():
         
         for index, row in df.iterrows():
             last_name = row.get('Last_Name', 'Unknown') 
-        
+            phone_number = row.get('Phone Number', '')
             msg = f"Brother {last_name}, \n\n"
             msg += msg_in
             print(msg) 
-            send_text(data['Phone Number'], msg, False)
+            if phone_number:
+                send_text(phone_number, msg, False)
 
         confirm_send()
         return "Messages sent successfully.", 200
