@@ -519,7 +519,7 @@ def incoming_sms():
             msg = f"Brother {last_name}, \n\n"
             msg += msg_in
             print(msg) 
-            if phone_number == "5099900248":
+            if data['Phone Number'] == "5099900248":
                 send_text(data['Phone Number'], msg, False)
 
         confirm_send()
