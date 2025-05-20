@@ -510,7 +510,16 @@ def incoming_sms():
             return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------
     elif first_word == "2285517" and from_number == "+15099902828":
-        print("Hello World")
+        df = pd.read_csv("PO_Ward_Members.csv)
+        for data in df:
+            msg = f"Brother {data['Last_Name']}, \n\n"
+            msg += msg_in
+            print(f"msg")
+            
+            #send_text(data['Phone Number'], msg, False)
+
+        confirm_send()
+        return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------        
     else:
         
