@@ -514,7 +514,7 @@ def incoming_sms():
         with open('DO_NOT_SEND_PO_Ward.txt', 'r') as file:
             sent_texts = set(line.strip() for line in file)
             
-        df = pd.read_csv("PO_Ward_Members_test.csv")
+        df = pd.read_csv("PO_Ward_Members.csv")
         
         for index, row in df.iterrows():
             last_name = row.get('Last_Name', 'Unknown') 
