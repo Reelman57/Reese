@@ -14,7 +14,7 @@ import pandas as pd
 import numpy as np
 import pytz
 import phonenumbers
-from flask import Flask, request, make_response
+from flask import Flask, request
 from twilio.rest import Client
 
 app = Flask(__name__)
@@ -25,7 +25,6 @@ account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 messaging_sid = os.environ['TWILIO_MSGNG_SID']
 twilio_number = "+12086034040"
-# twilio_number = "+15005550006"
 
 client = Client(account_sid, auth_token)
 
