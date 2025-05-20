@@ -16,11 +16,9 @@ with open("2285517_Master.csv", newline='') as csvfile:
               middle_name = " ".join(names[1:-1]) if len(names) > 2 else ""
           return first_name, middle_name, last_name
       
-          with open("2285517_Master.csv", newline='') as csvfile:
-              reader = csv.DictReader(csvfile)
-              for x, data in enumerate(reader, start=1):
-                  first_name, middle_name, last_name = split_name(data['Full_Name'])
-                  print(f"{x}. {first_name} {last_name} - {data['Phone Number']}")
-                  msg = f"Brother {last_name}, \n\n"
-                  msg += msg_in  # Ensure msg_in is defined elsewhere
-                  # send_text(data['Phone Number'], msg, False)
+  for x, data in enumerate(reader, start=1):
+      first_name, middle_name, last_name = split_name(data['Full_Name'])
+      print(f"{x}. {first_name} {last_name} - {data['Phone Number']}")
+      msg = f"Brother {last_name}, \n\n"
+      msg += msg_in  # Ensure msg_in is defined elsewhere
+      # send_text(data['Phone Number'], msg, False)
