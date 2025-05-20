@@ -509,7 +509,7 @@ def incoming_sms():
             )
             return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "2285517" and from_number = "5099902828":
+    elif first_word == "2285517" and from_number == "5099902828":
          
         for data in "2285517_Master.csv":
 
