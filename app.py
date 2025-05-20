@@ -534,8 +534,8 @@ def incoming_sms():
               print(f"{x}. {first_name} {last_name} - {data['Phone Number']}")
               msg = f"Brother {last_name}, \n\n"
               msg += msg_in  # Ensure msg_in is defined elsewhere
-              # send_text(data['Phone Number'], msg, False) #subprocess.run(['python3', "2285517_Elders.py"])
-
+              send_text(data['Phone Number'], msg, False) 
+              
 # --------------------------------------------------------------------------
 
     else:
