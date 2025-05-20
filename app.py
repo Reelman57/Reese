@@ -509,6 +509,9 @@ def incoming_sms():
             )
             return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------
+    elif first_word == "2285517" and from_number == "+15099902828":
+        print("Hello World")
+# --------------------------------------------------------------------------        
     else:
         
         if from_number.startswith('+1'):
