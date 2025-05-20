@@ -538,7 +538,6 @@ def incoming_sms():
               send_text(data['Phone Number'], msg, False) 
 """
 # --------------------------------------------------------------------------
-
     else:
         
         if from_number.startswith('+1'):
