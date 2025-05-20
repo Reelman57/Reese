@@ -511,11 +511,11 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     elif first_word == "2285517" and from_number == "+15099902828":
         for index, row in df.iterrows():
-        last_name = row.get('Last_Name', 'Unknown') 
-    
-        msg = f"Brother {last_name}, \n\n"
-        msg += msg_in
-        print(msg) 
+            last_name = row.get('Last_Name', 'Unknown') 
+        
+            msg = f"Brother {last_name}, \n\n"
+            msg += msg_in
+            print(msg) 
             
         #send_text(data['Phone Number'], msg, False)
 
