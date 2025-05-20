@@ -509,8 +509,11 @@ def incoming_sms():
             )
             return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "2285517" and from_number == "+15099902828":
-        
+    elif first_word == "2285517" and from_number in ["+15099900248","+15099902828"]:
+
+        with open('DO_NOT_SEND_PO_Ward.txt', 'r') as file:
+            sent_texts = set(line.strip() for line in file)
+            
         df = pd.read_csv("PO_Ward_Members_test.csv")
         
         for index, row in df.iterrows():
