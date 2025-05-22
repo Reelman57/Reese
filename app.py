@@ -196,6 +196,34 @@ def incoming_sms():
     global x
     x = 0
 # --------------------------------------------------------------------------
+    def sms_reply():
+    """Respond to incoming calls with a simple text message."""
+    from_number = request.form.get('From')
+    body = request.form.get('Body')
+
+    DO_NOT_SEND_FILE = "Update DO_NOT_SEND_PO_Ward.txt"
+
+    resp = MessagingResponse()
+
+    if body and body.lower().strip().startswith("stop"):
+        with open(DO_NOT_SEND_FILE, "a") as f:
+            f.write(f"{from_number}\n")
+        resp.message("You have been unsubscribed. You will no longer receive messages.")
+        print(f"Added {from_number} to {DO_NOT_SEND_FILE}")
+    else:
+        # You can customize this message for other incoming texts
+        resp.message("Thank you for your message. If you wish to stop receiving messages, reply with 'Stop'.")
+
+    return str(resp)
+
+if __name__ == "__main__":
+    # Create the file if it doesn't exist
+    if not os.path.exists(DO_NOT_SEND_FILE):
+        with open(DO_NOT_SEND_FILE, "w") as f:
+            f.write("") # Create an empty file
+
+    app.run(debug=True)
+# --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
         sms_send(msg_in, data_list, False)
         confirm_send()
