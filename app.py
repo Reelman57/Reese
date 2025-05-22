@@ -196,7 +196,7 @@ def incoming_sms():
     global x
     x = 0
 # --------------------------------------------------------------------------
-    def sms_reply():
+def sms_reply():
     """Respond to incoming calls with a simple text message."""
     from_number = request.form.get('From')
     body = request.form.get('Body')
