@@ -196,30 +196,6 @@ def incoming_sms():
     global x
     x = 0
 # --------------------------------------------------------------------------
-def sms_reply():
-    from_number = request.form.get('From')
-    body = request.form.get('Body')
-    
-    DO_NOT_SEND_NUMBERS = set()
-    DO_NOT_SEND_FILE = "DO_NOT_SEND_PO_Ward.txt"
-
-    resp = MessagingResponse()
-
-    from_number = request.form.get('From')
-    body = request.form.get('Body')
-
-    resp = MessagingResponse()
-
-    if body and body.lower().strip().startswith("stop"):
-        # Add the number to our in-memory set
-        DO_NOT_SEND_NUMBERS.add(from_number)
-        resp.message("You have been unsubscribed. You will no longer receive messages.")
-        print(f"Added {from_number} to DO_NOT_SEND_NUMBERS (in-memory)")
-    else:
-        resp.message("Thank you for your message. If you wish to stop receiving messages, reply with 'Stop'.")
-
-    return str(resp)
-# --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
         sms_send(msg_in, data_list, False)
         confirm_send()
