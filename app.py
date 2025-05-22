@@ -215,6 +215,12 @@ def sms_reply():
         resp.message("Thank you for your message. If you wish to stop receiving messages, reply with 'Stop'.")
 
     return str(resp)
+
+    if not os.path.exists(DO_NOT_SEND_FILE):
+        with open(DO_NOT_SEND_FILE, "w") as f:
+            f.write("") # Create an empty file
+
+    app.run(debug=True)
 # --------------------------------------------------------------------------
     if first_word == "sms77216" and from_number in authorized_list:
         sms_send(msg_in, data_list, False)
