@@ -201,7 +201,7 @@ def sms_reply():
     from_number = request.form.get('From')
     body = request.form.get('Body')
 
-    DO_NOT_SEND_FILE = "Update DO_NOT_SEND_PO_Ward.txt"
+    DO_NOT_SEND_FILE = "DO_NOT_SEND_PO_Ward.txt"
 
     resp = MessagingResponse()
 
