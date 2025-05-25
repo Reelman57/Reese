@@ -375,38 +375,38 @@ def incoming_sms():
             '+12086102929': 'SD1',
             '+12089201618': 'SD2',
             '+15093449400': 'SD3'
-        }        
+        }
         district = district.get(from_number)
+
         try:
+            df = pd.read_csv(data_file)
+        except FileNotFoundError:
+            return "Error: File not found.", 500
+        except Exception as e:
+            return f"Error reading data file: {e}", 500
+        
+        if district and district[0] == 'S':
+            df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
+            r = range(3, 5)  
+        else:
+            df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
+            r = range(1, 3)
+        
+        for xr in r: 
+            
+            ministerxr = f"Minister{xr}"
+            ministerxr_phone = f"Minister{xr}_Phone"
+            ministerxr_email = f"Minister{xr}_Email"
+        
+            df_filtered = df_filtered[df_filtered[ministerxr].notnull()]
+            df_filtered = df_filtered[df_filtered['Age'] > 17]
+            df_filtered[ministerxr] = df_filtered[ministerxr].fillna('')
+        
             try:
-                df = pd.read_csv(data_file)
-            except FileNotFoundError:
-                return "Error: File not found.", 500
-            except Exception as e:
-                return f"Error reading data file: {e}", 500
-            if district and district[0] == 'S':
-                df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
-                r = range(3, 5)  
-            else:
-                df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
-                r = range(1, 3)
-                
-            for r in range(1, 3):
-                ministerr = f"Minister{r}"
-                ministerr_phone = f"Minister{r}_Phone"
-                ministerr_email = f"Minister{r}_Email"
-    
-                df_filtered = df[df[ministerr].notnull()]
-                df_filtered = df_filtered[df_filtered['Age'] > 17]
-                df_filtered[ministerr] = df_filtered[ministerr].fillna('')
-    
-                try:
-                    df_filtered[['Minister_Last', 'Minister_FirstMiddle']] = df_filtered[ministerr].str.split(',', expand=True)
-                    df_filtered['Minister_First'] = df_filtered['Minister_FirstMiddle'].str.split().str[0]
-                    df_filtered = df_filtered.drop(columns=['Minister_FirstMiddle'])
-                except AttributeError as e:
-                    print(f"Error splitting {ministerr} for potential missing or invalid data: {e}")
-                    continue
+                df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerxr].str.split(',', expand=True) 
+            except AttributeError as e:
+                print(f"Error splitting {ministerxr} for potential missing or invalid data: {e}")
+                continue  # Skip to the next iteration of the outer for loop
     
                 grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerr_phone, ministerr_email])
     
