@@ -296,7 +296,7 @@ def incoming_sms():
         confirm_send() 
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "district77216" and from_number in authorized_list:
+    elif first_word == "temp77216" and from_number in authorized_list:
         district = {
             '+15099902828': 'D1',
             '+19722819991': 'D2',
@@ -370,7 +370,7 @@ def incoming_sms():
 
 # --------------------------------------------------------------------------
   
-    elif first_word == "test77216" and from_number in authorized_list: # Assuming this is correct indentation
+    elif first_word == "district77216" and from_number in authorized_list: # Assuming this is correct indentation
         district_map = { # Renamed to avoid conflict if 'district' is used elsewhere, and more descriptive
             '+15099902828': 'D1',
             '+19722819991': 'D2',
@@ -391,24 +391,14 @@ def incoming_sms():
         except Exception as e:
             return f"Error reading data file: {e}", 500
     
-        # Main try-except for the entire processing logic
         try:
             if district_code and district_code[0] == 'S': # Use district_code
                 df_filtered = df[(df['S_District'] == district_code) & (df['Age'] > 17)].copy() # .copy() to avoid SettingWithCopyWarning
-                # r = range(3, 5) # This range specifies Minister3 and Minister4 columns
-                # Assuming you want to map S_District to Minister3/4, and B_District to Minister1/2
-                # The original logic of r = range(3,5) seems to map to Sister Ministers (Minister3, Minister4)
-                # The original logic of r = range(1,3) seems to map to Brother Ministers (Minister1, Minister2)
-                # Based on your Bro_Sis logic, xr=1,2 are Brothers; xr=3,4 are Sisters.
-                # If district_code starts with 'S', it implies 'Sister Districts', so Minister3/4
-                # If district_code does NOT start with 'S', it implies 'Brother Districts', so Minister1/2
-                # This makes the ranges consistent with Bro_Sis assignment.
                 current_r_range = range(3, 5) # For Minister3 and Minister4
             else:
                 df_filtered = df[(df['B_District'] == district_code) & (df['Age'] > 17)].copy() # .copy()
                 current_r_range = range(1, 3) # For Minister1 and Minister2
     
-            # Ensure df_filtered is not empty after initial filtering
             if df_filtered.empty:
                 return f"No records found for district {district_code} with age > 17.", 200 # Or 404
     
@@ -418,38 +408,20 @@ def incoming_sms():
                 minister_phone_col = f"Minister{xr}_Phone"
                 minister_email_col = f"Minister{xr}_Email"
     
-                # Filter for non-null minister names
-                # df_filtered is being re-assigned here each time. This means for xr=4, it only works on data where Minister3 was not null.
-                # You might need to filter outside this loop if you want to apply this filtering across all original df_filtered
-                # Or make a copy for each xr iteration if you want distinct data per xr
-                # For simplicity, I'll assume you want to refine df_filtered for each xr.
                 current_minister_df = df_filtered[df_filtered[minister_col].notnull()].copy() # .copy()
-    
-                # No need to filter age > 17 again, it's done above.
-                # df_filtered = df_filtered[df_filtered['Age'] > 17] # REDUNDANT
-    
                 current_minister_df[minister_col] = current_minister_df[minister_col].fillna('')
     
-                # --- Extract Minister's First/Last Name ---
                 try:
-                    # Splitting logic for Minister_Last, Minister_First
                     current_minister_df[['Minister_Last', 'Minister_First']] = current_minister_df[minister_col].str.split(',', expand=True)
-    
-                    # Strip whitespace from names after split
                     current_minister_df['Minister_Last'] = current_minister_df['Minister_Last'].str.strip()
                     current_minister_df['Minister_First'] = current_minister_df['Minister_First'].str.strip()
     
                 except AttributeError as e:
                     print(f"Error splitting '{minister_col}' for potential missing or invalid data: {e}")
-                    # If splitting fails for a column, it means no valid minister names in that column for this xr iteration.
-                    # Continue to next xr range if this is the case.
                     continue # Skip to the next iteration of the outer 'for xr in current_r_range:' loop
     
-                # --- Group by Minister ---
-                # Corrected variable names here: minister_phone_col, minister_email_col
                 grouped_df = current_minister_df.groupby(["Minister_Last", "Minister_First", minister_phone_col, minister_email_col])
     
-                # --- Process each Minister Group ---
                 for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
     
                     text_nbr = str(minister_phone) if pd.notna(minister_phone) else "" # Ensure phone is string, handle NaN
@@ -473,23 +445,6 @@ def incoming_sms():
                     else:
                         msg += "No ministering families assigned to you.\n" # Message if group is empty
     
-                    # --- Handle Companion Information ---
-                    # CRITICAL LOGIC POINT: 'row' is from the *last* iteration of the inner loop.
-                    # This needs to be pulled from df_filtered or a different source based on the current minister.
-                    # I'm making an assumption that Companion data is on the same row as the Minister,
-                    # based on the minister_col, minister_phone_col, etc., for the *current minister*.
-                    # This is likely incorrect for a grouped dataframe.
-                    # You probably need to access companion data from the original df or df_filtered
-                    # based on the minister_last/minister_first that defined the group.
-    
-                    # A better approach: Get companion details for the current minister *before* the inner loop,
-                    # or ensure your grouping includes relevant companion columns if they are unique per minister.
-                    # For now, I'll demonstrate one way to get companion details for the *current minister*
-                    # from the original df_filtered (before grouping), assuming Minister1/2/3/4 have corresponding companions.
-                    # This is a placeholder and may need adjustment based on your data model.
-    
-                    # Find the row in df_filtered that corresponds to the current minister
-                    # This assumes minister_col, minister_phone_col, minister_email_col are unique per minister in df_filtered
                     current_minister_row = current_minister_df[
                         (current_minister_df['Minister_Last'] == minister_last) &
                         (current_minister_df['Minister_First'] == minister_first)
@@ -524,21 +479,13 @@ def incoming_sms():
                     else:
                         print("Comp value was null or NaN for current minister.")
     
-    
                     if Comp and pd.notna(CompPhone): # Check if Comp exists and phone is not NaN
                         msg += f"\nYour Companion is {Comp_First} {Comp_Last} - {CompPhone}\n"
                     elif Comp: # Companion exists but phone is NaN/missing
                         msg += f"\nYour Companion is {Comp_First} {Comp_Last}\n"
-                    # Else, if Comp is None, no companion line is added
-    
+                    
                     print(minister_last, " - ", minister_phone, "  ", minister_email, msg)
-                    # Ensure send_text is defined and correctly configured
                     send_text(text_nbr, msg, False) # Pass text_nbr, not minister_phone directly if text_nbr is preprocessed
-                    # send_email(minister_email, subj, msg) # Uncomment if sending emails
-    
-            # This confirm_send and return statement must be outside the for xr loop
-            # and also outside the for minister_last, group in grouped_df loop
-            # if it's meant to confirm all sends for this first_word branch.
             try:
                 confirm_send()
                 return "Ministering district messages sent.", 200
@@ -548,9 +495,6 @@ def incoming_sms():
     
         except Exception as e:
             print(f"Main processing error for minall77216 branch: {e}")
-            # Log the full traceback for better debugging in production:
-            # import traceback
-            # print(traceback.format_exc())
             return "General Error during minall77216 processing.", 500
 # --------------------------------------------------------------------------    
     elif (first_word == "?" or first_word == "instructions") and from_number in authorized_list:
