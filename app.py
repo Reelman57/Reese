@@ -234,7 +234,7 @@ def incoming_sms():
             print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
             msg = f"Brother {data['Last_Name']}, \n\n"
             msg += msg_in
-            send_text(data['Phone Number'], msg, False)
+            send_text(data['Phone Number'], msg, True)
 
         confirm_send()
         return "Messages sent successfully.", 200
