@@ -219,7 +219,7 @@ def incoming_sms():
         )
         return f'{canceled_count} messages canceled.', 200
 # --------------------------------------------------------------------------
-    elif first_word == "Emergency 77216" and (from_number in authorized_list or from_number == '+13607428998'):
+    elif first_word == "Emergency77216" and (from_number in authorized_list or from_number == '+13607428998'):
         subject = "Emergency Communications System"
         send_voice(msg_in, data_list)
         sms_send(msg_in, data_list, True)
@@ -227,7 +227,7 @@ def incoming_sms():
         confirm_send()
         return "Emergency Communications System messages sent.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "Elders 77216" and from_number in authorized_list:
+    elif first_word == "Elders77216" and from_number in authorized_list:
         filtered_data_list = filter_gender(data_list, "M")
         
         for data in filtered_data_list:
@@ -239,7 +239,7 @@ def incoming_sms():
         confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "Sisters 77216" and from_number in authorized_list:
+    elif first_word == "Sisters77216" and from_number in authorized_list:
         filtered_data_list = filter_gender(data_list, "F")
         
         for data in filtered_data_list:
@@ -296,7 +296,7 @@ def incoming_sms():
         confirm_send() 
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "District 77216" and from_number in authorized_list:
+    elif first_word == "District77216" and from_number in authorized_list:
         district = {
             '+15099902828': 'D1',
             '+19722819991': 'D2',
@@ -509,7 +509,7 @@ def incoming_sms():
             )
             return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "2285517" and from_number in ["+15099900248","+15099902828"]:
+    elif first_word == "Elders2285517" and from_number in ["+15099900248","+15099902828"]:
 
         with open('DO_NOT_SEND_PO_Ward.txt', 'r') as file:
             sent_texts = set(line.strip() for line in file)
