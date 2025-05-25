@@ -368,6 +368,15 @@ def incoming_sms():
         return "Ministering district messages sent.", 200
 # --------------------------------------------------------------------------
     elif first_word == "minall77216" and from_number in authorized_list:
+        district = {
+            '+15099902828': 'D1',
+            '+19722819991': 'D2',
+            '+12086103066': 'D3',
+            '+12086102929': 'SD1',
+            '+12089201618': 'SD2',
+            '+15093449400': 'SD3'
+        }        
+        district = district.get(from_number)
         try:
             try:
                 df = pd.read_csv(data_file)
