@@ -196,7 +196,7 @@ def incoming_sms():
     global x
     x = 0
 # --------------------------------------------------------------------------
-    if first_word == "sms77216" and from_number in authorized_list:
+    if first_word == "Ward77216" and from_number in authorized_list:
         sms_send(msg_in, data_list, False)
         confirm_send()
         return "SMS messages scheduled.", 200
