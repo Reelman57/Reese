@@ -384,7 +384,13 @@ def incoming_sms():
                 return "Error: File not found.", 500
             except Exception as e:
                 return f"Error reading data file: {e}", 500
-    
+            if district and district[0] == 'S':
+                df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
+                r = range(3, 5)  
+            else:
+                df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
+                r = range(1, 3)
+                
             for r in range(1, 3):
                 ministerr = f"Minister{r}"
                 ministerr_phone = f"Minister{r}_Phone"
