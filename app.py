@@ -195,8 +195,9 @@ def incoming_sms():
 
     global x
     x = 0
+    time.sleep(2)
 # --------------------------------------------------------------------------
-    if first_word == "Ward77216" and from_number in authorized_list:
+    if first_word == "ward77216" and from_number in authorized_list:
         sms_send(msg_in, data_list, False)
         confirm_send()
         return "SMS messages scheduled.", 200
@@ -251,7 +252,7 @@ def incoming_sms():
         confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "fam77216" and from_number in authorized_list:
+    elif first_word == "families77216" and from_number in authorized_list:
         filtered_data_list = filter_minister(data_list)
 
         for x, data in enumerate(filtered_data_list, start=1): 
@@ -296,80 +297,6 @@ def incoming_sms():
         confirm_send() 
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "temp77216" and from_number in authorized_list:
-        district = {
-            '+15099902828': 'D1',
-            '+19722819991': 'D2',
-            '+12086103066': 'D3',
-            '+12086102929': 'SD1',
-            '+12089201618': 'SD2',
-            '+15093449400': 'SD3'
-        }
-        district = district.get(from_number)
-
-        try:
-            df = pd.read_csv(data_file)
-        except FileNotFoundError:
-            return "Error: File not found.", 500
-        except Exception as e:
-            return f"Error reading data file: {e}", 500
-        
-        if district and district[0] == 'S':
-            df_filtered = df[(df['S_District'] == district) & (df['Age'] > 17)]
-            r = range(3, 5)  
-        else:
-            df_filtered = df[(df['B_District'] == district) & (df['Age'] > 17)]
-            r = range(1, 3)
-        
-        for xr in r: 
-            
-            ministerxr = f"Minister{xr}"
-            ministerxr_phone = f"Minister{xr}_Phone"
-            ministerxr_email = f"Minister{xr}_Email"
-        
-            df_filtered = df_filtered[df_filtered[ministerxr].notnull()]
-            df_filtered = df_filtered[df_filtered['Age'] > 17]
-            df_filtered[ministerxr] = df_filtered[ministerxr].fillna('')
-        
-            try:
-                df_filtered[['Minister_Last', 'Minister_First']] = df_filtered[ministerxr].str.split(',', expand=True) 
-            except AttributeError as e:
-                print(f"Error splitting {ministerxr} for potential missing or invalid data: {e}")
-                continue  # Skip to the next iteration of the outer for loop
-        
-            grouped_df = df_filtered.groupby(["Minister_Last", "Minister_First", ministerxr_phone, ministerxr_email])
-        
-            for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
-          
-                text_nbr = minister_phone
-                subj="Your Ministering Families"
-        
-                if xr < 3:
-                    Bro_Sis = "Brother"
-                else:
-                    Bro_Sis = "Sister"
-                    
-                msg = f"{Bro_Sis} {minister_last}, \n"
-                msg += f"{msg_in} \n\n"
-                msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
-        
-                if not group.empty:
-                    for index, row in group.iterrows():
-                        msg += f"{row['Name']}"
-                        if not pd.isna(row['Phone Number']):
-                            msg += f"  - {row['Phone Number']}"
-                        msg += "\n"
-        
-                    print(minister_phone,"  " ,minister_email,msg)
-                    send_text(text_nbr, msg, False)
-                    #send_email(minister_email,subj,msg)
-
-        confirm_send()
-        return "Ministering district messages sent.", 200
-# --------------------------------------------------------------------------
-
-# --------------------------------------------------------------------------
-  
     elif first_word == "district77216" and from_number in authorized_list: # Assuming this is correct indentation
         district_map = { # Renamed to avoid conflict if 'district' is used elsewhere, and more descriptive
             '+15099902828': 'D1',
@@ -549,7 +476,7 @@ def incoming_sms():
             )
             return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "Elders2285517" and from_number in ["+15099900248","+15099902828"]:
+    elif first_word == "elders2285517" and from_number in ["+15099900248","+15099902828"]:
 
         with open('DO_NOT_SEND_PO_Ward.txt', 'r') as file:
             sent_texts = set(line.strip() for line in file)
