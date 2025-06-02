@@ -480,27 +480,9 @@ def incoming_sms():
 
         data_file = "PO_Ward_Members.csv"
         data_list = process_data(data_file)
-        #with open('DO_NOT_SEND_PO_Ward.txt', 'r') as file:
-        #    sent_texts = set(line.strip() for line in file)
             
         filtered_data_list = filter_gender(data_list, "M")
         
-        for data in filtered_data_list:
-            print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
-            msg = f"Brother {data['Last_Name']}, \n\n"
-            msg += msg_in
-            send_text(data['Phone Number'], msg, False)
-
-        confirm_send()
-        return "Messages sent successfully.", 200
-# --------------------------------------------------------------------------
-    elif first_word == "members2285517" and from_number in ["+15099900248","+15099902828"]:
-
-        data_file = "PO_Ward_Members.csv"
-        data_list = process_data(data_file)
-        #with open('DO_NOT_SEND_PO_Ward.txt', 'r') as file:
-        #    sent_texts = set(line.strip() for line in file)
-            
         for data in filtered_data_list:
             print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
             msg = f"Brother {data['Last_Name']}, \n\n"
@@ -509,6 +491,15 @@ def incoming_sms():
 
         confirm_send()
         return "Messages sent successfully.", 200
+# --------------------------------------------------------------------------
+    elif first_word == "members2285517" and from_number in ["+15099900248","+15099902828"]:
+
+        data_file = "PO_Ward_Members.csv"
+        data_list = process_data(data_file)
+
+        sms_send(msg_in, data_list, False)
+        confirm_send()
+        return "SMS messages scheduled.", 200
 # --------------------------------------------------------------------------        
     else:
         
