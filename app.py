@@ -487,12 +487,12 @@ def incoming_sms():
             print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
             msg = f"Brother {data['Last_Name']}, \n\n"
             msg += msg_in
-            #send_text(data['Phone Number'], msg, False)
+            send_text(data['Phone Number'], msg, False)
 
         confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "members2285517" and from_number in ["+15099900248","+15099902828"]:
+    elif first_word == "ward2285517" and from_number in ["+15099900248","+15099902828"]:
 
         data_file = "PO_Ward_Members.csv"
         data_list = process_data(data_file)
