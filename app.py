@@ -480,8 +480,8 @@ def incoming_sms():
 
         data_file = "PO_Ward_Members.csv"
         data_list = process_data(data_file)
-        with open('DO_NOT_SEND_PO_Ward.txt', 'r') as file:
-            sent_texts = set(line.strip() for line in file)
+        #with open('DO_NOT_SEND_PO_Ward.txt', 'r') as file:
+        #    sent_texts = set(line.strip() for line in file)
             
         filtered_data_list = filter_gender(data_list, "M")
         
@@ -498,8 +498,8 @@ def incoming_sms():
 
         data_file = "PO_Ward_Members.csv"
         data_list = process_data(data_file)
-        with open('DO_NOT_SEND_PO_Ward.txt', 'r') as file:
-            sent_texts = set(line.strip() for line in file)
+        #with open('DO_NOT_SEND_PO_Ward.txt', 'r') as file:
+        #    sent_texts = set(line.strip() for line in file)
             
         for data in filtered_data_list:
             print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
