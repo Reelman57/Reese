@@ -478,19 +478,34 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     elif first_word == "elders2285517" and from_number in ["+15099900248","+15099902828"]:
 
+        data_file = "PO_Ward_Members.csv"
+        data_list = process_data(data_file)
         with open('DO_NOT_SEND_PO_Ward.txt', 'r') as file:
             sent_texts = set(line.strip() for line in file)
             
-        df = pd.read_csv("PO_Ward_Members.csv")
+        filtered_data_list = filter_gender(data_list, "M")
         
-        for index, row in df.iterrows():
-            last_name = row.get('Last_Name', 'Unknown') 
-            phone_number = row.get('Phone Number', '')
-            msg = f"Brother {last_name}, \n\n"
+        for data in filtered_data_list:
+            print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
+            msg = f"Brother {data['Last_Name']}, \n\n"
             msg += msg_in
-            print(msg) 
-            if phone_number:
-                send_text(phone_number, msg, False)
+            send_text(data['Phone Number'], msg, False)
+
+        confirm_send()
+        return "Messages sent successfully.", 200
+# --------------------------------------------------------------------------
+    elif first_word == "members2285517" and from_number in ["+15099900248","+15099902828"]:
+
+        data_file = "PO_Ward_Members.csv"
+        data_list = process_data(data_file)
+        with open('DO_NOT_SEND_PO_Ward.txt', 'r') as file:
+            sent_texts = set(line.strip() for line in file)
+            
+        for data in filtered_data_list:
+            print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
+            msg = f"Brother {data['Last_Name']}, \n\n"
+            msg += msg_in
+            #send_text(data['Phone Number'], msg, False)
 
         confirm_send()
         return "Messages sent successfully.", 200
