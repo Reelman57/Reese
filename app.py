@@ -166,7 +166,7 @@ def get_unit_nbr(search_value, filename="User_UnitNbr.csv"):
         with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
             csv_reader = csv.reader(csvfile)
             for row in csv_reader:
-                # Ensure the row has at least two columns
+                
                 if len(row) >= 2:
                     first_column_value = row[0].strip() # Clean whitespace
                     unit_nbr = row[1].strip() # Clean whitespace
@@ -198,7 +198,22 @@ def incoming_sms():
     message_body = request.values.get('Body', None)
     global from_number
     from_number = request.values.get('From', None)
-    get_unit_nbr(from_number)
+    # ------------------------------------------------------------------
+    with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
+            csv_reader = csv.reader(csvfile)
+            for row in csv_reader:
+                
+                if len(row) >= 2:
+                    first_column_value = row[0].strip() # Clean whitespace
+                    unit_nbr = row[1].strip() # Clean whitespace
+                    
+                    if first_column_value == search_value:
+                        print(f"Unit Number is {unit_nbr}")
+                        time.sleep(1)
+                        return unit_nbr
+                        
+    # ------------------------------------------------------------------                 
+    #get_unit_nbr(from_number)
     
     data_file = "Westmond_Master.csv"
     data_list = process_data(data_file)
