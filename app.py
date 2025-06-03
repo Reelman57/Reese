@@ -219,7 +219,7 @@ def incoming_sms():
 
     global x
     x = 0
-    get_unit_number(from_number)
+    get_unit_nbr(from_number)
     
     time.sleep(2)
 # --------------------------------------------------------------------------
