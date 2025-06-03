@@ -199,7 +199,7 @@ def incoming_sms():
     global from_number
     from_number = request.values.get('From', None)
     # ------------------------------------------------------------------
-    with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
+    with open("User_UnitNbr.csv", mode='r', newline='', encoding='utf-8') as csvfile:
             csv_reader = csv.reader(csvfile)
             for row in csv_reader:
                 
