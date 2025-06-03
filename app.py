@@ -193,8 +193,6 @@ def incoming_sms():
         '+12089201618',
         '+15093449400'
     ]
-    get_unit_number_from_twilio_number(from_number)
-    
     message_body = request.values.get('Body', None)
     global from_number
     from_number = request.values.get('From', None)
@@ -221,6 +219,8 @@ def incoming_sms():
 
     global x
     x = 0
+    get_unit_number_from_twilio_number(from_number)
+    
     time.sleep(2)
 # --------------------------------------------------------------------------
     if first_word == "ward77216" and from_number in authorized_list:
