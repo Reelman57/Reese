@@ -530,6 +530,7 @@ def incoming_sms():
             if row_data.get('Phone Number') == cleaned_number:
                 found_row = row_data
                 break # Exit loop once a match is found
+                print(found_row)
         try:
             if found_row:
                 full_name = f"{found_row['First_Name']} {found_row['Last_Name']}"
