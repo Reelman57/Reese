@@ -160,30 +160,6 @@ def sms_send(msg_in, data_list, now):
     
     return success_count
 # --------------------------------------------------------------------------
-def get_unit_nbr(search_value, filename="User_UnitNbr.csv"):
-    global unit_nbr
-    try:
-        with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
-            csv_reader = csv.reader(csvfile)
-            for row in csv_reader:
-                
-                if len(row) >= 2:
-                    first_column_value = row[0].strip() # Clean whitespace
-                    unit_nbr = row[1].strip() # Clean whitespace
-                    
-                    if first_column_value == search_value:
-                        return unit_nbr
-                        print(f"Unit Number is {unit_nbr}")
-                        
-        print(f"'{search_value}' not found in the first column of '{filename}'.")
-        return None
-    except FileNotFoundError:
-        print(f"Error: The file '{filename}' was not found.")
-        return None
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
-        return None
-# -------------------------------------------------------------------------- 
 @app.route("/sms", methods=['POST'])
 
 def incoming_sms():
@@ -210,12 +186,8 @@ def incoming_sms():
                     if first_column_value == from_number:
                         print(f"Unit Number is {unit_nbr}")
                         time.sleep(1)
-                        return unit_nbr
-                        
     # ------------------------------------------------------------------                 
-    #get_unit_nbr(from_number)
-    
-    data_file = "Westmond_Master.csv"
+    data_file = unit_nbr + "_datafile.csv"
     data_list = process_data(data_file)
 
     if message_body is None or from_number is None:
@@ -484,7 +456,6 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     elif first_word == "dnc77216" and from_number in authorized_list:
         do_not_send_file = "DO_NOT_SEND.txt"
-        data_file = "Westmond_Master.csv"
     
         try:
             with open(do_not_send_file, 'r') as f:
@@ -551,7 +522,7 @@ def incoming_sms():
             from_number = from_number[2:] 
             cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
         
-            df = pd.read_csv("Westmond_Master.csv")
+            df = pd.read_csv(datafile)
             row = df[df['Phone Number'] == cleaned_number]
         
             try:
