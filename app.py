@@ -158,6 +158,30 @@ def sms_send(msg_in, data_list, now):
                 app.logger.error(f"Error processing future: {e}")
     
     return success_count
+# --------------------------------------------------------------------------
+def get_unit_number_from_twilio_number(from_number, user_unit_file="User_UnitNbr.csv"):
+
+    try:
+        with open(user_unit_file, 'r') as f:
+            for line in f:
+                # Assuming the file is comma-separated. Adjust if your delimiter is different.
+                parts = line.strip().split(',')
+                if len(parts) >= 2:
+                    file_number = parts[0].strip()
+                    unit_number = parts[1].strip()
+
+                    # Compare the Twilio 'from_number' with the number in the file
+                    if from_number == file_number:
+                        return unit_number
+                        print(f"Unit number for {from_number} is {unit_number}")
+                        
+    except FileNotFoundError:
+        print(f"Error: The file '{user_unit_file}' was not found.")
+        return None
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+    return None  # Return None if the from_number is not found in the file
 # -------------------------------------------------------------------------- 
 @app.route("/sms", methods=['POST'])        
 def incoming_sms():
@@ -169,6 +193,8 @@ def incoming_sms():
         '+12089201618',
         '+15093449400'
     ]
+    get_unit_number_from_twilio_number()
+    
     message_body = request.values.get('Body', None)
     global from_number
     from_number = request.values.get('From', None)
