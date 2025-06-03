@@ -207,7 +207,7 @@ def incoming_sms():
                     first_column_value = row[0].strip() # Clean whitespace
                     unit_nbr = row[1].strip() # Clean whitespace
                     
-                    if first_column_value == search_value:
+                    if first_column_value == from_number:
                         print(f"Unit Number is {unit_nbr}")
                         time.sleep(1)
                         return unit_nbr
