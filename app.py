@@ -161,7 +161,7 @@ def sms_send(msg_in, data_list, now):
     return success_count
 # --------------------------------------------------------------------------
 def get_unit_nbr(search_value, filename="User_UnitNbr.csv"):
-    
+    global unit_nbr
     try:
         with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
             csv_reader = csv.reader(csvfile)
@@ -173,7 +173,6 @@ def get_unit_nbr(search_value, filename="User_UnitNbr.csv"):
                     
                     if first_column_value == search_value:
                         return unit_nbr
-                        global unit_nbr
                         print(f"Unit Number is {unit_nbr}")
                         
         print(f"'{search_value}' not found in the first column of '{filename}'.")
