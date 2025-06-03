@@ -526,6 +526,7 @@ def incoming_sms():
             cleaned_number = from_number
     
         found_row = None
+        print(unit_nbr)
         for row_data in data_list:
             print(row_data)
             if row_data.get('Phone Number') == cleaned_number:
