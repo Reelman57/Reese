@@ -193,6 +193,7 @@ def incoming_sms():
     # ------------------------------------------------------------------                 
     data_file = unit_nbr + "_datafile.csv"
     data_list = process_data(data_file)
+    print(data_file)
 
     if message_body is None or from_number is None:
         return "Invalid request: Missing message body or sender number", 400
