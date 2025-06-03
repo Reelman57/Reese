@@ -527,9 +527,9 @@ def incoming_sms():
     
         found_row = None
         for row_data in data_list:
+            print(row_data)
             if row_data.get('Phone Number') == cleaned_number:
                 found_row = row_data
-                print(row_data)
                 break # Exit loop once a match is found
     
         try:
