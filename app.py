@@ -189,7 +189,7 @@ def incoming_sms():
                     
                     if first_column_value == from_number:
                         print(f"Unit Number is {unit_nbr}")
-                        time.sleep(1)
+                        return unit_nbr
     # ------------------------------------------------------------------                 
     data_file = unit_nbr + "_datafile.csv"
     data_list = process_data(data_file)
