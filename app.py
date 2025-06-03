@@ -185,9 +185,6 @@ def get_unit_number_from_twilio_number(from_number, user_unit_file="User_UnitNbr
 # -------------------------------------------------------------------------- 
 @app.route("/sms", methods=['POST'])
 
-app.logger.info(f"Received request form: {request.form}")
-    from_number = request.form.get('From')
-
 def incoming_sms():
     authorized_list = [
         '+15099902828',
