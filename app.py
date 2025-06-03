@@ -193,7 +193,6 @@ def incoming_sms():
     # ------------------------------------------------------------------                 
     data_file = unit_nbr + "_datafile.csv"
     data_list = process_data(data_file)
-    print(data_file)
 
     if message_body is None or from_number is None:
         return "Invalid request: Missing message body or sender number", 400
@@ -527,13 +526,11 @@ def incoming_sms():
             cleaned_number = from_number
     
         found_row = None
-        print(unit_nbr)
+
         for row_data in data_list:
-            print(row_data)
             if row_data.get('Phone Number') == cleaned_number:
                 found_row = row_data
                 break # Exit loop once a match is found
-    
         try:
             if found_row:
                 full_name = f"{found_row['First_Name']} {found_row['Last_Name']}"
