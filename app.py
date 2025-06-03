@@ -520,7 +520,6 @@ def incoming_sms():
 
         if from_number.startswith('+1'):
             from_number = from_number[2:]
-            # Format to (XXX) XXX-XXXX
             cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
         else:
             cleaned_number = from_number
@@ -537,7 +536,7 @@ def incoming_sms():
                 client.messages.create(
                     body=f"{cleaned_number} - {full_name}\n{msg_in}",
                     from_=twilio_number,
-                    to='+15099902828' # Destination for forwarding
+                    to='+15099902828'
                 )
                 return "Message forwarded successfully.", 200
             else:
