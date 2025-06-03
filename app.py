@@ -517,12 +517,12 @@ def incoming_sms():
         return "SMS messages scheduled.", 200
 # --------------------------------------------------------------------------        
     else:
-        
+"""
         if from_number.startswith('+1'):
             from_number = from_number[2:] 
             cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
         
-            df = pd.read_csv(data_list)
+            df = pd.read_csv(data_file)
             row = df[df['Phone Number'] == cleaned_number]
         
             try:
@@ -546,6 +546,51 @@ def incoming_sms():
                     to='+12083063370'
                 )
     return "Command not recognized or unauthorized.", 400
+"""
+    if from_number.startswith('+1'):
+        from_number = from_number[2:]
+        # Format to (XXX) XXX-XXXX
+        cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
+    else:
+        cleaned_number = from_number
+
+    found_row = None
+    for row_data in data_list:
+        if row_data.get('Phone Number') == cleaned_number:
+            found_row = row_data
+            break # Exit loop once a match is found
+
+    try:
+        if found_row:
+            full_name = f"{found_row['First_Name']} {found_row['Last_Name']}"
+            client.messages.create(
+                body=f"{cleaned_number} - {full_name}\n{msg_in}",
+                from_=twilio_number,
+                to='+15099902828' # Destination for forwarding
+            )
+            return "Message forwarded successfully.", 200
+        else:
+            # No matching row found
+            raise IndexError("No matching name found for the phone number.")
+
+    except IndexError as e: # Catch the custom IndexError for no match
+        client.messages.create(
+            body=f"No matching name found for {cleaned_number}",
+            from_=twilio_number,
+            to='+15099902828'
+        )
+        return f"No matching name found for {cleaned_number}.", 404 # Use 404 for not found
+
+    except Exception as e:
+        # Catch any other unexpected errors during message creation or processing
+        print(f"An unexpected error occurred: {e}") # Log the error for debugging
+        client.messages.create(
+            body=f"An error occurred: {e}",
+            from_=twilio_number,
+            to='+15099902828' # Emergency contact for errors
+        )
+        return f"An internal error occurred: {e}", 500 # Use 500 for internal server error
+
 # --------------------------------------------------------------------------
 def confirm_send():
     global x
