@@ -169,10 +169,13 @@ def get_unit_nbr(search_value, filename="User_UnitNbr.csv"):
                 # Ensure the row has at least two columns
                 if len(row) >= 2:
                     first_column_value = row[0].strip() # Clean whitespace
-                    second_column_value = row[1].strip() # Clean whitespace
-
+                    unit_nbr = row[1].strip() # Clean whitespace
+                    
                     if first_column_value == search_value:
-                        return second_column_value
+                        return unit_nbr
+                        global unit_nbr
+                        print(f"Unit Number is {unit_nbr}")
+                        
         print(f"'{search_value}' not found in the first column of '{filename}'.")
         return None
     except FileNotFoundError:
@@ -196,6 +199,8 @@ def incoming_sms():
     message_body = request.values.get('Body', None)
     global from_number
     from_number = request.values.get('From', None)
+    get_unit_nbr(from_number)
+    
     data_file = "Westmond_Master.csv"
     data_list = process_data(data_file)
 
@@ -219,7 +224,6 @@ def incoming_sms():
 
     global x
     x = 0
-    get_unit_nbr(from_number)
     
     time.sleep(2)
 # --------------------------------------------------------------------------
