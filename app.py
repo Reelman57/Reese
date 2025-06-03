@@ -183,7 +183,11 @@ def get_unit_number_from_twilio_number(from_number, user_unit_file="User_UnitNbr
         return None
     return None  # Return None if the from_number is not found in the file
 # -------------------------------------------------------------------------- 
-@app.route("/sms", methods=['POST'])        
+@app.route("/sms", methods=['POST'])
+
+app.logger.info(f"Received request form: {request.form}")
+    from_number = request.form.get('From')
+
 def incoming_sms():
     authorized_list = [
         '+15099902828',
