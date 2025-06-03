@@ -161,7 +161,11 @@ def sms_send(msg_in, data_list, now):
     return success_count
 # ---------------------------------------------------------------------------
 def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
-   
+    if from_number.startswith('+1'):
+            from_number = from_number[2:]
+            cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
+        else:
+            cleaned_number = from_number
     try:
         with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
             csv_reader = csv.reader(csvfile)
@@ -170,7 +174,7 @@ def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
                     first_column_value = row[0].strip()
                     unit_nbr = row[1].strip()
 
-                    if first_column_value == from_number:
+                    if first_column_value == cleaned_number:
                         print(f"Unit Number is {unit_nbr}")
                         return unit_nbr
         
@@ -203,7 +207,7 @@ def incoming_sms():
     
     from_number = request.values.get('From', None)
 
-    get_unitnbr(from_number)
+    unit_nbr = get_unitnbr(from_number)
     
     data_file = unit_nbr + "_datafile.csv"
     data_list = process_data(data_file)
@@ -531,15 +535,7 @@ def incoming_sms():
         return "SMS messages scheduled.", 200
 # --------------------------------------------------------------------------        
     else:
-
-        if from_number.startswith('+1'):
-            from_number = from_number[2:]
-            cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
-        else:
-            cleaned_number = from_number
-    
-        found_row = None
-
+        
         for row_data in data_list:
             if row_data.get('Phone Number') == cleaned_number:
                 found_row = row_data
