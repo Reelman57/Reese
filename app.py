@@ -173,6 +173,10 @@ def incoming_sms():
     ]
     message_body = request.values.get('Body', None)
     global from_number
+    global datafile
+    global sent_texts 
+    global x
+    
     from_number = request.values.get('From', None)
     # ------------------------------------------------------------------
     with open("User_UnitNbr.csv", mode='r', newline='', encoding='utf-8') as csvfile:
@@ -199,16 +203,12 @@ def incoming_sms():
 
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
-        
-    global sent_texts        
+               
     sent_texts = set()
-    try:
-        with open('DO_NOT_SEND.txt', 'r') as file:
-            sent_texts = set(line.strip() for line in file)
-    except FileNotFoundError:
-        return "Error: DO_NOT_SEND.txt file not found.", 500
+    
+    with open('DO_NOT_SEND.txt', 'r') as file:
+        sent_texts = set(line.strip() for line in file)
 
-    global x
     x = 0
     
     time.sleep(2)
