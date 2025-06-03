@@ -161,6 +161,7 @@ def sms_send(msg_in, data_list, now):
     return success_count
 # ---------------------------------------------------------------------------
 def get_unitnbr(from_nbr, filename="User_UnitNbr.csv"):
+    global cleaned_number
     if from_nbr.startswith('+1'):
         from_nbr = from_number[2:]
         cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_nbr)
