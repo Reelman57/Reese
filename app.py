@@ -159,6 +159,30 @@ def sms_send(msg_in, data_list, now):
                 app.logger.error(f"Error processing future: {e}")
     
     return success_count
+# ---------------------------------------------------------------------------
+def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
+   
+    try:
+        with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
+            csv_reader = csv.reader(csvfile)
+            for row in csv_reader:
+                if len(row) >= 2: # Ensure the row has at least two columns
+                    first_column_value = row[0].strip()
+                    unit_nbr = row[1].strip()
+
+                    if first_column_value == from_number:
+                        print(f"Unit Number is {unit_nbr}")
+                        return unit_nbr
+        
+        print(f"No unit number found for '{from_number}' in '{filename}'.")
+        return None
+
+    except FileNotFoundError:
+        print(f"Error: The file '{filename}' was not found.")
+        return None
+    except Exception as e:
+        print(f"An unexpected error occurred while reading the CSV: {e}")
+        return None
 # --------------------------------------------------------------------------
 @app.route("/sms", methods=['POST'])
 
@@ -178,19 +202,9 @@ def incoming_sms():
     global x
     
     from_number = request.values.get('From', None)
-    # ------------------------------------------------------------------
-    with open("User_UnitNbr.csv", mode='r', newline='', encoding='utf-8') as csvfile:
-            csv_reader = csv.reader(csvfile)
-            for row in csv_reader:
-                
-                if len(row) >= 2:
-                    first_column_value = row[0].strip() # Clean whitespace
-                    unit_nbr = row[1].strip() # Clean whitespace
-                    
-                    if first_column_value == from_number:
-                        print(f"Unit Number is {unit_nbr}")
-                        return unit_nbr
-    # ------------------------------------------------------------------                 
+
+    get_unitnbr(from_number)
+    
     data_file = unit_nbr + "_datafile.csv"
     data_list = process_data(data_file)
 
