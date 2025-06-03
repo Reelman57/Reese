@@ -2,6 +2,7 @@ from itertools import count
 from datetime import datetime, timedelta
 import os
 import re
+import csv
 import sys
 import time
 import smtplib
@@ -159,29 +160,27 @@ def sms_send(msg_in, data_list, now):
     
     return success_count
 # --------------------------------------------------------------------------
-def get_unit_number_from_twilio_number(from_number, user_unit_file="User_UnitNbr.csv"):
-
+def get_unit_nbr(search_value, filename="User_UnitNbr.csv"):
+    
     try:
-        with open(user_unit_file, 'r') as f:
-            for line in f:
-                # Assuming the file is comma-separated. Adjust if your delimiter is different.
-                parts = line.strip().split(',')
-                if len(parts) >= 2:
-                    file_number = parts[0].strip()
-                    unit_number = parts[1].strip()
+        with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
+            csv_reader = csv.reader(csvfile)
+            for row in csv_reader:
+                # Ensure the row has at least two columns
+                if len(row) >= 2:
+                    first_column_value = row[0].strip() # Clean whitespace
+                    second_column_value = row[1].strip() # Clean whitespace
 
-                    # Compare the Twilio 'from_number' with the number in the file
-                    if from_number == file_number:
-                        return unit_number
-                        print(f"Unit number for {from_number} is {unit_number}")
-                        
+                    if first_column_value == search_value:
+                        return second_column_value
+        print(f"'{search_value}' not found in the first column of '{filename}'.")
+        return None
     except FileNotFoundError:
-        print(f"Error: The file '{user_unit_file}' was not found.")
+        print(f"Error: The file '{filename}' was not found.")
         return None
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An unexpected error occurred: {e}")
         return None
-    return None  # Return None if the from_number is not found in the file
 # -------------------------------------------------------------------------- 
 @app.route("/sms", methods=['POST'])
 
@@ -220,7 +219,7 @@ def incoming_sms():
 
     global x
     x = 0
-    get_unit_number_from_twilio_number(from_number)
+    get_unit_number(from_number)
     
     time.sleep(2)
 # --------------------------------------------------------------------------
