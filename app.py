@@ -193,7 +193,7 @@ def incoming_sms():
         '+12089201618',
         '+15093449400'
     ]
-    get_unit_number_from_twilio_number()
+    get_unit_number_from_twilio_number(from_number)
     
     message_body = request.values.get('Body', None)
     global from_number
