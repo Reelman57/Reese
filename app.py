@@ -162,10 +162,10 @@ def sms_send(msg_in, data_list, now):
 # ---------------------------------------------------------------------------
 def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
     if from_number.startswith('+1'):
-            from_number = from_number[2:]
-            cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
-        else:
-            cleaned_number = from_number
+        from_number = from_number[2:]
+        cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
+    else:
+        cleaned_number = from_number
     try:
         with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
             csv_reader = csv.reader(csvfile)
