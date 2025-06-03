@@ -522,7 +522,7 @@ def incoming_sms():
             from_number = from_number[2:] 
             cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
         
-            df = pd.read_csv(data_file)
+            df = pd.read_csv(data_list)
             row = df[df['Phone Number'] == cleaned_number]
         
             try:
