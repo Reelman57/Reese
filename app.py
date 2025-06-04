@@ -518,7 +518,6 @@ def incoming_sms():
             if row_data.get('Phone Number') == cleaned_number:
                 found_row = row_data
                 break
-                print(found_row)
         try:
             if found_row:
                 full_name = f"{found_row['First_Name']} {found_row['Last_Name']}"
@@ -539,7 +538,7 @@ def incoming_sms():
             )
             return f"No matching name found for {cleaned_number}.", 404
     
-        except Exception as e:g
+        except Exception as e:
             print(f"An unexpected error occurred: {e}")
             client.messages.create(
                 body=f"An error occurred: {e}",
