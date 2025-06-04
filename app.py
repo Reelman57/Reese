@@ -256,6 +256,7 @@ def incoming_sms():
     x = 0
     
     time.sleep(2)
+    
 # --------------------------------------------------------------------------
     if first_word == "ward"+unit_nbr:
         sms_send(msg_in, data_list, False)
@@ -338,20 +339,8 @@ def incoming_sms():
             msg += "\n"
             
             msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have. \n"
-            msg += "If you are unable to reach your Ministering Brothers then please contact the member of the Elders Quorum Presidency that serves your area which is: \n"
+            msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency. \n"
             
-            if data.get('B_District') == 'D1':
-                District_Leader = "Dale Reese - 509-990-2828"
-            elif data.get('B_District') == 'D2':
-                District_Leader = "Ghent Bailey - 972-281-9991"
-            elif data.get('B_District') == 'D3':
-                District_Leader = "Glen Bailey - 208-610-3066"
-                
-            else:
-                District_Leader = "Dale Reese - 509-990-2828"
-    
-            msg += f"{District_Leader}\n\n"
-    
             send_text(data['Phone Number'], msg, False) 
     
         confirm_send() 
