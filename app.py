@@ -187,14 +187,7 @@ def get_unitnbr(from_nbr, filename="User_UnitNbr.csv"):
 @app.route("/sms", methods=['POST'])
 
 def incoming_sms():
-    authorized_list = [
-        '+15099902828',
-        '+19722819991',
-        '+12086103066',
-        '+12086102929',
-        '+12089201618',
-        '+15093449400'
-    ]
+    
     message_body = request.values.get('Body', None)
     global from_number
     global datafile
@@ -264,7 +257,7 @@ def incoming_sms():
     
     time.sleep(2)
 # --------------------------------------------------------------------------
-    if first_word == "ward"+unit_nbr and from_number in authorized_list:
+    if first_word == "ward"+unit_nbr:
         sms_send(msg_in, data_list, False)
         confirm_send()
         return "SMS messages scheduled.", 200
@@ -287,7 +280,7 @@ def incoming_sms():
         )
         return f'{canceled_count} messages canceled.', 200
 # --------------------------------------------------------------------------
-    elif first_word == "emergency"+unit_nbr and from_number in authorized_list:
+    elif first_word == "emergency"+unit_nbr:
         subject = "Emergency Communications System"
         send_voice(msg_in, data_list)
         sms_send(msg_in, data_list, True)
@@ -295,7 +288,7 @@ def incoming_sms():
         confirm_send()
         return "Emergency Communications System messages sent.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "elders"+unit_nbr  and from_number in authorized_list:
+    elif first_word == "elders"+unit_nbr:
         filtered_data_list = filter_gender(data_list, "M")
         
         for data in filtered_data_list:
@@ -307,7 +300,7 @@ def incoming_sms():
         confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "sisters"+unit_nbr  and from_number in authorized_list:
+    elif first_word == "sisters"+unit_nbr:
         filtered_data_list = filter_gender(data_list, "F")
         
         for data in filtered_data_list:
@@ -319,7 +312,7 @@ def incoming_sms():
         confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "families"+unit_nbr  and from_number in authorized_list:
+    elif first_word == "families"+unit_nbr:
         filtered_data_list = filter_minister(data_list)
 
         for x, data in enumerate(filtered_data_list, start=1): 
@@ -364,7 +357,7 @@ def incoming_sms():
         confirm_send() 
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "district"+unit_nbr  and from_number in authorized_list:
+    elif first_word == "district"+unit_nbr:
         district_map = {
             '+15099902828': 'D1',
             '+19722819991': 'D2',
@@ -491,7 +484,7 @@ def incoming_sms():
             print(f"Main processing error for minall77216 branch: {e}")
             return "General Error during minall77216 processing.", 500
 # --------------------------------------------------------------------------    
-    elif (first_word == "?" or first_word == "instructions") and from_number in authorized_list:
+    elif (first_word == "?" or first_word == "instructions"):
         instructions = "To send a message to any of the following groups.  Simply type the group code on the 1st line followed by your message on subsequent lines.  The message will already have a salutation on it, ie. 'Brother Jones' or 'Hello John'.  Do not use emojis or pictures.  The app is authenticated by your phone number and will only work on your phone.\n\n"
         instructions += "Group codes\n"
         instructions += "min77216 - Your Ministering District with assignments\n"
@@ -505,7 +498,7 @@ def incoming_sms():
             to=from_number
             )
 # --------------------------------------------------------------------------
-    elif first_word == "dnc77216" and from_number in authorized_list:
+    elif first_word == "dnc77216":
         do_not_send_file = "DO_NOT_SEND.txt"
     
         try:
