@@ -205,24 +205,24 @@ def incoming_sms():
 
     unit_nbr = get_unitnbr(from_number)
     if unit_nbr is None:
-    response_to_sender = f"Sorry, your phone number {from_number} is not recognized or associated with a unit."
-    alert_to_team = f"Lookup failed for {from_number}: no unit number found."
-
-    print(alert_to_team)
-
-    # Send a message back to the original sender
-    client.messages.create(
-        body=response_to_sender,
-        from_=twilio_number,
-        to=from_number
-    )
-    # Optionally, also send an alert to your team
-    client.messages.create(
-        body=alert_to_team,
-        from_=twilio_number,
-        to='+15099902828'
-    )
-    return response_to_sender, 404
+        response_to_sender = f"Sorry, your phone number {from_number} is not recognized or associated with a unit."
+        alert_to_team = f"Lookup failed for {from_number}: no unit number found."
+    
+        print(alert_to_team)
+    
+        # Send a message back to the original sender
+        client.messages.create(
+            body=response_to_sender,
+            from_=twilio_number,
+            to=from_number
+        )
+        # Optionally, also send an alert to your team
+        client.messages.create(
+            body=alert_to_team,
+            from_=twilio_number,
+            to='+15099902828'
+        )
+        return response_to_sender, 404
     
     data_file = unit_nbr + "_datafile.csv"
     data_list = process_data(data_file)
