@@ -161,14 +161,7 @@ def sms_send(msg_in, data_list, now):
     return success_count
 # ---------------------------------------------------------------------------
 def get_unitnbr(from_nbr, filename="User_UnitNbr.csv"):
-    """   
-    global cleaned_number
-    if from_nbr.startswith('+1'):
-        from_nbr = from_number[2:]
-        cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_nbr)
-    else:
-        cleaned_number = from_nbr
-    """
+  
     try:
         with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
             csv_reader = csv.reader(csvfile)
@@ -514,8 +507,14 @@ def incoming_sms():
 # --------------------------------------------------------------------------     
     else:
         
+        if from_number.startswith('+1'):
+            from_number = from_number[2:]
+            cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
+        else:
+            cleaned_number = from_number
+  
         for row_data in data_list:
-            if row_data.get('Phone Number') == from_number:
+            if row_data.get('Phone Number') == cleaned_number:
                 found_row = row_data
                 break
         try:
@@ -532,11 +531,11 @@ def incoming_sms():
     
         except IndexError as e:
             client.messages.create(
-                body=f"No matching name found for {from_number}",
+                body=f"No matching name found for {cleaned_number}",
                 from_=twilio_number,
                 to='+15099902828'
             )
-            return f"No matching name found for {from_number}.", 404
+            return f"No matching name found for {cleaned_number}.", 404
     
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
