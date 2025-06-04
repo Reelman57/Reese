@@ -223,6 +223,24 @@ def incoming_sms():
             to='+15099902828'
         )
         return response_to_sender, 404
+
+    if not os.path.exists(unit_nbr+"_datafile.csv"):
+        response_to_sender = f"Sorry, unit data for your number ({from_number}) is missing. Please contact support."
+        alert_to_team = f"CRITICAL: Secondary data file '{unit_nbr+"_datafile.csv"}' not found for unit '{unit_nbr}' (from {from_number})."
+    
+        print(alert_to_team)
+    
+        client.messages.create(
+            body=response_to_sender,
+            from_=twilio_number,
+            to=from_number_raw
+        )
+        client.messages.create(
+            body=alert_to_team,
+            from_=twilio_number,
+            to='+15099902828'
+        )
+        return response_to_sender, 500
     
     data_file = unit_nbr + "_datafile.csv"
     data_list = process_data(data_file)
