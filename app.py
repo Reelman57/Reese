@@ -233,7 +233,7 @@ def incoming_sms():
         client.messages.create(
             body=response_to_sender,
             from_=twilio_number,
-            to=from_number_raw
+            to=from_number
         )
         client.messages.create(
             body=alert_to_team,
