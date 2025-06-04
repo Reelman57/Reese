@@ -234,7 +234,7 @@ def incoming_sms():
     
     time.sleep(2)
 # --------------------------------------------------------------------------
-    if first_word == "ward77216" and from_number in authorized_list:
+    if first_word == "ward"+unit_nbr and from_number in authorized_list:
         sms_send(msg_in, data_list, False)
         confirm_send()
         return "SMS messages scheduled.", 200
@@ -257,7 +257,7 @@ def incoming_sms():
         )
         return f'{canceled_count} messages canceled.', 200
 # --------------------------------------------------------------------------
-    elif first_word == "emergency77216" and (from_number in authorized_list or from_number == '+13607428998'):
+    elif first_word == "emergency"+unit_nbr and from_number in authorized_list:
         subject = "Emergency Communications System"
         send_voice(msg_in, data_list)
         sms_send(msg_in, data_list, True)
@@ -265,7 +265,7 @@ def incoming_sms():
         confirm_send()
         return "Emergency Communications System messages sent.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "elders77216" and from_number in authorized_list:
+    elif first_word == "elders"+unit_nbr  and from_number in authorized_list:
         filtered_data_list = filter_gender(data_list, "M")
         
         for data in filtered_data_list:
@@ -277,7 +277,7 @@ def incoming_sms():
         confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "sisters77216" and from_number in authorized_list:
+    elif first_word == "sisters"+unit_nbr  and from_number in authorized_list:
         filtered_data_list = filter_gender(data_list, "F")
         
         for data in filtered_data_list:
@@ -289,7 +289,7 @@ def incoming_sms():
         confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "families77216" and from_number in authorized_list:
+    elif first_word == "families"+unit_nbr  and from_number in authorized_list:
         filtered_data_list = filter_minister(data_list)
 
         for x, data in enumerate(filtered_data_list, start=1): 
@@ -334,8 +334,8 @@ def incoming_sms():
         confirm_send() 
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "district77216" and from_number in authorized_list: # Assuming this is correct indentation
-        district_map = { # Renamed to avoid conflict if 'district' is used elsewhere, and more descriptive
+    elif first_word == "district"+unit_nbr  and from_number in authorized_list:
+        district_map = {
             '+15099902828': 'D1',
             '+19722819991': 'D2',
             '+12086103066': 'D3',
@@ -343,9 +343,9 @@ def incoming_sms():
             '+12089201618': 'SD2',
             '+15093449400': 'SD3'
         }
-        district_code = district_map.get(from_number) # Renamed to district_code
+        district_code = district_map.get(from_number)
     
-        if district_code is None: # Added check for unauthorized or unmapped phone numbers
+        if district_code is None:
             return "Error: Unauthorized sender or unmapped district phone.", 403
     
         try:
@@ -356,23 +356,23 @@ def incoming_sms():
             return f"Error reading data file: {e}", 500
     
         try:
-            if district_code and district_code[0] == 'S': # Use district_code
-                df_filtered = df[(df['S_District'] == district_code) & (df['Age'] > 17)].copy() # .copy() to avoid SettingWithCopyWarning
-                current_r_range = range(3, 5) # For Minister3 and Minister4
+            if district_code and district_code[0] == 'S':
+                df_filtered = df[(df['S_District'] == district_code) & (df['Age'] > 17)].copy()
+                current_r_range = range(3, 5)
             else:
-                df_filtered = df[(df['B_District'] == district_code) & (df['Age'] > 17)].copy() # .copy()
-                current_r_range = range(1, 3) # For Minister1 and Minister2
+                df_filtered = df[(df['B_District'] == district_code) & (df['Age'] > 17)].copy()
+                current_r_range = range(1, 3)
     
             if df_filtered.empty:
-                return f"No records found for district {district_code} with age > 17.", 200 # Or 404
+                return f"No records found for district {district_code} with age > 17.", 200
     
-            for xr in current_r_range: # Iterate through the correct range based on district type
+            for xr in current_r_range:
     
                 minister_col = f"Minister{xr}"
                 minister_phone_col = f"Minister{xr}_Phone"
                 minister_email_col = f"Minister{xr}_Email"
     
-                current_minister_df = df_filtered[df_filtered[minister_col].notnull()].copy() # .copy()
+                current_minister_df = df_filtered[df_filtered[minister_col].notnull()].copy()
                 current_minister_df[minister_col] = current_minister_df[minister_col].fillna('')
     
                 try:
@@ -382,74 +382,74 @@ def incoming_sms():
     
                 except AttributeError as e:
                     print(f"Error splitting '{minister_col}' for potential missing or invalid data: {e}")
-                    continue # Skip to the next iteration of the outer 'for xr in current_r_range:' loop
+                    continue
     
                 grouped_df = current_minister_df.groupby(["Minister_Last", "Minister_First", minister_phone_col, minister_email_col])
     
                 for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
     
-                    text_nbr = str(minister_phone) if pd.notna(minister_phone) else "" # Ensure phone is string, handle NaN
+                    text_nbr = str(minister_phone) if pd.notna(minister_phone) else ""
                     subj = "Your Ministering Families"
     
-                    if xr > 2: # Use xr here, not r
+                    if xr > 2:
                         Bro_Sis = "Sister"
                     else:
                         Bro_Sis = "Brother"
     
-                    msg = f"{Bro_Sis} {minister_last.strip()}, \n" # .strip() just in case of leading/trailing spaces
+                    msg = f"{Bro_Sis} {minister_last.strip()}, \n"
                     msg += f"{msg_in} \n\n"
                     msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
     
                     if not group.empty:
                         for index, row in group.iterrows():
                             msg += f"{row['Name']}"
-                            if pd.notna(row['Phone Number']): # Use pd.notna for checking NaN
+                            if pd.notna(row['Phone Number']):
                                 msg += f" - {row['Phone Number']}"
                             msg += "\n"
                     else:
-                        msg += "No ministering families assigned to you.\n" # Message if group is empty
+                        msg += "No ministering families assigned to you.\n"
     
                     current_minister_row = current_minister_df[
                         (current_minister_df['Minister_Last'] == minister_last) &
                         (current_minister_df['Minister_First'] == minister_first)
-                    ].iloc[0] # Get the first matching row
+                    ].iloc[0]
     
-                    if xr == 1: # Assuming minister 1 has companion minister 2
+                    if xr == 1:
                         Comp = current_minister_row.get('Minister2')
                         CompPhone = current_minister_row.get('Minister2_Phone')
-                    elif xr == 2: # Assuming minister 2 has companion minister 1
+                    elif xr == 2:
                         Comp = current_minister_row.get('Minister1')
                         CompPhone = current_minister_row.get('Minister1_Phone')
-                    elif xr == 3: # Assuming minister 3 has companion minister 4
+                    elif xr == 3:
                         Comp = current_minister_row.get('Minister4')
                         CompPhone = current_minister_row.get('Minister4_Phone')
-                    elif xr == 4: # Assuming minister 4 has companion minister 3
+                    elif xr == 4:
                         Comp = current_minister_row.get('Minister3')
                         CompPhone = current_minister_row.get('Minister3_Phone')
                     else:
                         Comp = None
                         CompPhone = None
     
-                    if pd.notna(Comp): # Check if Comp is not NaN (from .get() or direct column access)
+                    if pd.notna(Comp):
                         try:
-                            Comp_Last, Comp_FirstMiddle = Comp.split(',', 1) # Use split(, 1) for safety
+                            Comp_Last, Comp_FirstMiddle = Comp.split(',', 1)
                             Comp_Last = Comp_Last.strip()
                             Comp_FirstMiddle = Comp_FirstMiddle.strip()
                             first_name_parts = Comp_FirstMiddle.split()
                             Comp_First = first_name_parts[0]
                         except (ValueError, AttributeError) as e:
                             print(f"Error splitting companion name '{Comp}': {e}. Skipping companion details.")
-                            Comp = None # Set Comp to None to skip companion info
+                            Comp = None
                     else:
                         print("Comp value was null or NaN for current minister.")
     
-                    if Comp and pd.notna(CompPhone): # Check if Comp exists and phone is not NaN
+                    if Comp and pd.notna(CompPhone):
                         msg += f"\nYour Companion is {Comp_First} {Comp_Last} - {CompPhone}\n"
-                    elif Comp: # Companion exists but phone is NaN/missing
+                    elif Comp:
                         msg += f"\nYour Companion is {Comp_First} {Comp_Last}\n"
                     
                     print(minister_last, " - ", minister_phone, "  ", minister_email, msg)
-                    send_text(text_nbr, msg, False) # Pass text_nbr, not minister_phone directly if text_nbr is preprocessed
+                    send_text(text_nbr, msg, False)
             try:
                 confirm_send()
                 return "Ministering district messages sent.", 200
@@ -511,38 +511,13 @@ def incoming_sms():
                 to=from_number
             )
             return "No matching phone numbers found.", 200
-# --------------------------------------------------------------------------
-    elif first_word == "elders2285517" and from_number in ["+15099900248","+15099902828"]:
-
-        data_file = "PO_Ward_Members.csv"
-        data_list = process_data(data_file)
-            
-        filtered_data_list = filter_gender(data_list, "M")
-        
-        for data in filtered_data_list:
-            print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
-            msg = f"Brother {data['Last_Name']}, \n\n"
-            msg += msg_in
-            send_text(data['Phone Number'], msg, False)
-
-        confirm_send()
-        return "Messages sent successfully.", 200
-# --------------------------------------------------------------------------
-    elif first_word == "ward2285517" and from_number in ["+15099900248","+15099902828"]:
-
-        data_file = "PO_Ward_Members.csv"
-        data_list = process_data(data_file)
-
-        sms_send(msg_in, data_list, False)
-        confirm_send()
-        return "SMS messages scheduled.", 200
-# --------------------------------------------------------------------------        
+# --------------------------------------------------------------------------     
     else:
         
         for row_data in data_list:
             if row_data.get('Phone Number') == cleaned_number:
                 found_row = row_data
-                break # Exit loop once a match is found
+                break
                 print(found_row)
         try:
             if found_row:
@@ -554,26 +529,24 @@ def incoming_sms():
                 )
                 return "Message forwarded successfully.", 200
             else:
-                # No matching row found
                 raise IndexError("No matching name found for the phone number.")
     
-        except IndexError as e: # Catch the custom IndexError for no match
+        except IndexError as e:
             client.messages.create(
                 body=f"No matching name found for {cleaned_number}",
                 from_=twilio_number,
                 to='+15099902828'
             )
-            return f"No matching name found for {cleaned_number}.", 404 # Use 404 for not found
+            return f"No matching name found for {cleaned_number}.", 404
     
-        except Exception as e:
-            # Catch any other unexpected errors during message creation or processing
-            print(f"An unexpected error occurred: {e}") # Log the error for debugging
+        except Exception as e:g
+            print(f"An unexpected error occurred: {e}")
             client.messages.create(
                 body=f"An error occurred: {e}",
                 from_=twilio_number,
-                to='+15099902828' # Emergency contact for errors
+                to='+15099902828'
             )
-            return f"An internal error occurred: {e}", 500 # Use 500 for internal server error
+            return f"An internal error occurred: {e}", 500
 
 # --------------------------------------------------------------------------
 def confirm_send():
