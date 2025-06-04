@@ -515,7 +515,7 @@ def incoming_sms():
     else:
         
         for row_data in data_list:
-            if row_data.get('Phone Number') == cleaned_number:
+            if row_data.get('Phone Number') == from_number:
                 found_row = row_data
                 break
         try:
@@ -532,11 +532,11 @@ def incoming_sms():
     
         except IndexError as e:
             client.messages.create(
-                body=f"No matching name found for {cleaned_number}",
+                body=f"No matching name found for {from_number}",
                 from_=twilio_number,
                 to='+15099902828'
             )
-            return f"No matching name found for {cleaned_number}.", 404
+            return f"No matching name found for {from_number}.", 404
     
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
