@@ -87,7 +87,7 @@ def send_voice(msg_in, data_list):
 def get_minister_phone_number(minister_name_to_lookup):
     
     try:
-        merged_df = pd.read_csv(datafile)
+        merged_df = pd.read_csv(data_file)
     except Exception as e:
         print(f"Error loading merged file {data_file}: {e}")
         return []
