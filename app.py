@@ -83,6 +83,58 @@ def send_voice(msg_in, data_list):
             except Exception as e:
                 print(f"Error sending voice call to {to_number}: {e}")
     return calls 
+# --------------------------------------------------------------------------
+def get_minister_phone_number(minister_name_to_lookup):
+    """
+    Retrieves the phone number(s) for a given minister from the merged data file.
+    It looks up the minister's name in the 'Name' column (from members data)
+    and returns the corresponding 'Phone Number'.
+
+    Args:
+        minister_name_to_lookup (str): The full name of the minister (e.g., "Doe, John Allen").
+                                        This name should match entries in the 'Name' column of the merged file.
+
+    Returns:
+        list: A list of unique phone numbers associated with the minister (as strings),
+              or an empty list if not found, no phone number, or an error occurs.
+    """
+    if not os.path.exists(MERGED_FILE_PATH):
+        print(f"Error: Merged file not found at {MERGED_FILE_PATH}. Please run the main script first to create it.")
+        return []
+
+    try:
+        merged_df = pd.read_csv(MERGED_FILE_PATH)
+    except Exception as e:
+        print(f"Error loading merged file {MERGED_FILE_PATH}: {e}")
+        return []
+
+    # Check for required columns
+    # Assuming 'Name' and 'Phone Number' columns exist in the merged file after the join
+    required_cols = ['Name', 'Phone Number'] # Adjust 'Phone Number' if your column name is different
+    if not all(col in merged_df.columns for col in required_cols):
+        print(f"Error: One or more required columns ({required_cols}) not found in the merged file.")
+        print(f"Available columns in '{MERGED_FILE_NAME}': {merged_df.columns.tolist()}")
+        return []
+
+    # Perform the lookup: Filter rows where the 'Name' column matches the minister's name
+    # Using .astype(str), .strip(), and .lower() for robust matching
+    minister_records = merged_df[
+        merged_df['Name'].astype(str).str.strip().str.lower() == minister_name_to_lookup.strip().lower()
+    ]
+
+    if minister_records.empty:
+        print(f"Minister '{minister_name_to_lookup}' not found in the 'Name' column of '{MERGED_FILE_NAME}'.")
+        return []
+
+    # Extract unique phone numbers, drop any NaN/empty values, and convert to list of strings
+    # Ensure phone numbers are treated as strings to avoid data type issues (e.g., if some are numeric)
+    phone_numbers = minister_records['Phone Number'].dropna().astype(str).unique().tolist()
+
+    if not phone_numbers:
+        print(f"No phone number found for minister '{minister_name_to_lookup}' in '{MERGED_FILE_NAME}'.")
+    
+    return phone_numbers
+
 # --------------------------------------------------------------------------        
 def send_email(subject, body, data_list):
     sent_emails = set()
@@ -327,17 +379,21 @@ def incoming_sms():
             msg += "Your assigned ministering brothers are as follows: \n"
 
             if pd.notna(data.get('Minister1')):
-                msg += f"{data['Minister1']}"
-                if pd.notna(data.get('Minister1_Phone')):
-                    msg += f" - {data['Minister1_Phone']}"
-            msg += "\n"
-            
+                minister_name = data['Minister1'] # Store the actual minister's name
+                msg += f"{minister_name}"
+                phone_numbers = get_minister_phone_number(minister_name)
+                if phone_numbers:
+                    msg += f" - {', '.join(phone_numbers)}" 
+                else:
+                    msg += " "
+                msg += "\n"
+            """
             if pd.notna(data.get('Minister2')):
                 msg += f"{data['Minister2']}"
                 if pd.notna(data.get('Minister2_Phone')):
                     msg += f" - {data['Minister2_Phone']}"
             msg += "\n"
-            
+            """
             msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have. \n"
             msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency. \n"
             
