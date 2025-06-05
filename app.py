@@ -37,7 +37,6 @@ def get_send_time():
     return send_at.isoformat()
 # --------------------------------------------------------------------------
 def send_text(text_nbr, message, now):
-    x=1
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         if not now:
             send_at = get_send_time()
@@ -47,7 +46,6 @@ def send_text(text_nbr, message, now):
             schedule_type = None
 
         try: 
-            """
             message = client.messages.create(
                 body=message,
                 from_=twilio_number,
@@ -56,7 +54,6 @@ def send_text(text_nbr, message, now):
                 send_at=send_at,
                 schedule_type=schedule_type
             )
-            """
             print(f"{x}. {text_nbr}")
             sent_texts.add(text_nbr)
             x+=1
