@@ -113,7 +113,7 @@ def send_email(subject, body, data_list):
 def process_data(data_path):
     df = pd.read_csv(data_path)
     df_filtered = df[df['Age'] > 17]
-    df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email', 'Gender','District','Minister1','Minister2','Minister3'
+    df_filtered = df_filtered[['First_Name', 'Last_Name', 'Phone Number', 'Email', 'Gender','District','Minister1','Minister2','Minister3']
     df_filtered = df_filtered.dropna(subset=['Phone Number'])
     df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
     df_filtered = df_filtered[df_filtered['is_valid_phone']]
