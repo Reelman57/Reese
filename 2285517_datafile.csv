@@ -1,363 +1,769 @@
-Name,Gender,Age,Birth Date,Address,Phone Number,Email,Last_Name,First_Name,Middle_Name,B_District,Minister1,Minister1_Phone,Minister1_Email,Minister2,Minister2_Phone,Minister2_Email,S_District,Minister3,Minister3_Phone,Minister3_Email,Minister4,Minister4_Phone,Minister4_Email
-"Achey, Lynn",F,70,31 Jul 1954,"2036 Vay Rd., Priest River, 83856",(208) 448-1636,chucknlynn@msn.com,Achey,Lynn,,,,,,,,,,,,,,,
-"Achy, Charles Thomas",M,58,24 Oct 1966,"2036 Vay Rd., Priest River, 83856",(208) 448-1636,chucknlynn@msn.com,Achy,Charles,Thomas,,,,,,,,,,,,,,
-"Ackley, Jake",M,47,20 Jan 1978,"246 Hoo Doo Hideaway, Oldtown, Idaho 83822-8559",(208) 448-0716,5creekselk@gmail.com,Ackley,Jake,,,,,,,,,,,,,,,
-"Ackley, Kaden",M,18,2 May 2007,"246 Hoo Doo Hideaway, Oldtown, Idaho 83822-8559",,,Ackley,Kaden,,,,,,,,,,,,,,,
-"Ackley, Kailey",F,21,16 Jul 2003,"246 Hoo Doo Hideaway, Oldtown, Idaho 83822-8559",,,Ackley,Kailey,,,,,,,,,,,,,,,
-"Ackley, Meranda",F,45,14 Dec 1979,"246 Hoo Doo Hideaway, Oldtown, Idaho 83822-8559",(208) 448-0716,,Ackley,Meranda,,,,,,,,,,,,,,,
-"Alexander, Tyler",M,34,13 Jan 1991,"N Washington Ave, Oldtown, Idaho 83822",(509) 572-6274,,Alexander,Tyler,,,,,,,,,,,,,,,
-"Alters, Christopher",M,50,26 Dec 1974,Idaho,(208) 409-5966,,Alters,Christopher,,,,,,,,,,,,,,,
-"Andersen, Scott",M,62,19 Sep 1962,Idaho,,,Andersen,Scott,,,,,,,,,,,,,,,
-"Anderson, Art",M,72,10 Jan 1953,"206 Hoo Doo Loop, Oldtown, Idaho 83822-8522",(208) 437-2026,artthehermit@gmail.com,Anderson,Art,,,,,,,,,,,,,,,
-"Ashton, Pamela",F,71,29 Jan 1954,"618 Outback Loop, Spirit Lake, Idaho 83869-6024",(208) 446-5183,ashton54Idaho@gmail.com,Ashton,Pamela,,,,,,,,,,,,,,,
-"Baker, Jeffrey Lynn",M,68,24 May 1957,"621 E Spring St S, Oldtown, Idaho 83822-9268",,,Baker,Jeffrey,Lynn,,,,,,,,,,,,,,
-"Balazs, Jordan",M,33,12 Feb 1992,"53 Wisconsin St, Priest River, Idaho 83856-0107",(509) 222-4406,michellebalazs@yahoo.com,Balazs,Jordan,,,,,,,,,,,,,,,
-"Baldwin, Victoria",F,56,8 Nov 1968,"205 Cottonwood Crk, Priest River, Idaho 83856-8874",,,Baldwin,Victoria,,,,,,,,,,,,,,,
-"Barlow, Douglas Spencer",M,55,9 Nov 1969,"Po Box 1281, Priest River, Idaho 83856",,,Barlow,Douglas,Spencer,,,,,,,,,,,,,,
-"Barnes, Bridger",M,28,9 Apr 1997,"106 Granite Ridge Rd, Priest River, Idaho 83856-6759",(208) 760-6713,blbrocks1@hotmail.com,Barnes,Bridger,,,,,,,,,,,,,,,
-"Barrett, Chris",M,63,4 Jul 1961,"50 Granite Ridge Rd, Priest River, Idaho 83856-4927",(253) 569-2819,chrisbarrettatchurch@gmail.com,Barrett,Chris,,,,,,,,,,,,,,,
-"Barrett, Tracy",F,54,7 Mar 1971,"50 Granite Ridge Rd, Priest River, Idaho 83856-4927",(253) 344-7016,tebarnes71@gmail.com,Barrett,Tracy,,,,,,,,,,,,,,,
-"Batch, Sam",F,21,27 Mar 2004,"635 Silver Birch Ln, Lt 1A, Oldtown, Idaho 83822-7541",(208) 946-8845,samanthabatch46@gmail.com,Batch,Sam,,,,,,,,,,,,,,,
-"Bickford, Alan Phillip",M,55,10 Nov 1969,"145 Dinger Ln, Priest River, Idaho 83856-7708",(208) 819-8881,Alan.bickford@yahoo.com,Bickford,Alan,Phillip,,,,,,,,,,,,,,
-"Bickford, Dawn Elizabeth",F,54,27 Dec 1970,"145 Dinger Ln, Priest River, Idaho 83856-7708",(208) 659-1976,dawndenver_1@yahoo.com,Bickford,Dawn,Elizabeth,,,,,,,,,,,,,,
-"Bingham, Lafe",M,65,12 Apr 1960,"584 Railroad Ave, Blanchard, Idaho 83804-9552",(907) 957-4883,,Bingham,Lafe,,,,,,,,,,,,,,,
-"Bingham, Michael",M,71,15 Apr 1954,"2352 Old Priest River Rd, Priest River, Idaho 83856-8773",(208) 448-2585,,Bingham,Michael,,,,,,,,,,,,,,,
-"Birdwell, Shannon",F,48,4 Jan 1977,"265 Cabin Ridge Rd, Spirit Lake, Idaho 83869-9772",(541) 605-0056,,Birdwell,Shannon,,,,,,,,,,,,,,,
-"Bitton, Jalaire",F,64,20 May 1961,"43 Hoop Dr., Priest River, Idaho 83856",(208) 290-4998,,Bitton,Jalaire,,,,,,,,,,,,,,,
-"Black, Cassie Dawn",F,32,19 Jul 1992,"921 HUNTER RD, PO Box 278, BLANCHARD, Idaho 83804-0019",(435) 289-7429,cassie.hunt92.ch@gmail.com,Black,Cassie,Dawn,,,,,,,,,,,,,,
-"Black, John Steven Reigle",M,27,11 Oct 1997,"921 HUNTER RD, PO Box 278, BLANCHARD, Idaho 83804-0019",(208) 625-8909,Jblackwork97@gmail.com,Black,John,Steven,,,,,,,,,,,,,,
-"Black, Liam Arron",M,1,13 Dec 2023,"921 HUNTER RD, PO Box 278, BLANCHARD, Idaho 83804-0019",,,Black,Liam,Arron,,,,,,,,,,,,,,
-"Blankenship, Donald",M,63,1 Jan 1962,"36877 Highway 41, Oldtown, Idaho 83822-9276",(208) 773-1467,,Blankenship,Donald,,,,,,,,,,,,,,,
-"Boone, Charlie",M,67,6 Sep 1957,"193 Elicia Ln, Priest River, Idaho 83856-1215",(509) 315-6134,boonecharleswade@msn.com,Boone,Charlie,,,,,,,,,,,,,,,
-"Boone, Gavin",M,41,24 Dec 1983,"1504 Clagstone Rd, Spirit Lake, Idaho 83869-9616",,,Boone,Gavin,,,,,,,,,,,,,,,
-"Bristol, Micheal",M,51,15 Jul 1973,Idaho,(360) 443-2195,,Bristol,Micheal,,,,,,,,,,,,,,,
-"Broyles, Keenan Paul",M,30,8 Dec 1994,"734 Chipakota Ln, Oldtown, Idaho 83822-9291",(360) 348-2469,keenanbroyles@gmail.com,Broyles,Keenan,Paul,,,,,,,,,,,,,,
-"Brunson, Linda Helen",F,56,25 Dec 1968,"267 Thama Dr, Priest River, Idaho 83856-8786",(775) 225-4557,,Brunson,Linda,Helen,,,,,,,,,,,,,,
-"Buckley, Michael John",M,67,20 Mar 1958,"3994 Hwy 2, Priest River, Idaho 83856",(509) 979-3327,mj.buckley320@yahoo.com,Buckley,Michael,John,,,,,,,,,,,,,,
-"Burkette, Paul",M,54,28 Jul 1970,"460 Als Welding RD, Spirit Lake, Idaho 83869-",,paulburk2010@hotmail.com,Burkette,Paul,,,,,,,,,,,,,,,
-"Campbell, Dixie Lee",F,73,25 Sep 1951,"7651 Kelso Lake Rd, Priest River, Idaho 83856-9303",(503) 348-9382,pictish@msn.com,Campbell,Dixie,Lee,,,,,,,,,,,,,,
-"Case, William",M,53,30 Dec 1971,"Po Box 112, 2773 Hwy 2, Priest River, Idaho 83856",(208) 437-0350,,Case,William,,,,,,,,,,,,,,,
-"Cavanaugh, Carolyn Louise",F,91,17 Jan 1934,"647 Als Welding Rd, Spirit Lake, Idaho 83869-9661",(509) 863-9891,,Cavanaugh,Carolyn,Louise,,,,,,,,,,,,,,
-"Chamberlain, Steven",M,45,19 Jan 1980,"244 Campbell Loop, Laclede, Idaho 83841",(208) 255-6537,,Chamberlain,Steven,,,,,,,,,,,,,,,
-"Chamberlin, Stephanie",F,41,13 Jul 1983,"244 Campbell Loop, Laclede, Idaho 83841",(208) 255-6537,,Chamberlin,Stephanie,,,,,,,,,,,,,,,
-"Charleston, Billie",M,17,23 Apr 2008,"1437 Torrens Trl, Spirit Lake, Idaho 83869-7017",,CCharleston75501@gmail.com,Charleston,Billie,,,,,,,,,,,,,,,
-"Charleston, Chaelynn Anne",F,18,5 Oct 2006,"1437 Torrens Trl, Spirit Lake, Idaho 83869-7017",(253) 330-1456,,Charleston,Chaelynn,Anne,,,,,,,,,,,,,,
-"Charleston, Cristal",F,35,2 Nov 1989,"1437 Torrens Trl, Spirit Lake, Idaho 83869-7017",(253) 330-1456,CCharleston75501@gmail.com,Charleston,Cristal,,,,,,,,,,,,,,,
-"Charleston, Hunter Jo",M,16,7 May 2009,"1437 Torrens Trl, Spirit Lake, Idaho 83869-7017",(253) 330-1456,27HunterCharleston@gmail.com,Charleston,Hunter,Jo,,,,,,,,,,,,,,
-"Charleston, Joseph",M,28,27 Mar 1997,"17 Torrens Trl, Spirit Lake, Idaho 83869-5046",(208) 610-7265,jcharleston1997@yahoo.com,Charleston,Joseph,,,,,,,,,,,,,,,
-"Charleston, Rhailin",F,10,20 Mar 2015,"1437 Torrens Trl, Spirit Lake, Idaho 83869-7017",,,Charleston,Rhailin,,,,,,,,,,,,,,,
-"Charleston, Terry",F,71,28 Jan 1954,"60 Charleston Ln, Spirit Lake, Idaho 83869-0075",(208) 262-1756,4evercharleston@gmail.com,Charleston,Terry,,,,,,,,,,,,,,,
-"Charleston, Tim",M,41,11 Jan 1984,"1437 Torrens Trl, Spirit Lake, Idaho 83869-7017",(208) 641-9870,makethenailblead@gmail.com,Charleston,Tim,,,,,,,,,,,,,,,
-"Charleston, Wayne",M,66,31 Mar 1959,"60 Charleston Ln, Spirit Lake, Idaho 83869-0075",(208) 217-5824,wayne.charleston2@gmail.com,Charleston,Wayne,,,,,,,,,,,,,,,
-"Chenoweth, Tyler Lee Charles",M,28,10 Apr 1997,"621 Ockert St, Oldtown, Idaho 83822",(208) 437-2070,,Chenoweth,Tyler,Lee,,,,,,,,,,,,,,
-"Christian, Jack",M,18,27 Oct 2006,"80 Springdale Gdns, Priest River, Idaho 83856-8790",,s4christian73@gmail.com,Christian,Jack,,,,,,,,,,,,,,,
-"Christian, Liam Skyler",M,20,11 Feb 2005,"80 Springdale Gdns, Priest River, Idaho 83856-8790",,,Christian,Liam,Skyler,,,,,,,,,,,,,,
-"Christian, Sophia Grace",F,14,2 Jan 2011,"80 Springdale Gdns, Priest River, Idaho 83856-8790",,s4christian73@gmail.com,Christian,Sophia,Grace,,,,,,,,,,,,,,
-"Christian, Stephani S",F,52,26 Feb 1973,"80 Springdale Gdns, Priest River, Idaho 83856-8790",(208) 720-2432,s4christian73@gmail.com,Christian,Stephani,S,,,,,,,,,,,,,,
-"Clayburn, Brian",M,68,3 Jan 1957,"750 Rustling Leaf Rd, PO Box 95, Priest River, Idaho 83856-6050",(206) 713-5468,brian.clayburn@gmail.com,Clayburn,Brian,,,,,,,,,,,,,,,
-"Clayburn, Justin",M,34,1 Aug 1990,"750 Rustling Leaf Rd, Priest River, Idaho 83856-6050",(509) 607-9785,jkclayburn@gmail.com,Clayburn,Justin,,,,,,,,,,,,,,,
-"Clayburn, Kaulene",F,69,13 Dec 1955,"750 Rustling Leaf Rd, PO Box 95, Priest River, Idaho 83856-6050",(208) 920-0910,,Clayburn,Kaulene,,,,,,,,,,,,,,,
-"Coates, Dennis",M,66,29 May 1959,"230 Chad Ct, Priest River, Idaho 83856-5205",(208) 687-5460,,Coates,Dennis,,,,,,,,,,,,,,,
-"Colombini, Dustin",M,40,25 Jun 1984,"1369 Riverside Rd, Priest River, Idaho 83856-8725",(208) 215-4173,,Colombini,Dustin,,,,,,,,,,,,,,,
-"Colombini, Kim",F,41,7 Dec 1983,"1369 Riverside Rd, Priest River, Idaho 83856-8725",(208) 215-4173,,Colombini,Kim,,,,,,,,,,,,,,,
-"Condie, Brent",M,69,9 Jan 1956,"563 This A Way, Spirit Lake, Idaho 83869-5028",(208) 661-0731,,Condie,Brent,,,,,,,,,,,,,,,
-"Condie, Peggy",F,67,30 Oct 1957,"563 This A Way, Spirit Lake, Idaho 83869-5028",(208) 651-3996,,Condie,Peggy,,,,,,,,,,,,,,,
-"Connly, Amanda Grace",F,11,1 Feb 2014,"234 E. 4th street s., Oldtown, Idaho 83822-9525",,leslie632@msn.com,Connly,Amanda,Grace,,,,,,,,,,,,,,
-"Connly, Leslie Rachel",F,48,30 Jun 1976,"234 E. 4th street s., Oldtown, Idaho 83822-9525",(406) 291-8636,leslie632@msn.com,Connly,Leslie,Rachel,,,,,,,,,,,,,,
-"Connly, Spencer Ervin James",M,9,17 Nov 2015,"234 E. 4th street s., Oldtown, Idaho 83822-9525",,,Connly,Spencer,Ervin,,,,,,,,,,,,,,
-"Connly, Steven James",M,38,24 Nov 1986,"234 E. 4th street s., Oldtown, Idaho 83822-9525",(406) 291-6211,sconnly86@gmail.com,Connly,Steven,James,,,,,,,,,,,,,,
-"Cook, Howard",M,72,2 Jun 1953,"229 Church St, PO Box 803, Priest River, Idaho 83856",(208) 448-1676,,Cook,Howard,,,,,,,,,,,,,,,
-"Cooper, Janis",F,64,2 Oct 1960,"176 Salishan Beach Dr, Priest River, Idaho 83856-0080",(509) 263-0585,Jcooper1060@gmail.com,Cooper,Janis,,,,,,,,,,,,,,,
-"Cooper, Rick",M,67,29 Nov 1957,"176 Salishan Beach Dr, Priest River, Idaho 83856-0080",(509) 990-0248,rccoop57@gmail.com,Cooper,Rick,,,,,,,,,,,,,,,
-"Creviston, Rayanne",F,59,27 Jul 1965,"306 Hoodoo Hideaway, Oldtown, Idaho 83822",(208) 437-5910,,Creviston,Rayanne,,,,,,,,,,,,,,,
-"Crossley, Caden Christopher Augerlavoie",M,7,21 Jul 2017,"808 Larch Lane, Oldtown, Idaho 83822",,,Crossley,Caden,Christopher,,,,,,,,,,,,,,
-"Crossley, David Don",M,48,28 Mar 1977,"808 Larch Lane, Oldtown, Idaho 83822",(208) 255-0879,ddcrossley@gmail.com,Crossley,David,Don,,,,,,,,,,,,,,
-"Crossley, Jordan Charles",M,7,29 Jun 2017,"808 Larch Lane, Oldtown, Idaho 83822",,,Crossley,Jordan,Charles,,,,,,,,,,,,,,
-"Crossley, Marie",F,45,15 May 1980,"808 Larch Lane, Oldtown, Idaho 83822",(208) 596-5838,mariecvtlvt@gmail.com,Crossley,Marie,,,,,,,,,,,,,,,
-"Custer, Robert",M,54,12 Mar 1971,"34754 Highway 41, Oldtown, Idaho 83822-5003",,,Custer,Robert,,,,,,,,,,,,,,,
-"Dahlstrom, Benjamin Don",M,53,17 Nov 1971,"246 Hoodoo Hidaway, Oldtown, Idaho 83822",(509) 993-4138,,Dahlstrom,Benjamin,Don,,,,,,,,,,,,,,
-"Danley, Wanda Sue",F,63,11 Jan 1962,"275 S 1st St, Priest River, Idaho 83856-6765",(208) 981-1362,,Danley,Wanda,Sue,,,,,,,,,,,,,,
-"Daugherty, Clayton John",M,16,5 Aug 2008,"84 Cedar View Estates, Blanchard, Idaho 83804",(208) 306-9099,gamingwithclaytonminecraft2020@gmail.com,Daugherty,Clayton,John,,,,,,,,,,,,,,
-"Daugherty, Janice",F,74,10 Jan 1951,"84 Cedar View Estates, Blanchard, Idaho 83804",(208) 306-9058,janicedaugherty58@gmail.com,Daugherty,Janice,,,,,,,,,,,,,,,
-"Daugherty, Jennifer",F,41,7 Mar 1984,"84 Cedar View Estates, Blancharo, Idaho 83804",(208) 610-5712,,Daugherty,Jennifer,,,,,,,,,,,,,,,
-"Daugherty, Timmy",M,54,6 Jan 1971,"P. O. Box 236, 84 Cedar View Estates, Blanchard, Idaho 83804",(208) 437-0286,,Daugherty,Timmy,,,,,,,,,,,,,,,
-"Dean, Diana",F,69,24 Aug 1955,"3994 Highway 2, Priest River, Idaho 83856-8305",(509) 290-3104,prdeans@gmail.com,Dean,Diana,,,,,,,,,,,,,,,
-"Dempewolf, Autumn",F,64,8 Sep 1960,"95 East Cedar Ln, Priest River, Idaho 83856-8732",,,Dempewolf,Autumn,,,,,,,,,,,,,,,
-"Dracocardos, Annalise",F,17,26 Apr 2008,"245 Lost Creek Ln, Priest River, Idaho 83856-9358",(208) 217-0230,1direction.dracocardos@gmail.com,Dracocardos,Annalise,,,,,,,,,,,,,,,
-"Dracocardos, Jacob George Brantly",M,13,8 May 2012,"245 Lost Creek Ln, Priest River, Idaho 83856-9358",,,Dracocardos,Jacob,George,,,,,,,,,,,,,,
-"Dracocardos, Matthias",M,49,29 Jul 1975,"245 Lost Creek Ln, Priest River, Idaho 83856-9358",(575) 268-8469,mattdrac@outlook.com,Dracocardos,Matthias,,,,,,,,,,,,,,,
-"Dracocardos, Megan Elizabeth",F,47,13 Oct 1977,"245 Lost Creek Ln, Priest River, Idaho 83856-9358",(208) 217-0230,megan.dracocardos@hotmail.co.uk,Dracocardos,Megan,Elizabeth,,,,,,,,,,,,,,
-"Dracocardos, Nicholas Michael",M,14,30 Jan 2011,"245 Lost Creek Ln, Priest River, Idaho 83856-9358",,nick.dracocardos@gmail.com,Dracocardos,Nicholas,Michael,,,,,,,,,,,,,,
-"Duncan, Arlyn",M,88,27 Jul 1936,"Po Box 513, 35 McKinley, Priest River, Idaho 83856",(208) 448-1451,arlynduncan@Gmail.com,Duncan,Arlyn,,,,,,,,,,,,,,,
-"Dyer, Linda Kay",F,75,19 May 1950,"66 Kevin Ln, Oldtown, Idaho 83822-7570",(208) 651-1660,,Dyer,Linda,Kay,,,,,,,,,,,,,,
-"Eastmond, John",M,53,2 May 1972,"36 Krupp Rd, Spirit Lake, Idaho 83869",(208) 610-6851,,Eastmond,John,,,,,,,,,,,,,,,
-"Egland, Candice",F,65,30 Mar 1960,Idaho,(208) 290-5266,,Egland,Candice,,,,,,,,,,,,,,,
-"Eikanger, James",M,65,13 Feb 1960,"250 Hanaford Rd, Blanchard, Idaho 83804-5049",(208) 290-1746,,Eikanger,James,,,,,,,,,,,,,,,
-"Evenson, Tira Ann",F,55,18 May 1970,"4348 Hoo Doo Loop, Oldtown, Idaho 83822-8539",,,Evenson,Tira,Ann,,,,,,,,,,,,,,
-"Farman, Jacob",M,28,27 Jul 1996,"2891 Spirit Lake Cut Off, Spirit Lake, Idaho 83869-9623",(509) 294-8300,,Farman,Jacob,,,,,,,,,,,,,,,
-"Fisher, Harold",M,74,2 Aug 1950,"446 S. Marian Ave, Oldtown, Idaho 83822-9526",(405) 722-4702,,Fisher,Harold,,,,,,,,,,,,,,,
-"Fitzell, Andrew Melvin Wayne",M,21,12 Sep 2003,"9 Charleston Ln, Spirit Lake, Idaho 83869-0075",(208) 449-6556,tmFitzell@hotmail.com,Fitzell,Andrew,Melvin,,,,,,,,,,,,,,
-"Fitzell, James Watson Noble",M,23,9 Dec 2001,"9 Charleston Ln, Spirit Lake, Idaho 83869-0075",(208) 255-6291,jamesfitzell@outlook.com,Fitzell,James,Watson,,,,,,,,,,,,,,
-"Fitzell, Melvin James",M,68,29 Jul 1956,"9 Charleston Ln, Spirit Lake, Idaho 83869-0075",(208) 217-1202,melvinfitzell55@gmail.com,Fitzell,Melvin,James,,,,,,,,,,,,,,
-"Fitzell, Patricia Marie Bell",F,16,24 Dec 2008,"9 Charleston Ln, Spirit Lake, Idaho 83869-0075",,,Fitzell,Patricia,Marie,,,,,,,,,,,,,,
-"Fitzell, Rose Marie Lily",F,19,30 Jun 2005,"9 Charleston Ln, Spirit Lake, Idaho 83869-0075",(208) 449-6556,,Fitzell,Rose,Marie,,,,,,,,,,,,,,
-"Fitzell, Teresa Anne Elizabeth",F,25,10 Oct 1999,"9 Charleston Ln, Spirit Lake, Idaho 83869-0075",(208) 610-7039,teresafitzell@yahoo.com,Fitzell,Teresa,Anne,,,,,,,,,,,,,,
-"Fitzell, Trish Marie",F,47,27 Jan 1978,"9 Charleston Ln, Spirit Lake, Idaho 83869-0075",(208) 610-2754,tmfitzell@hotmail.com,Fitzell,Trish,Marie,,,,,,,,,,,,,,
-"Forsyth, Calvin",M,68,17 Nov 1956,"54 Hanaford Ct, Blanchard, Idaho 83804-8566",(509) 496-1352,,Forsyth,Calvin,,,,,,,,,,,,,,,
-"Gale, Elena",F,36,16 Nov 1988,"69 Hoop Loop, Priest River, Idaho 83856",(208) 610-3024,16elenas@gmail.com,Gale,Elena,,,,,,,,,,,,,,,
-"Garmon, Sethery Alex",M,40,18 Feb 1985,"133 This A Way, Spirit Lake, Washington 83869-9316",,,Garmon,Sethery,Alex,,,,,,,,,,,,,,
-"Garrison, Curtis Lamar",M,70,27 May 1955,"1966 Blanchard Elk Rd, Blanchard, Idaho 83804",,,Garrison,Curtis,Lamar,,,,,,,,,,,,,,
-"Garrison, Darren Leroy",M,60,5 Feb 1965,"25 or 382 Blanchard Cutoff, Blanchard, Idaho 83804",,,Garrison,Darren,Leroy,,,,,,,,,,,,,,
-"Gering, Buck",M,49,8 Jan 1976,"1250 Torrens Trl, Spirit Lake, Idaho 83869-5063",,,Gering,Buck,,,,,,,,,,,,,,,
-"Giggey, James Alan",M,28,22 Jan 1997,"60 Charleston lane, Spirit Lake, Idaho 83869-0075",(208) 217-5497,daethsundavr1@gmail.com,Giggey,James,Alan,,,,,,,,,,,,,,
-"Gillespie, Luana",F,71,25 Jan 1954,"33688 Hwy 41, Oldtown, Idaho 83822",(208) 437-4317,,Gillespie,Luana,,,,,,,,,,,,,,,
-"Gonzalez, Erica Eileen",F,43,28 Dec 1981,Idaho,(360) 463-9130,,Gonzalez,Erica,Eileen,,,,,,,,,,,,,,
-"Goodbrake, Cynthia",F,60,12 Jul 1964,"242 Spirit Valley Ln, Blanchard, Idaho 83804-8563",(208) 437-2093,,Goodbrake,Cynthia,,,,,,,,,,,,,,,
-"Goodbrake, John",M,30,30 Apr 1995,"242 Spirit Valley Ln, Blanchard, Idaho 83804-8563",,,Goodbrake,John,,,,,,,,,,,,,,,
-"Gould, Marlin",M,62,8 Apr 1963,"6275 Clagstone Rd, Spirit Lake, Idaho 83869-9603",,,Gould,Marlin,,,,,,,,,,,,,,,
-"Haebe, James Anthony",M,73,29 Nov 1951,"PO Box 245, Blanchard, Idaho 83804-0245",,,Haebe,James,Anthony,,,,,,,,,,,,,,
-"Haggerty, Donna Jeanne",F,64,7 Oct 1960,"234 Merry Ln, Oldtown, Idaho 83822-7522",(208) 437-2552,riverratz444@yahoo.com,Haggerty,Donna,Jeanne,,,,,,,,,,,,,,
-"Hall, Jonathan Arnold",M,50,8 Jun 1974,"322 Cram Rd, Spirit Lake, Idaho 83869",(509) 202-7615,jhall@cochraninc.com,Hall,Jonathan,Arnold,,,,,,,,,,,,,,
-"Halseth, Nathaniel David",M,24,14 Nov 2000,"234 E. 4th street s., Oldtown, Idaho 83822-9525",,,Halseth,Nathaniel,David,,,,,,,,,,,,,,
-"Hancock, Joann",F,82,30 Dec 1942,"312 Blackthorne Rd, Oldtown Id, Idaho 83822",(208) 610-2785,,Hancock,Joann,,,,,,,,,,,,,,,
-"Hansen, Jennifer",F,53,22 Oct 1971,"505 E 5th St S, Oldtown, Idaho 83822-9264",(509) 671-1973,hansenjennifer827@gmail.com,Hansen,Jennifer,,,,,,,,,,,,,,,
-"Harrah, Donna Grace",F,84,9 Oct 1940,"3138 Hwy 2, Priest River, Idaho 83856",(208) 920-9181,,Harrah,Donna,Grace,,,,,,,,,,,,,,
-"Harvey, Howard Lee",M,72,19 Mar 1953,"100 Antler Ln, Spirit Lake, Idaho 83869",(208) 623-6244,,Harvey,Howard,Lee,,,,,,,,,,,,,,
-"Hawks, Atayah Serenity",F,13,2 Jan 2012,"316 Walker Rd, Blanchard, Idaho 83804-6003",,,Hawks,Atayah,Serenity,,,,,,,,,,,,,,
-"Hawks, Erika",F,19,14 Sep 2005,"316 Walker Rd, Blanchard, Idaho 83804-6003",(208) 627-3627,Erika.hawks1@gmail.com,Hawks,Erika,,,,,,,,,,,,,,,
-"Hawks, Jair",M,49,13 Jun 1975,"316 Walker Rd, Blanchard, Idaho 83804-6003",(208) 627-3602,jamminhawks6@gmail.com,Hawks,Jair,,,,,,,,,,,,,,,
-"Hawks, Kaylynn",F,24,10 Jan 2001,"316 Walker Rd, Blanchard, Idaho 83804-6003",(509) 919-7941,Kaylynn.hawks@gmail.com,Hawks,Kaylynn,,,,,,,,,,,,,,,
-"Hawks, Margie",F,47,25 Dec 1977,"316 Walker Rd, Blanchard, Idaho 83804-6003",(208) 627-3244,jamminhawks5@gmail.com,Hawks,Margie,,,,,,,,,,,,,,,
-"Hawks, McKenna Alise",F,14,7 Oct 2010,"316 Walker Rd, Blanchard, Idaho 83804-6003",,jamminhawks5@yahoo.com,Hawks,McKenna,Alise,,,,,,,,,,,,,,
-"Heintz, Derek",M,33,3 Mar 1992,"193 Sierra Ln., p.o. box 411, Blanchard, Idaho 83804",,,Heintz,Derek,,,,,,,,,,,,,,,
-"Heintz, Dick",M,73,5 Oct 1951,"193 Sierra Ln., p.o. box 411, Blanchard, Idaho 83804",(208) 946-0937,Heintz50@AOL.com,Heintz,Dick,,,,,,,,,,,,,,,
-"Heintz, Michael",M,46,28 Oct 1978,"193 Sierra Ln., p.o. box 411, Blanchard, Idaho 83804",,,Heintz,Michael,,,,,,,,,,,,,,,
-"Henry, Vanessa Marie",F,38,14 Nov 1986,"23 Ogilvie Ln, Oldtown, Idaho 83822-7516",,,Henry,Vanessa,Marie,,,,,,,,,,,,,,
-"Herron, Coral Ann",F,73,24 Dec 1951,"44 Campbell Loop, Laclede, Idaho 83841-0109",,,Herron,Coral,Ann,,,,,,,,,,,,,,
-"Hessing, Bailey",F,23,28 Nov 2001,"984 Roberts Ln, Blanchard, Idaho 83804-9537",(208) 803-4231,baileyhessing01@gmail.com,Hessing,Bailey,,,,,,,,,,,,,,,
-"Hollett, Gary Alan",M,70,20 Feb 1955,"574 Horn Mountain Rd, Priest River, Idaho 83856-9342",(208) 660-8050,,Hollett,Gary,Alan,,,,,,,,,,,,,,
-"Howard, Kendra",F,33,17 Feb 1992,"112 Washington St, Priest River, Idaho 83856-6543",(208) 946-6594,,Howard,Kendra,,,,,,,,,,,,,,,
-"Hoyme, Louise",F,62,10 Feb 1963,"PO Box 326, Laclede, Idaho 83841-0326",(435) 469-2010,mlj1063@yahoo.com,Hoyme,Louise,,,,,,,,,,,,,,,
-"Hutchins, Rhonda",F,61,25 Apr 1964,"115 S 1st St, Priest River, Idaho 83856",(208) 428-8601,,Hutchins,Rhonda,,,,,,,,,,,,,,,
-"Isenberger, Donald Ray",M,27,12 Jul 1997,"125 Shadow Green Rd, Blanchard, Idaho 83804-8503",(503) 910-7643,ise20003@byui.edu,Isenberger,Donald,Ray,,,,,,,,,,,,,,
-"Isenberger, James Duane",M,21,29 May 2004,"125 Shadow Green Rd, Blanchard, Idaho 83804-8503",(208) 217-8948,ironmtn.jd@gmail.com,Isenberger,James,Duane,,,,,,,,,,,,,,
-"Isenberger, Jennifer",F,47,21 Mar 1978,"125 Shadow Green Rd, Blanchard, Idaho 83804-8503",(503) 910-7643,ironmtn.ji@gmail.com,Isenberger,Jennifer,,,,,,,,,,,,,,,
-"Isenberger, Merrik Gene",M,18,28 Jan 2007,"125 Shadow Green Rd, Blanchard, Idaho 83804-8503",,ironmtn.mgi@gmail.com,Isenberger,Merrik,Gene,,,,,,,,,,,,,,
-"Isenberger, Michael",M,47,19 Nov 1977,"125 Shadow Green Rd, Blanchard, Idaho 83804-8503",(503) 910-7643,ironmtn.mike@gmail.com,Isenberger,Michael,,,,,,,,,,,,,,,
-"Isenberger, Serena Lind",F,7,18 Sep 2017,"125 Shadow Green Rd, Blanchard, Idaho 83804-8503",,,Isenberger,Serena,Lind,,,,,,,,,,,,,,
-"Jansen, Judy Ellend",F,71,15 May 1954,"676 S Rena Rd, Oldtown, Idaho 83822-8510",(208) 582-1096,,Jansen,Judy,Ellend,,,,,,,,,,,,,,
-"Jennings, Jon Jay",M,43,15 Oct 1981,Idaho,,,Jennings,Jon,Jay,,,,,,,,,,,,,,
-"Johnsen, Catherine",F,27,9 Dec 1997,"205 Cottonwood Crk, Priest River, Idaho 83856-8874",,,Johnsen,Catherine,,,,,,,,,,,,,,,
-"Johnson, Brad",M,58,20 Feb 1967,"327 High Meadow Dr, Priest River, Idaho 83856-6773",,,Johnson,Brad,,,,,,,,,,,,,,,
-"Johnson, Colleen",F,62,23 Jan 1963,"255 Campbell Loop, Laclede, Idaho 83841-0137",(208) 610-2425,colleenjohnson86@gmail.com,Johnson,Colleen,,,,,,,,,,,,,,,
-"Johnson, Darrin",M,60,23 Feb 1965,"240 Leaning Firs Ln, Priest River, Idaho 83856-9382",(208) 304-0086,,Johnson,Darrin,,,,,,,,,,,,,,,
-"Johnson, Jack",M,78,28 Oct 1946,"Po Box 1595, 667 Hoop Loop Road, Priest River, Idaho 83856",(208) 448-2396,,Johnson,Jack,,,,,,,,,,,,,,,
-"Johnson, Jeanne Michelle",F,51,28 Dec 1973,"62 La Luna Ln, Spirit Lake, Idaho 83869-0019",(484) 802-8643,jgonzalez127@yahoo.com,Johnson,Jeanne,Michelle,,,,,,,,,,,,,,
-"Johnson, Joshua Dan",M,49,23 May 1976,"62 La Luna Ln, Spirit Lake, Idaho 83869-0019",(610) 622-0299,ObjectsUnlimited@gmail.com,Johnson,Joshua,Dan,,,,,,,,,,,,,,
-"Johnson, Joshua Ladd",M,23,6 Apr 2002,"62 La Luna Ln, Spirit Lake, Idaho 83869-0019",,,Johnson,Joshua,Ladd,,,,,,,,,,,,,,
-"Johnson, Karen Sue",F,60,18 Jun 1964,"240 Leaning Firs Ln, Priest River, Idaho 83856-9382",(208) 597-5932,weebleswabbles37@gmail.com,Johnson,Karen,Sue,,,,,,,,,,,,,,
-"Johnson, Mark",M,62,7 Jan 1963,"255 Campbell Loop, Laclede, Idaho 83841-0137",(208) 610-2445,bonner.bailiff.1@gmail.com,Johnson,Mark,,,,,,,,,,,,,,,
-"Jones, Dustin Roger",M,39,6 Jun 1985,"619 S State Ave, Oldtown, Idaho 83822-9553",(208) 520-4187,,Jones,Dustin,Roger,,,,,,,,,,,,,,
-"Jones, Tyler Roy",M,27,28 Sep 1997,"34 Church St, Priest River, Idaho 83856-6544",(208) 792-8828,whatsup1494@gmail.com,Jones,Tyler,Roy,,,,,,,,,,,,,,
-"Jordan, Duane",M,56,7 Sep 1968,"923 Ediah Rd, Spirit Lake, Idaho 83869",(503) 397-4425,,Jordan,Duane,,,,,,,,,,,,,,,
-"Jose, Gloria",F,77,2 Mar 1948,"102 Wild Meadow, Spirt Lake, Idaho 83869",(208) 263-8277,,Jose,Gloria,,,,,,,,,,,,,,,
-"Kamphaus, Jeff",M,34,9 Jul 1990,"2891 Spirit Lake Cut Off, Spirit Lake, Idaho 83869-9623",(208) 625-8583,,Kamphaus,Jeff,,,,,,,,,,,,,,,
-"Keenan, Patrick",M,48,20 Sep 1976,"164 Rhubarb Jct, Oldtown, Idaho 83822-7529",(509) 240-4768,,Keenan,Patrick,,,,,,,,,,,,,,,
-"Kelley, Julia",F,35,22 Feb 1990,"465 Outback Loop, Spirit Lake, Idaho 83869-8602",,,Kelley,Julia,,,,,,,,,,,,,,,
-"Kelly, Alaina",F,30,19 Nov 1994,"30 Akre Dr, Blanchard, Idaho 83804-5010",(661) 972-1012,,Kelly,Alaina,,,,,,,,,,,,,,,
-"Kelsey, William Kenneth",M,33,19 Dec 1991,"60 Charleston Ln, Spirit Lake, Idaho 83869-0075",(559) 940-0329,,Kelsey,William,Kenneth,,,,,,,,,,,,,,
-"Kesler, Amelia Grace",F,18,5 Sep 2006,Idaho,(208) 970-0571,amelia.kesler@icloud.com,Kesler,Amelia,Grace,,,,,,,,,,,,,,
-"Kesler, Aspen Marie",F,11,4 Jul 2013,Idaho,,becky.kesler@hotmail.com,Kesler,Aspen,Marie,,,,,,,,,,,,,,
-"Kesler, Becky",F,44,14 Jan 1981,Idaho,(208) 690-9787,becky.kesler@hotmail.com,Kesler,Becky,,,,,,,,,,,,,,,
-"Kesler, Elizabeth Faith",F,13,20 Jul 2011,Idaho,(208) 690-9787,,Kesler,Elizabeth,Faith,,,,,,,,,,,,,,
-"Kesler, Mike",M,41,27 Dec 1983,Idaho,(208) 709-9875,mike_kesler1@hotmail.com,Kesler,Mike,,,,,,,,,,,,,,,
-"Kesler, Naomi Rose",F,11,11 Aug 2013,Idaho,(208) 690-9787,becky.kesler@hotmail.com,Kesler,Naomi,Rose,,,,,,,,,,,,,,
-"Kesler, Rachel Hope",F,15,14 Sep 2009,Idaho,(208) 690-9787,rachelhopekesler@icloud.com,Kesler,Rachel,Hope,,,,,,,,,,,,,,
-"Kesler, Rifle Rees",M,13,12 Dec 2011,Idaho,,riflekesler@icloud.com,Kesler,Rifle,Rees,,,,,,,,,,,,,,
-"Kesler, Tucker Ezra",M,16,25 Apr 2009,Idaho,,mike_kesler1@hotmail.com,Kesler,Tucker,Ezra,,,,,,,,,,,,,,
-"Kidd, Alex",F,33,3 Apr 1992,"372 Campbell Point Rd, Laclede, Idaho 83841-0140",(208) 610-7610,alexandria.peterson@icloud.com,Kidd,Alex,,,,,,,,,,,,,,,
-"Kidd, Asher Kam",M,8,18 Apr 2017,"372 Campbell Point Rd, Laclede, Idaho 83841-0140",,,Kidd,Asher,Kam,,,,,,,,,,,,,,
-"Kidd, Konnor Robert",M,3,6 Feb 2022,"372 Campbell Point Rd, Laclede, Idaho 83841-0140",,,Kidd,Konnor,Robert,,,,,,,,,,,,,,
-"Kidd, Shane",M,33,23 Mar 1992,"372 Campbell Point Rd, Laclede, Idaho 83841-0140",(208) 610-7610,nor.ida1992@gmail.com,Kidd,Shane,,,,,,,,,,,,,,,
-"Kinney, Sharon",F,63,5 Apr 1962,"264 Mansours Pl, Oldtown, Idaho 83822",(913) 268-3223,,Kinney,Sharon,,,,,,,,,,,,,,,
-"Kitchin, Cozy",F,70,26 Apr 1955,"2654 E Hwy 2 space 12, oldtown, Idaho 83822",(208) 714-2041,,Kitchin,Cozy,,,,,,,,,,,,,,,
-"Kitchin, Dannelle Marie",F,13,9 Feb 2012,"2654 Highway 2, Spc 12, Oldtown, Idaho 83822-9214",,,Kitchin,Dannelle,Marie,,,,,,,,,,,,,,
-"Kitchin, Richard",M,53,15 Apr 1972,"2654 Highway 2, Spc 12, Oldtown, Idaho 83822-9214",(509) 589-0724,rchkitchin@yahoo.com,Kitchin,Richard,,,,,,,,,,,,,,,
-"Knaack, Braxton Lee",M,16,22 Jan 2009,"604 E. 4th Street, Oldtown, Idaho 83822",(208) 755-1904,,Knaack,Braxton,Lee,,,,,,,,,,,,,,
-"Knaack, Hudson James",M,12,31 May 2013,"604 E. 4th Street, Oldtown, Idaho 83822",,,Knaack,Hudson,James,,,,,,,,,,,,,,
-"Knaack, Kyler Christopher",M,13,7 Oct 2011,"604 E. 4th Street, Oldtown, Idaho 83822",(208) 755-1104,,Knaack,Kyler,Christopher,,,,,,,,,,,,,,
-"Knaack, Nikki",F,41,8 Sep 1983,"604 E. 4th Street, Oldtown, Idaho 83822",(208) 755-1904,Knaackfamily@yahoo.com,Knaack,Nikki,,,,,,,,,,,,,,,
-"Kramer, Renee Lyn",F,49,4 Jul 1975,"82 S. 2nd ST., Priest River, Idaho 83856",,,Kramer,Renee,Lyn,,,,,,,,,,,,,,
-"Krogh, Chad",M,41,22 Sep 1983,"75 Fairway Dr, Blanchard, Idaho 83804-8557",(801) 634-5593,,Krogh,Chad,,,,,,,,,,,,,,,
-"Lane, Nancy",F,72,11 Jun 1952,"402 Cedar View Ests Rd, Blanchard, Idaho 83804",(208) 255-0961,,Lane,Nancy,,,,,,,,,,,,,,,
-"Lawrence, Daniel",M,64,6 Feb 1961,"540 N Riley CRK, Laclede, Idaho 83841",(208) 255-5217,,Lawrence,Daniel,,,,,,,,,,,,,,,
-"Le Blanc, Dan",M,81,14 Aug 1943,"103C Chardonnay dr, Blanchard, Idaho 83804",(208) 217-8078,,Le Blanc,Dan,,,,,,,,,,,,,,,
-"Le Blanc, Donna",F,80,25 Nov 1944,"103C Chardonnay dr, Blanchard, Idaho 83804",(208) 217-8078,,Le Blanc,Donna,,,,,,,,,,,,,,,
-"Leininger, Lee Wayne",M,87,17 May 1938,"137 Dreamcatcher Ln, Spirit Lake, Idaho 83869-7002",,,Leininger,Lee,Wayne,,,,,,,,,,,,,,
-"Leitch, Hannah Lee",F,17,28 Jul 2007,"365 Jack's Pl, Oldtown, Idaho 83822",,kacole26@aol.com,Leitch,Hannah,Lee,,,,,,,,,,,,,,
-"Leitch, Wes",M,38,14 Sep 1986,"365 Jack's Pl, Oldtown, Idaho 83822",(425) 289-6728,westonleitch@gmail.com,Leitch,Wes,,,,,,,,,,,,,,,
-"Littlefield, Carl",M,63,17 Apr 1962,Idaho,(360) 250-2256,carl.littlefield@gmail.com,Littlefield,Carl,,,,,,,,,,,,,,,
-"Littlefield, Shannon",F,54,23 Jun 1970,Idaho,(360) 250-2252,idaho.7b@hotmail.com,Littlefield,Shannon,,,,,,,,,,,,,,,
-"Lobdell, Alice",F,68,13 Jan 1957,"PO BOX 4, BLANCHARD, Idaho 83804-0004",(208) 437-0115,,Lobdell,Alice,,,,,,,,,,,,,,,
-"Lupton, Ashley",F,36,19 Jul 1988,"186 Bearing Tree Ln, Spirit Lake, Idaho 83869-0079",,,Lupton,Ashley,,,,,,,,,,,,,,,
-"Lupton, Brian",M,60,12 Aug 1964,"186 Bearing Tree Ln, Spirit Lake, Idaho 83869-0079",(208) 627-3071,brianlupton186@gmail.com,Lupton,Brian,,,,,,,,,,,,,,,
-"Lupton, Jennifer",F,59,19 Aug 1965,"186 Bearing Tree Ln, Spirit Lake, Idaho 83869-0079",(626) 695-5730,luptonbj4@gmail.com,Lupton,Jennifer,,,,,,,,,,,,,,,
-"Luttrell, Jerry",M,60,14 Mar 1965,"6275 Kelso Lake Rd, Athol, Idaho 83801-9237",(775) 209-5264,Jerrylutt@gmail.com,Luttrell,Jerry,,,,,,,,,,,,,,,
-"Madan, Edmond",M,48,26 Oct 1976,"188 Laclede Shores Dr, Laclede, Idaho 83841",(208) 610-0201,,Madan,Edmond,,,,,,,,,,,,,,,
-"Maiava, Annie",F,35,16 Mar 1990,"186 Bearing Tree Ln, Spirit Lake, Idaho 83869-0079",(808) 726-0464,annie.polvado08@gmail.com,Maiava,Annie,,,,,,,,,,,,,,,
-"Maiava, Kaisa",M,13,17 Sep 2011,"186 Bearing Tree Ln, Spirit Lake, Idaho 83869-0079",,,Maiava,Kaisa,,,,,,,,,,,,,,,
-"Maiava, Roby Salesa Marcus Keola Polvado",M,16,26 Feb 2009,"186 Bearing Tree Ln, Spirit Lake, Idaho 83869-0079",,,Maiava,Roby,Salesa,,,,,,,,,,,,,,
-"Maiava, Tiloi",M,8,27 Mar 2017,"186 Bearing Tree Ln, Spirit Lake, Idaho 83869-0079",,,Maiava,Tiloi,,,,,,,,,,,,,,,
-"Maiava, TK",M,34,3 Apr 1991,"186 Bearing Tree Ln, Spirit Lake, Idaho 83869-0079",(808) 726-0463,maiava.96762@gmail.com,Maiava,TK,,,,,,,,,,,,,,,
-"Maines, Burt",M,48,27 Aug 1976,"792 Hoo Doo Mountain Rd, Priest River, Idaho 83856-7797",(208) 755-1006,,Maines,Burt,,,,,,,,,,,,,,,
-"Mangum, Braiden Douglas",M,19,24 Jun 2005,"34512 Highway 41, Oldtown, Idaho 83822-9225",(402) 380-1757,braidenmangum2005@gmail.com,Mangum,Braiden,Douglas,,,,,,,,,,,,,,
-"Mangum, Jillian",F,39,25 Jan 1986,"34512 Highway 41, Oldtown, Idaho 83822-9225",,,Mangum,Jillian,,,,,,,,,,,,,,,
-"Marti, Harry",M,42,9 Jul 1982,"312 S. Rena Rd., Oldtown, Idaho 83822",,,Marti,Harry,,,,,,,,,,,,,,,
-"Martin, Robert Chad",M,65,23 Jun 1959,"625 E 4th St S, Oldtown, Idaho 83822",(208) 437-2021,,Martin,Robert,Chad,,,,,,,,,,,,,,
-"McCollum, Anne-Marie",F,81,9 Jul 1943,"943 Coyote Song, PObox 307, Priest River, Idaho 83856-0307",(208) 610-8318,ldannemcc@gmail.com,McCollum,Anne-Marie,,,,,,,,,,,,,,,
-"McEvers, Jesse Ray",M,53,31 Aug 1971,"7265 Kelso Lake Rd, Athol, Idaho 83801",(208) 290-7751,,McEvers,Jesse,Ray,,,,,,,,,,,,,,
-"McGrew, Barbara Luann",F,70,28 Oct 1954,"244 Eldenburg Rd, Priest River, Idaho 83856-7758",(661) 992-0168,brbrmcgre@aol.com,McGrew,Barbara,Luann,,,,,,,,,,,,,,
-"McKee, Cole Andrew",M,22,19 Sep 2002,"346 Saunders Rd, Blanchard, Idaho 83804-7032",(541) 678-2137,,McKee,Cole,Andrew,,,,,,,,,,,,,,
-"McKee, Michael Bryan",M,59,21 Jul 1965,"346 Saunders Rd, Blanchard, Idaho 83804-7032",(541) 678-2137,mmbcole7@aol.com,McKee,Michael,Bryan,,,,,,,,,,,,,,
-"McKee, Michael Bryan II",M,27,5 Jan 1998,"346 Saunders Rd, Blanchard, Idaho 83804-7032",(541) 678-0143,mymikes123@gmail.com,McKee,Michael,Bryan,,,,,,,,,,,,,,
-"McKee, Tracy Lynne",F,61,27 Aug 1963,"346 Saunders Rd, Blanchard, Idaho 83804-7032",(541) 678-2138,,McKee,Tracy,Lynne,,,,,,,,,,,,,,
-"Meatoga, Hailey",F,35,20 Apr 1990,"186 Bearing Tree Ln, Spirit Lake, Idaho 83869-0079",(626) 340-6142,hailey.lupton@yahoo.com,Meatoga,Hailey,,,,,,,,,,,,,,,
-"Meatoga, Kili",F,1,30 Nov 2023,"186 Bearing Tree Ln, Spirit Lake, Idaho 83869-0079",,,Meatoga,Kili,,,,,,,,,,,,,,,
-"Meatoga, Paul",M,33,20 Jul 1991,"186 Bearing Tree Ln, Spirit Lake, Idaho 83869-0079",(808) 293-5609,pmeatoga@gmail.com,Meatoga,Paul,,,,,,,,,,,,,,,
-"Moon, Earl",M,77,25 Feb 1948,"PO Box 207, Blanchard, Idaho 83804",(208) 661-6066,,Moon,Earl,,,,,,,,,,,,,,,
-"Moren, Charles Leslie",M,75,6 Nov 1949,Idaho,(360) 303-0382,LesMoren@gmail.com,Moren,Charles,Leslie,,,,,,,,,,,,,,
-"Morgan, Debra Lee",F,71,13 Feb 1954,"236 Saunders Rd, Blanchard, Idaho 83804",(208) 437-3610,,Morgan,Debra,Lee,,,,,,,,,,,,,,
-"Moss, Rhiannon",F,34,27 Sep 1990,"120 E 6th St S, Oldtown, Idaho 83822-9602",(509) 671-6985,,Moss,Rhiannon,,,,,,,,,,,,,,,
-"Mostoller, Ed",M,76,13 Jul 1948,Idaho,(208) 437-0535,,Mostoller,Ed,,,,,,,,,,,,,,,
-"Mostoller, Rose",F,64,17 May 1961,Idaho,(208) 437-0535,,Mostoller,Rose,,,,,,,,,,,,,,,
-"Myrvang, Anna",F,85,24 Jan 1940,"75 Fairway Dr. #3, Blanchard, Idaho 83804",(208) 215-0055,,Myrvang,Anna,,,,,,,,,,,,,,,
-"Myrvang, Bryce",M,42,19 Apr 1983,"231 Stoneridge Rd, Blanchard, Idaho 83804-9505",(360) 447-6650,telcontar75@gmail.com,Myrvang,Bryce,,,,,,,,,,,,,,,
-"Myrvang, Kristin",F,39,15 Dec 1985,"231 Stoneridge Rd, Blanchard, Idaho 83804-9505",(208) 304-2588,yountkids@gmail.com,Myrvang,Kristin,,,,,,,,,,,,,,,
-"Myrvang, Malcolm Alan",M,6,2 Jan 2019,"231 Stoneridge Rd, Blanchard, Idaho 83804-9505",,,Myrvang,Malcolm,Alan,,,,,,,,,,,,,,
-"Myrvang, Mazlynn Oleah",F,3,30 Jul 2021,"231 Stoneridge Rd, Blanchard, Idaho 83804-9505",,,Myrvang,Mazlynn,Oleah,,,,,,,,,,,,,,
-"Myrvang, Melynda",F,39,1 Nov 1985,"474 Stoneridge Rd, Blanchard, Idaho 83804-9526",(208) 651-9932,melynda.myrvang@hotmail.com,Myrvang,Melynda,,,,,,,,,,,,,,,
-"Myrvang, Olaf Leeroy",M,86,2 Mar 1939,"75 Fairway Dr. #3, Blanchard, Idaho 83804",(208) 215-0055,,Myrvang,Olaf,Leeroy,,,,,,,,,,,,,,
-"Myrvang, Rodney",M,65,20 May 1960,"474 Stoneridge Rd., Blanchard, Idaho 83804",(208) 340-6344,Rod.myrvang@gmail.com,Myrvang,Rodney,,,,,,,,,,,,,,,
-"Myrvang, Sheila",F,61,10 Nov 1963,"474 Stoneridge Rd., Blanchard, Idaho 83804",(208) 640-0444,Sheila.myrvang@gmail.com,Myrvang,Sheila,,,,,,,,,,,,,,,
-"Naegle, Ronald Wayne",M,84,30 Nov 1940,"52 Womack Rd, Oldtown, Idaho 83822",(909) 772-3628,,Naegle,Ronald,Wayne,,,,,,,,,,,,,,
-"Nash, Kevin Allen",M,61,30 Oct 1963,"1951 Blanchard Elk Rd, Blanchard, Idaho 83804",(208) 437-0267,,Nash,Kevin,Allen,,,,,,,,,,,,,,
-"Naylor, Michael",M,69,22 Jan 1956,"443 Meadowlark Ln, Old Town, Idaho 83822",,,Naylor,Michael,,,,,,,,,,,,,,,
-"Neil, BJ",M,42,1 Sep 1982,"9 Mansour Rd, PO Box 1266, Newport, Washington 99156",(208) 946-7065,bajeepers@hotmail.com,Neil,BJ,,,,,,,,,,,,,,,
-"Nelson, Ben",M,42,19 Dec 1982,"5498 Spirit Lake Cut Off, Spirit Lake, Idaho 83869-9636",(509) 592-6687,2worlds1fate@gmail.com,Nelson,Ben,,,,,,,,,,,,,,,
-"Nelson, Brian",M,42,19 Dec 1982,"5498 Spirit Lake Cut Off, Spirit Lake, Idaho 83869-9636",(208) 217-3019,castlestokingdoms@gmail.com,Nelson,Brian,,,,,,,,,,,,,,,
-"Nelson, Cecil",F,41,12 Nov 1983,"1332 US-2, Old Town, Idaho",(509) 294-5609,,Nelson,Cecil,,,,,,,,,,,,,,,
-"Nelson, Lorraine",F,93,17 Aug 1931,Idaho,(208) 437-3610,logcabinannie@yahoo.com,Nelson,Lorraine,,,,,,,,,,,,,,,
-"Nelson, Patty",F,64,17 Jan 1961,"464 Rockview Dr, Priest River, Idaho 83856-9763",(208) 290-6195,Lgnkd7ejm1@gmail.com,Nelson,Patty,,,,,,,,,,,,,,,
-"Nowland, Kim",F,64,16 Aug 1960,Idaho,(208) 437-3126,,Nowland,Kim,,,,,,,,,,,,,,,
-"Painter, Aries Albert Ellis",M,26,25 Nov 1998,"504 Krupps Rd, PO Box 1245, Spirit Lake, Idaho 83869",,,Painter,Aries,Albert,,,,,,,,,,,,,,
-"Painter, Lisa",F,66,16 Oct 1958,"504 Krupps Rd, PO Box 1245, Spirit Lake, Idaho 83869",(208) 623-2857,,Painter,Lisa,,,,,,,,,,,,,,,
-"Peterson, Kathline",F,70,22 Apr 1955,"96 Mountain View Rd, Blanchard, Idaho 83804",,,Peterson,Kathline,,,,,,,,,,,,,,,
-"Petrick, Blake",M,51,2 Mar 1974,"106 Stewart Dr, Blanchard, Idaho 83804-8553",(208) 916-4666,bzpetrick@yahoo.com,Petrick,Blake,,,,,,,,,,,,,,,
-"Petrick, Lindsey Nichole",F,32,14 Apr 1993,"106 Stewart Dr, Blanchard, Idaho 83804-8553",,Lindseynbarre@gmail.com,Petrick,Lindsey,Nichole,,,,,,,,,,,,,,
-"Pitman, Lavere Baron",M,74,11 Jun 1950,"297 Lakeview Dr, Blanchard, Idaho 83856",(208) 437-4885,,Pitman,Lavere,Baron,,,,,,,,,,,,,,
-"Potts, Shania Llyn",F,28,16 Dec 1996,"145 Dinger Ln, Priest River, Idaho 83856-7708",,,Potts,Shania,Llyn,,,,,,,,,,,,,,
-"Raley, Barbara Jean",F,65,6 Oct 1959,"151 Chip N Dale Rd, Priest River, Idaho 83856",,,Raley,Barbara,Jean,,,,,,,,,,,,,,
-"Reese, Aidan James Norman",M,7,31 May 2018,"921 HUNTER RD, PO Box 278, BLANCHARD, Idaho 83804-0019",,,Reese,Aidan,James,,,,,,,,,,,,,,
-"Reese, Amber Lynn",F,10,26 Apr 2015,"921 HUNTER RD, PO Box 278, BLANCHARD, Idaho 83804-0019",(801) 979-6798,,Reese,Amber,Lynn,,,,,,,,,,,,,,
-"Reese, Angela Emily",F,57,6 Nov 1967,"169 Shelby Rd, Laclede, Idaho 83841-0320",(360) 357-9234,,Reese,Angela,Emily,,,,,,,,,,,,,,
-"Reese, Atlas Henry",M,5,11 Jul 2019,"921 HUNTER RD, PO Box 278, BLANCHARD, Idaho 83804-0019",,,Reese,Atlas,Henry,,,,,,,,,,,,,,
-"Reese, Danny",M,60,4 Aug 1964,"188 Rena Rd, Oldtown, Idaho 83822-8501",,,Reese,Danny,,,,,,,,,,,,,,,
-"Reese, James Tallen",M,57,17 May 1968,"169 Shelby Rd, Laclede, Idaho 83841-0320",(360) 357-9234,,Reese,James,Tallen,,,,,,,,,,,,,,
-"Remsburg, Donald Lee",M,61,8 Apr 1964,"2656 Clagstone, Clagstone, Idaho",(208) 255-6691,,Remsburg,Donald,Lee,,,,,,,,,,,,,,
-"Reynolds, Diane Arlene",F,69,1 May 1956,"5180 Old Priest River Rd, Priest River, Idaho",,,Reynolds,Diane,Arlene,,,,,,,,,,,,,,
-"Reynolds, Tim",M,48,18 Jun 1976,"Po Box 1617, 1343Hoop Loop Rd, Priest River, Idaho 83856",,,Reynolds,Tim,,,,,,,,,,,,,,,
-"Reynolds, Tony",M,51,24 Nov 1973,"Po Box 1617, 1343Hoop Loop Rd, Priest River, Idaho 83856",(208) 448-1552,,Reynolds,Tony,,,,,,,,,,,,,,,
-"Rife, Mary Kay",F,66,18 Jul 1958,"496 Elk Meadows, Blanchard, Idaho 83804",,,Rife,Mary,Kay,,,,,,,,,,,,,,
-"Rogers, Benjamin",M,22,22 Mar 2003,"37 Markham Ct, Priest River, Idaho 83856-9306",(208) 789-4391,benj.j.rogers22@gmail.com,Rogers,Benjamin,,,,,,,,,,,,,,,
-"Routt, Brian Patric",M,32,27 Jul 1992,"100 South McKinley Apt. # 204, Priest River, Idaho 83856",,,Routt,Brian,Patric,,,,,,,,,,,,,,
-"Russell, Jordyn Taylor",F,27,6 Mar 1998,"465 Outback Loop, Spirit Lake, Idaho 83869-8602",(208) 255-9970,ruskelley7@gmail.com,Russell,Jordyn,Taylor,,,,,,,,,,,,,,
-"Russell, Paul Calvin",M,62,20 Aug 1962,"187 Wakena Ln, Priest River, Idaho 83856-7734",,,Russell,Paul,Calvin,,,,,,,,,,,,,,
-"Russell, Renee' Diane",F,62,17 Dec 1962,"187 Wakena Ln, Priest River, Idaho 83856-7734",,,Russell,Renee',Diane,,,,,,,,,,,,,,
-"Savage, Robert",M,64,17 Sep 1960,"301 S. Grover Ave., Old Town, Idaho 83822",(208) 437-4274,,Savage,Robert,,,,,,,,,,,,,,,
-"Scholtz, Paul Emanuel Leonard",M,35,29 Jun 1989,"Po Box 865, Priest River, Idaho 83856-",(208) 448-2680,schu6059@vandals.uidaho.edu,Scholtz,Paul,Emanuel,,,,,,,,,,,,,,
-"Schultz, Richard",M,74,13 Feb 1951,"3966 Hyway 2, Priest River, Idaho 83856",(208) 217-8751,richardschultz971@gmail.com,Schultz,Richard,,,,,,,,,,,,,,,
-"Sedgwick, Christian",M,53,22 Mar 1972,"271 Pine Haven Road, Spirit Lake, Idaho 83869",,,Sedgwick,Christian,,,,,,,,,,,,,,,
-"Sedgwick, Megan",F,30,17 Feb 1995,"271 Pinehaven Rd, Priest River, Idaho 83856",(208) 926-4758,,Sedgwick,Megan,,,,,,,,,,,,,,,
-"Sedgwick, Rhonda",F,54,26 Nov 1970,"271 Pine Haven Road, Spirit Lake, Idaho 83869",(208) 255-4125,crsdgwck@yahoo.com,Sedgwick,Rhonda,,,,,,,,,,,,,,,
-"Sedgwick, Sean",M,28,18 Feb 1997,"271 Pine Haven Road, Spirit Lake, Idaho 83869",,,Sedgwick,Sean,,,,,,,,,,,,,,,
-"Shalkowski, Sarah Deanne",F,42,14 Oct 1982,"825 Shamar Dr, Blanchard, Idaho 83804-5005",(360) 337-0493,,Shalkowski,Sarah,Deanne,,,,,,,,,,,,,,
-"Shanholtzer, Theresa",F,58,3 May 1967,"468 Mountain View Rd, Blanchard, Idaho 83804-8544",(360) 697-4182,,Shanholtzer,Theresa,,,,,,,,,,,,,,,
-"Sheck, Sonja",F,69,12 Jun 1955,"565 Grove Addition, Oldtown, Idaho 83822",(208) 437-4076,,Sheck,Sonja,,,,,,,,,,,,,,,
-"Shepherd, Benjamin",M,27,7 Jun 1997,"106 Mason Rd, Blanchard, Idaho 83804-7001",(208) 818-8909,benjamintshep@gmail.com,Shepherd,Benjamin,,,,,,,,,,,,,,,
-"Shepherd, Donald Jim",M,42,23 Oct 1982,"702 S Rena Rd, Oldtown, Idaho 83822-8508",(928) 380-1181,,Shepherd,Donald,Jim,,,,,,,,,,,,,,
-"Shepherd, Forrest Rock",M,0,17 Jan 2025,"106 Mason Rd, Blanchard, Idaho 83804-7001",,,Shepherd,Forrest,Rock,,,,,,,,,,,,,,
-"Shepherd, Hudson Bleu",M,4,5 Nov 2020,"106 Mason Rd, Blanchard, Idaho 83804-7001",,,Shepherd,Hudson,Bleu,,,,,,,,,,,,,,
-"Shepherd, Rebekah Rose",F,27,6 Nov 1997,"106 Mason Rd, Blanchard, Idaho 83804-7001",(208) 818-9284,rebekahroseb@gmail.com,Shepherd,Rebekah,Rose,,,,,,,,,,,,,,
-"Shuck, Avril",F,40,9 Oct 1984,"181 Lake Veiw Dr., Blanchard, Idaho 83804",(509) 998-9386,hite_three@yahoo.com,Shuck,Avril,,,,,,,,,,,,,,,
-"Simmons, Connie Francine",F,80,7 Dec 1944,"206 Merry Ln, Oldtown, Idaho 83822-7522",(702) 234-3484,simm1944@outlook.com,Simmons,Connie,Francine,,,,,,,,,,,,,,
-"Smiley, Sean",M,35,2 Feb 1990,"17278 Dufort Rd, Priest River, Idaho 83856-5091",(208) 304-6689,sean_smiley_ranger@yahoo.com,Smiley,Sean,,,,,,,,,,,,,,,
-"Smith, James",M,71,29 Dec 1953,"24170 Highway 41, Blanchard, Idaho 83804-5024",(206) 850-8295,,Smith,James,,,,,,,,,,,,,,,
-"Sommer, Austin",M,33,2 Jan 1992,"190 Turner Rd., Priest River, Idaho 83856",,,Sommer,Austin,,,,,,,,,,,,,,,
-"Sommer, Michelle",F,57,16 Jun 1967,"190 Turner Rd., Priest River, Idaho 83856",,,Sommer,Michelle,,,,,,,,,,,,,,,
-"Sorensen, Bradley",M,21,13 Sep 2003,"179 McDonald Creek Rd, Blanchard, Idaho 83804-9548",(385) 315-0252,bradsorensen1040@yahoo.com,Sorensen,Bradley,,,,,,,,,,,,,,,
-"Sorensen, Marc John",M,42,5 Jun 1982,"179 McDonald Creek Rd, Blanchard, Idaho 83804-9548",(801) 592-6263,marcsorensen.ms@gmail.com,Sorensen,Marc,John,,,,,,,,,,,,,,
-"Sparks, Ernie Daniel",M,59,17 May 1966,Idaho,,,Sparks,Ernie,Daniel,,,,,,,,,,,,,,
-"Sproul, Kyle Ray",M,36,2 Mar 1989,"645 N Cedar View Estates Rd, Blanchard, Idaho 83804-8568",(208) 568-0081,,Sproul,Kyle,Ray,,,,,,,,,,,,,,
-"Sproul, Vonnell Faith",F,80,7 Feb 1945,"51 Forge Way, Blanchard, Idaho 83804-1006",(208) 582-6642,mamavonnell@gmail.com,Sproul,Vonnell,Faith,,,,,,,,,,,,,,
-"Stagner, Cassandra Lynn",F,33,2 May 1992,"10069 Kelsolake Rd, Priest River, Idaho 83856",,,Stagner,Cassandra,Lynn,,,,,,,,,,,,,,
-"Stagner, Hannah",F,36,19 May 1989,"10069 Kelsolake Rd, Priest River, Idaho 83856",,,Stagner,Hannah,,,,,,,,,,,,,,,
-"Stagner, Hilary",F,56,25 Jun 1968,"10069 Kelsolake Rd, Priest River, Idaho 83856",(208) 290-1270,,Stagner,Hilary,,,,,,,,,,,,,,,
-"Stamey, James Thomas",M,88,29 Apr 1937,"84 Cedar View Estates Rd, Blanchard, Idaho 83804-9582",(208) 265-9299,,Stamey,James,Thomas,,,,,,,,,,,,,,
-"Stamey, Jamie Lynn",F,48,18 Mar 1977,"545 Krupp Rd, Spirit Lake, Idaho 83869",,,Stamey,Jamie,Lynn,,,,,,,,,,,,,,
-"Steinbrenner, Craig",M,58,14 Jan 1967,"361 Spirit Lake Cut Off, Spirit Lake, Idaho 83869-7009",(208) 263-1212,,Steinbrenner,Craig,,,,,,,,,,,,,,,
-"Stokes, Blair Wayne",M,45,7 Apr 1980,"3472 Vay Rd, Priest River, Idaho 83856",,,Stokes,Blair,Wayne,,,,,,,,,,,,,,
-"Streeter, Michael John",M,70,10 May 1955,"495 Hoop Loop Rd, Priest River, Idaho 83856-8763",(208) 610-5450,,Streeter,Michael,John,,,,,,,,,,,,,,
-"Streeter, Raylene",F,69,17 Feb 1956,"495 Hoop Loop Rd, Priest River, Idaho 83856-8763",,wildrose_34540@hotmail.com,Streeter,Raylene,,,,,,,,,,,,,,,
-"Strong, Clay Vilas",M,57,25 Jun 1967,"PO BOX 3613, 2234 Hoodoo Loop, OLDTOWN, Idaho 83822",,,Strong,Clay,Vilas,,,,,,,,,,,,,,
-"Stumm, Eric",M,42,13 Jul 1982,"3108 Bandy RD., Priest River, Idaho 83856",(208) 255-8839,,Stumm,Eric,,,,,,,,,,,,,,,
-"Thompson, Marie",F,87,3 Oct 1937,"38368 Highway 41, Oldtown, Idaho 83822-9200",(253) 381-9596,,Thompson,Marie,,,,,,,,,,,,,,,
-"Thornbrugh, Dallas Angel Mae",F,36,8 Sep 1988,"375 Hooper Ln, Oldtown, Idaho 83822-7547",,,Thornbrugh,Dallas,Angel,,,,,,,,,,,,,,
-"Thornbrugh, JT",M,33,31 Mar 1992,"375 Hooper Ln, Oldtown, Idaho 83822-7547",(425) 318-6151,,Thornbrugh,JT,,,,,,,,,,,,,,,
-"Thornbrugh, Laura Lynne",F,57,14 Jan 1968,"375 Hooper Ln, Oldtown, Idaho 83822-7547",,,Thornbrugh,Laura,Lynne,,,,,,,,,,,,,,
-"Tipke, Alan Lee",M,74,22 Jun 1950,"2022 Spirit Lake Cut Off, Spirit Lake, Idaho 83869",(208) 265-9622,,Tipke,Alan,Lee,,,,,,,,,,,,,,
-"Tolman, Jessica",F,25,18 Mar 2000,"6736 Highway 2, Priest River, Idaho 83856-6106",(208) 269-0129,jesskaytolman@gmail.com,Tolman,Jessica,,,,,,,,,,,,,,,
-"Topp, Ed",M,77,5 Sep 1947,"45 Krupps Rd, PO Box Box 54, Spirit Lake, Idaho 83869",(208) 623-6105,,Topp,Ed,,,,,,,,,,,,,,,
-"Torgesen, Allene",F,81,19 Nov 1943,"745 Blackthorn Road, Oldtown, Idaho 83822",(208) 304-4606,awtorgesen@gmail.com,Torgesen,Allene,,,,,,,,,,,,,,,
-"Torgesen, Gerald Wayne",M,82,29 Sep 1942,"745 Blackthorn Road, Oldtown, Idaho 83822",(208) 946-6834,gwtorgesen@gmail.com,Torgesen,Gerald,Wayne,,,,,,,,,,,,,,
-"Torgesen, James Eugene",M,77,9 Oct 1947,"423 Solar Rd, Oldtown, Idaho 83822-7572",(208) 217-2806,Torgfam@yahoo.com,Torgesen,James,Eugene,,,,,,,,,,,,,,
-"Torgesen, Lynda",F,75,24 Feb 1950,"423 Solar Rd, Oldtown, Idaho 83822-7572",(208) 217-2751,torgfam@yahoo.com,Torgesen,Lynda,,,,,,,,,,,,,,,
-"Trexler, Andrew Robert",M,50,29 Dec 1974,"PO Box 748, Spirit Lake, Idaho 83869-0748",(903) 245-4681,drewbert.trexler@gmail.com,Trexler,Andrew,Robert,,,,,,,,,,,,,,
-"Trexler, Glenn",M,79,30 Aug 1945,"PO Box 748, 1288 Beare Rd, Spirit Lake, Idaho 83869-0748",(760) 221-4538,trexler29@aol.com,Trexler,Glenn,,,,,,,,,,,,,,,
-"Trexler, Patty",F,77,27 Feb 1948,"PO Box 748, 1288 Beare Rd, Spirit Lake, Idaho 83869-0748",(760) 221-4538,GPatty@aol.com,Trexler,Patty,,,,,,,,,,,,,,,
-"Tripp, Leland Michael",M,70,14 Jul 1954,"P. O. Box 187, Blanchard, Idaho 83804",(208) 437-0382,,Tripp,Leland,Michael,,,,,,,,,,,,,,
-"Tripp, Marta Lee",F,69,6 Sep 1955,"P. O. Box 187, Blanchard, Idaho 83804",(208) 437-0382,,Tripp,Marta,Lee,,,,,,,,,,,,,,
-"Trotta, Cheryl",F,76,9 Oct 1948,"252 Akre Heights, Dr., blanchard, Idaho 83804",(208) 304-7048,camillerhomestead@gmail.com,Trotta,Cheryl,,,,,,,,,,,,,,,
-"Trotta, Louis",M,76,28 Jun 1948,"252 Akre Heights, Dr., blanchard, Idaho 83804",(208) 304-7064,loutrotta@gmail.com,Trotta,Louis,,,,,,,,,,,,,,,
-"Vachon, Andre Bertrand",M,64,10 Aug 1960,"179 McDonald Creek Rd, Blanchard, Idaho 83804-0341",4370558,,Vachon,Andre,Bertrand,,,,,,,,,,,,,,
-"Vanness, Pamela",F,41,23 Jun 1983,"625 E Valley St S, Oldtown, Idaho 83822-9550",(360) 584-7572,,Vanness,Pamela,,,,,,,,,,,,,,,
-"Walker, Charity",F,53,9 May 1972,Idaho,(509) 405-0181,,Walker,Charity,,,,,,,,,,,,,,,
-"Walker, Jerry",M,68,4 Sep 1956,"942 HWY 2, Oldtown, Idaho 83822",(208) 437-3100,,Walker,Jerry,,,,,,,,,,,,,,,
-"Walker, Ronald",M,58,6 Apr 1967,Idaho,(509) 222-0755,,Walker,Ronald,,,,,,,,,,,,,,,
-"Walsh, Juanita",F,58,3 Nov 1966,"954 Bluebird Ln, Priest River, Idaho 83856",,,Walsh,Juanita,,,,,,,,,,,,,,,
-"Watts, Scott Sheldon",M,74,31 Dec 1950,"101 Wild Meadows Rd, Spirit Lake, Idaho 83869",(509) 661-0017,,Watts,Scott,Sheldon,,,,,,,,,,,,,,
-"Webb, Barbara",F,37,1 May 1988,"1470 Albeni Cove Rd, Oldtown, Idaho 83822",(208) 627-7508,,Webb,Barbara,,,,,,,,,,,,,,,
-"Whalin, Betty",F,79,26 Mar 1946,"165 Larch Ln, Oldtown, Idaho 83822-9234",(208) 661-0362,mathfun4u@yahoo.com,Whalin,Betty,,,,,,,,,,,,,,,
-"Whalin, Jason",M,48,1 Mar 1977,"65 Malakowski rd., Oldtown, Idaho 83822-9234",,jasonwhalin@gmail.com,Whalin,Jason,,,,,,,,,,,,,,,
-"Whalin, Madison Dawn",F,26,8 Jan 1999,Idaho,,,Whalin,Madison,Dawn,,,,,,,,,,,,,,
-"White, Nephi",M,76,7 Jun 1948,"311 Jachetta Rd, Priest River, Idaho 83856",(208) 448-1145,,White,Nephi,,,,,,,,,,,,,,,
-"White, Sally",F,72,9 Jun 1952,"311 Jachetta Rd, Priest River, Idaho 83856",(208) 448-1145,,White,Sally,,,,,,,,,,,,,,,
-"Wilhelm, William",M,62,27 Oct 1962,"211 Laclede Shores Dr., Laclede, Idaho 83841",(208) 265-9446,,Wilhelm,William,,,,,,,,,,,,,,,
-"Willis, Joseph",M,53,14 Oct 1971,"635 A1 Silver Birch, Oldtown, Idaho 83822",(208) 437-3265,,Willis,Joseph,,,,,,,,,,,,,,,
-"Willis, Loyd",M,79,31 May 1946,"289 Hoodoo Hideaway, Old Town, Idaho 83822",(208) 437-0165,,Willis,Loyd,,,,,,,,,,,,,,,
-"Wilson, Dakota",M,38,4 Jun 1986,"1470 Albeni Cove Rd., Oldtown, Idaho 83822",,,Wilson,Dakota,,,,,,,,,,,,,,,
-"Wilson, Elija Eliu",M,27,21 Jul 1997,"1840 Old Priest River Rd, Priest River, Idaho 83856-8769",(208) 597-3263,elijagreycloud21@gmail.com,Wilson,Elija,Eliu,,,,,,,,,,,,,,
-"Wiser, Patty",F,72,10 Dec 1952,"PO Box 638, 710 chipakota, oldtown, Idaho 838",(208) 290-3189,,Wiser,Patty,,,,,,,,,,,,,,,
-"Woods, Audra",F,18,30 Sep 2006,"175 Kohler Rd, Spirit Lake, Idaho 83869-0109",(208) 618-9433,audrawoods28@gmail.com,Woods,Audra,,,,,,,,,,,,,,,
-"Woodward, Patricia",F,84,31 May 1941,"10069 Kelso Lake Rd., Priest River, Idaho 83856",(208) 290-1270,p.woodward3@frontier.com,Woodward,Patricia,,,,,,,,,,,,,,,
-"Wright, Allison",F,10,9 Dec 2014,"391 Outback Loop, Spirit Lake, Idaho 83869",,,Wright,Allison,,,,,,,,,,,,,,,
-"Wright, Brandon Eugene",M,13,30 Mar 2012,"391 Outback Loop, Spirit Lake, Idaho 83869",,30brandonwright@gmail.com,Wright,Brandon,Eugene,,,,,,,,,,,,,,
-"Wright, Cameo Lee",F,40,17 Nov 1984,"391 Outback Loop, Spirit Lake, Idaho 83869",(406) 261-1305,camcam84@hotmail.com,Wright,Cameo,Lee,,,,,,,,,,,,,,
-"Wright, Jared",M,42,18 Feb 1983,"391 Outback Loop, Spirit Lake, Idaho 83869",(406) 261-1856,jaredbwright18@gmail.com,Wright,Jared,,,,,,,,,,,,,,,
-"Wright, Tanner Ray",M,7,9 Nov 2017,"391 Outback Loop, Spirit Lake, Idaho 83869",(406) 261-1856,jaredbwright18@gmail.com,Wright,Tanner,Ray,,,,,,,,,,,,,,
-"Wright, Tanner William Johnson",M,32,1 Feb 1993,"17553 Highway 2, Sandpoint, Idaho 83864-7378",(707) 334-4545,,Wright,Tanner,William,,,,,,,,,,,,,,
-"Yount, Jordan",M,32,29 May 1993,"122 cedar St, Priest River, Idaho 83856",(208) 946-8067,,Yount,Jordan,,,,,,,,,,,,,,,
-"Yount, Timothy Thad",M,45,21 May 1980,"100 Dinger Ln, Priest River, Idaho 83856-7708",(208) 587-5089,,Yount,Timothy,Thad,,,,,,,,,,,,,,
-"Zwygart, Herbert Walter",M,79,30 Jul 1945,"1840 Old Preist River Rd, Priest River, Idaho 83856",(208) 597-2217,herbzwygart@gmail.com,Zwygart,Herbert,Walter,,,,,,,,,,,,,,
-"Zwygart, Rebekah Lefu",F,25,9 Oct 1999,"1840 Old Priest River Rd, Priest River, Idaho 83856-8769",(208) 597-3761,bekahzwygart@gmail.com,Zwygart,Rebekah,Lefu,,,,,,,,,,,,,,
-"Zwygart, Teresa Ann",F,52,5 Apr 1973,"1840 Old Priest River Rd, Priest River, Idaho 83856-8769",(208) 597-3212,teresaannzwygart@churchofjesuschrist.org,Zwygart,Teresa,Ann,,,,,,,,,,,,,,
-"Zylstra, Laura Ann",F,54,21 Aug 1970,"417 East Beardmore, Priest River, Idaho 83856",(208) 946-1805,,Zylstra,Laura,Ann,,,,,,,,,,,,,,
+District,Assigned Households,Minister1,Minister2,Minister3,Unnamed: 0,Name,Gender,Age,Birth Date,Address,Phone Number,E-mail,First_Name,Middle_Name,Last_Name
+,,,,,,"Achey, Lynn",F,70,31 Jul 1954,"2036 Vay Rd.
+Priest River, 83856",208-448-1636,chucknlynn@msn.com,Lynn,,Achey
+,,,,,,"Achy, Charles Thomas",M,58,24 Oct 1966,"2036 Vay Rd.
+Priest River, 83856",208-448-1636,chucknlynn@msn.com,Charles,Thomas,Achy
+,,,,,,"Ackley, Jake",M,47,20 Jan 1978,"246 Hoo Doo Hideaway
+Oldtown, Idaho 83822-8559",208-448-0716,5creekselk@gmail.com,Jake,,Ackley
+,,,,,,"Ackley, Kaden",M,18,2 May 2007,"246 Hoo Doo Hideaway
+Oldtown, Idaho 83822-8559",,,Kaden,,Ackley
+,,,,,,"Ackley, Kailey",F,21,16 Jul 2003,"246 Hoo Doo Hideaway
+Oldtown, Idaho 83822-8559",,,Kailey,,Ackley
+,,,,,,"Ackley, Meranda",F,45,14 Dec 1979,"246 Hoo Doo Hideaway
+Oldtown, Idaho 83822-8559",208-448-0716,,Meranda,,Ackley
+D3,"Alexander, Tyler","Knaack, Braxton Lee","Torgesen, James Eugene",,,"Alexander, Tyler",M,34,13 Jan 1991,"N Washington Ave
+Oldtown, Idaho 83822",509 572 6274,,Tyler,,Alexander
+D1,"Alters, Christopher","Anderson, Art","Bickford, Alan Phillip","Charleston, Wayne",,"Alters, Christopher",M,50,26 Dec 1974,Idaho,208-409-5966,,Christopher,,Alters
+D2,"Andersen, Scott","Cooper, Rick","Kesler, Rifle Rees","Kesler, Tucker Ezra",,"Andersen, Scott",M,62,19 Sep 1962,Idaho,,,Scott,,Andersen
+D1,"Anderson, Art","Hawks, Jair","Streeter, Michael John",,,"Anderson, Art",M,72,10 Jan 1953,"206 Hoo Doo Loop
+Oldtown, Idaho 83822-8522",208-437-2026,artthehermit@gmail.com,Art,,Anderson
+D1,"Ashton, Pamela","Charleston, Hunter Jo","Charleston, Tim","Wright, Jared",,"Ashton, Pamela",F,71,29 Jan 1954,"618 Outback Loop
+Spirit Lake, Idaho 83869-6024",2084465183,ashton54Idaho@gmail.com,Pamela,,Ashton
+D1,"Baker, Jeffrey Lynn","Anderson, Art","Bickford, Alan Phillip","Charleston, Wayne",,"Baker, Jeffrey Lynn",M,68,24 May 1957,"621 E Spring St S
+Oldtown, Idaho 83822-9268",,,Jeffrey,Lynn,Baker
+D1,"Balazs, Jordan","Anderson, Art","Bickford, Alan Phillip","Charleston, Wayne",,"Balazs, Jordan",M,33,12 Feb 1992,"53 Wisconsin St
+Priest River, Idaho 83856-0107",(509) 222-4406,michellebalazs@yahoo.com,Jordan,,Balazs
+D1,"Baldwin, Victoria","Boone, Charlie","Clayburn, Brian",,,"Baldwin, Victoria",F,56,8 Nov 1968,"205 Cottonwood Crk
+Priest River, Idaho 83856-8874",,,Victoria,,Baldwin
+D1,"Barlow, Douglas Spencer","Boone, Charlie","Clayburn, Brian",,,"Barlow, Douglas Spencer",M,55,9 Nov 1969,"Po Box 1281
+Priest River, Idaho 83856",,,Douglas,Spencer,Barlow
+D2,"Barnes, Bridger","Barrett, Chris","Charleston, Billie",,,"Barnes, Bridger",M,28,9 Apr 1997,"106 Granite Ridge Rd
+Priest River, Idaho 83856-6759",208-760-6713,blbrocks1@hotmail.com,Bridger,,Barnes
+,,,,,,"Barrett, Chris",M,63,4 Jul 1961,"50 Granite Ridge Rd
+Priest River, Idaho 83856-4927",+12535692819,chrisbarrettatchurch@gmail.com,Chris,,Barrett
+,,,,,,"Barrett, Tracy",F,54,7 Mar 1971,"50 Granite Ridge Rd
+Priest River, Idaho 83856-4927",253-344-7016,tebarnes71@gmail.com,Tracy,,Barrett
+D3,"Batch, Sam","Knaack, Braxton Lee","Torgesen, James Eugene",,,"Batch, Sam",F,21,27 Mar 2004,"635 Silver Birch Ln
+Lt 1A
+Oldtown, Idaho 83822-7541",+12089468845,samanthabatch46@gmail.com,Sam,,Batch
+,,,,,,"*
+Behrens, Angelic Margaret",F,22,27 Jul 2002,"P. O. Box 236
+84 Cedar View Estates
+Blanchard, Idaho 83804",,,Angelic,Margaret,"*
+Behrens"
+,,,,,,"Bickford, Alan Phillip",M,55,10 Nov 1969,"145 Dinger Ln
+Priest River, Idaho 83856-7708",208-819-8881,Alan.bickford@yahoo.com,Alan,Phillip,Bickford
+,,,,,,"Bickford, Dawn Elizabeth",F,54,27 Dec 1970,"145 Dinger Ln
+Priest River, Idaho 83856-7708",+12086591976,dawndenver_1@yahoo.com,Dawn,Elizabeth,Bickford
+D2,"Bingham, Lafe","Barrett, Chris","Charleston, Billie",,,"Bingham, Lafe",M,65,12 Apr 1960,"584 Railroad Ave
+Blanchard, Idaho 83804-9552",907-957-4883,,Lafe,,Bingham
+D1,"Bingham, Michael","Boone, Charlie","Clayburn, Brian",,,"Bingham, Michael",M,71,15 Apr 1954,"2352 Old Priest River Rd
+Priest River, Idaho 83856-8773",(208)448-2585,,Michael,,Bingham
+D1,"Birdwell, Shannon","Charleston, Hunter Jo","Charleston, Tim","Wright, Jared",,"Birdwell, Shannon",F,48,4 Jan 1977,"265 Cabin Ridge Rd
+Spirit Lake, Idaho 83869-9772",541-605-0056,,Shannon,,Birdwell
+D1,"Bitton, Jalaire","Boone, Charlie","Clayburn, Brian",,,"Bitton, Jalaire",F,64,20 May 1961,"43 Hoop Dr.
+Priest River, Idaho 83856",208-290-4998,,Jalaire,,Bitton
+,,,,,,"Black, Cassie Dawn",F,32,19 Jul 1992,"921 HUNTER RD
+PO Box 278
+BLANCHARD, Idaho 83804-0019",435 -289-7429,cassie.hunt92.ch@gmail.com,Cassie,Dawn,Black
+,,,,,,"Black, John Steven Reigle",M,27,11 Oct 1997,"921 HUNTER RD
+PO Box 278
+BLANCHARD, Idaho 83804-0019",+12086258909,Jblackwork97@gmail.com,John,Steven Reigle,Black
+,,,,,,"Black, Liam Arron",M,1,13 Dec 2023,"921 HUNTER RD
+PO Box 278
+BLANCHARD, Idaho 83804-0019",,,Liam,Arron,Black
+,,,,,,"Blankenship, Donald",M,63,1 Jan 1962,"36877 Highway 41
+Oldtown, Idaho 83822-9276",208-7731467,,Donald,,Blankenship
+D3,"Boone, Charlie","Knaack, Kyler Christopher","Littlefield, Carl",,,"Boone, Charlie",M,67,6 Sep 1957,"193 Elicia Ln
+Priest River, Idaho 83856-1215",509-315-6134,boonecharleswade@msn.com,Charlie,,Boone
+,,,,,,"Boone, Gavin",M,41,24 Dec 1983,"1504 Clagstone Rd
+Spirit Lake, Idaho 83869-9616",,,Gavin,,Boone
+D3,"Bristol, Micheal","Knaack, Kyler Christopher","Littlefield, Carl",,,"Bristol, Micheal",M,51,15 Jul 1973,Idaho,360-443-2195,,Micheal,,Bristol
+D1,"Broyles, Keenan Paul","Hawks, Jair","Streeter, Michael John",,,"Broyles, Keenan Paul",M,30,8 Dec 1994,"734 Chipakota Ln
+Oldtown, Idaho 83822-9291",3603482469,keenanbroyles@gmail.com,Keenan,Paul,Broyles
+,,,,,,"Brunson, Linda Helen",F,56,25 Dec 1968,"267 Thama Dr
+Priest River, Idaho 83856-8786",7752254557,,Linda,Helen,Brunson
+D1,"Buckley, Michael John","Anderson, Art","Bickford, Alan Phillip","Charleston, Wayne",,"Buckley, Michael John",M,67,20 Mar 1958,"3994 Hwy 2
+Priest River, Idaho 83856",+15099793327,mj.buckley320@yahoo.com,Michael,John,Buckley
+D2,"Burkette, Paul","Fitzell, Melvin James","Moren, Charles Leslie","Trexler, Andrew Robert",,"Burkette, Paul",M,54,28 Jul 1970,"460 Als Welding RD
+Spirit Lake, Idaho 83869-",,paulburk2010@hotmail.com,Paul,,Burkette
+,,,,,,"Campbell, Dixie Lee",F,73,25 Sep 1951,"7651 Kelso Lake Rd
+Priest River, Idaho 83856-9303",503-348-9382,pictish@msn.com,Dixie,Lee,Campbell
+,,,,,,"Case, William",M,53,30 Dec 1971,"Po Box 112
+2773 Hwy 2
+Priest River, Idaho 83856",208-437-0350,,William,,Case
+,,,,,,"Cavanaugh, Carolyn Louise",F,91,17 Jan 1934,"647 Als Welding Rd
+Spirit Lake, Idaho 83869-9661",509-863-9891,,Carolyn,Louise,Cavanaugh
+,,,,,,"Chamberlain, Steven",M,45,19 Jan 1980,"244 Campbell Loop
+Laclede, Idaho 83841",(208)255-6537,,Steven,,Chamberlain
+,,,,,,"Chamberlin, Stephanie",F,41,13 Jul 1983,"244 Campbell Loop
+Laclede, Idaho 83841",(208)255-6537,,Stephanie,,Chamberlin
+,,,,,,"Charleston, Billie",M,17,23 Apr 2008,"1437 Torrens Trl
+Spirit Lake, Idaho 83869-7017",,CCharleston75501@gmail.com,Billie,,Charleston
+,,,,,,"Charleston, Chaelynn Anne",F,18,5 Oct 2006,"1437 Torrens Trl
+Spirit Lake, Idaho 83869-7017",253-330-1456,,Chaelynn,Anne,Charleston
+,,,,,,"Charleston, Cristal",F,35,2 Nov 1989,"1437 Torrens Trl
+Spirit Lake, Idaho 83869-7017",2533301456,CCharleston75501@gmail.com,Cristal,,Charleston
+,,,,,,"Charleston, Hunter Jo",M,16,7 May 2009,"1437 Torrens Trl
+Spirit Lake, Idaho 83869-7017",253 330-1456,27HunterCharleston@gmail.com,Hunter,Jo,Charleston
+D3,"Charleston, Joseph","Trotta, Louis","Zwygart, Herbert Walter",,,"Charleston, Joseph",M,28,27 Mar 1997,"17 Torrens Trl
+Spirit Lake, Idaho 83869-5046",2086107265,jcharleston1997@yahoo.com,Joseph,,Charleston
+,,,,,,"Charleston, Rhailin",F,10,20 Mar 2015,"1437 Torrens Trl
+Spirit Lake, Idaho 83869-7017",,,Rhailin,,Charleston
+,,,,,,"Charleston, Terry",F,71,28 Jan 1954,"60 Charleston Ln
+Spirit Lake, Idaho 83869-0075",208-262-1756,4evercharleston@gmail.com,Terry,,Charleston
+,,,,,,"Charleston, Tim",M,41,11 Jan 1984,"1437 Torrens Trl
+Spirit Lake, Idaho 83869-7017",208-641-9870,makethenailblead@gmail.com,Tim,,Charleston
+,,,,,,"Charleston, Wayne",M,66,31 Mar 1959,"60 Charleston Ln
+Spirit Lake, Idaho 83869-0075",+12082175824,wayne.charleston2@gmail.com,Wayne,,Charleston
+D1,"Chenoweth, Tyler Lee Charles","Hawks, Jair","Streeter, Michael John",,,"Chenoweth, Tyler Lee Charles",M,28,10 Apr 1997,"621 Ockert St
+Oldtown, Idaho 83822",208-437-2070,,Tyler,Lee Charles,Chenoweth
+,,,,,,"Christian, Jack",M,18,27 Oct 2006,"80 Springdale Gdns
+Priest River, Idaho 83856-8790",,s4christian73@gmail.com,Jack,,Christian
+,,,,,,"Christian, Liam Skyler",M,20,11 Feb 2005,"80 Springdale Gdns
+Priest River, Idaho 83856-8790",,,Liam,Skyler,Christian
+,,,,,,"Christian, Sophia Grace",F,14,2 Jan 2011,"80 Springdale Gdns
+Priest River, Idaho 83856-8790",,s4christian73@gmail.com,Sophia,Grace,Christian
+,,,,,,"Christian, Stephani S",F,52,26 Feb 1973,"80 Springdale Gdns
+Priest River, Idaho 83856-8790",208-720-2432,s4christian73@gmail.com,Stephani,S,Christian
+,,,,,,"Clayburn, Brian",M,68,3 Jan 1957,"750 Rustling Leaf Rd
+PO Box 95
+Priest River, Idaho 83856-6050",206-713-5468,brian.clayburn@gmail.com,Brian,,Clayburn
+D3,"Clayburn, Justin","Knaack, Kyler Christopher","Littlefield, Carl",,,"Clayburn, Justin",M,34,1 Aug 1990,"750 Rustling Leaf Rd
+Priest River, Idaho 83856-6050",509-607-9785,jkclayburn@gmail.com,Justin,,Clayburn
+,,,,,,"Clayburn, Kaulene",F,69,13 Dec 1955,"750 Rustling Leaf Rd
+PO Box 95
+Priest River, Idaho 83856-6050",+12089200910,,Kaulene,,Clayburn
+,,,,,,"Coates, Dennis",M,66,29 May 1959,"230 Chad Ct
+Priest River, Idaho 83856-5205",208-687-5460,,Dennis,,Coates
+,,,,,,"Colombini, Dustin",M,40,25 Jun 1984,"1369 Riverside Rd
+Priest River, Idaho 83856-8725",208-215-4173,,Dustin,,Colombini
+,,,,,,"Colombini, Kim",F,41,7 Dec 1983,"1369 Riverside Rd
+Priest River, Idaho 83856-8725",208-215-4173,,Kim,,Colombini
+,,,,,,"Condie, Brent",M,69,9 Jan 1956,"563 This A Way
+Spirit Lake, Idaho 83869-5028",208-661-0731,,Brent,,Condie
+,,,,,,"Condie, Peggy",F,67,30 Oct 1957,"563 This A Way
+Spirit Lake, Idaho 83869-5028",208-651-3996,,Peggy,,Condie
+,,,,,,"Connly, Amanda Grace",F,11,1 Feb 2014,"234 E. 4th street s.
+Oldtown, Idaho 83822-9525",,leslie632@msn.com,Amanda,Grace,Connly
+,,,,,,"Connly, Leslie Rachel",F,48,30 Jun 1976,"234 E. 4th street s.
+Oldtown, Idaho 83822-9525",406-291-8636,leslie632@msn.com,Leslie,Rachel,Connly
+,,,,,,"Connly, Spencer Ervin James",M,9,17 Nov 2015,"234 E. 4th street s.
+Oldtown, Idaho 83822-9525",,,Spencer,Ervin James,Connly
+,,,,,,"Connly, Steven James",M,38,24 Nov 1986,"234 E. 4th street s.
+Oldtown, Idaho 83822-9525",406-291-6211,sconnly86@gmail.com,Steven,James,Connly
+,,,,,,"Cook, Howard",M,72,2 Jun 1953,"229 Church St
+PO Box 803
+Priest River, Idaho 83856",208-448-1676,,Howard,,Cook
+,,,,,,"Cooper, Janis",F,64,2 Oct 1960,"176 Salishan Beach Dr
+Priest River, Idaho 83856-0080",509-263-0585,Jcooper1060@gmail.com,Janis,,Cooper
+,,,,,,"Cooper, Rick",M,67,29 Nov 1957,"176 Salishan Beach Dr
+Priest River, Idaho 83856-0080",509-990-0248,rccoop57@gmail.com,Rick,,Cooper
+,,,,,,"Creviston, Rayanne",F,59,27 Jul 1965,"306 Hoodoo Hideaway
+Oldtown, Idaho 83822",208-437-5910,,Rayanne,,Creviston
+,,,,,,"Crossley, Caden Christopher Augerlavoie",M,7,21 Jul 2017,"808 Larch Lane
+Oldtown, Idaho 83822",,,Caden,Christopher Augerlavoie,Crossley
+,,,,,,"Crossley, David Don",M,48,28 Mar 1977,"808 Larch Lane
+Oldtown, Idaho 83822",208-255-0879,ddcrossley@gmail.com,David,Don,Crossley
+,,,,,,"Crossley, Jordan Charles",M,7,29 Jun 2017,"808 Larch Lane
+Oldtown, Idaho 83822",,,Jordan,Charles,Crossley
+,,,,,,"Crossley, Marie",F,45,15 May 1980,"808 Larch Lane
+Oldtown, Idaho 83822",208-596-5838,mariecvtlvt@gmail.com,Marie,,Crossley
+D1,"Custer, Robert","Anderson, Art","Bickford, Alan Phillip","Charleston, Wayne",,"Custer, Robert",M,54,12 Mar 1971,"34754 Highway 41
+Oldtown, Idaho 83822-5003",,,Robert,,Custer
+,,,,,,"Dahlstrom, Benjamin Don",M,53,17 Nov 1971,"246 Hoodoo Hidaway
+Oldtown, Idaho 83822",509-993-4138,,Benjamin,Don,Dahlstrom
+,,,,,,"Danley, Wanda Sue",F,63,11 Jan 1962,"275 S 1st St
+Priest River, Idaho 83856-6765",208-981-1362,,Wanda,Sue,Danley
+,,,,,,"Daugherty, Clayton John",M,16,5 Aug 2008,"84 Cedar View Estates
+Blanchard, Idaho 83804",208-306-9099,gamingwithclaytonminecraft2020@gmail.com,Clayton,John,Daugherty
+D3,"Daugherty, Janice","Knaack, Braxton Lee","Torgesen, James Eugene",,,"Daugherty, Janice",F,74,10 Jan 1951,"84 Cedar View Estates
+Blanchard, Idaho 83804",(208) 306-9058,janicedaugherty58@gmail.com,Janice,,Daugherty
+D3,"Daugherty, Jennifer","Knaack, Braxton Lee","Torgesen, James Eugene",,,"Daugherty, Jennifer",F,41,7 Mar 1984,"84 Cedar View Estates
+Blancharo, Idaho 83804",208-610-5712,,Jennifer,,Daugherty
+D3,"Daugherty, Timmy","Knaack, Braxton Lee","Torgesen, James Eugene",,,"Daugherty, Timmy",M,54,6 Jan 1971,"P. O. Box 236
+84 Cedar View Estates
+Blanchard, Idaho 83804",208-437-0286,,Timmy,,Daugherty
+D1,"Dean, Diana","Anderson, Art","Bickford, Alan Phillip","Charleston, Wayne",,"Dean, Diana",F,69,24 Aug 1955,"3994 Highway 2
+Priest River, Idaho 83856-8305",(509)-290-3104,prdeans@gmail.com,Diana,,Dean
+,,,,,,"Dempewolf, Autumn",F,64,8 Sep 1960,"95 East Cedar Ln
+Priest River, Idaho 83856-8732",,,Autumn,,Dempewolf
+,,,,,,"Dracocardos, Annalise",F,17,26 Apr 2008,"245 Lost Creek Ln
+Priest River, Idaho 83856-9358",2082170230,1direction.dracocardos@gmail.com,Annalise,,Dracocardos
+,,,,,,"Dracocardos, Jacob George Brantly",M,13,8 May 2012,"245 Lost Creek Ln
+Priest River, Idaho 83856-9358",,,Jacob,George Brantly,Dracocardos
+,,,,,,"Dracocardos, Matthias",M,49,29 Jul 1975,"245 Lost Creek Ln
+Priest River, Idaho 83856-9358",575-268-8469,mattdrac@outlook.com,Matthias,,Dracocardos
+,,,,,,"Dracocardos, Megan Elizabeth",F,47,13 Oct 1977,"245 Lost Creek Ln
+Priest River, Idaho 83856-9358",208-217-0230,megan.dracocardos@hotmail.co.uk,Megan,Elizabeth,Dracocardos
+,,,,,,"Dracocardos, Nicholas Michael",M,14,30 Jan 2011,"245 Lost Creek Ln
+Priest River, Idaho 83856-9358",,nick.dracocardos@gmail.com,Nicholas,Michael,Dracocardos
+,,,,,,"Duncan, Arlyn",M,88,27 Jul 1936,"Po Box 513
+35 McKinley
+Priest River, Idaho 83856",208-448-1451,arlynduncan@Gmail.com,Arlyn,,Duncan
+,,,,,,"Dyer, Linda Kay",F,75,19 May 1950,"66 Kevin Ln
+Oldtown, Idaho 83822-7570",2086511660,,Linda,Kay,Dyer
+D1,"Eastmond, John","Charleston, Hunter Jo","Charleston, Tim","Wright, Jared",,"Eastmond, John",M,53,2 May 1972,"36 Krupp Rd
+Spirit Lake, Idaho 83869",208-610-6851,,John,,Eastmond
+,,,,,,"Egland, Candice",F,65,30 Mar 1960,Idaho,208 290 5266,,Candice,,Egland
+D3,"Eikanger, James","Isenberger, James Duane","Shepherd, Benjamin",,,"Eikanger, James",M,65,13 Feb 1960,"250 Hanaford Rd
+Blanchard, Idaho 83804-5049",208-290-1746,,James,,Eikanger
+,,,,,,"Evenson, Tira Ann",F,55,18 May 1970,"4348 Hoo Doo Loop
+Oldtown, Idaho 83822-8539",,,Tira,Ann,Evenson
+D2,"Farman, Jacob","Barrett, Chris","Charleston, Billie",,,"Farman, Jacob",M,28,27 Jul 1996,"2891 Spirit Lake Cut Off
+Spirit Lake, Idaho 83869-9623",509-294-8300,,Jacob,,Farman
+D1,"Fisher, Harold","Anderson, Art","Bickford, Alan Phillip","Charleston, Wayne",,"Fisher, Harold",M,74,2 Aug 1950,"446 S. Marian Ave
+Oldtown, Idaho 83822-9526",405-722-4702,,Harold,,Fisher
+,,,,,,"Fitzell, Andrew Melvin Wayne",M,21,12 Sep 2003,"9 Charleston Ln
+Spirit Lake, Idaho 83869-0075",2084496556,tmFitzell@hotmail.com,Andrew,Melvin Wayne,Fitzell
+,,,,,,"Fitzell, James Watson Noble",M,23,9 Dec 2001,"9 Charleston Ln
+Spirit Lake, Idaho 83869-0075",2082556291,jamesfitzell@outlook.com,James,Watson Noble,Fitzell
+,,,,,,"Fitzell, Melvin James",M,68,29 Jul 1956,"9 Charleston Ln
+Spirit Lake, Idaho 83869-0075",+12082171202,melvinfitzell55@gmail.com,Melvin,James,Fitzell
+,,,,,,"Fitzell, Patricia Marie Bell",F,16,24 Dec 2008,"9 Charleston Ln
+Spirit Lake, Idaho 83869-0075",,,Patricia,Marie Bell,Fitzell
+,,,,,,"Fitzell, Rose Marie Lily",F,19,30 Jun 2005,"9 Charleston Ln
+Spirit Lake, Idaho 83869-0075",208-449-6556,,Rose,Marie Lily,Fitzell
+,,,,,,"*
+Fitzell, Samuel Daniel Adam",M,11,5 May 2014,"9 Charleston Ln
+Spirit Lake, Idaho 83869-0075",,,Samuel,Daniel Adam,"*
+Fitzell"
+,,,,,,"Fitzell, Teresa Anne Elizabeth",F,25,10 Oct 1999,"9 Charleston Ln
+Spirit Lake, Idaho 83869-0075",2086107039,teresafitzell@yahoo.com,Teresa,Anne Elizabeth,Fitzell
+,,,,,,"Fitzell, Trish Marie",F,47,27 Jan 1978,"9 Charleston Ln
+Spirit Lake, Idaho 83869-0075",2086102754,tmfitzell@hotmail.com,Trish,Marie,Fitzell
+D2,"Forsyth, Calvin","Barrett, Chris","Charleston, Billie",,,"Forsyth, Calvin",M,68,17 Nov 1956,"54 Hanaford Ct
+Blanchard, Idaho 83804-8566",509-496-1352,,Calvin,,Forsyth
+,,,,,,"Gale, Elena",F,36,16 Nov 1988,"69 Hoop Loop
+Priest River, Idaho 83856",208-610-3024,16elenas@gmail.com,Elena,,Gale
+D3,"Garmon, Sethery Alex","Dracocardos, Matthias","Dracocardos, Nicholas Michael",,,"Garmon, Sethery Alex",M,40,18 Feb 1985,"133 This A Way
+Spirit Lake, Washington 83869-9316",,,Sethery,Alex,Garmon
+D3,"Garrison, Curtis Lamar","Isenberger, James Duane","Shepherd, Benjamin",,,"Garrison, Curtis Lamar",M,70,27 May 1955,"1966 Blanchard Elk Rd
+Blanchard, Idaho 83804",,,Curtis,Lamar,Garrison
+D2,"Garrison, Darren Leroy","Barrett, Chris","Charleston, Billie",,,"Garrison, Darren Leroy",M,60,5 Feb 1965,"25 or 382 Blanchard Cutoff
+Blanchard, Idaho 83804",,,Darren,Leroy,Garrison
+D1,"Gering, Buck","Charleston, Hunter Jo","Charleston, Tim","Wright, Jared",,"Gering, Buck",M,49,8 Jan 1976,"1250 Torrens Trl
+Spirit Lake, Idaho 83869-5063",,,Buck,,Gering
+D1,"Giggey, James Alan","Charleston, Hunter Jo","Charleston, Tim","Wright, Jared",,"Giggey, James Alan",M,28,22 Jan 1997,"60 Charleston lane
+Spirit Lake, Idaho 83869-0075",208 217-5497,daethsundavr1@gmail.com,James,Alan,Giggey
+,,,,,,"Gillespie, Luana",F,71,25 Jan 1954,"33688 Hwy 41
+Oldtown, Idaho 83822",208-437-4317,,Luana,,Gillespie
+D2,"Gonzalez, Erica Eileen","Kesler, Mike",,,,"Gonzalez, Erica Eileen",F,43,28 Dec 1981,Idaho,360-463-9130,,Erica,Eileen,Gonzalez
+,,,,,,"Goodbrake, Cynthia",F,60,12 Jul 1964,"242 Spirit Valley Ln
+Blanchard, Idaho 83804-8563",208-437-2093,,Cynthia,,Goodbrake
+,,,,,,"Goodbrake, John",M,30,30 Apr 1995,"242 Spirit Valley Ln
+Blanchard, Idaho 83804-8563",,,John,,Goodbrake
+D1,"Gould, Marlin","Charleston, Hunter Jo","Charleston, Tim","Wright, Jared",,"Gould, Marlin",M,62,8 Apr 1963,"6275 Clagstone Rd
+Spirit Lake, Idaho 83869-9603",,,Marlin,,Gould
+D3,"Haebe, James Anthony","Dracocardos, Matthias","Dracocardos, Nicholas Michael",,,"Haebe, James Anthony",M,73,29 Nov 1951,"PO Box 245
+Blanchard, Idaho 83804-0245",,,James,Anthony,Haebe
+,,,,,,"Haggerty, Donna Jeanne",F,64,7 Oct 1960,"234 Merry Ln
+Oldtown, Idaho 83822-7522",+12084372552,riverratz444@yahoo.com,Donna,Jeanne,Haggerty
+,,,,,,"Hall, Jonathan Arnold",M,50,8 Jun 1974,"322 Cram Rd
+Spirit Lake, Idaho 83869",509-202-7615,jhall@cochraninc.com,Jonathan,Arnold,Hall
+,,,,,,"Halseth, Nathaniel David",M,24,14 Nov 2000,"234 E. 4th street s.
+Oldtown, Idaho 83822-9525",,,Nathaniel,David,Halseth
+,,,,,,"Hancock, Joann",F,82,30 Dec 1942,"312 Blackthorne Rd
+Oldtown Id, Idaho 83822",208-610-2785,,Joann,,Hancock
+D1,"Hansen, Jennifer","Anderson, Art","Bickford, Alan Phillip","Charleston, Wayne",,"Hansen, Jennifer",F,53,22 Oct 1971,"505 E 5th St S
+Oldtown, Idaho 83822-9264",15096711973,hansenjennifer827@gmail.com,Jennifer,,Hansen
+D1,"Harrah, Donna Grace","Buckley, Michael John","Johnson, Mark","Schultz, Richard",,"Harrah, Donna Grace",F,84,9 Oct 1940,"3138 Hwy 2
+Priest River, Idaho 83856",208-920-9181,,Donna,Grace,Harrah
+D2,"Harvey, Howard Lee","Fitzell, Melvin James","Moren, Charles Leslie","Trexler, Andrew Robert",,"Harvey, Howard Lee",M,72,19 Mar 1953,"100 Antler Ln
+Spirit Lake, Idaho 83869",208-623-6244,,Howard,Lee,Harvey
+,,,,,,"Hawks, Atayah Serenity",F,13,2 Jan 2012,"316 Walker Rd
+Blanchard, Idaho 83804-6003",,,Atayah,Serenity,Hawks
+,,,,,,"Hawks, Erika",F,19,14 Sep 2005,"316 Walker Rd
+Blanchard, Idaho 83804-6003",2086273627,Erika.hawks1@gmail.com,Erika,,Hawks
+,,,,,,"Hawks, Jair",M,49,13 Jun 1975,"316 Walker Rd
+Blanchard, Idaho 83804-6003",2086273602,jamminhawks6@gmail.com,Jair,,Hawks
+,,,,,,"Hawks, Kaylynn",F,24,10 Jan 2001,"316 Walker Rd
+Blanchard, Idaho 83804-6003",5099197941,Kaylynn.hawks@gmail.com,Kaylynn,,Hawks
+,,,,,,"Hawks, Margie",F,47,25 Dec 1977,"316 Walker Rd
+Blanchard, Idaho 83804-6003",2086273244,jamminhawks5@gmail.com,Margie,,Hawks
+,,,,,,"Hawks, McKenna Alise",F,14,7 Oct 2010,"316 Walker Rd
+Blanchard, Idaho 83804-6003",,jamminhawks5@yahoo.com,McKenna,Alise,Hawks
+,,,,,,"Heintz, Derek",M,33,3 Mar 1992,"193 Sierra Ln.
+p.o. box 411
+Blanchard, Idaho 83804",,,Derek,,Heintz
+D2,"Heintz, Dick","Fitzell, Melvin James","Moren, Charles Leslie","Trexler, Andrew Robert",,"Heintz, Dick",M,73,5 Oct 1951,"193 Sierra Ln.
+p.o. box 411
+Blanchard, Idaho 83804",208-946-0937,Heintz50@AOL.com,Dick,,Heintz
+,,,,,,"Heintz, Michael",M,46,28 Oct 1978,"193 Sierra Ln.
+p.o. box 411
+Blanchard, Idaho 83804",,,Michael,,Heintz
+,,,,,,"Henry, Vanessa Marie",F,38,14 Nov 1986,"23 Ogilvie Ln
+Oldtown, Idaho 83822-7516",,,Vanessa,Marie,Henry
+,,,,,,"Herron, Coral Ann",F,73,24 Dec 1951,"44 Campbell Loop
+Laclede, Idaho 83841-0109",,,Coral,Ann,Herron
+D3,"Hessing, Bailey","Dracocardos, Matthias","Dracocardos, Nicholas Michael",,,"Hessing, Bailey",F,23,28 Nov 2001,"984 Roberts Ln
+Blanchard, Idaho 83804-9537",(208) 803-4231,baileyhessing01@gmail.com,Bailey,,Hessing
+,,,,,,"*
+Hirst, Taylor Davis Rodney",M,19,8 Sep 2005,"115 S 1st St
+Priest River, Idaho 83856",,,Taylor,Davis Rodney,"*
+Hirst"
+D1,"Hollett, Gary Alan","Boone, Charlie","Clayburn, Brian",,,"Hollett, Gary Alan",M,70,20 Feb 1955,"574 Horn Mountain Rd
+Priest River, Idaho 83856-9342",208-660-8050,,Gary,Alan,Hollett
+D2,"Howard, Kendra","Cooper, Rick","Kesler, Rifle Rees","Kesler, Tucker Ezra",,"Howard, Kendra",F,33,17 Feb 1992,"112 Washington St
+Priest River, Idaho 83856-6543",208-946-6594,,Kendra,,Howard
+D1,"Hoyme, Louise","Buckley, Michael John","Johnson, Mark","Schultz, Richard",,"Hoyme, Louise",F,62,10 Feb 1963,"PO Box 326
+Laclede, Idaho 83841-0326",435-469-2010,mlj1063@yahoo.com,Louise,,Hoyme
+D3,"Hutchins, Rhonda","Knaack, Kyler Christopher","Littlefield, Carl",,,"Hutchins, Rhonda",F,61,25 Apr 1964,"115 S 1st St
+Priest River, Idaho 83856",208-428-8601,,Rhonda,,Hutchins
+,,,,,,"Isenberger, Donald Ray",M,27,12 Jul 1997,"125 Shadow Green Rd
+Blanchard, Idaho 83804-8503",503-910-7643,ise20003@byui.edu,Donald,Ray,Isenberger
+,,,,,,"Isenberger, James Duane",M,21,29 May 2004,"125 Shadow Green Rd
+Blanchard, Idaho 83804-8503",208-217-8948,ironmtn.jd@gmail.com,James,Duane,Isenberger
+,,,,,,"Isenberger, Jennifer",F,47,21 Mar 1978,"125 Shadow Green Rd
+Blanchard, Idaho 83804-8503",503-910-7643,ironmtn.ji@gmail.com,Jennifer,,Isenberger
+,,,,,,"Isenberger, Merrik Gene",M,18,28 Jan 2007,"125 Shadow Green Rd
+Blanchard, Idaho 83804-8503",,ironmtn.mgi@gmail.com,Merrik,Gene,Isenberger
+,,,,,,"Isenberger, Michael",M,47,19 Nov 1977,"125 Shadow Green Rd
+Blanchard, Idaho 83804-8503",503-910-7643,ironmtn.mike@gmail.com,Michael,,Isenberger
+,,,,,,"Isenberger, Serena Lind",F,7,18 Sep 2017,"125 Shadow Green Rd
+Blanchard, Idaho 83804-8503",,,Serena,Lind,Isenberger
+,,,,,,"Jansen, Judy Ellend",F,71,15 May 1954,"676 S Rena Rd
+Oldtown, Idaho 83822-8510",208-582-1096,,Judy,Ellend,Jansen
+D3,"Jennings, Jon Jay","Knaack, Kyler Christopher","Littlefield, Carl",,,"Jennings, Jon Jay",M,43,15 Oct 1981,Idaho,,,Jon,Jay,Jennings
+,,,,,,"Johnsen, Catherine",F,27,9 Dec 1997,"205 Cottonwood Crk
+Priest River, Idaho 83856-8874",,,Catherine,,Johnsen
+D2,"Johnson, Brad","Kesler, Mike",,,,"Johnson, Brad",M,58,20 Feb 1967,"327 High Meadow Dr
+Priest River, Idaho 83856-6773",,,Brad,,Johnson
+,,,,,,"Johnson, Colleen",F,62,23 Jan 1963,"255 Campbell Loop
+Laclede, Idaho 83841-0137",208-610-2425,colleenjohnson86@gmail.com,Colleen,,Johnson
+,,,,,,"Johnson, Darrin",M,60,23 Feb 1965,"240 Leaning Firs Ln
+Priest River, Idaho 83856-9382",208-304-0086,,Darrin,,Johnson
+,,,,,,"Johnson, Jack",M,78,28 Oct 1946,"Po Box 1595
+667 Hoop Loop Road
+Priest River, Idaho 83856",208-448-2396,,Jack,,Johnson
+,,,,,,"Johnson, Jeanne Michelle",F,51,28 Dec 1973,"62 La Luna Ln
+Spirit Lake, Idaho 83869-0019",484.802.8643,jgonzalez127@yahoo.com,Jeanne,Michelle,Johnson
+,,,,,,"Johnson, Joshua Dan",M,49,23 May 1976,"62 La Luna Ln
+Spirit Lake, Idaho 83869-0019",610-622-0299,ObjectsUnlimited@gmail.com,Joshua,Dan,Johnson
+,,,,,,"Johnson, Joshua Ladd",M,23,6 Apr 2002,"62 La Luna Ln
+Spirit Lake, Idaho 83869-0019",,,Joshua,Ladd,Johnson
+,,,,,,"Johnson, Karen Sue",F,60,18 Jun 1964,"240 Leaning Firs Ln
+Priest River, Idaho 83856-9382",208-597-5932,weebleswabbles37@gmail.com,Karen,Sue,Johnson
+,,,,,,"Johnson, Mark",M,62,7 Jan 1963,"255 Campbell Loop
+Laclede, Idaho 83841-0137",208-610-2445,bonner.bailiff.1@gmail.com,Mark,,Johnson
+D3,"Jones, Dustin Roger","Knaack, Braxton Lee","Torgesen, James Eugene",,,"Jones, Dustin Roger",M,39,6 Jun 1985,"619 S State Ave
+Oldtown, Idaho 83822-9553",208-520-4187,,Dustin,Roger,Jones
+,,,,,,"Jones, Tyler Roy",M,27,28 Sep 1997,"34 Church St
+Priest River, Idaho 83856-6544",208-792-8828,whatsup1494@gmail.com,Tyler,Roy,Jones
+,,,,,,"Jordan, Duane",M,56,7 Sep 1968,"923 Ediah Rd
+Spirit Lake, Idaho 83869",503-397-4425,,Duane,,Jordan
+,,,,,,"Jose, Gloria",F,77,2 Mar 1948,"102 Wild Meadow
+Spirt Lake, Idaho 83869",208-263-8277,,Gloria,,Jose
+D2,"Kamphaus, Jeff","Barrett, Chris","Charleston, Billie",,,"Kamphaus, Jeff",M,34,9 Jul 1990,"2891 Spirit Lake Cut Off
+Spirit Lake, Idaho 83869-9623",208-625-8583,,Jeff,,Kamphaus
+D2,"Keenan, Patrick","Connly, Steven James","Isenberger, Merrik Gene","Torgesen, Gerald Wayne",,"Keenan, Patrick",M,48,20 Sep 1976,"164 Rhubarb Jct
+Oldtown, Idaho 83822-7529",(509) 240-4768,,Patrick,,Keenan
+,,,,,,"Kelley, Julia",F,35,22 Feb 1990,"465 Outback Loop
+Spirit Lake, Idaho 83869-8602",,,Julia,,Kelley
+D3,"Kelly, Alaina","Dracocardos, Matthias","Dracocardos, Nicholas Michael",,,"Kelly, Alaina",F,30,19 Nov 1994,"30 Akre Dr
+Blanchard, Idaho 83804-5010",661-972-1012,,Alaina,,Kelly
+,,,,,,"Kelsey, William Kenneth",M,33,19 Dec 1991,"60 Charleston Ln
+Spirit Lake, Idaho 83869-0075",559-940-0329,,William,Kenneth,Kelsey
+,,,,,,"Kesler, Amelia Grace",F,18,5 Sep 2006,Idaho,+12089700571,amelia.kesler@icloud.com,Amelia,Grace,Kesler
+,,,,,,"Kesler, Aspen Marie",F,11,4 Jul 2013,Idaho,,becky.kesler@hotmail.com,Aspen,Marie,Kesler
+,,,,,,"Kesler, Becky",F,44,14 Jan 1981,Idaho,208-690-9787,becky.kesler@hotmail.com,Becky,,Kesler
+,,,,,,"Kesler, Elizabeth Faith",F,13,20 Jul 2011,Idaho,2086909787,,Elizabeth,Faith,Kesler
+,,,,,,"Kesler, Mike",M,41,27 Dec 1983,Idaho,208-709-9875,mike_kesler1@hotmail.com,Mike,,Kesler
+,,,,,,"Kesler, Naomi Rose",F,11,11 Aug 2013,Idaho,2086909787,becky.kesler@hotmail.com,Naomi,Rose,Kesler
+,,,,,,"Kesler, Rachel Hope",F,15,14 Sep 2009,Idaho,2086909787,rachelhopekesler@icloud.com,Rachel,Hope,Kesler
+,,,,,,"Kesler, Rifle Rees",M,13,12 Dec 2011,Idaho,,riflekesler@icloud.com,Rifle,Rees,Kesler
+,,,,,,"Kesler, Tucker Ezra",M,16,25 Apr 2009,Idaho,,mike_kesler1@hotmail.com,Tucker,Ezra,Kesler
+,,,,,,"Kidd, Alex",F,33,3 Apr 1992,"372 Campbell Point Rd
+Laclede, Idaho 83841-0140",12086107610,alexandria.peterson@icloud.com,Alex,,Kidd
+,,,,,,"Kidd, Asher Kam",M,8,18 Apr 2017,"372 Campbell Point Rd
+Laclede, Idaho 83841-0140",,,Asher,Kam,Kidd
+,,,,,,"Kidd, Konnor Robert",M,3,6 Feb 2022,"372 Campbell Point Rd
+Laclede, Idaho 83841-0140",,,Konnor,Robert,Kidd
+,,,,,,"Kidd, Shane",M,33,23 Mar 1992,"372 Campbell Point Rd
+Laclede, Idaho 83841-0140",208-610-7610,nor.ida1992@gmail.com,Shane,,Kidd
+,,,,,,"Kinney, Sharon",F,63,5 Apr 1962,"264 Mansours Pl
+Oldtown, Idaho 83822",913-268-3223,,Sharon,,Kinney
+D1,"Kitchin, Cozy","Hawks, Jair","Streeter, Michael John",,,"Kitchin, Cozy",F,70,26 Apr 1955,"2654 E Hwy 2 space 12
+oldtown, Idaho 83822",+12087142041,,Cozy,,Kitchin
+,,,,,,"Kitchin, Dannelle Marie",F,13,9 Feb 2012,"2654 Highway 2
+Spc 12
+Oldtown, Idaho 83822-9214",,,Dannelle,Marie,Kitchin
+D1,"Kitchin, Richard","Hawks, Jair","Streeter, Michael John",,,"Kitchin, Richard",M,53,15 Apr 1972,"2654 Highway 2
+Spc 12
+Oldtown, Idaho 83822-9214",509-589-0724,rchkitchin@yahoo.com,Richard,,Kitchin
+,,,,,,"Knaack, Braxton Lee",M,16,22 Jan 2009,"604 E. 4th Street
+Oldtown, Idaho 83822",208-755-1904,,Braxton,Lee,Knaack
+,,,,,,"Knaack, Hudson James",M,12,31 May 2013,"604 E. 4th Street
+Oldtown, Idaho 83822",,,Hudson,James,Knaack
+,,,,,,"Knaack, Kyler Christopher",M,13,7 Oct 2011,"604 E. 4th Street
+Oldtown, Idaho 83822",208-755-1104,,Kyler,Christopher,Knaack
+D3,"Knaack, Nikki","Knaack, Braxton Lee","Torgesen, James Eugene",,,"Knaack, Nikki",F,41,8 Sep 1983,"604 E. 4th Street
+Oldtown, Idaho 83822",208-755-1904,Knaackfamily@yahoo.com,Nikki,,Knaack
+D3,"Kramer, Renee Lyn","Knaack, Kyler Christopher","Littlefield, Carl",,,"Kramer, Renee Lyn",F,49,4 Jul 1975,"82 S. 2nd ST.
+Priest River, Idaho 83856",,,Renee,Lyn,Kramer
+D3,"Krogh, Chad","Dracocardos, Matthias","Dracocardos, Nicholas Michael",,,"Krogh, Chad",M,41,22 Sep 1983,"75 Fairway Dr
+Blanchard, Idaho 83804-8557",801-634-5593,,Chad,,Krogh
+D2,"Lane, Nancy","Barrett, Chris","Charleston, Billie",,,"Lane, Nancy",F,72,11 Jun 1952,"402 Cedar View Ests Rd
+Blanchard, Idaho 83804",208-255-0961,,Nancy,,Lane
+D1,"Lawrence, Daniel","Buckley, Michael John","Johnson, Mark","Schultz, Richard",,"Lawrence, Daniel",M,64,6 Feb 1961,"540 N Riley CRK
+Laclede, Idaho 83841",208-255-5217,,Daniel,,Lawrence
+,,,,,,"Le Blanc, Dan",M,81,14 Aug 1943,"103C Chardonnay dr
+Blanchard, Idaho 83804",208-217-8078,,Dan,,Le Blanc
+,,,,,,"Le Blanc, Donna",F,80,25 Nov 1944,"103C Chardonnay dr
+Blanchard, Idaho 83804",208-217-8078,,Donna,,Le Blanc
+,,,,,,"Leininger, Lee Wayne",M,87,17 May 1938,"137 Dreamcatcher Ln
+Spirit Lake, Idaho 83869-7002",,,Lee,Wayne,Leininger
+,,,,,,"Leitch, Hannah Lee",F,17,28 Jul 2007,"365 Jack's Pl
+Oldtown, Idaho 83822",,kacole26@aol.com,Hannah,Lee,Leitch
+D2,"Leitch, Wes","Cooper, Rick","Kesler, Rifle Rees","Kesler, Tucker Ezra",,"Leitch, Wes",M,38,14 Sep 1986,"365 Jack's Pl
+Oldtown, Idaho 83822",425-289-6728,westonleitch@gmail.com,Wes,,Leitch
+,,,,,,"Littlefield, Carl",M,63,17 Apr 1962,Idaho,360-250-2256,carl.littlefield@gmail.com,Carl,,Littlefield
+,,,,,,"Littlefield, Shannon",F,54,23 Jun 1970,Idaho,360-250-2252,idaho.7b@hotmail.com,Shannon,,Littlefield
+,,,,,,"Lobdell, Alice",F,68,13 Jan 1957,"PO BOX 4
+BLANCHARD, Idaho 83804-0004",208-437-0115,,Alice,,Lobdell
+,,,,,,"Lupton, Ashley",F,36,19 Jul 1988,"186 Bearing Tree Ln
+Spirit Lake, Idaho 83869-0079",,,Ashley,,Lupton
+,,,,,,"Lupton, Brian",M,60,12 Aug 1964,"186 Bearing Tree Ln
+Spirit Lake, Idaho 83869-0079",208-627-3071,brianlupton186@gmail.com,Brian,,Lupton
+,,,,,,"Lupton, Jennifer",F,59,19 Aug 1965,"186 Bearing Tree Ln
+Spirit Lake, Idaho 83869-0079",626-695-5730,luptonbj4@gmail.com,Jennifer,,Lupton
+D1,"Luttrell, Jerry","Charleston, Hunter Jo","Charleston, Tim","Wright, Jared",,"Luttrell, Jerry",M,60,14 Mar 1965,"6275 Kelso Lake Rd
+Athol, Idaho 83801-9237",775-209-5264,Jerrylutt@gmail.com,Jerry,,Luttrell
+D1,"Madan, Edmond","Buckley, Michael John","Johnson, Mark","Schultz, Richard",,"Madan, Edmond",M,48,26 Oct 1976,"188 Laclede Shores Dr
+Laclede, Idaho 83841",208-610-0201,,Edmond,,Madan
+,,,,,,"Maiava, Annie",F,35,16 Mar 1990,"186 Bearing Tree Ln
+Spirit Lake, Idaho 83869-0079",8087260464,annie.polvado08@gmail.com,Annie,,Maiava
+,,,,,,"Maiava, Kaisa",M,13,17 Sep 2011,"186 Bearing Tree Ln
+Spirit Lake, Idaho 83869-0079",,,Kaisa,,Maiava
+,,,,,,"Maiava, Roby Salesa Marcus Keola Polvado",M,16,26 Feb 2009,"186 Bearing Tree Ln
+Spirit Lake, Idaho 83869-0079",,,Roby,Salesa Marcus Keola Polvado,Maiava
+,,,,,,"Maiava, Tiloi",M,8,27 Mar 2017,"186 Bearing Tree Ln
+Spirit Lake, Idaho 83869-0079",,,Tiloi,,Maiava
+,,,,,,"Maiava, TK",M,34,3 Apr 1991,"186 Bearing Tree Ln
+Spirit Lake, Idaho 83869-0079",8087260463,maiava.96762@gmail.com,TK,,Maiava
+D2,"Maines, Burt","Barrett, Chris","Charleston, Billie",,,"Maines, Burt",M,48,27 Aug 1976,"792 Hoo Doo Mountain Rd
+Priest River, Idaho 83856-7797",208-755-1006,,Burt,,Maines
+D3,"Mangum, Braiden Douglas","Trotta, Louis","Zwygart, Herbert Walter",,,"Mangum, Braiden Douglas",M,19,24 Jun 2005,"34512 Highway 41
+Oldtown, Idaho 83822-9225",402-380-1757,braidenmangum2005@gmail.com,Braiden,Douglas,Mangum
+D3,"Mangum, Jillian","Trotta, Louis","Zwygart, Herbert Walter",,,"Mangum, Jillian",F,39,25 Jan 1986,"34512 Highway 41
+Oldtown, Idaho 83822-9225",,,Jillian,,Mangum
+D3,"Marti, Harry","Knaack, Braxton Lee","Torgesen, James Eugene",,,"Marti, Harry",M,42,9 Jul 1982,"312 S. Rena Rd.
+Oldtown, Idaho 83822",,,Harry,,Marti
+D1,"Martin, Robert Chad","Hawks, Jair","Streeter, Michael John",,,"Martin, Robert Chad",M,65,23 Jun 1959,"625 E 4th St S
+Oldtown, Idaho 83822",(208)437-2021,,Robert,Chad,Martin
+D2,"McCollum, Anne-Marie","Cooper, Rick","Kesler, Rifle Rees","Kesler, Tucker Ezra",,"McCollum, Anne-Marie",F,81,9 Jul 1943,"943 Coyote Song
+PObox 307
+Priest River, Idaho 83856-0307",208-610-8318,ldannemcc@gmail.com,Anne-Marie,,McCollum
+,,,,,,"*
+Mcculla, Jeremy",M,23,11 Jan 2002,"193 Sierra Ln.
+p.o. box 411
+Blanchard, Idaho 83804",,,Jeremy,,"*
+Mcculla"
+,,,,,,"McEvers, Jesse Ray",M,53,31 Aug 1971,"7265 Kelso Lake Rd
+Athol, Idaho 83801",208-290-7751,,Jesse,Ray,McEvers
+D1,"McGrew, Barbara Luann","Boone, Charlie","Clayburn, Brian",,,"McGrew, Barbara Luann",F,70,28 Oct 1954,"244 Eldenburg Rd
+Priest River, Idaho 83856-7758",661-992-0168,brbrmcgre@aol.com,Barbara,Luann,McGrew
+,,,,,,"McKee, Cole Andrew",M,22,19 Sep 2002,"346 Saunders Rd
+Blanchard, Idaho 83804-7032",541-678-2137,,Cole,Andrew,McKee
+,,,,,,"McKee, Michael Bryan",M,59,21 Jul 1965,"346 Saunders Rd
+Blanchard, Idaho 83804-7032",541-678-2137,mmbcole7@aol.com,Michael,Bryan,McKee
+,,,,,,"McKee, Michael Bryan II",M,27,5 Jan 1998,"346 Saunders Rd
+Blanchard, Idaho 83804-7032",541-678-0143,mymikes123@gmail.com,Michael,Bryan II,McKee
+,,,,,,"McKee, Tracy Lynne",F,61,27 Aug 1963,"346 Saunders Rd
+Blanchard, Idaho 83804-7032",541-678-2138,,Tracy,Lynne,McKee
+,,,,,,"Meatoga, Hailey",F,35,20 Apr 1990,"186 Bearing Tree Ln
+Spirit Lake, Idaho 83869-0079",626-340-6142,hailey.lupton@yahoo.com,Hailey,,Meatoga
+,,,,,,"Meatoga, Kili",F,1,30 Nov 2023,"186 Bearing Tree Ln
+Spirit Lake, Idaho 83869-0079",,,Kili,,Meatoga
+,,,,,,"Meatoga, Paul",M,33,20 Jul 1991,"186 Bearing Tree Ln
+Spirit Lake, Idaho 83869-0079",808 293-5609,pmeatoga@gmail.com,Paul,,Meatoga
+D2,"Moon, Earl","Barrett, Chris","Charleston, Billie",,,"Moon, Earl",M,77,25 Feb 1948,"PO Box 207
+Blanchard, Idaho 83804",208-661-6066,,Earl,,Moon
+D3,"Moren, Charles Leslie","Dracocardos, Matthias","Dracocardos, Nicholas Michael",,,"Moren, Charles Leslie",M,75,6 Nov 1949,Idaho,360 303-0382,LesMoren@gmail.com,Charles,Leslie,Moren
+,,,,,,"Morgan, Debra Lee",F,71,13 Feb 1954,"236 Saunders Rd
+Blanchard, Idaho 83804",2084373610,,Debra,Lee,Morgan
+D3,"Moss, Rhiannon","Knaack, Braxton Lee","Torgesen, James Eugene",,,"Moss, Rhiannon",F,34,27 Sep 1990,"120 E 6th St S
+Oldtown, Idaho 83822-9602",5096716985,,Rhiannon,,Moss
+,,,,,,"Mostoller, Ed",M,76,13 Jul 1948,Idaho,208-437-0535,,Ed,,Mostoller
+,,,,,,"Mostoller, Rose",F,64,17 May 1961,Idaho,208-437-0535,,Rose,,Mostoller
+,,,,,,"Myrvang, Anna",F,85,24 Jan 1940,"75 Fairway Dr. #3
+Blanchard, Idaho 83804",208-215-0055,,Anna,,Myrvang
+,,,,,,"Myrvang, Bryce",M,42,19 Apr 1983,"231 Stoneridge Rd
+Blanchard, Idaho 83804-9505",+13604476650,telcontar75@gmail.com,Bryce,,Myrvang
+,,,,,,"Myrvang, Kristin",F,39,15 Dec 1985,"231 Stoneridge Rd
+Blanchard, Idaho 83804-9505",208-304-2588,yountkids@gmail.com,Kristin,,Myrvang
+,,,,,,"Myrvang, Malcolm Alan",M,6,2 Jan 2019,"231 Stoneridge Rd
+Blanchard, Idaho 83804-9505",,,Malcolm,Alan,Myrvang
+,,,,,,"Myrvang, Mazlynn Oleah",F,3,30 Jul 2021,"231 Stoneridge Rd
+Blanchard, Idaho 83804-9505",,,Mazlynn,Oleah,Myrvang
+D1,"Myrvang, Melynda","Charleston, Hunter Jo","Charleston, Tim","Wright, Jared",,"Myrvang, Melynda",F,39,1 Nov 1985,"474 Stoneridge Rd
+Blanchard, Idaho 83804-9526",208 651-9932,melynda.myrvang@hotmail.com,Melynda,,Myrvang
+,,,,,,"Myrvang, Olaf Leeroy",M,86,2 Mar 1939,"75 Fairway Dr. #3
+Blanchard, Idaho 83804",208-215-0055,,Olaf,Leeroy,Myrvang
+,,,,,,"Myrvang, Rodney",M,65,20 May 1960,"474 Stoneridge Rd.
+Blanchard, Idaho 83804",+12083406344,Rod.myrvang@gmail.com,Rodney,,Myrvang
+,,,,,,"Myrvang, Sheila",F,61,10 Nov 1963,"474 Stoneridge Rd.
+Blanchard, Idaho 83804",208-640-0444,Sheila.myrvang@gmail.com,Sheila,,Myrvang
+D3,"Naegle, Ronald Wayne","Knaack, Braxton Lee","Torgesen, James Eugene",,,"Naegle, Ronald Wayne",M,84,30 Nov 1940,"52 Womack Rd
+Oldtown, Idaho 83822",909-772-3628,,Ronald,Wayne,Naegle
+D3,"Nash, Kevin Allen","Isenberger, James Duane","Shepherd, Benjamin",,,"Nash, Kevin Allen",M,61,30 Oct 1963,"1951 Blanchard Elk Rd
+Blanchard, Idaho 83804",208-437-0267,,Kevin,Allen,Nash
+D3,"Naylor, Michael","Trotta, Louis","Zwygart, Herbert Walter",,,"Naylor, Michael",M,69,22 Jan 1956,"443 Meadowlark Ln
+Old Town, Idaho 83822",,,Michael,,Naylor
+D3,"Neil, BJ","Knaack, Kyler Christopher","Littlefield, Carl",,,"Neil, BJ",M,42,1 Sep 1982,"9 Mansour Rd
+PO Box 1266
+Newport, Washington 99156",208-946-7065,bajeepers@hotmail.com,BJ,,Neil
+,,,,,,"Nelson, Ben",M,42,19 Dec 1982,"5498 Spirit Lake Cut Off
+Spirit Lake, Idaho 83869-9636",1-509-592-6687,2worlds1fate@gmail.com,Ben,,Nelson
+,,,,,,"Nelson, Brian",M,42,19 Dec 1982,"5498 Spirit Lake Cut Off
+Spirit Lake, Idaho 83869-9636",208-217-3019,castlestokingdoms@gmail.com,Brian,,Nelson
+,,,,,,"Nelson, Cecil",F,41,12 Nov 1983,"1332 US-2
+Old Town, Idaho",5092945609,,Cecil,,Nelson
+D1,"Nelson, Lorraine","Anderson, Art","Bickford, Alan Phillip","Charleston, Wayne",,"Nelson, Lorraine",F,93,17 Aug 1931,Idaho,208-437-3610,logcabinannie@yahoo.com,Lorraine,,Nelson
+D2,"Nelson, Patty","Cooper, Rick","Kesler, Rifle Rees","Kesler, Tucker Ezra",,"Nelson, Patty",F,64,17 Jan 1961,"464 Rockview Dr
+Priest River, Idaho 83856-9763",208-290-6195,Lgnkd7ejm1@gmail.com,Patty,,Nelson
+D3,"Nowland, Kim","Trotta, Louis","Zwygart, Herbert Walter",,,"Nowland, Kim",F,64,16 Aug 1960,Idaho,208-437-3126,,Kim,,Nowland
+,,,,,,"Painter, Aries Albert Ellis",M,26,25 Nov 1998,"504 Krupps Rd
+PO Box 1245
+Spirit Lake, Idaho 83869",,,Aries,Albert Ellis,Painter
+D1,"Painter, Lisa","Charleston, Hunter Jo","Charleston, Tim","Wright, Jared",,"Painter, Lisa",F,66,16 Oct 1958,"504 Krupps Rd
+PO Box 1245
+Spirit Lake, Idaho 83869",208-623-2857,,Lisa,,Painter
+D3,"Peterson, Kathline","Isenberger, James Duane","Shepherd, Benjamin",,,"Peterson, Kathline",F,70,22 Apr 1955,"96 Mountain View Rd
+Blanchard, Idaho 83804",,,Kathline,,Peterson
+,,,,,,"Petrick, Blake",M,51,2 Mar 1974,"106 Stewart Dr
+Blanchard, Idaho 83804-8553",208-916-4666,bzpetrick@yahoo.com,Blake,,Petrick
+,,,,,,"Petrick, Lindsey Nichole",F,32,14 Apr 1993,"106 Stewart Dr
+Blanchard, Idaho 83804-8553",,Lindseynbarre@gmail.com,Lindsey,Nichole,Petrick
+D2,"Pitman, Lavere Baron","Kesler, Mike",,,,"Pitman, Lavere Baron",M,74,11 Jun 1950,"297 Lakeview Dr
+Blanchard, Idaho 83856",208-437-4885,,Lavere,Baron,Pitman
+,,,,,,"Potts, Shania Llyn",F,28,16 Dec 1996,"145 Dinger Ln
+Priest River, Idaho 83856-7708",,,Shania,Llyn,Potts
+,,,,,,"Raley, Barbara Jean",F,65,6 Oct 1959,"151 Chip N Dale Rd
+Priest River, Idaho 83856",,,Barbara,Jean,Raley
+,,,,,,"Reese, Aidan James Norman",M,7,31 May 2018,"921 HUNTER RD
+PO Box 278
+BLANCHARD, Idaho 83804-0019",,,Aidan,James Norman,Reese
+,,,,,,"Reese, Amber Lynn",F,10,26 Apr 2015,"921 HUNTER RD
+PO Box 278
+BLANCHARD, Idaho 83804-0019",801 979 6798,,Amber,Lynn,Reese
+,,,,,,"Reese, Angela Emily",F,57,6 Nov 1967,"169 Shelby Rd
+Laclede, Idaho 83841-0320",360-357-9234,,Angela,Emily,Reese
+,,,,,,"Reese, Atlas Henry",M,5,11 Jul 2019,"921 HUNTER RD
+PO Box 278
+BLANCHARD, Idaho 83804-0019",,,Atlas,Henry,Reese
+D1,"Reese, Danny","Buckley, Michael John","Johnson, Mark","Schultz, Richard",,"Reese, Danny",M,60,4 Aug 1964,"188 Rena Rd
+Oldtown, Idaho 83822-8501",,,Danny,,Reese
+,,,,,,"Reese, James Tallen",M,57,17 May 1968,"169 Shelby Rd
+Laclede, Idaho 83841-0320",360-357-9234,,James,Tallen,Reese
+D2,"Remsburg, Donald Lee","Kesler, Mike",,,,"Remsburg, Donald Lee",M,61,8 Apr 1964,"2656 Clagstone
+Clagstone, Idaho",2082556691,,Donald,Lee,Remsburg
+D1,"Reynolds, Diane Arlene","Hawks, Jair","Streeter, Michael John",,,"Reynolds, Diane Arlene",F,69,1 May 1956,"5180 Old Priest River Rd
+Priest River, Idaho",,,Diane,Arlene,Reynolds
+,,,,,,"Reynolds, Tim",M,48,18 Jun 1976,"Po Box 1617
+1343Hoop Loop Rd
+Priest River, Idaho 83856",,,Tim,,Reynolds
+D2,"Reynolds, Tony","Connly, Steven James","Isenberger, Merrik Gene","Torgesen, Gerald Wayne",,"Reynolds, Tony",M,51,24 Nov 1973,"Po Box 1617
+1343Hoop Loop Rd
+Priest River, Idaho 83856",208-448-1552,,Tony,,Reynolds
+,,,,,,"Rife, Mary Kay",F,66,18 Jul 1958,"496 Elk Meadows
+Blanchard, Idaho 83804",,,Mary,Kay,Rife
+D1,"Rogers, Benjamin","Boone, Charlie","Clayburn, Brian",,,"Rogers, Benjamin",M,22,22 Mar 2003,"37 Markham Ct
+Priest River, Idaho 83856-9306",208-789-4391,benj.j.rogers22@gmail.com,Benjamin,,Rogers
+D3,"Routt, Brian Patric","Knaack, Kyler Christopher","Littlefield, Carl",,,"Routt, Brian Patric",M,32,27 Jul 1992,"100 South McKinley Apt. # 204
+Priest River, Idaho 83856",,,Brian,Patric,Routt
+D2,"Russell, Jordyn Taylor","Kesler, Mike",,,,"Russell, Jordyn Taylor",F,27,6 Mar 1998,"465 Outback Loop
+Spirit Lake, Idaho 83869-8602",2082559970,ruskelley7@gmail.com,Jordyn,Taylor,Russell
+,,,,,,"Russell, Paul Calvin",M,62,20 Aug 1962,"187 Wakena Ln
+Priest River, Idaho 83856-7734",,,Paul,Calvin,Russell
+,,,,,,"Russell, Renee' Diane",F,62,17 Dec 1962,"187 Wakena Ln
+Priest River, Idaho 83856-7734",,,Renee',Diane,Russell
+,,,,,,"Savage, Robert",M,64,17 Sep 1960,"301 S. Grover Ave.
+Old Town, Idaho 83822",208-437-4274,,Robert,,Savage
+D3,"Scholtz, Paul Emanuel Leonard","Trotta, Louis","Zwygart, Herbert Walter",,,"Scholtz, Paul Emanuel Leonard",M,35,29 Jun 1989,"Po Box 865
+Priest River, Idaho 83856-",208-448-2680,schu6059@vandals.uidaho.edu,Paul,Emanuel Leonard,Scholtz
+D3,"Schultz, Richard","Trotta, Louis","Zwygart, Herbert Walter",,,"Schultz, Richard",M,74,13 Feb 1951,"3966 Hyway 2
+Priest River, Idaho 83856",208-217-8751,richardschultz971@gmail.com,Richard,,Schultz
+,,,,,,"*
+Sedgwick, Amanda",F,24,28 May 2001,"271 Pine Haven Road
+Spirit Lake, Idaho 83869",,,Amanda,,"*
+Sedgwick"
+,,,,,,"Sedgwick, Christian",M,53,22 Mar 1972,"271 Pine Haven Road
+Spirit Lake, Idaho 83869",,,Christian,,Sedgwick
+,,,,,,"*
+Sedgwick, Kimberlee",F,21,26 Nov 2003,"271 Pine Haven Road
+Spirit Lake, Idaho 83869",,,Kimberlee,,"*
+Sedgwick"
+D2,"Sedgwick, Megan","Fitzell, Melvin James","Moren, Charles Leslie","Trexler, Andrew Robert",,"Sedgwick, Megan",F,30,17 Feb 1995,"271 Pinehaven Rd
+Priest River, Idaho 83856",208-926-4758,,Megan,,Sedgwick
+,,,,,,"Sedgwick, Rhonda",F,54,26 Nov 1970,"271 Pine Haven Road
+Spirit Lake, Idaho 83869",208-255-4125,crsdgwck@yahoo.com,Rhonda,,Sedgwick
+,,,,,,"Sedgwick, Sean",M,28,18 Feb 1997,"271 Pine Haven Road
+Spirit Lake, Idaho 83869",,,Sean,,Sedgwick
+,,,,,,"*
+Sedgwick, Spencer",M,26,29 May 1999,"271 Pine Haven Road
+Spirit Lake, Idaho 83869",,,Spencer,,"*
+Sedgwick"
+,,,,,,"Shalkowski, Sarah Deanne",F,42,14 Oct 1982,"825 Shamar Dr
+Blanchard, Idaho 83804-5005",360-337-0493,,Sarah,Deanne,Shalkowski
+D2,"Shanholtzer, Theresa","Kesler, Mike",,,,"Shanholtzer, Theresa",F,58,3 May 1967,"468 Mountain View Rd
+Blanchard, Idaho 83804-8544",360-697 4182,,Theresa,,Shanholtzer
+,,,,,,"Sheck, Sonja",F,69,12 Jun 1955,"565 Grove Addition
+Oldtown, Idaho 83822",208-437-4076,,Sonja,,Sheck
+,,,,,,"Shepherd, Benjamin",M,27,7 Jun 1997,"106 Mason Rd
+Blanchard, Idaho 83804-7001",208-818-8909,benjamintshep@gmail.com,Benjamin,,Shepherd
+D3,"Shepherd, Donald Jim","Trotta, Louis","Zwygart, Herbert Walter",,,"Shepherd, Donald Jim",M,42,23 Oct 1982,"702 S Rena Rd
+Oldtown, Idaho 83822-8508",928-380-1181,,Donald,Jim,Shepherd
+,,,,,,"Shepherd, Forrest Rock",M,0,17 Jan 2025,"106 Mason Rd
+Blanchard, Idaho 83804-7001",,,Forrest,Rock,Shepherd
+,,,,,,"Shepherd, Hudson Bleu",M,4,5 Nov 2020,"106 Mason Rd
+Blanchard, Idaho 83804-7001",,,Hudson,Bleu,Shepherd
+,,,,,,"Shepherd, Rebekah Rose",F,27,6 Nov 1997,"106 Mason Rd
+Blanchard, Idaho 83804-7001",208-818-9284,rebekahroseb@gmail.com,Rebekah,Rose,Shepherd
+D2,"Shuck, Avril","Kesler, Mike",,,,"Shuck, Avril",F,40,9 Oct 1984,"181 Lake Veiw Dr.
+Blanchard, Idaho 83804",509-998-9386,hite_three@yahoo.com,Avril,,Shuck
+D2,"Simmons, Connie Francine","Connly, Steven James","Isenberger, Merrik Gene","Torgesen, Gerald Wayne",,"Simmons, Connie Francine",F,80,7 Dec 1944,"206 Merry Ln
+Oldtown, Idaho 83822-7522",702-234-3484,simm1944@outlook.com,Connie,Francine,Simmons
+D2,"Smiley, Sean","Cooper, Rick","Kesler, Rifle Rees","Kesler, Tucker Ezra",,"Smiley, Sean",M,35,2 Feb 1990,"17278 Dufort Rd
+Priest River, Idaho 83856-5091",208-304-6689,sean_smiley_ranger@yahoo.com,Sean,,Smiley
+,,,,,,"Smith, James",M,71,29 Dec 1953,"24170 Highway 41
+Blanchard, Idaho 83804-5024",206 850 8295,,James,,Smith
+,,,,,,"Sommer, Austin",M,33,2 Jan 1992,"190 Turner Rd.
+Priest River, Idaho 83856",,,Austin,,Sommer
+,,,,,,"*
+Sommer, Dalton Frank",M,30,26 Mar 1995,"190 Turner Rd.
+Priest River, Idaho 83856",,,Dalton,Frank,"*
+Sommer"
+,,,,,,"Sommer, Michelle",F,57,16 Jun 1967,"190 Turner Rd.
+Priest River, Idaho 83856",,,Michelle,,Sommer
+,,,,,,"Sorensen, Bradley",M,21,13 Sep 2003,"179 McDonald Creek Rd
+Blanchard, Idaho 83804-9548",3853150252,bradsorensen1040@yahoo.com,Bradley,,Sorensen
+D1,"Sorensen, Marc John","Charleston, Hunter Jo","Charleston, Tim","Wright, Jared",,"Sorensen, Marc John",M,43,5 Jun 1982,"179 McDonald Creek Rd
+Blanchard, Idaho 83804-9548",8015926263,marcsorensen.ms@gmail.com,Marc,John,Sorensen
+D2,"Sparks, Ernie Daniel","Connly, Steven James","Isenberger, Merrik Gene","Torgesen, Gerald Wayne",,"Sparks, Ernie Daniel",M,59,17 May 1966,Idaho,,,Ernie,Daniel,Sparks
+,,,,,,"Sproul, Kyle Ray",M,36,2 Mar 1989,"645 N Cedar View Estates Rd
+Blanchard, Idaho 83804-8568",208-568-0081,,Kyle,Ray,Sproul
+D3,"Sproul, Vonnell Faith","Knaack, Braxton Lee","Torgesen, James Eugene",,,"Sproul, Vonnell Faith",F,80,7 Feb 1945,"51 Forge Way
+Blanchard, Idaho 83804-1006",+12085826642,mamavonnell@gmail.com,Vonnell,Faith,Sproul
+,,,,,,"Stagner, Cassandra Lynn",F,33,2 May 1992,"10069 Kelsolake Rd
+Priest River, Idaho 83856",,,Cassandra,Lynn,Stagner
+,,,,,,"Stagner, Hannah",F,36,19 May 1989,"10069 Kelsolake Rd
+Priest River, Idaho 83856",,,Hannah,,Stagner
+,,,,,,"Stagner, Hilary",F,56,25 Jun 1968,"10069 Kelsolake Rd
+Priest River, Idaho 83856",208-290-1270,,Hilary,,Stagner
+,,,,,,"Stamey, James Thomas",M,88,29 Apr 1937,"84 Cedar View Estates Rd
+Blanchard, Idaho 83804-9582",208-265-9299,,James,Thomas,Stamey
+D2,"Stamey, Jamie Lynn","Barrett, Chris","Charleston, Billie",,,"Stamey, Jamie Lynn",F,48,18 Mar 1977,"545 Krupp Rd
+Spirit Lake, Idaho 83869",,,Jamie,Lynn,Stamey
+D2,"Steinbrenner, Craig","Barrett, Chris","Charleston, Billie",,,"Steinbrenner, Craig",M,58,14 Jan 1967,"361 Spirit Lake Cut Off
+Spirit Lake, Idaho 83869-7009",(208) 263-1212,,Craig,,Steinbrenner
+D1,"Stokes, Blair Wayne","Boone, Charlie","Clayburn, Brian",,,"Stokes, Blair Wayne",M,45,7 Apr 1980,"3472 Vay Rd
+Priest River, Idaho 83856",,,Blair,Wayne,Stokes
+,,,,,,"Streeter, Michael John",M,70,10 May 1955,"495 Hoop Loop Rd
+Priest River, Idaho 83856-8763",208-610-5450,,Michael,John,Streeter
+,,,,,,"Streeter, Raylene",F,69,17 Feb 1956,"495 Hoop Loop Rd
+Priest River, Idaho 83856-8763",,wildrose_34540@hotmail.com,Raylene,,Streeter
+,,,,,,"Strong, Clay Vilas",M,57,25 Jun 1967,"PO BOX 3613
+2234 Hoodoo Loop
+OLDTOWN, Idaho 83822",,,Clay,Vilas,Strong
+D2,"Stumm, Eric","Kesler, Mike",,,,"Stumm, Eric",M,42,13 Jul 1982,"3108 Bandy RD.
+Priest River, Idaho 83856",208-255-8839,,Eric,,Stumm
+D1,"Thompson, Marie","Boone, Charlie","Clayburn, Brian",,,"Thompson, Marie",F,87,3 Oct 1937,"38368 Highway 41
+Oldtown, Idaho 83822-9200",253-381-9596,,Marie,,Thompson
+,,,,,,"Thornbrugh, Dallas Angel Mae",F,36,8 Sep 1988,"375 Hooper Ln
+Oldtown, Idaho 83822-7547",,,Dallas,Angel Mae,Thornbrugh
+D3,"Thornbrugh, JT","Trotta, Louis","Zwygart, Herbert Walter",,,"Thornbrugh, JT",M,33,31 Mar 1992,"375 Hooper Ln
+Oldtown, Idaho 83822-7547",(425) 318-6151,,JT,,Thornbrugh
+,,,,,,"Thornbrugh, Laura Lynne",F,57,14 Jan 1968,"375 Hooper Ln
+Oldtown, Idaho 83822-7547",,,Laura,Lynne,Thornbrugh
+,,,,,,"Tipke, Alan Lee",M,74,22 Jun 1950,"2022 Spirit Lake Cut Off
+Spirit Lake, Idaho 83869",208-265-9622,,Alan,Lee,Tipke
+,,,,,,"Tolman, Jessica",F,25,18 Mar 2000,"6736 Highway 2
+Priest River, Idaho 83856-6106",208-269-0129,jesskaytolman@gmail.com,Jessica,,Tolman
+D2,"Topp, Ed","Fitzell, Melvin James","Moren, Charles Leslie","Trexler, Andrew Robert",,"Topp, Ed",M,77,5 Sep 1947,"45 Krupps Rd
+PO Box Box 54
+Spirit Lake, Idaho 83869",208-623-6105,,Ed,,Topp
+,,,,,,"Torgesen, Allene",F,81,19 Nov 1943,"745 Blackthorn Road
+Oldtown, Idaho 83822",208-304-4606,awtorgesen@gmail.com,Allene,,Torgesen
+,,,,,,"Torgesen, Gerald Wayne",M,82,29 Sep 1942,"745 Blackthorn Road
+Oldtown, Idaho 83822",208-946-6834,gwtorgesen@gmail.com,Gerald,Wayne,Torgesen
+,,,,,,"Torgesen, James Eugene",M,77,9 Oct 1947,"423 Solar Rd
+Oldtown, Idaho 83822-7572",208-217 2806,Torgfam@yahoo.com,James,Eugene,Torgesen
+,,,,,,"Torgesen, Lynda",F,75,24 Feb 1950,"423 Solar Rd
+Oldtown, Idaho 83822-7572",208-217-2751,torgfam@yahoo.com,Lynda,,Torgesen
+D2,"Trexler, Andrew Robert","Cooper, Rick","Kesler, Rifle Rees","Kesler, Tucker Ezra",,"Trexler, Andrew Robert",M,50,29 Dec 1974,"PO Box 748
+Spirit Lake, Idaho 83869-0748",903-245-4681,drewbert.trexler@gmail.com,Andrew,Robert,Trexler
+,,,,,,"Trexler, Glenn",M,79,30 Aug 1945,"PO Box 748
+1288 Beare Rd
+Spirit Lake, Idaho 83869-0748",760-221-4538,trexler29@aol.com,Glenn,,Trexler
+,,,,,,"Trexler, Patty",F,77,27 Feb 1948,"PO Box 748
+1288 Beare Rd
+Spirit Lake, Idaho 83869-0748",(760) 221-4538,GPatty@aol.com,Patty,,Trexler
+,,,,,,"Tripp, Leland Michael",M,70,14 Jul 1954,"P. O. Box 187
+Blanchard, Idaho 83804",208-437-0382,,Leland,Michael,Tripp
+,,,,,,"Tripp, Marta Lee",F,69,6 Sep 1955,"P. O. Box 187
+Blanchard, Idaho 83804",208-437-0382,,Marta,Lee,Tripp
+,,,,,,"Trotta, Cheryl",F,76,9 Oct 1948,"252 Akre Heights, Dr.
+blanchard, Idaho 83804",208-304-7048,camillerhomestead@gmail.com,Cheryl,,Trotta
+,,,,,,"Trotta, Louis",M,76,28 Jun 1948,"252 Akre Heights, Dr.
+blanchard, Idaho 83804",208-304-7064,loutrotta@gmail.com,Louis,,Trotta
+,,,,,,"Vachon, Andre Bertrand",M,64,10 Aug 1960,"179 McDonald Creek Rd
+Blanchard, Idaho 83804-0341",437-0558,,Andre,Bertrand,Vachon
+D1,"Vanness, Pamela","Boone, Charlie","Clayburn, Brian",,,"Vanness, Pamela",F,41,23 Jun 1983,"625 E Valley St S
+Oldtown, Idaho 83822-9550",360-584-7572,,Pamela,,Vanness
+,,,,,,"Walker, Charity",F,53,9 May 1972,Idaho,509-405-0181,,Charity,,Walker
+,,,,,,"*
+Walker, Dammon",M,30,9 Jun 1994,Idaho,,,Dammon,,"*
+Walker"
+D1,"Walker, Jerry","Hawks, Jair","Streeter, Michael John",,,"Walker, Jerry",M,68,4 Sep 1956,"942 HWY 2
+Oldtown, Idaho 83822",208-437-3100,,Jerry,,Walker
+,,,,,,"Walker, Ronald",M,58,6 Apr 1967,Idaho,509-222-0755,,Ronald,,Walker
+,,,,,,"*
+Walker, Shelby Samantha Bailey",F,29,9 Feb 1996,Idaho,,,Shelby,Samantha Bailey,"*
+Walker"
+D2,"Walsh, Juanita","Barrett, Chris","Charleston, Billie",,,"Walsh, Juanita",F,58,3 Nov 1966,"954 Bluebird Ln
+Priest River, Idaho 83856",,,Juanita,,Walsh
+D3,"Watts, Scott Sheldon","Dracocardos, Matthias","Dracocardos, Nicholas Michael",,,"Watts, Scott Sheldon",M,74,31 Dec 1950,"101 Wild Meadows Rd
+Spirit Lake, Idaho 83869",(509)661-0017,,Scott,Sheldon,Watts
+,,,,,,"Webb, Barbara",F,37,1 May 1988,"1470 Albeni Cove Rd
+Oldtown, Idaho 83822",208-627-7508,,Barbara,,Webb
+D2,"Whalin, Betty","Connly, Steven James","Isenberger, Merrik Gene","Torgesen, Gerald Wayne",,"Whalin, Betty",F,79,26 Mar 1946,"165 Larch Ln
+Oldtown, Idaho 83822-9234",2086610362,mathfun4u@yahoo.com,Betty,,Whalin
+,,,,,,"Whalin, Jason",M,48,1 Mar 1977,"65 Malakowski rd.
+Oldtown, Idaho 83822-9234",,jasonwhalin@gmail.com,Jason,,Whalin
+D2,"Whalin, Madison Dawn","Connly, Steven James","Isenberger, Merrik Gene","Torgesen, Gerald Wayne",,"Whalin, Madison Dawn",F,26,8 Jan 1999,Idaho,,,Madison,Dawn,Whalin
+,,,,,,"White, Nephi",M,76,7 Jun 1948,"311 Jachetta Rd
+Priest River, Idaho 83856",208-448-1145,,Nephi,,White
+,,,,,,"White, Sally",F,72,9 Jun 1952,"311 Jachetta Rd
+Priest River, Idaho 83856",208-448-1145,,Sally,,White
+D1,"Wilhelm, William","Buckley, Michael John","Johnson, Mark","Schultz, Richard",,"Wilhelm, William",M,62,27 Oct 1962,"211 Laclede Shores Dr.
+Laclede, Idaho 83841",208-265-9446,,William,,Wilhelm
+D3,"Willis, Joseph","Knaack, Kyler Christopher","Littlefield, Carl",,,"Willis, Joseph",M,53,14 Oct 1971,"635 A1 Silver Birch
+Oldtown, Idaho 83822",208-437-3265,,Joseph,,Willis
+D1,"Willis, Loyd","Hawks, Jair","Streeter, Michael John",,,"Willis, Loyd",M,79,31 May 1946,"289 Hoodoo Hideaway
+Old Town, Idaho 83822",208-437-0165,,Loyd,,Willis
+D2,"Wilson, Dakota","Connly, Steven James","Isenberger, Merrik Gene","Torgesen, Gerald Wayne",,"Wilson, Dakota",M,39,4 Jun 1986,"1470 Albeni Cove Rd.
+Oldtown, Idaho 83822",,,Dakota,,Wilson
+D1,"Wilson, Elija Eliu","Boone, Charlie","Clayburn, Brian",,,"Wilson, Elija Eliu",M,27,21 Jul 1997,"1840 Old Priest River Rd
+Priest River, Idaho 83856-8769",208-597-3263,elijagreycloud21@gmail.com,Elija,Eliu,Wilson
+,,,,,,"Wiser, Patty",F,72,10 Dec 1952,"PO Box 638
+710 chipakota
+oldtown, Idaho 838",208-290-3189,,Patty,,Wiser
+,,,,,,"Woods, Audra",F,18,30 Sep 2006,"175 Kohler Rd
+Spirit Lake, Idaho 83869-0109",2086189433,audrawoods28@gmail.com,Audra,,Woods
+,,,,,,"Woodward, Patricia",F,84,31 May 1941,"10069 Kelso Lake Rd.
+Priest River, Idaho 83856",208-290-1270,p.woodward3@frontier.com,Patricia,,Woodward
+,,,,,,"Wright, Allison",F,10,9 Dec 2014,"391 Outback Loop
+Spirit Lake, Idaho 83869",,,Allison,,Wright
+,,,,,,"Wright, Brandon Eugene",M,13,30 Mar 2012,"391 Outback Loop
+Spirit Lake, Idaho 83869",,30brandonwright@gmail.com,Brandon,Eugene,Wright
+,,,,,,"Wright, Cameo Lee",F,40,17 Nov 1984,"391 Outback Loop
+Spirit Lake, Idaho 83869",406-261-1305,camcam84@hotmail.com,Cameo,Lee,Wright
+,,,,,,"Wright, Jared",M,42,18 Feb 1983,"391 Outback Loop
+Spirit Lake, Idaho 83869",406 261-1856,jaredbwright18@gmail.com,Jared,,Wright
+,,,,,,"Wright, Tanner Ray",M,7,9 Nov 2017,"391 Outback Loop
+Spirit Lake, Idaho 83869",406-261-1856,jaredbwright18@gmail.com,Tanner,Ray,Wright
+D3,"Wright, Tanner William Johnson","Trotta, Louis","Zwygart, Herbert Walter",,,"Wright, Tanner William Johnson",M,32,1 Feb 1993,"17553 Highway 2
+Sandpoint, Idaho 83864-7378",7073344545,,Tanner,William Johnson,Wright
+D3,"Yount, Jordan","Knaack, Kyler Christopher","Littlefield, Carl",,,"Yount, Jordan",M,32,29 May 1993,"122 cedar St
+Priest River, Idaho 83856",208-946-8067,,Jordan,,Yount
+D3,"Yount, Timothy Thad","Knaack, Kyler Christopher","Littlefield, Carl",,,"Yount, Timothy Thad",M,45,21 May 1980,"100 Dinger Ln
+Priest River, Idaho 83856-7708",208-587-5089,,Timothy,Thad,Yount
+D1,"Zwygart, Herbert Walter","Anderson, Art","Bickford, Alan Phillip","Charleston, Wayne",,"Zwygart, Herbert Walter",M,79,30 Jul 1945,"1840 Old Preist River Rd
+Priest River, Idaho 83856",208-597-2217,herbzwygart@gmail.com,Herbert,Walter,Zwygart
+,,,,,,"Zwygart, Rebekah Lefu",F,25,9 Oct 1999,"1840 Old Priest River Rd
+Priest River, Idaho 83856-8769",208-597-3761,bekahzwygart@gmail.com,Rebekah,Lefu,Zwygart
+D1,"Zwygart, Teresa Ann","Anderson, Art","Bickford, Alan Phillip","Charleston, Wayne",,"Zwygart, Teresa Ann",F,52,5 Apr 1973,"1840 Old Priest River Rd
+Priest River, Idaho 83856-8769",208-597-3212,teresaannzwygart@churchofjesuschrist.org,Teresa,Ann,Zwygart
+D1,"Zylstra, Laura Ann","Buckley, Michael John","Johnson, Mark","Schultz, Richard",,"Zylstra, Laura Ann",F,54,21 Aug 1970,"417 East Beardmore
+Priest River, Idaho 83856",208-946-1805,,Laura,Ann,Zylstra
