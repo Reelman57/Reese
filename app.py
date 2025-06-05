@@ -86,6 +86,9 @@ def send_voice(msg_in, data_list):
 # --------------------------------------------------------------------------
 def get_minister_phone_number(minister_name_to_lookup):
     
+    if not os.path.exists(data_file):
+        print(f"Error: Merged file not found at {data_file}. Please run the main script first to create it.")
+        return []
     try:
         merged_df = pd.read_csv(data_file)
     except Exception as e:
@@ -106,13 +109,14 @@ def get_minister_phone_number(minister_name_to_lookup):
         print(f"Minister '{minister_name_to_lookup}' not found in the 'Name' column of '{data_file}'.")
         return []
 
+    # Extract unique phone numbers, drop any NaN/empty values, and convert to list of strings
     phone_numbers = minister_records['Phone Number'].dropna().astype(str).unique().tolist()
 
     if not phone_numbers:
         print(f"No phone number found for minister '{minister_name_to_lookup}' in '{data_file}'.")
-    
-    return phone_numbers
 
+    return phone_numbers
+   
 # --------------------------------------------------------------------------        
 def send_email(subject, body, data_list):
     sent_emails = set()
@@ -220,7 +224,7 @@ def incoming_sms():
     
     message_body = request.values.get('Body', None)
     global from_number
-    global datafile
+    global data_file
     global sent_texts 
     global x
     
