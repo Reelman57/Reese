@@ -363,16 +363,16 @@ def incoming_sms():
                 msg += "Your assigned ministering brothers are as follows: \n"
                 
                 for i in range(1, 4): # Loop for Minister1, Minister2, Minister3
-                minister_col = f'Minister{i}'
-                if pd.notna(data.get(minister_col)):
-                    minister_name = data[minister_col]
-                    msg += f"{minister_name}"
-                    phone_numbers = get_minister_phone_number(minister_name)
-                    if phone_numbers:
-                        msg += f" - {', '.join(phone_numbers)}"
-                    else:
-                        msg += " - [Phone not available]" # Or just " " if you prefer
-                    msg += "\n"
+                    minister_col = f'Minister{i}'
+                    if pd.notna(data.get(minister_col)):
+                        minister_name = data[minister_col]
+                        msg += f"{minister_name}"
+                        phone_numbers = get_minister_phone_number(minister_name)
+                        if phone_numbers:
+                            msg += f" - {', '.join(phone_numbers)}"
+                        else:
+                            msg += " - [Phone not available]" # Or just " " if you prefer
+                        msg += "\n"
                 
                 msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have. \n"
                 msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency. \n"
