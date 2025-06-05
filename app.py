@@ -37,8 +37,6 @@ def get_send_time():
     return send_at.isoformat()
 # --------------------------------------------------------------------------
 def send_text(text_nbr, message, now):
-    global sent_texts
-    global x
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         if not now:
             send_at = get_send_time()
@@ -376,7 +374,7 @@ def incoming_sms():
                 
                 msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have. \n"
                 msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency. \n"
-                print(msg)
+                print(f"{x}. {msg}")
                 #send_text(data['Phone Number'], msg, False) 
     
         confirm_send() 
