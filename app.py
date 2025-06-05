@@ -45,7 +45,8 @@ def send_text(text_nbr, message, now):
             send_at = None
             schedule_type = None
 
-        try: """
+        try: 
+            """
             message = client.messages.create(
                 body=message,
                 from_=twilio_number,
@@ -53,7 +54,8 @@ def send_text(text_nbr, message, now):
                 messaging_service_sid=messaging_sid,
                 send_at=send_at,
                 schedule_type=schedule_type
-            )"""
+            ) 
+            """
             print(f"{x}. {text_nbr}")
             sent_texts.add(text_nbr)
             x+=1
