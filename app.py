@@ -85,53 +85,31 @@ def send_voice(msg_in, data_list):
     return calls 
 # --------------------------------------------------------------------------
 def get_minister_phone_number(minister_name_to_lookup):
-    """
-    Retrieves the phone number(s) for a given minister from the merged data file.
-    It looks up the minister's name in the 'Name' column (from members data)
-    and returns the corresponding 'Phone Number'.
-
-    Args:
-        minister_name_to_lookup (str): The full name of the minister (e.g., "Doe, John Allen").
-                                        This name should match entries in the 'Name' column of the merged file.
-
-    Returns:
-        list: A list of unique phone numbers associated with the minister (as strings),
-              or an empty list if not found, no phone number, or an error occurs.
-    """
-    if not os.path.exists(MERGED_FILE_PATH):
-        print(f"Error: Merged file not found at {MERGED_FILE_PATH}. Please run the main script first to create it.")
-        return []
-
+    
     try:
-        merged_df = pd.read_csv(MERGED_FILE_PATH)
+        merged_df = pd.read_csv(datafile)
     except Exception as e:
-        print(f"Error loading merged file {MERGED_FILE_PATH}: {e}")
+        print(f"Error loading merged file {datafile}: {e}")
         return []
 
-    # Check for required columns
-    # Assuming 'Name' and 'Phone Number' columns exist in the merged file after the join
     required_cols = ['Name', 'Phone Number'] # Adjust 'Phone Number' if your column name is different
     if not all(col in merged_df.columns for col in required_cols):
         print(f"Error: One or more required columns ({required_cols}) not found in the merged file.")
-        print(f"Available columns in '{MERGED_FILE_NAME}': {merged_df.columns.tolist()}")
+        print(f"Available columns in '{datafile}': {merged_df.columns.tolist()}")
         return []
 
-    # Perform the lookup: Filter rows where the 'Name' column matches the minister's name
-    # Using .astype(str), .strip(), and .lower() for robust matching
     minister_records = merged_df[
         merged_df['Name'].astype(str).str.strip().str.lower() == minister_name_to_lookup.strip().lower()
     ]
 
     if minister_records.empty:
-        print(f"Minister '{minister_name_to_lookup}' not found in the 'Name' column of '{MERGED_FILE_NAME}'.")
+        print(f"Minister '{minister_name_to_lookup}' not found in the 'Name' column of '{datafile}'.")
         return []
 
-    # Extract unique phone numbers, drop any NaN/empty values, and convert to list of strings
-    # Ensure phone numbers are treated as strings to avoid data type issues (e.g., if some are numeric)
     phone_numbers = minister_records['Phone Number'].dropna().astype(str).unique().tolist()
 
     if not phone_numbers:
-        print(f"No phone number found for minister '{minister_name_to_lookup}' in '{MERGED_FILE_NAME}'.")
+        print(f"No phone number found for minister '{minister_name_to_lookup}' in '{datafile}'.")
     
     return phone_numbers
 
