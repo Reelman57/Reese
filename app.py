@@ -351,47 +351,33 @@ def incoming_sms():
         filtered_data_list = filter_minister(data_list)
 
         for x, data in enumerate(filtered_data_list, start=1): 
-            if data.get('Gender') == "M":
-                msg = f"Brother {data['Last_Name']}, \n\n"
-            elif data.get('Gender') == "F":
-                msg = f"Sister {data['Last_Name']}, \n\n"
-            else: 
-                msg = f"{data['First_Name']} {data['Last_Name']}, \n\n"  # Handle cases where Gender is missing or invalid
-    
-            msg += "Your assigned ministering brothers are as follows: \n"
-
             if pd.notna(data.get('Minister1')):
-                minister_name = data['Minister1'] # Store the actual minister's name
-                msg += f"{minister_name}"
-                phone_numbers = get_minister_phone_number(minister_name)
-                if phone_numbers:
-                    msg += f" - {', '.join(phone_numbers)}" 
-                else:
-                    msg += " "
-                msg += "\n"
-            if pd.notna(data.get('Minister2')):
-                minister_name = data['Minister2'] # Store the actual minister's name
-                msg += f"{minister_name}"
-                phone_numbers = get_minister_phone_number(minister_name)
-                if phone_numbers:
-                    msg += f" - {', '.join(phone_numbers)}" 
-                else:
-                    msg += " "
-                msg += "\n"
-            if pd.notna(data.get('Minister3')):
-                minister_name = data['Minister3'] # Store the actual minister's name
-                msg += f"{minister_name}"
-                phone_numbers = get_minister_phone_number(minister_name)
-                if phone_numbers:
-                    msg += f" - {', '.join(phone_numbers)}" 
-                else:
-                    msg += " "
-                msg += "\n"
             
-            msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have. \n"
-            msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency. \n"
-            
-            send_text(data['Phone Number'], msg, False) 
+                if data.get('Gender') == "M":
+                    msg = f"Brother {data['Last_Name']}, \n\n"
+                elif data.get('Gender') == "F":
+                    msg = f"Sister {data['Last_Name']}, \n\n"
+                else: 
+                    msg = f"{data['First_Name']} {data['Last_Name']}, \n\n"  # Handle cases where Gender is missing or invalid
+        
+                msg += "Your assigned ministering brothers are as follows: \n"
+                
+                for i in range(1, 4): # Loop for Minister1, Minister2, Minister3
+                minister_col = f'Minister{i}'
+                if pd.notna(data.get(minister_col)):
+                    minister_name = data[minister_col]
+                    msg += f"{minister_name}"
+                    phone_numbers = get_minister_phone_number(minister_name)
+                    if phone_numbers:
+                        msg += f" - {', '.join(phone_numbers)}"
+                    else:
+                        msg += " - [Phone not available]" # Or just " " if you prefer
+                    msg += "\n"
+                
+                msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have. \n"
+                msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency. \n"
+                
+                send_text(data['Phone Number'], msg, False) 
     
         confirm_send() 
         return "Messages sent successfully.", 200
