@@ -45,7 +45,7 @@ def send_text(text_nbr, message, now):
             send_at = None
             schedule_type = None
 
-        try:
+        try: """
             message = client.messages.create(
                 body=message,
                 from_=twilio_number,
@@ -53,7 +53,8 @@ def send_text(text_nbr, message, now):
                 messaging_service_sid=messaging_sid,
                 send_at=send_at,
                 schedule_type=schedule_type
-            )
+            )"""
+            print(f"{x}. {text_nbr}")
             sent_texts.add(text_nbr)
             x+=1
             return True
@@ -346,8 +347,8 @@ def incoming_sms():
                 
                 msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have. \n"
                 msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency. \n"
-                print(f"{x}. {msg}")
-                #send_text(data['Phone Number'], msg, False) 
+                #print(f"{x}. {msg}")
+                send_text(data['Phone Number'], msg, False) 
     
         confirm_send() 
         return "Messages sent successfully.", 200
