@@ -89,13 +89,13 @@ def get_minister_phone_number(minister_name_to_lookup):
     try:
         merged_df = pd.read_csv(datafile)
     except Exception as e:
-        print(f"Error loading merged file {datafile}: {e}")
+        print(f"Error loading merged file {data_file}: {e}")
         return []
 
     required_cols = ['Name', 'Phone Number'] # Adjust 'Phone Number' if your column name is different
     if not all(col in merged_df.columns for col in required_cols):
         print(f"Error: One or more required columns ({required_cols}) not found in the merged file.")
-        print(f"Available columns in '{datafile}': {merged_df.columns.tolist()}")
+        print(f"Available columns in '{data_file}': {merged_df.columns.tolist()}")
         return []
 
     minister_records = merged_df[
@@ -103,13 +103,13 @@ def get_minister_phone_number(minister_name_to_lookup):
     ]
 
     if minister_records.empty:
-        print(f"Minister '{minister_name_to_lookup}' not found in the 'Name' column of '{datafile}'.")
+        print(f"Minister '{minister_name_to_lookup}' not found in the 'Name' column of '{data_file}'.")
         return []
 
     phone_numbers = minister_records['Phone Number'].dropna().astype(str).unique().tolist()
 
     if not phone_numbers:
-        print(f"No phone number found for minister '{minister_name_to_lookup}' in '{datafile}'.")
+        print(f"No phone number found for minister '{minister_name_to_lookup}' in '{data_file}'.")
     
     return phone_numbers
 
