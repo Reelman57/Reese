@@ -304,7 +304,7 @@ def incoming_sms():
     time.sleep(2)
     
 # --------------------------------------------------------------------------
-    if first_word == "ward"+unit_nbr:
+    if first_word == "ward"+unit_nbr[0]:
         sms_send(msg_in, data_list, False)
         confirm_send()
         return "SMS messages scheduled.", 200
@@ -327,7 +327,7 @@ def incoming_sms():
         )
         return f'{canceled_count} messages canceled.', 200
 # --------------------------------------------------------------------------
-    elif first_word == "emergency"+unit_nbr:
+    elif first_word == "emergency"+unit_nbr[0]:
         subject = "Emergency Communications System"
         send_voice(msg_in, data_list)
         sms_send(msg_in, data_list, True)
@@ -335,7 +335,7 @@ def incoming_sms():
         confirm_send()
         return "Emergency Communications System messages sent.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "elders"+unit_nbr:
+    elif first_word == "elders"+unit_nbr[0]:
         filtered_data_list = filter_gender(data_list, "M")
         
         for data in filtered_data_list:
@@ -347,7 +347,7 @@ def incoming_sms():
         confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "sisters"+unit_nbr:
+    elif first_word == "sisters"+unit_nbr[0]:
         filtered_data_list = filter_gender(data_list, "F")
         
         for data in filtered_data_list:
@@ -359,7 +359,7 @@ def incoming_sms():
         confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "families"+unit_nbr:
+    elif first_word == "families"+unit_nbr[0]:
         filtered_data_list = filter_minister(data_list)
 
         for x, data in enumerate(filtered_data_list, start=1): 
@@ -393,7 +393,7 @@ def incoming_sms():
         confirm_send() 
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "district"+unit_nbr:
+    elif first_word == "district"+unit_nbr[0]:
 
         df = pd.read_csv(data_file)
     
