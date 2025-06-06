@@ -442,9 +442,9 @@ def incoming_sms():
                     print(f"Sending message to {first_name} {last_name} at {phone_number}: {message_body}")
                 else:
                     print(f"No phone number found for minister '{minister}'.")
-            resp = MessagingResponse()
-            resp.message("Your message was processed successfully!")
-            return str(resp), 200 # 
+    resp = MessagingResponse()
+    resp.message("Your message was processed successfully!")
+    return str(resp), 200 # 
 # --------------------------------------------------------------------------    
     elif (first_word == "?" or first_word == "instructions"):
         instructions = "To send a message to any of the following groups.  Simply type the group code on the 1st line followed by your message on subsequent lines.  The message will already have a salutation on it, ie. 'Brother Jones' or 'Hello John'.  Do not use emojis or pictures.  The app is authenticated by your phone number and will only work on your phone.\n\n"
