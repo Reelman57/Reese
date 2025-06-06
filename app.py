@@ -302,7 +302,8 @@ def incoming_sms():
     x = 0
     
     time.sleep(2)
-    
+
+    return
 # --------------------------------------------------------------------------
     if first_word == "ward"+unit_nbr[0]:
         sms_send(msg_in, data_list, False)
