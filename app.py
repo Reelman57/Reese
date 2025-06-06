@@ -237,12 +237,12 @@ def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
                     unit_nbr = row[1].strip()
                     district_code = row[3].strip() if len(row) > 2 else None
 
-                if first_column_value == frm_nbr:
+                if first_column_value == from_number:
                     print(f"Unit Number is {unit_nbr}")
                     print(f"District Code is {district_code}")
                     return unit_nbr, district_code
 
-        print(f"No unit number found for '{frm_nbr}' in '{filename}'.")
+        print(f"No unit number found for '{from_number}' in '{filename}'.")
         return None
 
     except FileNotFoundError:
