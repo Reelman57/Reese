@@ -191,22 +191,58 @@ def sms_send(msg_in, data_list, now):
                 app.logger.error(f"Error processing future: {e}")
     
     return success_count
-# ---------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+def get_minister_phone_number(minister_name_to_lookup):
+    
+    if not os.path.exists(data_file):
+        print(f"Error: Merged file not found at {data_file}. Please run the main script first to create it.")
+        return []
+    try:
+        merged_df = pd.read_csv(data_file)
+    except Exception as e:
+        print(f"Error loading merged file {data_file}: {e}")
+        return []
+
+    required_cols = ['Name', 'Phone Number'] # Adjust 'Phone Number' if your column name is different
+    if not all(col in merged_df.columns for col in required_cols):
+        print(f"Error: One or more required columns ({required_cols}) not found in the merged file.")
+        print(f"Available columns in '{data_file}': {merged_df.columns.tolist()}")
+        return []
+
+    minister_records = merged_df[
+        merged_df['Name'].astype(str).str.strip().str.lower() == minister_name_to_lookup.strip().lower()
+    ]
+
+    if minister_records.empty:
+        print(f"Minister '{minister_name_to_lookup}' not found in the 'Name' column of '{data_file}'.")
+        return []
+
+    # Extract unique phone numbers, drop any NaN/empty values, and convert to list of strings
+    phone_numbers = minister_records['Phone Number'].dropna().astype(str).unique().tolist()
+
+    if not phone_numbers:
+        print(f"No phone number found for minister '{minister_name_to_lookup}' in '{data_file}'.")
+
+    return phone_numbers
+# --------------------------------------------------------------------------
 def get_unitnbr(from_nbr, filename="User_UnitNbr.csv"):
-  
+    global district_code
+    district_code = None
     try:
         with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
             csv_reader = csv.reader(csvfile)
             for row in csv_reader:
-                if len(row) >= 2: # Ensure the row has at least two columns
+                if len(row) >= 2: 
                     first_column_value = row[0].strip()
                     unit_nbr = row[1].strip()
+                    district_code = row[3].strip() if len(row) > 2 else None
 
-                    if first_column_value == from_nbr:
-                        print(f"Unit Number is {unit_nbr}")
-                        return unit_nbr
-        
-        print(f"No unit number found for '{from_nbr}' in '{filename}'.")
+                if first_column_value == frm_nbr:
+                    print(f"Unit Number is {unit_nbr}")
+                    print(f"District Code is {district_code}")
+                    return unit_nbr, district_code
+
+        print(f"No unit number found for '{frm_nbr}' in '{filename}'.")
         return None
 
     except FileNotFoundError:
@@ -215,6 +251,12 @@ def get_unitnbr(from_nbr, filename="User_UnitNbr.csv"):
     except Exception as e:
         print(f"An unexpected error occurred while reading the CSV: {e}")
         return None
+# --------------------------------------------------------------------------
+def get_phone_number_by_name(df, minister_name):
+    record = df[df['Name'].astype(str).str.strip().str.lower() == minister_name.strip().lower()]
+    if not record.empty:
+        return record['Phone Number'].iloc[0]
+    return None
 # --------------------------------------------------------------------------
 @app.route("/sms", methods=['POST'])
 
@@ -352,132 +394,46 @@ def incoming_sms():
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
     elif first_word == "district"+unit_nbr:
-        district_map = {
-            '+15099902828': 'D1',
-            '+19722819991': 'D2',
-            '+12086103066': 'D3',
-            '+12086102929': 'SD1',
-            '+12089201618': 'SD2',
-            '+15093449400': 'SD3'
-        }
-        district_code = district_map.get(from_number)
+
+        df = pd.read_csv(data_file)
     
-        if district_code is None:
-            return "Error: Unauthorized sender or unmapped district phone.", 403
+        # Group by the specified columns
+        grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
     
-        try:
-            df = pd.read_csv(data_file)
-        except FileNotFoundError:
-            return "Error: Data file not found. Check path.", 500
-        except Exception as e:
-            return f"Error reading data file: {e}", 500
+        for group_keys, group_df in grouped:
+            family_names = group_df[['First_Name', 'Last_Name']].apply(lambda row: f"{row['First_Name']} {row['Last_Name']}", axis=1).tolist()
+            family_list_str = "\n".join(family_names)
     
-        try:
-            if district_code and district_code[0] == 'S':
-                df_filtered = df[(df['S_District'] == district_code) & (df['Age'] > 17)].copy()
-                current_r_range = range(3, 5)
-            else:
-                df_filtered = df[(df['B_District'] == district_code) & (df['Age'] > 17)].copy()
-                current_r_range = range(1, 3)
-    
-            if df_filtered.empty:
-                return f"No records found for district {district_code} with age > 17.", 200
-    
-            for xr in current_r_range:
-    
-                minister_col = f"Minister{xr}"
-                minister_phone_col = f"Minister{xr}_Phone"
-                minister_email_col = f"Minister{xr}_Email"
-    
-                current_minister_df = df_filtered[df_filtered[minister_col].notnull()].copy()
-                current_minister_df[minister_col] = current_minister_df[minister_col].fillna('')
-    
-                try:
-                    current_minister_df[['Minister_Last', 'Minister_First']] = current_minister_df[minister_col].str.split(',', expand=True)
-                    current_minister_df['Minister_Last'] = current_minister_df['Minister_Last'].str.strip()
-                    current_minister_df['Minister_First'] = current_minister_df['Minister_First'].str.strip()
-    
-                except AttributeError as e:
-                    print(f"Error splitting '{minister_col}' for potential missing or invalid data: {e}")
+            ministers = list(group_keys)
+            for idx, minister in enumerate(ministers):
+                if pd.isna(minister) or not minister:
                     continue
-    
-                grouped_df = current_minister_df.groupby(["Minister_Last", "Minister_First", minister_phone_col, minister_email_col])
-    
-                for (minister_last, minister_first, minister_phone, minister_email), group in grouped_df:
-    
-                    text_nbr = str(minister_phone) if pd.notna(minister_phone) else ""
-                    subj = "Your Ministering Families"
-    
-                    if xr > 2:
-                        Bro_Sis = "Sister"
-                    else:
-                        Bro_Sis = "Brother"
-    
-                    msg = f"{Bro_Sis} {minister_last.strip()}, \n"
-                    msg += f"{msg_in} \n\n"
-                    msg += f"{minister_first.strip()}, just tap on the phone numbers below for options on ways to message them.\n\n"
-    
-                    if not group.empty:
-                        for index, row in group.iterrows():
-                            msg += f"{row['Name']}"
-                            if pd.notna(row['Phone Number']):
-                                msg += f" - {row['Phone Number']}"
-                            msg += "\n"
-                    else:
-                        msg += "No ministering families assigned to you.\n"
-    
-                    current_minister_row = current_minister_df[
-                        (current_minister_df['Minister_Last'] == minister_last) &
-                        (current_minister_df['Minister_First'] == minister_first)
-                    ].iloc[0]
-    
-                    if xr == 1:
-                        Comp = current_minister_row.get('Minister2')
-                        CompPhone = current_minister_row.get('Minister2_Phone')
-                    elif xr == 2:
-                        Comp = current_minister_row.get('Minister1')
-                        CompPhone = current_minister_row.get('Minister1_Phone')
-                    elif xr == 3:
-                        Comp = current_minister_row.get('Minister4')
-                        CompPhone = current_minister_row.get('Minister4_Phone')
-                    elif xr == 4:
-                        Comp = current_minister_row.get('Minister3')
-                        CompPhone = current_minister_row.get('Minister3_Phone')
-                    else:
-                        Comp = None
-                        CompPhone = None
-    
-                    if pd.notna(Comp):
-                        try:
-                            Comp_Last, Comp_FirstMiddle = Comp.split(',', 1)
-                            Comp_Last = Comp_Last.strip()
-                            Comp_FirstMiddle = Comp_FirstMiddle.strip()
-                            first_name_parts = Comp_FirstMiddle.split()
-                            Comp_First = first_name_parts[0]
-                        except (ValueError, AttributeError) as e:
-                            print(f"Error splitting companion name '{Comp}': {e}. Skipping companion details.")
-                            Comp = None
-                    else:
-                        print("Comp value was null or NaN for current minister.")
-    
-                    if Comp and pd.notna(CompPhone):
-                        msg += f"\nYour Companion is {Comp_First} {Comp_Last} - {CompPhone}\n"
-                    elif Comp:
-                        msg += f"\nYour Companion is {Comp_First} {Comp_Last}\n"
-                    
-                    print(minister_last, " - ", minister_phone, "  ", minister_email, msg)
-                    send_text(text_nbr, msg, False)
-            try:
-                confirm_send()
-                return "Ministering district messages sent.", 200
-            except Exception as e:
-                print(f"confirm send error: {e}")
-                return "Error in confirm send.", 500
-    
-        except Exception as e:
-            print(f"Main processing error for minall77216 branch: {e}")
-            return "General Error during minall77216 processing.", 500
-# --------------------------------------------------------------------------    
+                # Split "Last, First Middle"
+                parts = minister.split(",", 1)
+                last_name = parts[0].strip()
+                first_middle = parts[1].strip() if len(parts) > 1 else ""
+                # Optionally, split first and middle if you want them separate
+                first_name = first_middle.split()[0] if first_middle else ""
+                # Companions are the other two ministers
+                companions = [m for i, m in enumerate(ministers) if i != idx and pd.notna(m) and m]
+                # Format companions as "First Last"
+                companions_formatted = []
+                for comp in companions:
+                    comp_parts = comp.split(",", 1)
+                    comp_last = comp_parts[0].strip()
+                    comp_first = comp_parts[1].strip().split()[0] if len(comp_parts) > 1 else ""
+                    companions_formatted.append(f"{comp_first} {comp_last}")
+                companions_str = ", ".join(companions_formatted) if companions_formatted else "None"
+                message_body = (
+                    f"Families in your group:\n{family_list_str}\n\n"
+                    f"Your Companion(s) are: {companions_str}"
+                )
+                phone_number = get_phone_number_by_name(df, minister)
+                if phone_number:
+                    print(f"Sending message to {first_name} {last_name} at {phone_number}: {message_body}")
+                else:
+                    print(f"No phone number found for minister '{minister}'.")
+    # --------------------------------------------------------------------------    
     elif (first_word == "?" or first_word == "instructions"):
         instructions = "To send a message to any of the following groups.  Simply type the group code on the 1st line followed by your message on subsequent lines.  The message will already have a salutation on it, ie. 'Brother Jones' or 'Hello John'.  Do not use emojis or pictures.  The app is authenticated by your phone number and will only work on your phone.\n\n"
         instructions += "Group codes\n"
