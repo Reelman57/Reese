@@ -281,7 +281,7 @@ def incoming_sms():
         )
         return alert_to_team, 404
     
-    data_file = unit_nbr + "_datafile.csv"
+    data_file = unit_nbr[0] + "_datafile.csv"
     data_list = process_data(data_file)
 
     if message_body is None or from_number is None:
