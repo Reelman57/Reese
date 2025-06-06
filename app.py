@@ -279,7 +279,7 @@ def incoming_sms():
             from_=twilio_number,
             to='+15099902828'
         )
-        return response_to_sender, 404
+        return alert_to_team, 404
     
     data_file = unit_nbr + "_datafile.csv"
     data_list = process_data(data_file)
