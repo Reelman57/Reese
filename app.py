@@ -405,10 +405,8 @@ def incoming_sms():
     elif first_word == "district"+unit_nbr[0]:
 
         df = pd.read_csv(data_file)
-    
-        # Group by the specified columns
         grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
-    
+        print(grouped)
         for group_keys, group_df in grouped:
             family_names = group_df[['First_Name', 'Last_Name']].apply(lambda row: f"{row['First_Name']} {row['Last_Name']}", axis=1).tolist()
             family_list_str = "\n".join(family_names)
