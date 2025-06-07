@@ -411,13 +411,12 @@ def incoming_sms():
         grouped = df.groupby(['First_Name', 'Last_Name', 'Phone Number', 'Minister1', 'Minister2', 'Minister3'])
         
         for group_keys, group_df in grouped:
-            print("group_df columns:", group_df.columns.tolist())
+
             family_names = group_df[['First_Name', 'Last_Name', 'Phone Number']].apply(
-                lambda row: f"{row['First_Name']} {row['Last_Name']}" + \
-                (f" - {row['Phone Number']}" if pd.notna(row['Phone Number']) and str(row['Phone Number']).strip() != '' else " - No Phone")
-                
-                #lambda row: f"{row['First_Name']} {row['Last_Name']} - {row['Phone Number']}", axis=1
-            ).tolist()
+                    lambda row: f"{row['First_Name']} {row['Last_Name']}" +
+                    (f" - {row['Phone Number']}" if pd.notna(row['Phone Number']) and str(row['Phone Number']).strip() != '' else " - No Phone"),
+                    axis=1
+                ).tolist()
             family_list_str = "\n".join(family_names)
         
             ministers = list(group_keys)
