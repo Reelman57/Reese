@@ -407,8 +407,8 @@ def incoming_sms():
         data_list = process_data(data_file)
         filtered_data_list = filter_minister(data_list)
         df = pd.DataFrame(filtered_data_list)
-        print("DataFrame columns:", df.columns.tolist()) 
-        grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
+       
+        grouped = df.groupby(['First_Name', 'Last_Name', 'Phone Number', 'Minister1', 'Minister2', 'Minister3'])
         
         for group_keys, group_df in grouped:
             family_names = group_df[['First_Name', 'Last_Name', 'Phone Number']].apply(
