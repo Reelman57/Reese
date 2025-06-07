@@ -149,8 +149,8 @@ def process_data(data_path):
     df_filtered = df_filtered.dropna(subset=['Phone Number'])
     df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
     df_filtered = df_filtered[df_filtered['is_valid_phone']]
-    df_filtered = df_filtered.drop_duplicates(subset=['Phone Number'])
-
+    #df_filtered = df_filtered.drop_duplicates(subset=['Phone Number'])
+    print(df)
     with open('DO_NOT_SEND.txt', 'r') as f:
         do_not_send_numbers = set(line.strip() for line in f)
     df_filtered = df_filtered[~df_filtered['Phone Number'].isin(do_not_send_numbers)]
