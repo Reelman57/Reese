@@ -423,7 +423,7 @@ def incoming_sms():
         
                 msg = (
                     f"Brother {last_name},\n"
-                    f"{msg_in},\n
+                    f"{msg_in},\n"
                     f"These are the families you are assigned to:\n{family_list_str}\n\n"
                     f"Your Companion(s) are: {companions_str}\n"
                 )
