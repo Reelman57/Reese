@@ -404,11 +404,14 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     elif first_word == "district"+unit_nbr[0]:
 
-        #data_list = process_data(data_file)
         filtered_data_list = filter_minister(data_list)
         df = pd.DataFrame(filtered_data_list)
-       
-        grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
+
+        df['Minister1'] = df['Minister1'].fillna('')
+        df['Minister2'] = df['Minister2'].fillna('')
+        df['Minister3'] = df['Minister3'].fillna('')
+
+        grouped = df.groupby(['Minister1'])
         
         for group_keys, group_df in grouped:
 
