@@ -191,6 +191,7 @@ def get_minister_phone_number(minister_name_to_lookup):
 def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
     global district_code
     district_code = None
+    global district_ldr
     district_ldr = None
     try:
         with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
