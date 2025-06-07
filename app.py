@@ -408,13 +408,11 @@ def incoming_sms():
         filtered_data_list = filter_minister(data_list)
         df = pd.DataFrame(filtered_data_list)
         
-        print(df.columns)
-        
         grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
         
         for group_keys, group_df in grouped:
             family_names = group_df[['First_Name', 'Last_Name', 'Phone Number']].apply(
-                lambda row: f"{row['First_Name']} {row['Last_Name', 'Phone Number']}", axis=1
+                lambda row: f"{row['First_Name']} {row['Last_Name']} - {row['Phone Number']}", axis=1
             ).tolist()
             family_list_str = "\n".join(family_names)
         
@@ -423,7 +421,6 @@ def incoming_sms():
                 if pd.isna(minister) or not minister:
                     continue
         
-                # Defensive split for "Last, First Middle"
                 if "," in minister:
                     parts = minister.split(",", 1)
                     last_name = parts[0].strip()
