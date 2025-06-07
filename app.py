@@ -219,62 +219,12 @@ def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
         print(f"An unexpected error occurred while reading the CSV: {e}")
         return None
 # --------------------------------------------------------------------------
-def get_phone_number_by_name(df_to_search, minister_name_to_find):
-    # DEBUG 1: Confirm function entry and input
-    print(f"DEBUG: Entering get_phone_number_by_name for minister: '{minister_name_to_find}'")
-    
-    # CRITICAL: Initialize found_row to an empty DataFrame at the start
-    found_row = pd.DataFrame() 
-    print(f"DEBUG: found_row initialized. Is empty: {found_row.empty}")
-
-    # Ensure minister_name_to_find is treated as a string for robust comparison
-    minister_name_str = str(minister_name_to_find).strip().lower()
-    print(f"DEBUG: Minister name (processed): '{minister_name_str}'")
-
-    # Define common minister name columns in your DataFrame.
-    # Adjust these names if your actual column names are different!
-    minister_columns = ['Minister1', 'Minister2', 'Minister3'] 
-    print(f"DEBUG: Columns to search: {minister_columns}")
-    print(f"DEBUG: DataFrame columns available: {df_to_search.columns.tolist()}") # Very important debug line
-
-    # Loop through the minister columns to find a match
-    match_found_in_loop = False
-    for col in minister_columns:
-        print(f"DEBUG: Checking column: '{col}'")
-        # Check if the column exists in the DataFrame to prevent a KeyError for the column itself
-        if col in df_to_search.columns:
-            # Filter for rows where the minister name matches (case-insensitive and stripped)
-            # Use .astype(str) to handle potential NaN values in minister columns during string operations
-            match = df_to_search[df_to_search[col].astype(str).str.strip().str.lower() == minister_name_str]
-            
-            # If a match is found in this column, assign it to found_row and break the loop
-            if not match.empty:
-                found_row = match
-                match_found_in_loop = True
-                print(f"DEBUG: Match found for '{minister_name_to_find}' in column '{col}'. Rows found: {len(found_row)}")
-                break # Exit the loop once a match is found
-            else:
-                print(f"DEBUG: No match in column '{col}'.")
-        else:
-            print(f"DEBUG: Column '{col}' not found in DataFrame.")
-    
-    # DEBUG 2: After the loop, check the state of found_row
-    print(f"DEBUG: After loop. match_found_in_loop: {match_found_in_loop}. found_row.empty: {found_row.empty}")
-
-    # After the loop, check if found_row was actually populated with a match
-    if not found_row.empty:
-        print(f"DEBUG: Found a row. Checking 'Phone Number' column.")
-        # Also ensure 'Phone Number' column exists and has a non-missing value
-        if 'Phone Number' in found_row.columns and pd.notna(found_row['Phone Number'].iloc[0]):
-            phone_num = str(found_row['Phone Number'].iloc[0]).strip()
-            print(f"DEBUG: Successfully extracted phone number: '{phone_num}'")
-            return phone_num
-        else:
-            print(f"DEBUG: Found minister '{minister_name_to_find}', but 'Phone Number' is missing or NaN or column not found.")
-            return None # Minister found, but phone number is missing
-    else:
-        print(f"DEBUG: No minister '{minister_name_to_find}' found in any minister column after loop.")
-        return None # No matching minister found at all
+def get_phone_number_by_name(df, minister_name):
+    minister_name_str = str(minister_name).strip().lower()
+    match = df[df['Name'].astype(str).str.strip().str.lower() == minister_name_str]
+    if not match.empty and 'Phone Number' in match.columns and pd.notna(match['Phone Number'].iloc[0]):
+        return str(match['Phone Number'].iloc[0]).strip()
+    return None
 # --------------------------------------------------------------------------
 @app.route("/sms", methods=['POST'])
 
