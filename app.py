@@ -408,8 +408,7 @@ def incoming_sms():
         filtered_data_list = filter_minister(data_list)
         df = pd.DataFrame(filtered_data_list)
         
-        # Group by a unique group identifier (e.g., 'GroupID' or 'Household')
-        # If you must group by all three ministers, keep as is, but see note above
+        print(df.columns)
         
         grouped = df.groupby(['Household'])
         
