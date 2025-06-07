@@ -30,20 +30,19 @@ twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 
 # --------------------------------------------------------------------------
-def get_send_time():
-    x+=1
+def get_send_time(x):
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
     send_at = now_utc + timedelta(minutes=15, seconds = x)
     return send_at.isoformat()
 # --------------------------------------------------------------------------
 def send_text(text_nbr, message, now):
-    global x
     global sent_texts
+    global x
     
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         if not now:
-            send_at = get_send_time()
+            send_at = get_send_time(x)
             schedule_type = "fixed"
         else:
             send_at = None
@@ -59,7 +58,7 @@ def send_text(text_nbr, message, now):
                 schedule_type=schedule_type
             )
             sent_texts.add(text_nbr)
-
+            x+=2
             return True
         except Exception as e:
             print(f"Error sending SMS to {text_nbr}: {e}")
@@ -278,7 +277,6 @@ def incoming_sms():
     with open('DO_NOT_SEND.txt', 'r') as file:
         sent_texts = set(line.strip() for line in file)
 
-    x = 1
     time.sleep(2)
 # --------------------------------------------------------------------------
     if first_word == "ward"+unit_nbr[0]:
