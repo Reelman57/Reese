@@ -369,67 +369,7 @@ def incoming_sms():
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
     elif first_word == "district"+unit_nbr[0]:
-"""
-        filtered_data_list = filter_minister(data_list)
-        df = pd.DataFrame(filtered_data_list)
 
-        df['Minister1'] = df['Minister1'].fillna('')
-        df['Minister2'] = df['Minister2'].fillna('')
-        df['Minister3'] = df['Minister3'].fillna('')
-
-        grouped = df.groupby(['Minister1'])
-        
-        for group_keys, group_df in grouped:
-
-            family_names = group_df[['First_Name', 'Last_Name', 'Phone Number']].apply(
-                    lambda row: f"{row['First_Name']} {row['Last_Name']}" +
-                    (f" - {row['Phone Number']}" if pd.notna(row['Phone Number']) and str(row['Phone Number']).strip() != '' else " - No Phone"),
-                    axis=1
-                ).tolist()
-            family_list_str = "\n".join(family_names)
-        
-            ministers = list(group_keys)
-            for idx, minister in enumerate(ministers):
-                if pd.isna(minister) or not minister:
-                    continue
-        
-                if "," in minister:
-                    parts = minister.split(",", 1)
-                    last_name = parts[0].strip()
-                    first_middle = parts[1].strip()
-                    first_name = first_middle.split()[0] if first_middle else ""
-                else:
-                    last_name = minister.strip()
-                    first_name = ""
-        
-                # Companions: the other two ministers
-                companions = [m for i, m in enumerate(ministers) if i != idx and pd.notna(m) and m]
-                companions_formatted = []
-                for comp in companions:
-                    if "," in comp:
-                        comp_parts = comp.split(",", 1)
-                        comp_last = comp_parts[0].strip()
-                        comp_first = comp_parts[1].strip().split()[0] if len(comp_parts) > 1 else ""
-                        companions_formatted.append(f"{comp_first} {comp_last}")
-                    else:
-                        companions_formatted.append(comp.strip())
-                companions_str = ", ".join(companions_formatted) if companions_formatted else "None"
-        
-                msg = (
-                    f"Brother {last_name},\n"
-                    f"These are the familes you are assigned to:\n{family_list_str}\n\n"
-                    f"Your Companion(s) are: {companions_str}\n"
-                )
-        
-                phone_number = get_phone_number_by_name(df, minister)
-                if phone_number:
-                    print (msg)
-                    #print(f"Sending message to {first_name} {last_name} at {phone_number}: {msg}")
-                    #send_text(df['Phone Number'], msg, False) 
-                else:
-                    print(f"No phone number found for minister '{minister}'.")
-                    """
-        df = pd.read_csv(data_file)
         df_filtered = df[df['Age'] > 17]
         df_filtered = df_filtered[['Name','Household','First_Name', 'Last_Name', 'Phone Number', 'E-mail', 'Gender','District','Minister1','Minister2','Minister3']]
         
