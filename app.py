@@ -425,7 +425,6 @@ def incoming_sms():
                 msg += f"{msg_in},\n\n"
                 msg += f"These are the families you are assigned to:\n{family_list_str}\n\n"
                 msg += f"Your Companion(s) are: {companions_str}\n"
-                )
         
                 phone_number = get_phone_number_by_name(df, minister)
                 if phone_number:
