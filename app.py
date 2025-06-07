@@ -201,12 +201,12 @@ def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
                     first_column_value = row[0].strip()
                     unit_nbr = row[1].strip()
                     district_code = row[3].strip() if len(row) > 2 else None
-                    District_Ldr = row[2].strip()
+                    district_ldr = row[2].strip()
 
                 if first_column_value == from_number:
                     print(f"Unit Number is {unit_nbr}")
                     print(f"District Code is {district_code}")
-                    print(f"District Leader is {District_Ldr}")
+                    print(f"District Leader is {district_ldr}")
                     return unit_nbr, district_code, district_ldr
 
         print(f"No unit number found for '{from_number}' in '{filename}'.")
@@ -423,7 +423,7 @@ def incoming_sms():
                 msg += f"{msg_in},\n\n"
                 msg += f"These are the individuals you have been assigned to:\n{family_list_str}\n\n"
                 msg += f"Your Companion(s) are: {companions_str}\n\n"
-                msg += "Do not respond to the automated message but you can reach me at: \n"
+                msg += "Do not respond to this automated message but you can reach me at: \n"
                 msg += f"{from_number},\n"
                 msg += f"{district_ldr}\n"
         
