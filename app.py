@@ -404,9 +404,51 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     elif first_word == "district"+unit_nbr[0]:
 
+        filtered_data_list = filter_minister(data_list)
+        df = pd.DataFrame(filtered_data_list)
+        
+        grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
+        
+        for group_keys, group_df in grouped:
+            family_names = group_df[['First_Name', 'Last_Name']].apply(lambda row: f"{row['First_Name']} {row['Last_Name']}", axis=1).tolist()
+            family_list_str = "\n".join(family_names)
+        
+            ministers = list(group_keys)
+            for idx, minister in enumerate(ministers):
+                if pd.isna(minister) or not minister:
+                    continue
+                # Split "Last, First Middle"
+                parts = minister.split(",", 1)
+                last_name = parts[0].strip()
+                first_middle = parts[1].strip() if len(parts) > 1 else ""
+                # Optionally, split first and middle if you want them separate
+                first_name = first_middle.split()[0] if first_middle else ""
+                # Companions are the other two ministers
+                companions = [m for i, m in enumerate(ministers) if i != idx and pd.notna(m) and m]
+                # Format companions as "First Last"
+                companions_formatted = []
+                for comp in companions:
+                    comp_parts = comp.split(",", 1)
+                    comp_last = comp_parts[0].strip()
+                    comp_first = comp_parts[1].strip().split()[0] if len(comp_parts) > 1 else ""
+                    companions_formatted.append(f"{comp_first} {comp_last}")
+                companions_str = ", ".join(companions_formatted) if companions_formatted else "None"
+                message_body = (
+                    f"Families in your group:\n{family_list_str}\n\n"
+                    f"Your Companion(s) are: {companions_str}"
+                )
+                # IMPORTANT: get_phone_number_by_name now searches within the filtered data.
+                # Ensure that 'Phone_Number' column exists in filtered_data_list (and thus in df)
+                phone_number = get_phone_number_by_name(df, minister)
+                if phone_number:
+                    print(f"Sending message to {first_name} {last_name} at {phone_number}: {message_body}")
+                else:
+                    print(f"No phone number found for minister '{minister}'.")
+"""
+        filtered_data_list = filter_minister(data_list)
         df = pd.read_csv(data_file)
         grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
-        print(grouped)
+
         for group_keys, group_df in grouped:
             family_names = group_df[['First_Name', 'Last_Name']].apply(lambda row: f"{row['First_Name']} {row['Last_Name']}", axis=1).tolist()
             family_list_str = "\n".join(family_names)
@@ -440,6 +482,7 @@ def incoming_sms():
                     print(f"Sending message to {first_name} {last_name} at {phone_number}: {message_body}")
                 else:
                     print(f"No phone number found for minister '{minister}'.")
+                    """
         resp = MessagingResponse()
         resp.message("Your message was processed successfully!")
         return str(resp), 200
