@@ -30,7 +30,7 @@ twilio_number = "+12086034040"
 client = Client(account_sid, auth_token)
 
 # --------------------------------------------------------------------------
-def get_send_time():
+def get_send_time(x):
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
     send_at = now_utc + timedelta(minutes=15, seconds = x)
@@ -39,7 +39,7 @@ def get_send_time():
 def send_text(text_nbr, message, now):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         if not now:
-            send_at = get_send_time()
+            send_at = get_send_time(x)
             schedule_type = "fixed"
         else:
             send_at = None
@@ -366,7 +366,7 @@ def incoming_sms():
         confirm_send() 
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
-    elif first_word == "district"+unit_nbr[0]:
+    elif first_word == "ministering"+unit_nbr[0]:
 
         df = pd.read_csv(data_file)
         df_filtered = df[df['Age'] > 17]
