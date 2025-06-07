@@ -31,6 +31,7 @@ client = Client(account_sid, auth_token)
 
 # --------------------------------------------------------------------------
 def get_send_time():
+    x+=1
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
     send_at = now_utc + timedelta(minutes=15, seconds = x)
@@ -58,7 +59,7 @@ def send_text(text_nbr, message, now):
                 schedule_type=schedule_type
             )
             sent_texts.add(text_nbr)
-            x+=1
+
             return True
         except Exception as e:
             print(f"Error sending SMS to {text_nbr}: {e}")
