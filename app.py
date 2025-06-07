@@ -81,41 +81,7 @@ def send_voice(msg_in, data_list):
             except Exception as e:
                 print(f"Error sending voice call to {to_number}: {e}")
     return calls 
-# --------------------------------------------------------------------------
-def get_minister_phone_number(minister_name_to_lookup):
-    
-    if not os.path.exists(data_file):
-        print(f"Error: Merged file not found at {data_file}. Please run the main script first to create it.")
-        return []
-    try:
-        merged_df = pd.read_csv(data_file)
-    except Exception as e:
-        print(f"Error loading merged file {data_file}: {e}")
-        return []
-
-    required_cols = ['Name', 'Phone Number'] # Adjust 'Phone Number' if your column name is different
-    if not all(col in merged_df.columns for col in required_cols):
-        print(f"Error: One or more required columns ({required_cols}) not found in the merged file.")
-        print(f"Available columns in '{data_file}': {merged_df.columns.tolist()}")
-        return []
-
-    minister_records = merged_df[
-        merged_df['Name'].astype(str).str.strip().str.lower() == minister_name_to_lookup.strip().lower()
-    ]
-
-    if minister_records.empty:
-        print(f"Minister '{minister_name_to_lookup}' not found in the 'Name' column of '{data_file}'.")
-        return []
-
-    # Extract unique phone numbers, drop any NaN/empty values, and convert to list of strings
-    phone_numbers = minister_records['Phone Number'].dropna().astype(str).unique().tolist()
-
-    if not phone_numbers:
-        print(f"No phone number found for minister '{minister_name_to_lookup}' in '{data_file}'.")
-
-    return phone_numbers
-   
-# --------------------------------------------------------------------------        
+# -------------------------------------------------------------------------- 
 def send_email(subject, body, data_list):
     sent_emails = set()
     for data in data_list:
