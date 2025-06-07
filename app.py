@@ -421,11 +421,10 @@ def incoming_sms():
                         companions_formatted.append(comp.strip())
                 companions_str = ", ".join(companions_formatted) if companions_formatted else "None"
         
-                msg = (
-                    f"Brother {last_name},\n"
-                    f"{msg_in},\n"
-                    f"These are the families you are assigned to:\n{family_list_str}\n\n"
-                    f"Your Companion(s) are: {companions_str}\n"
+                msg = f"Brother {last_name},\n"
+                msg += f"{msg_in},\n\n"
+                msg += f"These are the families you are assigned to:\n{family_list_str}\n\n"
+                msg += f"Your Companion(s) are: {companions_str}\n"
                 )
         
                 phone_number = get_phone_number_by_name(df, minister)
