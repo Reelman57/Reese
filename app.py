@@ -267,9 +267,6 @@ def incoming_sms():
 
     if len(lines) > 1:
         msg_in = "\n".join(lines[1:])
-        resp = MessagingResponse()
-        resp.message("I processed the multi-line message. Thank you!")
-        return str(resp), 200 
         
     sent_texts = set()
     
