@@ -360,8 +360,8 @@ def incoming_sms():
             
             msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have. \n"
             msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency. \n"
-            #print(f"{x}. {data['First_Name']} {data['Last_Name']}")
-            send_text(data['Phone Number'], msg, False) 
+            print(f"{x}. {data['First_Name']} {data['Last_Name']}")
+            #send_text(data['Phone Number'], msg, False) 
 
         confirm_send() 
         return "Messages sent successfully.", 200
