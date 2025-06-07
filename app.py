@@ -438,7 +438,7 @@ def incoming_sms():
                     f"Families in your group:\n{family_list_str}\n\n"
                     f"Your Companion(s) are: {companions_str}"
                 )
-                phone_number = get_phone_number_by_name(df, minister)
+                #phone_number = get_phone_number_by_name(df, minister)
                 if phone_number:
                     print(f"Sending message to {first_name} {last_name} at {phone_number}: {message_body}")
                 else:
