@@ -404,7 +404,7 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     elif first_word == "district"+unit_nbr[0]:
 
-        df = pd.read_csv(data_list)
+        df = data_list
         grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
         print(grouped)
         for group_keys, group_df in grouped:
