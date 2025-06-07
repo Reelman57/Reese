@@ -420,7 +420,7 @@ def incoming_sms():
                 companions_str = ", ".join(companions_formatted) if companions_formatted else "None"
         
                 msg = f"Brother {last_name},\n"
-                msg += f"{msg_in},\n\n"
+                msg += f"{msg_in}\n\n"
                 msg += f"These are the individuals you have been assigned to:\n{family_list_str}\n\n"
                 msg += f"Your Companion(s) are: {companions_str}\n\n"
                 msg += "Do not respond to this automated message but you can reach me at: \n"
