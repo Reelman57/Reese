@@ -429,14 +429,9 @@ def incoming_sms():
                 else:
                     print(f"No phone number found for minister '{minister}'.")
                     """
-        df = pd.read_csv(data_path)
+        df = pd.read_csv(data_file)
         df_filtered = df[df['Age'] > 17]
         df_filtered = df_filtered[['Name','Household','First_Name', 'Last_Name', 'Phone Number', 'E-mail', 'Gender','District','Minister1','Minister2','Minister3']]
-        # Do NOT drop rows with missing phone numbers here!
-        # df_filtered = df_filtered.dropna(subset=['Phone Number'])
-        # Do NOT drop duplicates on phone number here!
-        # df_filtered = df_filtered.drop_duplicates(subset=['Phone Number'])
-        #return df_filtered.to_dict('records')
         
         with open('DO_NOT_SEND.txt', 'r') as f:
             do_not_send_numbers = set(line.strip() for line in f)
