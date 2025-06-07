@@ -373,11 +373,7 @@ def incoming_sms():
         df = pd.read_csv(data_file)
         df_filtered = df[df['Age'] > 17]
         df_filtered = df_filtered[['Name','Household','First_Name', 'Last_Name', 'Phone Number', 'E-mail', 'Gender','District','Minister1','Minister2','Minister3']]
-        """
-        with open('DO_NOT_SEND.txt', 'r') as f:
-            do_not_send_numbers = set(line.strip() for line in f)
-        df_filtered = df_filtered[~df_filtered['Phone Number'].isin(do_not_send_numbers)]
-        """
+       
         data_list = df_filtered.to_dict('records')
         
         filtered_data_list = filter_minister(data_list)
@@ -427,6 +423,7 @@ def incoming_sms():
         
                 msg = (
                     f"Brother {last_name},\n"
+                    f"{msg_in},\n
                     f"These are the families you are assigned to:\n{family_list_str}\n\n"
                     f"Your Companion(s) are: {companions_str}\n"
                 )
