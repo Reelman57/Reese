@@ -186,9 +186,6 @@ def get_minister_phone_number(minister_name_to_lookup):
     # Extract unique phone numbers, drop any NaN/empty values, and convert to list of strings
     phone_numbers = minister_records['Phone Number'].dropna().astype(str).unique().tolist()
 
-    if not phone_numbers:
-        print(f"No phone number found for minister '{minister_name_to_lookup}' in '{data_file}'.")
-
     return phone_numbers
 # --------------------------------------------------------------------------
 def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
@@ -425,9 +422,8 @@ def incoming_sms():
         
                 phone_number = get_phone_number_by_name(df, minister)
                 if phone_number:
-                    print(msg)
-                else:
-                    print(f"No phone number found for minister '{minister}'.")
+                    send_text(phone_number, msg, False) 
+                    
         resp = MessagingResponse()
         resp.message("Your message was processed successfully!")
         return str(resp), 200
