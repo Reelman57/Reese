@@ -370,6 +370,7 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     elif first_word == "district"+unit_nbr[0]:
 
+        df = pd.read_csv(data_file)
         df_filtered = df[df['Age'] > 17]
         df_filtered = df_filtered[['Name','Household','First_Name', 'Last_Name', 'Phone Number', 'E-mail', 'Gender','District','Minister1','Minister2','Minister3']]
         
