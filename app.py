@@ -412,7 +412,10 @@ def incoming_sms():
         
         for group_keys, group_df in grouped:
             family_names = group_df[['First_Name', 'Last_Name', 'Phone Number']].apply(
-                lambda row: f"{row['First_Name']} {row['Last_Name']} - {row['Phone Number']}", axis=1
+                lambda row: f"{row['First_Name']} {row['Last_Name']}" + \
+                (f" - {row['Phone Number']}" if pd.notna(row['Phone Number']) and str(row['Phone Number']).strip() != '' else " - No Phone")
+                
+                #lambda row: f"{row['First_Name']} {row['Last_Name']} - {row['Phone Number']}", axis=1
             ).tolist()
             family_list_str = "\n".join(family_names)
         
