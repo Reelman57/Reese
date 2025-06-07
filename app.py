@@ -413,8 +413,8 @@ def incoming_sms():
         grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
         
         for group_keys, group_df in grouped:
-            family_names = group_df[['First_Name', 'Last_Name']].apply(
-                lambda row: f"{row['First_Name']} {row['Last_Name']}", axis=1
+            family_names = group_df[['First_Name', 'Last_Name', 'Phone Number']].apply(
+                lambda row: f"{row['First_Name']} {row['Last_Name', 'Phone Number']}", axis=1
             ).tolist()
             family_list_str = "\n".join(family_names)
         
@@ -446,14 +446,16 @@ def incoming_sms():
                         companions_formatted.append(comp.strip())
                 companions_str = ", ".join(companions_formatted) if companions_formatted else "None"
         
-                message_body = (
-                    f"Families in your group:\n{family_list_str}\n\n"
-                    f"Your Companion(s) are: {companions_str}"
+                msg = (
+                    f"These are the familes you are assigned to:\n{family_list_str}\n\n"
+                    f"Your Companion(s) are: {companions_str}\n"
                 )
         
                 phone_number = get_phone_number_by_name(df, minister)
                 if phone_number:
-                    print(f"Sending message to {first_name} {last_name} at {phone_number}: {message_body}")
+                    print (msg)
+                    #print(f"Sending message to {first_name} {last_name} at {phone_number}: {msg}")
+                    #send_text(df['Phone Number'], msg, False) 
                 else:
                     print(f"No phone number found for minister '{minister}'.")
         resp = MessagingResponse()
