@@ -404,6 +404,7 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     elif first_word == "district"+unit_nbr[0]:
 
+        data_list = process_data(data_file)
         filtered_data_list = filter_minister(data_list)
         df = pd.DataFrame(filtered_data_list)
         
