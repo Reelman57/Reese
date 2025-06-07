@@ -1,4 +1,4 @@
-import count
+from itertools import count
 from datetime import datetime, timedelta
 import os
 import re
