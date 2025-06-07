@@ -408,37 +408,51 @@ def incoming_sms():
         filtered_data_list = filter_minister(data_list)
         df = pd.DataFrame(filtered_data_list)
         
-        grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
+        # Group by a unique group identifier (e.g., 'GroupID' or 'Household')
+        # If you must group by all three ministers, keep as is, but see note above
+        
+        grouped = df.groupby(['Household'])
         
         for group_keys, group_df in grouped:
-            family_names = group_df[['First_Name', 'Last_Name']].apply(lambda row: f"{row['First_Name']} {row['Last_Name']}", axis=1).tolist()
+            family_names = group_df[['First_Name', 'Last_Name']].apply(
+                lambda row: f"{row['First_Name']} {row['Last_Name']}", axis=1
+            ).tolist()
             family_list_str = "\n".join(family_names)
         
             ministers = list(group_keys)
             for idx, minister in enumerate(ministers):
                 if pd.isna(minister) or not minister:
                     continue
- 
-                parts = minister.split(",", 1)
-                last_name = parts[0].strip()
-                first_middle = parts[1].strip() if len(parts) > 1 else ""
- 
-                first_name = first_middle.split()[0] if first_middle else ""
-
+        
+                # Defensive split for "Last, First Middle"
+                if "," in minister:
+                    parts = minister.split(",", 1)
+                    last_name = parts[0].strip()
+                    first_middle = parts[1].strip()
+                    first_name = first_middle.split()[0] if first_middle else ""
+                else:
+                    last_name = minister.strip()
+                    first_name = ""
+        
+                # Companions: the other two ministers
                 companions = [m for i, m in enumerate(ministers) if i != idx and pd.notna(m) and m]
-
                 companions_formatted = []
                 for comp in companions:
-                    comp_parts = comp.split(",", 1)
-                    comp_last = comp_parts[0].strip()
-                    comp_first = comp_parts[1].strip().split()[0] if len(comp_parts) > 1 else ""
-                    companions_formatted.append(f"{comp_first} {comp_last}")
+                    if "," in comp:
+                        comp_parts = comp.split(",", 1)
+                        comp_last = comp_parts[0].strip()
+                        comp_first = comp_parts[1].strip().split()[0] if len(comp_parts) > 1 else ""
+                        companions_formatted.append(f"{comp_first} {comp_last}")
+                    else:
+                        companions_formatted.append(comp.strip())
                 companions_str = ", ".join(companions_formatted) if companions_formatted else "None"
+        
                 message_body = (
                     f"Families in your group:\n{family_list_str}\n\n"
                     f"Your Companion(s) are: {companions_str}"
                 )
-                #phone_number = get_phone_number_by_name(df, minister)
+        
+                phone_number = get_phone_number_by_name(df, minister)
                 if phone_number:
                     print(f"Sending message to {first_name} {last_name} at {phone_number}: {message_body}")
                 else:
