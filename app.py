@@ -219,11 +219,31 @@ def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
         print(f"An unexpected error occurred while reading the CSV: {e}")
         return None
 # --------------------------------------------------------------------------
-def get_phone_number_by_name(df, minister_name):
+"""def get_phone_number_by_name(df, minister_name):
     record = df[df['Name'].astype(str).str.strip().str.lower() == minister_name.strip().lower()]
     if not record.empty:
         return record['Phone Number'].iloc[0]
     return None
+"""
+def get_phone_number_by_name(df_to_search, minister_name_to_find):
+    minister_name_str = str(minister_name_to_find).strip().lower()
+    minister_columns = ['Minister1', 'Minister2', 'Minister3']
+    found_row = pd.DataFrame() # Initialize with an empty DataFrame
+
+    for col in minister_columns:
+        if col in df_to_search.columns:
+            match = df_to_search[df_to_search[col].astype(str).str.strip().str.lower() == minister_name_str]
+            if not match.empty:
+                found_row = match
+                break
+    
+    if not found_row.empty:
+        if 'Phone Number' in found_row.columns and pd.notna(found_row['Phone Number'].iloc[0]):
+            return str(found_row['Phone Number'].iloc[0]).strip() 
+    
+    print(f"DEBUG: No phone number found for minister '{minister_name_to_find}' in get_phone_number_by_name.")
+    return None
+
 # --------------------------------------------------------------------------
 @app.route("/sms", methods=['POST'])
 
