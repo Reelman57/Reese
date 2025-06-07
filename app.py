@@ -410,7 +410,7 @@ def incoming_sms():
         
         print(df.columns)
         
-        grouped = df.groupby(['Minister1'])
+        grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
         
         for group_keys, group_df in grouped:
             family_names = group_df[['First_Name', 'Last_Name']].apply(
