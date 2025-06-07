@@ -204,7 +204,8 @@ def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
                 if first_column_value == from_number:
                     print(f"Unit Number is {unit_nbr}")
                     print(f"District Code is {district_code}")
-                    return unit_nbr, district_code,District_Ldr
+                    print(f"District Leader is {District_Ldr}")
+                    return unit_nbr, district_code, District_Ldr
 
         print(f"No unit number found for '{from_number}' in '{filename}'.")
         return None
