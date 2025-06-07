@@ -236,6 +236,7 @@ def incoming_sms():
     message_body = request.values.get('Body', None)
     global from_number
     global data_file
+    global sent_texts
     
     from_number = request.values.get('From', None)
 
