@@ -191,6 +191,7 @@ def get_minister_phone_number(minister_name_to_lookup):
 def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
     global district_code
     district_code = None
+    district_ldr = None
     try:
         with open(filename, mode='r', newline='', encoding='utf-8') as csvfile:
             csv_reader = csv.reader(csvfile)
@@ -205,7 +206,7 @@ def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
                     print(f"Unit Number is {unit_nbr}")
                     print(f"District Code is {district_code}")
                     print(f"District Leader is {District_Ldr}")
-                    return unit_nbr, district_code, District_Ldr
+                    return unit_nbr, district_code, district_ldr
 
         print(f"No unit number found for '{from_number}' in '{filename}'.")
         return None
@@ -423,7 +424,7 @@ def incoming_sms():
                 msg += f"Your Companion(s) are: {companions_str}\n\n"
                 msg += "Do not respond to the automated message but you can reach me at: \n"
                 msg += f"{from_number},\n"
-                msg += f"{District_Ldr}\n"
+                msg += f"{district_ldr}\n"
         
                 phone_number = get_phone_number_by_name(df, minister)
                 if phone_number:
