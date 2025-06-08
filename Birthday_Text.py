@@ -122,22 +122,16 @@ for index, row in df_filtered.iterrows():
             send_text(phone_number,msg)
             
     #Ministering Brothers
-"""
+    
     msg = f"A person whom you minister to, {name}, has a birthday today. {UC_pronoun2} phone number is {phone}\n"
     msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
 
-    for phone_number in Ministers12:
-
-        send_text(phone_number,msg)
-
-    #Ministering Sisters
-
-    if row['Gender'] == 'F':
-
-        msg = f"A person whom you minister to, {name}, has a birthday today. {UC_pronoun2} phone number is {phone}\n"
-        msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
-
-        for phone_number in Ministers34:
-
+    for phone_number in get_phone_number_by_name(df, row['Minister1']):
+        if phone_number is not None:
             send_text(phone_number,msg)
-"""
+    for phone_number in get_phone_number_by_name(df, row['Minister2']):
+        if phone_number is not None:
+            send_text(phone_number,msg)
+    for phone_number in get_phone_number_by_name(df, row['Minister3']):
+        if phone_number is not None:
+            send_text(phone_number,msg)
