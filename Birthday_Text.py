@@ -128,6 +128,7 @@ for index, row in df_filtered.iterrows():
 
     for phone_number in get_phone_number_by_name(df, row['Minister1']):
         print(phone_number)
+        """
         if phone_number:
             send_text(phone_number,msg)
     for phone_number in get_phone_number_by_name(df, row['Minister2']):
