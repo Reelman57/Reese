@@ -75,12 +75,7 @@ for index, row in df_filtered.iterrows():
         "Elder's Quorum Presidency\n\n"
 
     Bishopric = ['+1 (208) 627-2451','+1 (208) 277-5613','+1 (801) 673-1861']
-"""
-    Ministers12 = []
-    Ministers34 = []
-    Ministers12 = [f", {minister}" for minister in [row['Minister1_Phone'], row['Minister2_Phone']] if not pd.isna(minister)]
-    Ministers34 = [f", {minister}" for minister in [row['Minister3_Phone'], row['Minister4_Phone']] if not pd.isna(minister)]
-"""
+
     ReliefSociety = ['+1 (208) 610-2929','+1 (208) 920-1618', '+1 (509) 344-9400','+1 (310) 570-9897']
 
     #Birthday Person
