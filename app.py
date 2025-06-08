@@ -250,9 +250,7 @@ def incoming_sms():
                 from_=twilio_number,
                 to='+15099902828' # Assuming this is the team's number
             )
-            resp = MessagingResponse()
-            resp.message("Sorry, I couldn't find your unit number. Please contact support.")
-            return str(resp), 200 # Return TwiML with 200 OK
+            return None
         except Exception as e:
             print(f"Error sending alert to team: {e}")
             return "Internal server error during alert.", 500
