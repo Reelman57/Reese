@@ -127,9 +127,11 @@ for index, row in df_filtered.iterrows():
     msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
 
     for phone_number in get_phone_number_by_name(df, row['Minister1']):
+        print(phone_number)
         if phone_number:
             send_text(phone_number,msg)
     for phone_number in get_phone_number_by_name(df, row['Minister2']):
+        print(phone_number)
         if phone_number:
             send_text(phone_number,msg)
     for phone_number in get_phone_number_by_name(df, row['Minister3']):
