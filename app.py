@@ -59,7 +59,7 @@ def send_text(text_nbr, message, now):
                 schedule_type=schedule_type
             )
             sent_texts.add(text_nbr)
-            x+=2
+            x+=1
             return True
         except Exception as e:
             print(f"Error sending SMS to {text_nbr}: {e}")
