@@ -36,7 +36,7 @@ def send_text(text_nbr, message):
     time.sleep(1)
 
 # Read the CSV file
-df = pd.read_csv('Westmond_Master.csv')
+df = pd.read_csv('77216_datafile.csv')
 sent_texts = set()
 with open('DO_NOT_SEND.txt', 'r') as file:
   sent_texts = set(line.strip() for line in file)
@@ -72,15 +72,15 @@ for index, row in df_filtered.iterrows():
         UC_pronoun2 = "Her"
         min_gend = "Sister"
         min_org = "Westmond Ward\n"  \
-        "Relief Society Presidency\n\n"
+        "Elder's Quorum Presidency\n\n"
 
     Bishopric = ['+1 (208) 627-2451','+1 (208) 277-5613','+1 (801) 673-1861']
-
+"""
     Ministers12 = []
     Ministers34 = []
     Ministers12 = [f", {minister}" for minister in [row['Minister1_Phone'], row['Minister2_Phone']] if not pd.isna(minister)]
     Ministers34 = [f", {minister}" for minister in [row['Minister3_Phone'], row['Minister4_Phone']] if not pd.isna(minister)]
-
+"""
     ReliefSociety = ['+1 (208) 610-2929','+1 (208) 920-1618', '+1 (509) 344-9400','+1 (310) 570-9897']
 
     #Birthday Person
@@ -120,7 +120,7 @@ for index, row in df_filtered.iterrows():
             send_text(phone_number,msg)
             
     #Ministering Brothers
-
+"""
     msg = f"A person whom you minister to, {name}, has a birthday today. {UC_pronoun2} phone number is {phone}\n"
     msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
 
@@ -138,3 +138,4 @@ for index, row in df_filtered.iterrows():
         for phone_number in Ministers34:
 
             send_text(phone_number,msg)
+"""
