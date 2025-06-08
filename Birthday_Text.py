@@ -34,6 +34,13 @@ def send_text(text_nbr, message):
         )
     sent_texts.add(text_nbr)
     time.sleep(1)
+    
+def get_phone_number_by_name(df, minister_name):
+    minister_name_str = str(minister_name).strip().lower()
+    match = df[df['Name'].astype(str).str.strip().str.lower() == minister_name_str]
+    if not match.empty and 'Phone Number' in match.columns and pd.notna(match['Phone Number'].iloc[0]):
+        return str(match['Phone Number'].iloc[0]).strip()
+    return None
 
 # Read the CSV file
 df = pd.read_csv('77216_datafile.csv')
