@@ -493,7 +493,7 @@ def incoming_sms():
             return df['UnitNbr'].dropna().unique().tolist()
         
         # Example usage:
-        unitnbr_list = "User_UnitNbr.csv"
+        unitnbr_list = get_unique_unitnbr_list(os.path.join("User_UnitNbr.csv"))
         print(unitnbr_list)
         
         def find_member_by_phone(unitnbr_list, from_number):
