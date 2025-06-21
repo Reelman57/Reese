@@ -19,8 +19,6 @@ from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
 
 app = Flask(__name__)
-# account_sid = os.environ['TWILIO_TEST_SID']
-# auth_token = os.environ['TWILIO_TEST_TOKEN']
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']
 messaging_sid = os.environ['TWILIO_MSGNG_SID']
@@ -346,7 +344,6 @@ def incoming_sms():
         filtered_data_list = filter_gender(data_list, "M")
         
         for data in filtered_data_list:
-            #print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
             msg = f"Brother {data['Last_Name']}, \n\n"
             msg += msg_in
             send_text(data['Phone Number'], msg, False)
@@ -358,7 +355,6 @@ def incoming_sms():
         filtered_data_list = filter_gender(data_list, "F")
         
         for data in filtered_data_list:
-            #print(f"{x}. {data['First_Name']} {data['Last_Name']} - {data['Phone Number']}")
             msg = f"Sister {data['Last_Name']}, \n\n"
             msg += msg_in
             send_text(data['Phone Number'], msg, False)
@@ -394,7 +390,6 @@ def incoming_sms():
             
             msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have. \n"
             msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency. \n"
-            #print(f"{x}. {data['First_Name']} {data['Last_Name']}")
             send_text(data['Phone Number'], msg, False) 
 
         confirm_send() 
@@ -467,60 +462,9 @@ def incoming_sms():
         confirm_send()            
         resp = MessagingResponse()
         resp.message("Your message was processed successfully!")
-        return str(resp), 200
-# --------------------------------------------------------------------------    
-    elif (first_word == "?" or first_word == "instructions"):
-        instructions = "To send a message to any of the following groups.  Simply type the group code on the 1st line followed by your message on subsequent lines.  The message will already have a salutation on it, ie. 'Brother Jones' or 'Hello John'.  Do not use emojis or pictures.  The app is authenticated by your phone number and will only work on your phone.\n\n"
-        instructions += "Group codes\n"
-        instructions += "min77216 - Your Ministering District with assignments\n"
-        instructions += "eld77216 - Active Adult Priesthood holders\n"
-        instructions += "sms77216 - Entire Ward\n\n"
-        instructions += "These messages have a 15 minute delay before they go out.  Should you choose to cancel them you may send the command 'cancel-sms' within that 15 minutes"
-
-        message = client.messages.create(
-            body=instructions,
-            from_=twilio_number,
-            to=from_number
-            )
+        return str(resp), 200    
 # --------------------------------------------------------------------------
-    elif first_word == "dnc77216":
-        do_not_send_file = "DO_NOT_SEND.txt"
-    
-        try:
-            with open(do_not_send_file, 'r') as f:
-                do_not_send_numbers = set(line.strip() for line in f)
-    
-            df = pd.read_csv(data_file)
-            matching_numbers = df[df['Phone Number'].isin(do_not_send_numbers)]
-            names = matching_numbers[['First_Name', 'Last_Name']].values.tolist() 
-    
-        except FileNotFoundError:
-            print(f"Error: File not found: {do_not_send_file} or {data_file}")
-            return "Error: File not found.", 500 
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            return "An error occurred.", 500
-    
-        if names:
-            message = "Names associated with phone numbers in DO_NOT_SEND.TXT:\n"
-            for name in names:
-                message += f"{name[0]} {name[1]}\n" 
-            
-            client.messages.create(
-                body=message,
-                from_=twilio_number,
-                to=from_number
-            )
-            return "List of names sent successfully.", 200
-        else:
-            client.messages.create(
-                body="No matching phone numbers found.",
-                from_=twilio_number,
-                to=from_number
-            )
-            return "No matching phone numbers found.", 200
-# --------------------------------------------------------------------------     
-    else:
+       else:
         unitnbr_list = get_unique_unitnbr_list(os.path.join("User_UnitNbr.csv"))
         matches = find_member_by_phone(unitnbr_list, from_number)
         if matches:
