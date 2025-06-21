@@ -255,7 +255,7 @@ def find_member_by_phone(unitnbr_list, from_number):
                 row['Phone Number'],
                 f"{row['First_Name']} {row['Last_Name']}"
             ])
-return results
+        return results
 # --------------------------------------------------------------------------
 @app.route("/sms", methods=['POST'])
 
