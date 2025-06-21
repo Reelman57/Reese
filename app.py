@@ -257,6 +257,15 @@ def find_member_by_phone(unitnbr_list, from_number):
             ])
         return results
 # --------------------------------------------------------------------------
+def format_phone_number(phone):
+    digits = re.sub(r'\D', '', str(phone))
+    if len(digits) == 10:
+        return f"({digits[:3]}) {digits[3:6]}-{digits[6:]}"
+    elif len(digits) == 11 and digits.startswith('1'):
+        return f"({digits[1:4]}) {digits[4:7]}-{digits[7:]}"
+    else:
+        return phone  # Return as-is if not a standard US number
+# --------------------------------------------------------------------------
 @app.route("/sms", methods=['POST'])
 
 def incoming_sms():
@@ -266,7 +275,7 @@ def incoming_sms():
     global data_file
     
     from_number = request.values.get('From', None)
-
+    from_number = format_phone_number(from_number)
     unit_nbr = get_unitnbr(from_number)
     if unit_nbr is None:
         alert_to_team = f"Lookup failed for {from_number}: no unit number found."
