@@ -519,6 +519,7 @@ def incoming_sms():
             reply = "\n".join(f"Unit: {m[0]}, Phone: {m[1]}, Name: {m[2]}" for m in matches)
         else:
             reply = "No matching member found for your phone number."
+            print(from_number)
         twiml = f"<Response><Message>{reply}</Message></Response>"
         return Response(twiml, mimetype="application/xml")
 # --------------------------------------------------------------------------
