@@ -520,8 +520,9 @@ def incoming_sms():
         #from_number = "(509) 990-2828"  # Replace with your Twilio from_number
         matches = find_member_by_phone(unitnbr_list, from_number)
         print(matches)
-    twiml = "<Response><Message>(matches)</Message></Response>"
-    return Response(twiml, mimetype="application/xml")
+        reply = str(matches)
+        twiml = f"<Response><Message>{reply}</Message></Response>"
+        return Response(twiml, mimetype="application/xml")
 # --------------------------------------------------------------------------
 def confirm_send():
     global x
