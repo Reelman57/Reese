@@ -231,34 +231,30 @@ def get_phone_number_by_name(df, minister_name):
     return None
 # --------------------------------------------------------------------------
  def get_unique_unitnbr_list(csv_path):
-        df = pd.read_csv(csv_path)
-        if 'UnitNbr' not in df.columns:
-            raise ValueError("Column 'UnitNbr' not found in the CSV file.")
-        return df['UnitNbr'].dropna().unique().tolist()
-    
-    # Example usage:
-    unitnbr_list = get_unique_unitnbr_list(os.path.join("User_UnitNbr.csv"))
-    print(unitnbr_list)
+    df = pd.read_csv(csv_path)
+    if 'UnitNbr' not in df.columns:
+        raise ValueError("Column 'UnitNbr' not found in the CSV file.")
+    return df['UnitNbr'].dropna().unique().tolist()
 # --------------------------------------------------------------------------
 def find_member_by_phone(unitnbr_list, from_number):
-results = []
-for unitnbr in unitnbr_list:
-    members_file = os.path.join(f"{unitnbr}_datafile.csv")
-    if not os.path.exists(members_file):
-        print(f"Members file not found for unit {unitnbr}: {members_file}")
-        continue
-    df = pd.read_csv(members_file)
-    # Normalize phone numbers for comparison
-    df['Phone Number'] = df['Phone Number'].astype(str).str.replace(r'\D', '', regex=True)
-    search_number = re.sub(r'\D', '', str(from_number))
-    match = df[df['Phone Number'] == search_number]
-    if not match.empty:
-        row = match.iloc[0]
-        results.append([
-            unitnbr,
-            row['Phone Number'],
-            f"{row['First_Name']} {row['Last_Name']}"
-        ])
+    results = []
+    for unitnbr in unitnbr_list:
+        members_file = os.path.join(f"{unitnbr}_datafile.csv")
+        if not os.path.exists(members_file):
+            print(f"Members file not found for unit {unitnbr}: {members_file}")
+            continue
+        df = pd.read_csv(members_file)
+        # Normalize phone numbers for comparison
+        df['Phone Number'] = df['Phone Number'].astype(str).str.replace(r'\D', '', regex=True)
+        search_number = re.sub(r'\D', '', str(from_number))
+        match = df[df['Phone Number'] == search_number]
+        if not match.empty:
+            row = match.iloc[0]
+            results.append([
+                unitnbr,
+                row['Phone Number'],
+                f"{row['First_Name']} {row['Last_Name']}"
+            ])
 return results
 # --------------------------------------------------------------------------
 @app.route("/sms", methods=['POST'])
@@ -518,6 +514,7 @@ def incoming_sms():
     else:
         # Example usage:
         # from_number = "(509) 990-2828"  # Replace with your Twilio from_number
+        unitnbr_list = get_unique_unitnbr_list(os.path.join("User_UnitNbr.csv"))
         matches = find_member_by_phone(unitnbr_list, from_number)
         #print(matches)
         reply = str(matches)
