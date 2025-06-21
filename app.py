@@ -512,12 +512,13 @@ def incoming_sms():
             return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------     
     else:
-        # Example usage:
-        # from_number = "(509) 990-2828"  # Replace with your Twilio from_number
         unitnbr_list = get_unique_unitnbr_list(os.path.join("User_UnitNbr.csv"))
         matches = find_member_by_phone(unitnbr_list, from_number)
-        #print(matches)
-        reply = str(matches)
+        if matches:
+            # Format each match as a readable string
+            reply = "\n".join(f"Unit: {m[0]}, Phone: {m[1]}, Name: {m[2]}" for m in matches)
+        else:
+            reply = "No matching member found for your phone number."
         twiml = f"<Response><Message>{reply}</Message></Response>"
         return Response(twiml, mimetype="application/xml")
 # --------------------------------------------------------------------------
