@@ -526,6 +526,7 @@ def incoming_sms():
         if matches:
             # Format each match as a readable string
             reply = "\n".join(f"Unit: {m[0]}, Phone: {m[1]}, Name: {m[2]}" for m in matches)
+            reply += "\n",msg_in
         else:
             reply = "No matching member found for your phone number."
             print(from_number)
