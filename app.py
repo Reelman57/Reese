@@ -486,45 +486,40 @@ def incoming_sms():
 # --------------------------------------------------------------------------     
     else:
         
-        if from_number.startswith('+1'):
-            from_number = from_number[2:]
-            cleaned_number = re.sub(r'(\d{3})(\d{3})(\d{4})', r'(\1) \2-\3', from_number)
-        else:
-            cleaned_number = from_number
-  
-        for row_data in data_list:
-            if row_data.get('Phone Number') == cleaned_number:
-                found_row = row_data
-                break
-        try:
-            if found_row:
-                full_name = f"{found_row['First_Name']} {found_row['Last_Name']}"
-                client.messages.create(
-                    body=f"{cleaned_number} - {full_name}\n{msg_in}",
-                    from_=twilio_number,
-                    to='+15099902828'
-                )
-                return "Message forwarded successfully.", 200
-            else:
-                raise IndexError("No matching name found for the phone number.")
-    
-        except IndexError as e:
-            client.messages.create(
-                body=f"No matching name found for {cleaned_number}",
-                from_=twilio_number,
-                to='+15099902828'
-            )
-            return f"No matching name found for {cleaned_number}.", 404
-    
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
-            client.messages.create(
-                body=f"An error occurred: {e}",
-                from_=twilio_number,
-                to='+15099902828'
-            )
-            return f"An internal error occurred: {e}", 500
-
+        def get_unique_unitnbr_list(csv_path):
+            df = pd.read_csv(csv_path)
+            if 'UnitNbr' not in df.columns:
+                raise ValueError("Column 'UnitNbr' not found in the CSV file.")
+            return df['UnitNbr'].dropna().unique().tolist()
+        
+        # Example usage:
+        unitnbr_list = "User_UnitNbr.csv"
+        print(unitnbr_list)
+        
+        def find_member_by_phone(unitnbr_list, from_number):
+            results = []
+            for unitnbr in unitnbr_list:
+                members_file = os.path.join(f"{unitnbr}_datafile.csv")
+                if not os.path.exists(members_file):
+                    print(f"Members file not found for unit {unitnbr}: {members_file}")
+                    continue
+                df = pd.read_csv(members_file)
+                # Normalize phone numbers for comparison
+                df['Phone Number'] = df['Phone Number'].astype(str).str.replace(r'\D', '', regex=True)
+                search_number = re.sub(r'\D', '', str(from_number))
+                match = df[df['Phone Number'] == search_number]
+                if not match.empty:
+                    row = match.iloc[0]
+                    results.append([
+                        unitnbr,
+                        row['Phone Number'],
+                        f"{row['First_Name']} {row['Last_Name']}"
+                    ])
+            return results
+        # Example usage:
+        from_number = "(509) 990-2828"  # Replace with your Twilio from_number
+        matches = find_member_by_phone(unitnbr_list, from_number, EXPORT_DIR)
+        print(matches)
 # --------------------------------------------------------------------------
 def confirm_send():
     global x
