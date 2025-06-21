@@ -485,7 +485,7 @@ def incoming_sms():
             return "No matching phone numbers found.", 200
 # --------------------------------------------------------------------------     
     else:
-        
+        global from_number
         def get_unique_unitnbr_list(csv_path):
             df = pd.read_csv(csv_path)
             if 'UnitNbr' not in df.columns:
@@ -517,9 +517,9 @@ def incoming_sms():
                     ])
             return results
         # Example usage:
-        #from_number = "(509) 990-2828"  # Replace with your Twilio from_number
+        # from_number = "(509) 990-2828"  # Replace with your Twilio from_number
         matches = find_member_by_phone(unitnbr_list, from_number)
-        print(matches)
+        #print(matches)
         reply = str(matches)
         twiml = f"<Response><Message>{reply}</Message></Response>"
         return Response(twiml, mimetype="application/xml")
