@@ -340,7 +340,7 @@ def incoming_sms():
             return "Voice Calls made.", 200
     # --------------------------------------------------------------------------
         elif first_word == "email_all":
-            send_email(subject, msg_in, data_list)
+            send_email("Ward Communications", msg_in, data_list)
             return "Voice Calls made.", 200       
     # --------------------------------------------------------------------------
         elif first_word == "cancel-sms":
