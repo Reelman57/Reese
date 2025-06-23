@@ -5,10 +5,12 @@ import re
 import csv
 import sys
 import time
+import uuid
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from concurrent.futures import ThreadPoolExecutor
+from xml.sax.saxutils import escape
 
 import pandas as pd
 import numpy as np
@@ -83,6 +85,40 @@ def send_voice(msg_in, data_list):
             except Exception as e:
                 print(f"Error sending voice call to {to_number}: {e}")
     return calls 
+# --------------------------------------------------------------------------
+def call_all(msg_in, data_list):
+    
+    unique_recipients = {data['Phone Number']: data for data in data_list if not pd.isna(data.get('Phone Number'))}.values()
+
+    def place_one_call(data):
+        try:
+            to_number = data.get('Phone Number')
+            
+            # 1. Create the message and escape it for TwiML safety
+            raw_msg = f"Hello {data.get('First_Name', 'Friend')},\n{msg_in}\n"
+            safe_msg = escape(raw_msg) # <-- Escapes special characters
+            
+            # 2. Construct the TwiML with the safe message
+            twiml_payload = f"<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">{safe_msg} Goodbye. </Say></Response>"
+            
+            # 3. Make the API call
+            """call = client.calls.create(
+                twiml=twiml_payload,
+                to=to_number,
+                from_=twilio_number
+            )"""
+            print("Voice - ", data.get('Last_Name'), "-", to_number, f"(SID: {call.sid})")
+            return call
+        except Exception as e:
+            print(f"Error sending voice call to {data.get('Phone Number')}: {e}")
+            return None
+
+    with ThreadPoolExecutor(max_workers=10) as executor: # Adjust max_workers as needed
+        results = list(executor.map(place_one_call, unique_recipients))
+
+    successful_calls = [call for call in results if call is not None]
+    
+    return successful_calls
 # -------------------------------------------------------------------------- 
 def send_email(subject, body, data_list):
     sent_emails = set()
@@ -130,24 +166,13 @@ def filter_gender(data_list, gender):
     return [record for record in data_list if record.get('Gender') == gender]
 # --------------------------------------------------------------------------
 def sms_send(msg_in, data_list, now, prepared_messages=None):
-    """
-    Sends SMS messages concurrently.
-
-    Can operate in two modes:
-    1. Standard Mode: Sends a template message (`msg_in`) to a `data_list`,
-       personalizing with the first name.
-    2. Prepared Mode: Sends a list of `prepared_messages`, where each
-       item is a dictionary with the phone number and the full message body.
-    """
     success_count = 1
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         sendnow = now
 
         if prepared_messages:
-            # Mode 2: Iterate over pre-rendered messages
             for item in prepared_messages:
-                # The 'phone' and 'message' keys must be in the dictionary
                 future = executor.submit(send_text, item.get('phone'), item.get('message'), sendnow)
                 futures.append(future)
                 print("SMS (Prepared) - ", item.get('phone'))
@@ -165,7 +190,6 @@ def sms_send(msg_in, data_list, now, prepared_messages=None):
                 if result:
                     success_count += 1
             except Exception as e:
-                # It's good practice to log errors, especially in threads
                 print(f"Error processing a sending future: {e}")
 
     return success_count
@@ -332,6 +356,10 @@ def incoming_sms():
             sms_send(msg_in, data_list, False)
             confirm_send()
             return "SMS messages scheduled.", 200
+    # --------------------------------------------------------------------------
+        elif first_word == "call_all":
+            call_all(msg_in, data_list)
+             return "Voice Calls made.", 200       
     # --------------------------------------------------------------------------
         elif first_word == "cancel-sms":
             messages = client.messages.list(limit=300)  # Adjust limit as needed
