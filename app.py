@@ -114,9 +114,6 @@ def process_data(data_path):
     df = pd.read_csv(data_path)
     df_filtered = df[df['Age'] > 17]
     df_filtered = df_filtered[['Name','Household','First_Name', 'Last_Name', 'Phone Number', 'E-mail', 'Gender','District','Minister1','Minister2','Minister3']]
-    #df_filtered = df_filtered.dropna(subset=['Phone Number'])
-    #df_filtered['is_valid_phone'] = df_filtered['Phone Number'].apply(lambda x: is_valid_phone_number(x))
-    #df_filtered = df_filtered[df_filtered['is_valid_phone']]
     df_filtered = df_filtered.drop_duplicates(subset=['Phone Number'])
     
     with open('DO_NOT_SEND.txt', 'r') as f:
@@ -131,13 +128,6 @@ def filter_minister(data_list):
 
 def filter_gender(data_list, gender):
     return [record for record in data_list if record.get('Gender') == gender]
-# --------------------------------------------------------------------------    
-def is_valid_phone_number(phone_number):
-    try:
-        parsed_number = phonenumbers.parse(phone_number, region="US")
-        return phonenumbers.is_valid_number(parsed_number)
-    except phonenumbers.NumberParseException:
-        return False
 # --------------------------------------------------------------------------
 def sms_send(msg_in, data_list, now, prepared_messages=None):
     """
@@ -505,8 +495,7 @@ def incoming_sms():
             resp.message("Your message was processed successfully!")
             return str(resp), 200    
     # --------------------------------------------------------------------------
-        else: # This 'else' handles UNRECOGNIZED commands from an AUTHENTICATED user
-            # Alert the admin about the unrecognized command
+        else:
             reply = (f"Authenticated user {from_number} sent an unrecognized command:\n\n"
                      f"{message_body}")
             
@@ -515,8 +504,6 @@ def incoming_sms():
                 from_=twilio_number,
                 to='+15099902828'
             )
-            
-            # Best practice: Inform the user their command was not recognized
             resp = MessagingResponse()
             resp.message(f"Command not recognized. Please check the command and try again.")
             return Response(str(resp), mimetype="application/xml")
