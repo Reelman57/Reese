@@ -317,43 +317,30 @@ def incoming_sms():
     
     from_number = request.values.get('From', None)
     from_number = format_phone_number(from_number)
+     
+    unit_nbr = get_unitnbr(from_number)
+    
+    data_file = unit_nbr[0] + "_datafile.csv"
+    data_list = process_data(data_file)
 
+    if message_body is None or from_number is None:
+        resp = MessagingResponse()
+        resp.message("Invalid request: Missing message body or sender number.")
+        return str(resp), 400
+
+    first_word = message_body.split()[0].lower()
+    msg_in = message_body.strip()
+    lines = msg_in.splitlines()
+
+    if len(lines) > 1:
+        msg_in = "\n".join(lines[1:])
+    
+    with open('DO_NOT_SEND.txt', 'r') as file:
+        sent_texts = set(line.strip() for line in file)
+
+    time.sleep(2)
+    
     if is_user_authenticated(from_number):
-        
-        unit_nbr = get_unitnbr(from_number)
-        if unit_nbr is None:
-            alert_to_team = f"Lookup failed for {from_number}: no unit number found."
-    
-            try:
-                client.messages.create(
-                    body=alert_to_team,
-                    from_=twilio_number,
-                    to='+15099902828' # Assuming this is the team's number
-                )
-                return None
-            except Exception as e:
-                print(f"Error sending alert to team: {e}")
-                return "Internal server error during alert.", 500
-        
-        data_file = unit_nbr[0] + "_datafile.csv"
-        data_list = process_data(data_file)
-    
-        if message_body is None or from_number is None:
-            resp = MessagingResponse()
-            resp.message("Invalid request: Missing message body or sender number.")
-            return str(resp), 400
-    
-        first_word = message_body.split()[0].lower()
-        msg_in = message_body.strip()
-        lines = msg_in.splitlines()
-    
-        if len(lines) > 1:
-            msg_in = "\n".join(lines[1:])
-        
-        with open('DO_NOT_SEND.txt', 'r') as file:
-            sent_texts = set(line.strip() for line in file)
-    
-        time.sleep(2)
     # --------------------------------------------------------------------------
         if first_word == "ward"+unit_nbr[0]:
             sms_send(msg_in, data_list, False)
