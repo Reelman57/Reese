@@ -297,6 +297,16 @@ def confirm_send():
         to='+15099902828'
     )
 # --------------------------------------------------------------------------
+def is_user_authenticated(from_number, csv_path="User_UnitNbr.csv"):
+    
+    df = pd.read_csv(csv_path)
+    if from_number in df[UserPhone'].values:
+        print(f"Authentication successful for {from_number}")
+        return True
+    else:
+        print(f"Authentication failed for {from_number}")
+        return False
+# --------------------------------------------------------------------------
 @app.route("/sms", methods=['POST'])
 
 def incoming_sms():
@@ -307,6 +317,21 @@ def incoming_sms():
     
     from_number = request.values.get('From', None)
     from_number = format_phone_number(from_number)
+
+    if is_user_authenticated(from_number) is False:
+        unitnbr_list = get_unique_unitnbr_list(os.path.join("User_UnitNbr.csv"))
+        matches = find_member_by_phone(unitnbr_list, from_number)
+        if matches:
+            # Format each match as a readable string
+            reply = "\n".join(f"Unit: {m[0]}, Phone: {m[1]}, Name: {m[2]}" for m in matches)
+            reply += "\n"
+            reply += msg_in
+        else:
+            reply = "No matching member found for your phone number."
+            print(from_number)
+        twiml = f"<Response><Message>{reply}</Message></Response>"
+    return Response(twiml, mimetype="application/xml")
+# --------------------------------------------------------------------------
     unit_nbr = get_unitnbr(from_number)
     if unit_nbr is None:
         alert_to_team = f"Lookup failed for {from_number}: no unit number found."
@@ -510,17 +535,7 @@ def incoming_sms():
         return str(resp), 200    
 # --------------------------------------------------------------------------
     else:
-        unitnbr_list = get_unique_unitnbr_list(os.path.join("User_UnitNbr.csv"))
-        matches = find_member_by_phone(unitnbr_list, from_number)
-        if matches:
-            # Format each match as a readable string
-            reply = "\n".join(f"Unit: {m[0]}, Phone: {m[1]}, Name: {m[2]}" for m in matches)
-            reply += "\n"
-            reply += msg_in
-        else:
-            reply = "No matching member found for your phone number."
-            print(from_number)
-        twiml = f"<Response><Message>{reply}</Message></Response>"
+        twiml = f"<Response><Message>"No Command Given"</Message></Response>"
         return Response(twiml, mimetype="application/xml")
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
