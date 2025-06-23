@@ -300,7 +300,7 @@ def confirm_send():
 def is_user_authenticated(from_number, csv_path="User_UnitNbr.csv"):
     
     df = pd.read_csv(csv_path)
-    if from_number in df[UserPhone'].values:
+    if from_number in df['UserPhone'].values:
         print(f"Authentication successful for {from_number}")
         return True
     else:
