@@ -535,8 +535,10 @@ def incoming_sms():
         return str(resp), 200    
 # --------------------------------------------------------------------------
     else:
-        twiml = f"<Response><Message>"No Command Given"</Message></Response>"
-        return Response(twiml, mimetype="application/xml")
+
+        resp = MessagingResponse()
+        resp.message("No Command Given")
+        return Response(str(resp), mimetype="application/xml")
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
