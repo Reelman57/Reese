@@ -139,16 +139,35 @@ def is_valid_phone_number(phone_number):
     except phonenumbers.NumberParseException:
         return False
 # --------------------------------------------------------------------------
-def sms_send(msg_in, data_list, now):
+def sms_send(msg_in, data_list, now, prepared_messages=None):
+    """
+    Sends SMS messages concurrently.
+
+    Can operate in two modes:
+    1. Standard Mode: Sends a template message (`msg_in`) to a `data_list`,
+       personalizing with the first name.
+    2. Prepared Mode: Sends a list of `prepared_messages`, where each
+       item is a dictionary with the phone number and the full message body.
+    """
     success_count = 1
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = []
         sendnow = now
-        for data in data_list:
-            msg = f"Hello {data['First_Name']},\n{msg_in}\n"
-            future = executor.submit(send_text, data['Phone Number'], msg, sendnow)
-            futures.append(future)
-            print("SMS - ", data['Last_Name'], "-", data['Phone Number'])
+
+        if prepared_messages:
+            # Mode 2: Iterate over pre-rendered messages
+            for item in prepared_messages:
+                # The 'phone' and 'message' keys must be in the dictionary
+                future = executor.submit(send_text, item.get('phone'), item.get('message'), sendnow)
+                futures.append(future)
+                print("SMS (Prepared) - ", item.get('phone'))
+        elif data_list:
+            # Mode 1: Original behavior
+            for data in data_list:
+                msg = f"Hello {data['First_Name']},\n{msg_in}\n"
+                future = executor.submit(send_text, data['Phone Number'], msg, sendnow)
+                futures.append(future)
+                print("SMS - ", data['Last_Name'], "-", data['Phone Number'])
 
         for future in futures:
             try:
@@ -156,8 +175,9 @@ def sms_send(msg_in, data_list, now):
                 if result:
                     success_count += 1
             except Exception as e:
-                app.logger.error(f"Error processing future: {e}")
-    
+                # It's good practice to log errors, especially in threads
+                print(f"Error processing a sending future: {e}")
+
     return success_count
 # --------------------------------------------------------------------------
 def get_minister_phone_number(minister_name_to_lookup):
@@ -364,35 +384,48 @@ def incoming_sms():
 # --------------------------------------------------------------------------
     elif first_word == "families"+unit_nbr[0]:
         filtered_data_list = filter_minister(data_list)
+        
+        # Create a list to hold the dictionaries of prepared messages
+        messages_to_send = []
 
-        for x, data in enumerate(filtered_data_list, start=1): 
-            
+        for data in filtered_data_list:
+            # Determine the correct salutation
             if data.get('Gender') == "M":
-                msg = f"Brother {data['Last_Name']}, \n\n"
+                msg = f"Brother {data['Last_Name']},\n\n"
             elif data.get('Gender') == "F":
-                msg = f"Sister {data['Last_Name']}, \n\n"
-            else: 
-                msg = f"{data['First_Name']} {data['Last_Name']}, \n\n"  # Handle cases where Gender is missing or invalid
-    
-            msg += "Your assigned ministering brothers are as follows: \n"
-            
-            for i in range(1, 4): # Loop for Minister1, Minister2, Minister3
+                msg = f"Sister {data['Last_Name']},\n\n"
+            else:
+                msg = f"{data['First_Name']} {data['Last_Name']},\n\n"
+
+            msg += "Your assigned ministering brothers are as follows:\n"
+
+            # Loop through ministers and add their details
+            for i in range(1, 4):
                 minister_col = f'Minister{i}'
                 if pd.notna(data.get(minister_col)):
                     minister_name = data[minister_col]
-                    msg += f"{minister_name}"
+                    msg += f"- {minister_name}"
                     phone_numbers = get_minister_phone_number(minister_name)
                     if phone_numbers:
-                        msg += f" - {', '.join(phone_numbers)}"
-                    else:
-                        msg += " " 
+                        # Format and join multiple numbers if a minister has them
+                        formatted_numbers = [format_phone_number(p) for p in phone_numbers]
+                        msg += f": {', '.join(formatted_numbers)}"
                     msg += "\n"
-            
-            msg += "Feel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have. \n"
-            msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency. \n"
-            send_text(data['Phone Number'], msg, False) 
 
-        confirm_send() 
+            msg += "\nFeel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have.\n"
+            msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency.\n"
+
+            # Add the recipient's phone number and the fully formed message to our list
+            if data.get('Phone Number') and not pd.isna(data.get('Phone Number')):
+                messages_to_send.append({
+                    'phone': data['Phone Number'],
+                    'message': msg
+                })
+
+        # Call the modified sms_send function with our list of prepared messages
+        sms_send(msg_in=None, data_list=None, now=False, prepared_messages=messages_to_send)
+
+        confirm_send()
         return "Messages sent successfully.", 200
 # --------------------------------------------------------------------------
     elif first_word == "ministering"+unit_nbr[0]:
