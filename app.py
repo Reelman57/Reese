@@ -118,7 +118,7 @@ def call_all(msg_in, data_list):
 
     successful_calls = [call for call in results if call is not None]
     
-    return successful_calls
+return successful_calls
 # -------------------------------------------------------------------------- 
 def send_email(subject, body, data_list):
     sent_emails = set()
