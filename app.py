@@ -122,12 +122,46 @@ def send_email(subject, body, data_list):
         else:
             print(f"Invalid or missing email address for {data}")
     return len(sent_emails)
+# -------------------------------------------------------------------------- 
+def send_emails(subject, body, data_list):
+    sent_emails = set()
+    
+    # Establish the connection OUTSIDE the loop
+    try:
+        with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+            smtp.starttls()
+            smtp.login(os.environ.get('EMAIL_ADDRESS'), os.environ.get('EMAIL_PASSWORD'))
+
+            for data in data_list:
+                email = data.get('Email')
+                if email not in sent_emails and not pd.isna(email):
+                    try:
+                        message = f"Hello {data['First_Name']},\n"
+                        message += body + "\n"
+                        
+                        msg = MIMEMultipart()
+                        msg['From'] = os.environ.get('EMAIL_ADDRESS')
+                        msg['To'] = email
+                        msg['Subject'] = subject
+                        msg.attach(MIMEText(message, 'plain'))
+                        
+                        smtp.sendmail(msg['From'], msg['To'], msg.as_string())
+                        
+                        sent_emails.add(email)
+                        print("Email - ", data['Last_Name'], "-", email)
+                    except Exception as e:
+                        print(f"Error sending email to {email}: {e}")
+                        
+    except Exception as e:
+        print(f"Failed to connect or login to SMTP server: {e}")
+    return len(sent_emails)
 # --------------------------------------------------------------------------
 def process_data(data_path):
     df = pd.read_csv(data_path)
     df_filtered = df[df['Age'] > 17]
     df_filtered = df_filtered[['Name','Household','First_Name', 'Last_Name', 'Phone Number', 'E-mail', 'Gender','District','Minister1','Minister2','Minister3']]
     df_filtered = df_filtered.drop_duplicates(subset=['Phone Number'])
+    df_filtered = df[df['Last_Name'] > "C"]
     
     with open('DO_NOT_SEND.txt', 'r') as f:
         do_not_send_numbers = set(line.strip() for line in f)
@@ -348,7 +382,7 @@ def incoming_sms():
             return "Voice Calls made.", 200
     # --------------------------------------------------------------------------
         elif first_word == "email_all":
-            send_email(subject, msg_in, data_list)
+            send_emails(subject, msg_in, data_list)
             return "Voice Calls made.", 200       
     # --------------------------------------------------------------------------
         elif first_word == "cancel-sms":
@@ -373,7 +407,7 @@ def incoming_sms():
             subject = "Emergency Communications System"
             send_voice(msg_in, data_list)
             sms_send(msg_in, data_list, True)
-            send_email(subject, msg_in, data_list)
+            send_emails(subject, msg_in, data_list)
             confirm_send()
             return "Emergency Communications System messages sent.", 200
     # --------------------------------------------------------------------------
