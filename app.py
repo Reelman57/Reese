@@ -318,227 +318,249 @@ def incoming_sms():
     from_number = request.values.get('From', None)
     from_number = format_phone_number(from_number)
 
-    if is_user_authenticated(from_number) is False:
-        unitnbr_list = get_unique_unitnbr_list(os.path.join("User_UnitNbr.csv"))
-        matches = find_member_by_phone(unitnbr_list, from_number)
-        if matches:
-            # Format each match as a readable string
-            reply = "\n".join(f"Unit: {m[0]}, Phone: {m[1]}, Name: {m[2]}" for m in matches)
-            reply += "\n"
-            reply += msg_in
-        else:
-            reply = "No matching member found for your phone number."
-            print(from_number)
-        twiml = f"<Response><Message>{reply}</Message></Response>"
-    return Response(twiml, mimetype="application/xml")
-# --------------------------------------------------------------------------
-    unit_nbr = get_unitnbr(from_number)
-    if unit_nbr is None:
-        alert_to_team = f"Lookup failed for {from_number}: no unit number found."
+    if is_user_authenticated(from_number):
+        
+        unit_nbr = get_unitnbr(from_number)
+        if unit_nbr is None:
+            alert_to_team = f"Lookup failed for {from_number}: no unit number found."
+    
+            try:
+                client.messages.create(
+                    body=alert_to_team,
+                    from_=twilio_number,
+                    to='+15099902828' # Assuming this is the team's number
+                )
+                return None
+            except Exception as e:
+                print(f"Error sending alert to team: {e}")
+                return "Internal server error during alert.", 500
+        
+        data_file = unit_nbr[0] + "_datafile.csv"
+        data_list = process_data(data_file)
+    
+        if message_body is None or from_number is None:
+            resp = MessagingResponse()
+            resp.message("Invalid request: Missing message body or sender number.")
+            return str(resp), 400
+    
+        first_word = message_body.split()[0].lower()
+        msg_in = message_body.strip()
+        lines = msg_in.splitlines()
+    
+        if len(lines) > 1:
+            msg_in = "\n".join(lines[1:])
+        
+        with open('DO_NOT_SEND.txt', 'r') as file:
+            sent_texts = set(line.strip() for line in file)
+    
+        time.sleep(2)
+    # --------------------------------------------------------------------------
+        if first_word == "ward"+unit_nbr[0]:
+            sms_send(msg_in, data_list, False)
+            confirm_send()
+            return "SMS messages scheduled.", 200
+    # --------------------------------------------------------------------------
+        elif first_word == "cancel-sms":
+            messages = client.messages.list(limit=300)  # Adjust limit as needed
+            canceled_count = 0
+            for message in messages:
+                if message.status == 'scheduled':
+                    try:
+                        client.messages(message.sid).update(status='canceled')
+                        canceled_count += 1
+                    except Exception as e:
+                        print(f"Error canceling message {message.sid}: {e}") 
+        
+            client.messages.create(
+                body=f'{canceled_count} Messages canceled',
+                from_='+12086034040',
+                to=from_number
+            )
+            return f'{canceled_count} messages canceled.', 200
+    # --------------------------------------------------------------------------
+        elif first_word == "emergency"+unit_nbr[0]:
+            subject = "Emergency Communications System"
+            send_voice(msg_in, data_list)
+            sms_send(msg_in, data_list, True)
+            send_email(subject, msg_in, data_list)
+            confirm_send()
+            return "Emergency Communications System messages sent.", 200
+    # --------------------------------------------------------------------------
+        elif first_word == "elders"+unit_nbr[0]:
+            filtered_data_list = filter_gender(data_list, "M")
+            
+            for data in filtered_data_list:
+                msg = f"Brother {data['Last_Name']}, \n\n"
+                msg += msg_in
+                send_text(data['Phone Number'], msg, False)
+    
+            confirm_send()
+            return "Messages sent successfully.", 200
+    # --------------------------------------------------------------------------
+        elif first_word == "sisters"+unit_nbr[0]:
+            filtered_data_list = filter_gender(data_list, "F")
+            
+            for data in filtered_data_list:
+                msg = f"Sister {data['Last_Name']}, \n\n"
+                msg += msg_in
+                send_text(data['Phone Number'], msg, False)
+    
+            confirm_send()
+            return "Messages sent successfully.", 200
+    # --------------------------------------------------------------------------
+        elif first_word == "families"+unit_nbr[0]:
+            filtered_data_list = filter_minister(data_list)
+            
+            # Create a list to hold the dictionaries of prepared messages
+            messages_to_send = []
+    
+            for data in filtered_data_list:
+                # Determine the correct salutation
+                if data.get('Gender') == "M":
+                    msg = f"Brother {data['Last_Name']},\n\n"
+                elif data.get('Gender') == "F":
+                    msg = f"Sister {data['Last_Name']},\n\n"
+                else:
+                    msg = f"{data['First_Name']} {data['Last_Name']},\n\n"
+    
+                msg += "Your assigned ministering brothers are as follows:\n"
+    
+                # Loop through ministers and add their details
+                for i in range(1, 4):
+                    minister_col = f'Minister{i}'
+                    if pd.notna(data.get(minister_col)):
+                        minister_name = data[minister_col]
+                        msg += f"- {minister_name}"
+                        phone_numbers = get_minister_phone_number(minister_name)
+                        if phone_numbers:
+                            # Format and join multiple numbers if a minister has them
+                            formatted_numbers = [format_phone_number(p) for p in phone_numbers]
+                            msg += f": {', '.join(formatted_numbers)}"
+                        msg += "\n"
+    
+                msg += "\nFeel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have.\n"
+                msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency.\n"
+    
+                # Add the recipient's phone number and the fully formed message to our list
+                if data.get('Phone Number') and not pd.isna(data.get('Phone Number')):
+                    messages_to_send.append({
+                        'phone': data['Phone Number'],
+                        'message': msg
+                    })
+    
+            sms_send(msg_in=None, data_list=None, now=False, prepared_messages=messages_to_send)
+    
+            confirm_send()
+            return "Messages sent successfully.", 200
+    # --------------------------------------------------------------------------
+        elif first_word == "ministering"+unit_nbr[0]:
+    
+            df = pd.read_csv(data_file)
+            df_filtered = df[df['Age'] > 17]
+            df_filtered = df_filtered[['Name','Household','First_Name', 'Last_Name', 'Phone Number', 'E-mail', 'Gender','District','Minister1','Minister2','Minister3']]
+           
+            data_list = df_filtered.to_dict('records')
+            
+            filtered_data_list = filter_minister(data_list)
+            df = pd.DataFrame(filtered_data_list)
+            
+            df['Minister1'] = df['Minister1'].fillna('')
+            df['Minister2'] = df['Minister2'].fillna('')
+            df['Minister3'] = df['Minister3'].fillna('')
+            
+            grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
+            
+            for group_keys, group_df in grouped:
+                family_names = group_df[['First_Name', 'Last_Name', 'Phone Number']].apply(
+                    lambda row: f"{row['First_Name']} {row['Last_Name']}" +
+                    (f" - {row['Phone Number']}" if pd.notna(row['Phone Number']) and str(row['Phone Number']).strip() != '' else " - "),
+                    axis=1
+                ).tolist()
+                family_list_str = "\n".join(family_names)
+            
+                # group_keys is a tuple: (Minister1, Minister2, Minister3)
+                for minister in group_keys:
+                    if pd.isna(minister) or not minister:
+                        continue
+            
+                    # Name parsing as before
+                    if "," in minister:
+                        parts = minister.split(",", 1)
+                        last_name = parts[0].strip()
+                        first_middle = parts[1].strip()
+                        first_name = first_middle.split()[0] if first_middle else ""
+                    else:
+                        last_name = minister.strip()
+                        first_name = ""
+            
+                    # Companions: the other two ministers in this group
+                    companions = [m for m in group_keys if m != minister and pd.notna(m) and m]
+                    companions_formatted = []
+                    for comp in companions:
+                        if "," in comp:
+                            comp_parts = comp.split(",", 1)
+                            comp_last = comp_parts[0].strip()
+                            comp_first = comp_parts[1].strip().split()[0] if len(comp_parts) > 1 else ""
+                            companions_formatted.append(f"{comp_first} {comp_last}")
+                        else:
+                            companions_formatted.append(comp.strip())
+                    companions_str = ", ".join(companions_formatted) if companions_formatted else "None"
+            
+                    msg = f"Brother {last_name},\n"
+                    msg += f"{msg_in}\n\n"
+                    msg += f"These are the individuals you have been assigned to:\n{family_list_str}\n\n"
+                    msg += f"Your Companion(s) are: {companions_str}\n\n"
+                    msg += "Do not respond to this automated message but you can reach me at: \n"
+                    msg += f"{from_number},\n"
+                    msg += f"{district_ldr}\n"
+            
+                    phone_number = get_phone_number_by_name(df, minister)
+                    if phone_number:
+                        send_text(phone_number, msg, False) 
+            confirm_send()            
+            resp = MessagingResponse()
+            resp.message("Your message was processed successfully!")
+            return str(resp), 200    
+    # --------------------------------------------------------------------------
+        else: # This 'else' handles UNRECOGNIZED commands from an AUTHENTICATED user
+            # Alert the admin about the unrecognized command
+            reply = (f"Authenticated user {from_number} sent an unrecognized command:\n\n"
+                     f"{message_body}")
+            
+            client.messages.create(
+                body=reply,
+                from_=twilio_number,
+                to='+15099902828'
+            )
+            
+            # Best practice: Inform the user their command was not recognized
+            resp = MessagingResponse()
+            resp.message(f"Command not recognized. Please check the command and try again.")
+            return Response(str(resp), mimetype="application/xml")
 
+    else:
+        
+        # 1. Log the attempt to your server console for debugging
+        print(f"Unauthorized access attempt blocked from: {from_number}")
+
+        # 2. Create the alert message for you
+        alert_body = (f"Unauthorized access attempt from the number: {from_number}.\n\n"
+                      f"Message sent: \"{message_body}\"")
+        
+        # 3. Send the report to yourself
         try:
             client.messages.create(
-                body=alert_to_team,
+                body=alert_body,
                 from_=twilio_number,
-                to='+15099902828' # Assuming this is the team's number
+                to='+15099902828'
             )
-            return None
         except Exception as e:
-            print(f"Error sending alert to team: {e}")
-            return "Internal server error during alert.", 500
-    
-    data_file = unit_nbr[0] + "_datafile.csv"
-    data_list = process_data(data_file)
+            print(f"Error sending security alert to team: {e}")
 
-    if message_body is None or from_number is None:
-        resp = MessagingResponse()
-        resp.message("Invalid request: Missing message body or sender number.")
-        return str(resp), 400
+        # 4. End the interaction cleanly by sending an empty response to Twilio
+        # This prevents a reply to the unauthorized user and avoids a server crash.
+        return Response("<Response></Response>", mimetype="application/xml")
 
-    first_word = message_body.split()[0].lower()
-    msg_in = message_body.strip()
-    lines = msg_in.splitlines()
-
-    if len(lines) > 1:
-        msg_in = "\n".join(lines[1:])
-    
-    with open('DO_NOT_SEND.txt', 'r') as file:
-        sent_texts = set(line.strip() for line in file)
-
-    time.sleep(2)
-# --------------------------------------------------------------------------
-    if first_word == "ward"+unit_nbr[0]:
-        sms_send(msg_in, data_list, False)
-        confirm_send()
-        return "SMS messages scheduled.", 200
-# --------------------------------------------------------------------------
-    elif first_word == "cancel-sms":
-        messages = client.messages.list(limit=300)  # Adjust limit as needed
-        canceled_count = 0
-        for message in messages:
-            if message.status == 'scheduled':
-                try:
-                    client.messages(message.sid).update(status='canceled')
-                    canceled_count += 1
-                except Exception as e:
-                    print(f"Error canceling message {message.sid}: {e}") 
-    
-        client.messages.create(
-            body=f'{canceled_count} Messages canceled',
-            from_='+12086034040',
-            to=from_number
-        )
-        return f'{canceled_count} messages canceled.', 200
-# --------------------------------------------------------------------------
-    elif first_word == "emergency"+unit_nbr[0]:
-        subject = "Emergency Communications System"
-        send_voice(msg_in, data_list)
-        sms_send(msg_in, data_list, True)
-        send_email(subject, msg_in, data_list)
-        confirm_send()
-        return "Emergency Communications System messages sent.", 200
-# --------------------------------------------------------------------------
-    elif first_word == "elders"+unit_nbr[0]:
-        filtered_data_list = filter_gender(data_list, "M")
-        
-        for data in filtered_data_list:
-            msg = f"Brother {data['Last_Name']}, \n\n"
-            msg += msg_in
-            send_text(data['Phone Number'], msg, False)
-
-        confirm_send()
-        return "Messages sent successfully.", 200
-# --------------------------------------------------------------------------
-    elif first_word == "sisters"+unit_nbr[0]:
-        filtered_data_list = filter_gender(data_list, "F")
-        
-        for data in filtered_data_list:
-            msg = f"Sister {data['Last_Name']}, \n\n"
-            msg += msg_in
-            send_text(data['Phone Number'], msg, False)
-
-        confirm_send()
-        return "Messages sent successfully.", 200
-# --------------------------------------------------------------------------
-    elif first_word == "families"+unit_nbr[0]:
-        filtered_data_list = filter_minister(data_list)
-        
-        # Create a list to hold the dictionaries of prepared messages
-        messages_to_send = []
-
-        for data in filtered_data_list:
-            # Determine the correct salutation
-            if data.get('Gender') == "M":
-                msg = f"Brother {data['Last_Name']},\n\n"
-            elif data.get('Gender') == "F":
-                msg = f"Sister {data['Last_Name']},\n\n"
-            else:
-                msg = f"{data['First_Name']} {data['Last_Name']},\n\n"
-
-            msg += "Your assigned ministering brothers are as follows:\n"
-
-            # Loop through ministers and add their details
-            for i in range(1, 4):
-                minister_col = f'Minister{i}'
-                if pd.notna(data.get(minister_col)):
-                    minister_name = data[minister_col]
-                    msg += f"- {minister_name}"
-                    phone_numbers = get_minister_phone_number(minister_name)
-                    if phone_numbers:
-                        # Format and join multiple numbers if a minister has them
-                        formatted_numbers = [format_phone_number(p) for p in phone_numbers]
-                        msg += f": {', '.join(formatted_numbers)}"
-                    msg += "\n"
-
-            msg += "\nFeel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have.\n"
-            msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency.\n"
-
-            # Add the recipient's phone number and the fully formed message to our list
-            if data.get('Phone Number') and not pd.isna(data.get('Phone Number')):
-                messages_to_send.append({
-                    'phone': data['Phone Number'],
-                    'message': msg
-                })
-
-        sms_send(msg_in=None, data_list=None, now=False, prepared_messages=messages_to_send)
-
-        confirm_send()
-        return "Messages sent successfully.", 200
-# --------------------------------------------------------------------------
-    elif first_word == "ministering"+unit_nbr[0]:
-
-        df = pd.read_csv(data_file)
-        df_filtered = df[df['Age'] > 17]
-        df_filtered = df_filtered[['Name','Household','First_Name', 'Last_Name', 'Phone Number', 'E-mail', 'Gender','District','Minister1','Minister2','Minister3']]
-       
-        data_list = df_filtered.to_dict('records')
-        
-        filtered_data_list = filter_minister(data_list)
-        df = pd.DataFrame(filtered_data_list)
-        
-        df['Minister1'] = df['Minister1'].fillna('')
-        df['Minister2'] = df['Minister2'].fillna('')
-        df['Minister3'] = df['Minister3'].fillna('')
-        
-        grouped = df.groupby(['Minister1', 'Minister2', 'Minister3'])
-        
-        for group_keys, group_df in grouped:
-            family_names = group_df[['First_Name', 'Last_Name', 'Phone Number']].apply(
-                lambda row: f"{row['First_Name']} {row['Last_Name']}" +
-                (f" - {row['Phone Number']}" if pd.notna(row['Phone Number']) and str(row['Phone Number']).strip() != '' else " - "),
-                axis=1
-            ).tolist()
-            family_list_str = "\n".join(family_names)
-        
-            # group_keys is a tuple: (Minister1, Minister2, Minister3)
-            for minister in group_keys:
-                if pd.isna(minister) or not minister:
-                    continue
-        
-                # Name parsing as before
-                if "," in minister:
-                    parts = minister.split(",", 1)
-                    last_name = parts[0].strip()
-                    first_middle = parts[1].strip()
-                    first_name = first_middle.split()[0] if first_middle else ""
-                else:
-                    last_name = minister.strip()
-                    first_name = ""
-        
-                # Companions: the other two ministers in this group
-                companions = [m for m in group_keys if m != minister and pd.notna(m) and m]
-                companions_formatted = []
-                for comp in companions:
-                    if "," in comp:
-                        comp_parts = comp.split(",", 1)
-                        comp_last = comp_parts[0].strip()
-                        comp_first = comp_parts[1].strip().split()[0] if len(comp_parts) > 1 else ""
-                        companions_formatted.append(f"{comp_first} {comp_last}")
-                    else:
-                        companions_formatted.append(comp.strip())
-                companions_str = ", ".join(companions_formatted) if companions_formatted else "None"
-        
-                msg = f"Brother {last_name},\n"
-                msg += f"{msg_in}\n\n"
-                msg += f"These are the individuals you have been assigned to:\n{family_list_str}\n\n"
-                msg += f"Your Companion(s) are: {companions_str}\n\n"
-                msg += "Do not respond to this automated message but you can reach me at: \n"
-                msg += f"{from_number},\n"
-                msg += f"{district_ldr}\n"
-        
-                phone_number = get_phone_number_by_name(df, minister)
-                if phone_number:
-                    send_text(phone_number, msg, False) 
-        confirm_send()            
-        resp = MessagingResponse()
-        resp.message("Your message was processed successfully!")
-        return str(resp), 200    
-# --------------------------------------------------------------------------
-    else:
-
-        resp = MessagingResponse()
-        resp.message("No Command Given")
-        return Response(str(resp), mimetype="application/xml")
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
