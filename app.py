@@ -67,26 +67,6 @@ def send_text(text_nbr, message, now):
     return False
 # --------------------------------------------------------------------------
 def send_voice(msg_in, data_list):
-    sent_voice = set()
-    calls = []
-    for data in data_list:
-        to_number = data.get('Phone Number')
-        if to_number not in sent_voice and not pd.isna(to_number):
-            try:
-                msg = f"Hello {data['First_Name']},\n" + msg_in + "\n"
-                call = client.calls.create(
-                    twiml=f"<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">{msg} Goodbye. </Say></Response>",
-                    to=to_number,
-                    from_=twilio_number
-                )
-                sent_voice.add(to_number)
-                calls.append(call)
-                print("Voice - ", data['Last_Name'], "-", data['Phone Number']) 
-            except Exception as e:
-                print(f"Error sending voice call to {to_number}: {e}")
-    return calls 
-# --------------------------------------------------------------------------
-def call_all(msg_in, data_list):
     
     unique_recipients = {data['Phone Number']: data for data in data_list if not pd.isna(data.get('Phone Number'))}.values()
 
@@ -350,13 +330,17 @@ def incoming_sms():
         data_file = "test_file.csv"
         data_list = process_data(data_file)
     # --------------------------------------------------------------------------
-        if first_word == "ward"+unit_nbr[0]:
+        if first_word == "entire_ward":
             sms_send(msg_in, data_list, False)
             confirm_send()
             return "SMS messages scheduled.", 200
     # --------------------------------------------------------------------------
         elif first_word == "call_all":
-            call_all(msg_in, data_list)
+            send_voice(msg_in, data_list)
+            return "Voice Calls made.", 200
+    # --------------------------------------------------------------------------
+        elif first_word == "email_all":
+            send_email(subject, msg_in, data_list)
             return "Voice Calls made.", 200       
     # --------------------------------------------------------------------------
         elif first_word == "cancel-sms":
@@ -377,7 +361,7 @@ def incoming_sms():
             )
             return f'{canceled_count} messages canceled.', 200
     # --------------------------------------------------------------------------
-        elif first_word == "emergency"+unit_nbr[0]:
+        elif first_word == "ward_ecs":
             subject = "Emergency Communications System"
             send_voice(msg_in, data_list)
             sms_send(msg_in, data_list, True)
@@ -385,7 +369,7 @@ def incoming_sms():
             confirm_send()
             return "Emergency Communications System messages sent.", 200
     # --------------------------------------------------------------------------
-        elif first_word == "elders"+unit_nbr[0]:
+        elif first_word == "elders_quorum":
             filtered_data_list = filter_gender(data_list, "M")
             
             for data in filtered_data_list:
@@ -396,7 +380,7 @@ def incoming_sms():
             confirm_send()
             return "Messages sent successfully.", 200
     # --------------------------------------------------------------------------
-        elif first_word == "sisters"+unit_nbr[0]:
+        elif first_word == "relief_society":
             filtered_data_list = filter_gender(data_list, "F")
             
             for data in filtered_data_list:
@@ -407,14 +391,12 @@ def incoming_sms():
             confirm_send()
             return "Messages sent successfully.", 200
     # --------------------------------------------------------------------------
-        elif first_word == "families"+unit_nbr[0]:
+        elif first_word == "my_ministers":
             filtered_data_list = filter_minister(data_list)
             
-            # Create a list to hold the dictionaries of prepared messages
             messages_to_send = []
     
             for data in filtered_data_list:
-                # Determine the correct salutation
                 if data.get('Gender') == "M":
                     msg = f"Brother {data['Last_Name']},\n\n"
                 elif data.get('Gender') == "F":
@@ -424,7 +406,6 @@ def incoming_sms():
     
                 msg += "Your assigned ministering brothers are as follows:\n"
     
-                # Loop through ministers and add their details
                 for i in range(1, 4):
                     minister_col = f'Minister{i}'
                     if pd.notna(data.get(minister_col)):
@@ -432,7 +413,6 @@ def incoming_sms():
                         msg += f"- {minister_name}"
                         phone_numbers = get_minister_phone_number(minister_name)
                         if phone_numbers:
-                            # Format and join multiple numbers if a minister has them
                             formatted_numbers = [format_phone_number(p) for p in phone_numbers]
                             msg += f": {', '.join(formatted_numbers)}"
                         msg += "\n"
@@ -440,7 +420,6 @@ def incoming_sms():
                 msg += "\nFeel free to reach out to them for Priesthood blessings, spiritual guidance, physical assistance or any other needs you might have.\n"
                 msg += "If you are unable to reach your Ministering Brothers then please contact a member of the Elders Quorum Presidency.\n"
     
-                # Add the recipient's phone number and the fully formed message to our list
                 if data.get('Phone Number') and not pd.isna(data.get('Phone Number')):
                     messages_to_send.append({
                         'phone': data['Phone Number'],
@@ -452,7 +431,7 @@ def incoming_sms():
             confirm_send()
             return "Messages sent successfully.", 200
     # --------------------------------------------------------------------------
-        elif first_word == "ministering"+unit_nbr[0]:
+        elif first_word == "minister_assignments":
     
             df = pd.read_csv(data_file)
             df_filtered = df[df['Age'] > 17]
@@ -492,7 +471,6 @@ def incoming_sms():
                         last_name = minister.strip()
                         first_name = ""
             
-                    # Companions: the other two ministers in this group
                     companions = [m for m in group_keys if m != minister and pd.notna(m) and m]
                     companions_formatted = []
                     for comp in companions:
