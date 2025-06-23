@@ -226,9 +226,6 @@ def get_unitnbr(from_number, filename="User_UnitNbr.csv"):
                     district_ldr = row[2].strip()
 
                 if first_column_value == from_number:
-                    #print(f"Unit Number is {unit_nbr}")
-                    #print(f"District Code is {district_code}")
-                    #print(f"District Leader is {district_ldr}")
                     return unit_nbr, district_code, district_ldr
 
         print(f"No unit number found for '{from_number}' in '{filename}'.")
@@ -317,11 +314,6 @@ def incoming_sms():
     
     from_number = request.values.get('From', None)
     from_number = format_phone_number(from_number)
-     
-    unit_nbr = get_unitnbr(from_number)
-    
-    data_file = unit_nbr[0] + "_datafile.csv"
-    data_list = process_data(data_file)
 
     if message_body is None or from_number is None:
         resp = MessagingResponse()
@@ -341,6 +333,10 @@ def incoming_sms():
     time.sleep(2)
     
     if is_user_authenticated(from_number):
+        
+        unit_nbr = get_unitnbr(from_number)
+        data_file = unit_nbr[0] + "_datafile.csv"
+        data_list = process_data(data_file)
     # --------------------------------------------------------------------------
         if first_word == "ward"+unit_nbr[0]:
             sms_send(msg_in, data_list, False)
