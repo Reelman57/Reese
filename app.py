@@ -94,18 +94,15 @@ def call_all(msg_in, data_list):
         try:
             to_number = data.get('Phone Number')
             
-            # 1. Create the message and escape it for TwiML safety
             raw_msg = f"Hello {data.get('First_Name', 'Friend')},\n{msg_in}\n"
             safe_msg = escape(raw_msg) # <-- Escapes special characters
             
-            # 2. Construct the TwiML with the safe message
             twiml_payload = f"<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">{safe_msg} Goodbye. </Say></Response>"
             
-            # 3. Make the API call
-                call = client.calls.create(
-                twiml=twiml_payload,
-                to=to_number,
-                from_=twilio_number
+            call = client.calls.create(
+            twiml=twiml_payload,
+            to=to_number,
+            from_=twilio_number
             )
             print("Voice - ", data.get('Last_Name'), "-", to_number, f"(SID: {call.sid})")
             return call
