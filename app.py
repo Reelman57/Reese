@@ -102,11 +102,11 @@ def call_all(msg_in, data_list):
             twiml_payload = f"<Response><Pause length=\"3\"/><Say voice=\"Google.en-US-Standard-J\">{safe_msg} Goodbye. </Say></Response>"
             
             # 3. Make the API call
-            """call = client.calls.create(
+                call = client.calls.create(
                 twiml=twiml_payload,
                 to=to_number,
                 from_=twilio_number
-            )"""
+            )
             print("Voice - ", data.get('Last_Name'), "-", to_number, f"(SID: {call.sid})")
             return call
         except Exception as e:
@@ -118,7 +118,7 @@ def call_all(msg_in, data_list):
 
     successful_calls = [call for call in results if call is not None]
     
-return successful_calls
+    return successful_calls
 # -------------------------------------------------------------------------- 
 def send_email(subject, body, data_list):
     sent_emails = set()
