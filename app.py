@@ -312,6 +312,14 @@ def incoming_sms():
         return str(resp), 400
 
     first_word = message_body.split()[0].lower()
+    second_word = None 
+    try:
+        second_word = message_body.split()[1]
+    except IndexError:
+       pass
+    if second_word:
+        subject = second_word
+
     msg_in = message_body.strip()
     lines = msg_in.splitlines()
 
@@ -340,7 +348,7 @@ def incoming_sms():
             return "Voice Calls made.", 200
     # --------------------------------------------------------------------------
         elif first_word == "email_all":
-            send_email("Ward Communications", msg_in, data_list)
+            send_email(subject, msg_in, data_list)
             return "Voice Calls made.", 200       
     # --------------------------------------------------------------------------
         elif first_word == "cancel-sms":
