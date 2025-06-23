@@ -100,7 +100,7 @@ def send_voice(msg_in, data_list):
 def send_email(subject, body, data_list):
     sent_emails = set()
     for data in data_list:
-        email = data.get('Email')
+        email = data.get('E-mail')
         message = f"Hello {data['First_Name']},\n"
         message += body + "\n"
         if email not in sent_emails and not pd.isna(email):
