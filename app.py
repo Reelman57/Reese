@@ -539,26 +539,25 @@ def incoming_sms():
             return Response(str(resp), mimetype="application/xml")
 
     else:
-        
-        # 1. Log the attempt to your server console for debugging
-        print(f"Unauthorized access attempt blocked from: {from_number}")
 
-        # 2. Create the alert message for you
-        alert_body = (f"Unauthorized access attempt from the number: {from_number}.\n\n"
-                      f"Message sent: \"{message_body}\"")
+        unitnbr_list = get_unique_unitnbr_list(os.path.join("User_UnitNbr.csv"))
+        matches = find_member_by_phone(unitnbr_list, from_number)
+        if matches:
+            # Format each match as a readable string
+            reply = "\n".join(f"Unit: {m[0]}, Phone: {m[1]}, Name: {m[2]}" for m in matches)
+            reply += "\n"
+            reply += msg_in
+        else:
+            reply = f"No matching member found for ",{from_number}
         
-        # 3. Send the report to yourself
         try:
             client.messages.create(
-                body=alert_body,
+                body=reply,
                 from_=twilio_number,
                 to='+15099902828'
             )
         except Exception as e:
-            print(f"Error sending security alert to team: {e}")
 
-        # 4. End the interaction cleanly by sending an empty response to Twilio
-        # This prevents a reply to the unauthorized user and avoids a server crash.
         return Response("<Response></Response>", mimetype="application/xml")
 
 # --------------------------------------------------------------------------
