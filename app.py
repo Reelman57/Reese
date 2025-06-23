@@ -557,9 +557,8 @@ def incoming_sms():
                 to='+15099902828'
             )
         except Exception as e:
-
+            pass
         return Response("<Response></Response>", mimetype="application/xml")
-
 # --------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
