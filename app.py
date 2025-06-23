@@ -273,7 +273,7 @@ def find_member_by_phone(unitnbr_list, from_number):
                 row['Phone Number'],
                 f"{row['First_Name']} {row['Last_Name']}"
             ])
-        return results
+    return results
 # --------------------------------------------------------------------------
 def format_phone_number(phone):
     digits = re.sub(r'\D', '', str(phone))
@@ -283,6 +283,19 @@ def format_phone_number(phone):
         return f"({digits[1:4]}) {digits[4:7]}-{digits[7:]}"
     else:
         return phone  # Return as-is if not a standard US number
+# --------------------------------------------------------------------------
+def confirm_send():
+    global x
+    client.messages.create(
+        body=f"{x} Messages scheduled. Send 'cancel-sms' within 10 mins to cancel them",
+        from_=twilio_number,
+        to=from_number
+    )
+    client.messages.create(
+        body=f'{x} Messages have been scheduled by {from_number}',
+        from_=twilio_number,
+        to='+15099902828'
+    )
 # --------------------------------------------------------------------------
 @app.route("/sms", methods=['POST'])
 
@@ -422,7 +435,6 @@ def incoming_sms():
                     'message': msg
                 })
 
-        # Call the modified sms_send function with our list of prepared messages
         sms_send(msg_in=None, data_list=None, now=False, prepared_messages=messages_to_send)
 
         confirm_send()
@@ -511,18 +523,5 @@ def incoming_sms():
         twiml = f"<Response><Message>{reply}</Message></Response>"
         return Response(twiml, mimetype="application/xml")
 # --------------------------------------------------------------------------
-def confirm_send():
-    global x
-    client.messages.create(
-        body=f"{x} Messages scheduled. Send 'cancel-sms' within 10 mins to cancel them",
-        from_=twilio_number,
-        to=from_number
-    )
-    client.messages.create(
-        body=f'{x} Messages have been scheduled by {from_number}',
-        from_=twilio_number,
-        to='+15099902828'
-    )
-
 if __name__ == "__main__":
     app.run()
