@@ -357,7 +357,7 @@ def incoming_sms():
     # --------------------------------------------------------------------------
         elif first_word == "call_all":
             call_all(msg_in, data_list)
-             return "Voice Calls made.", 200       
+            return "Voice Calls made.", 200       
     # --------------------------------------------------------------------------
         elif first_word == "cancel-sms":
             messages = client.messages.list(limit=300)  # Adjust limit as needed
