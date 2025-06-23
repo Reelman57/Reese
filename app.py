@@ -464,7 +464,7 @@ def incoming_sms():
         resp.message("Your message was processed successfully!")
         return str(resp), 200    
 # --------------------------------------------------------------------------
-       else:
+    else:
         unitnbr_list = get_unique_unitnbr_list(os.path.join("User_UnitNbr.csv"))
         matches = find_member_by_phone(unitnbr_list, from_number)
         if matches:
