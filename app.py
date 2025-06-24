@@ -251,6 +251,35 @@ def is_user_authenticated(from_number, csv_path="User_UnitNbr.csv"):
         print(f"Authentication failed for {from_number}")
         return False
 # --------------------------------------------------------------------------
+def cancel_all_outbound_messages():
+   
+    try:
+        queued_messages = client.messages.list(status='queued')
+        scheduled_messages = client.messages.list(status='scheduled')
+        messages_to_cancel = queued_messages + scheduled_messages
+
+        if not messages_to_cancel:
+            print("No queued or scheduled messages found to cancel.")
+            return 0
+
+        canceled_count = 0
+        print(f"Found {len(messages_to_cancel)} messages to cancel...")
+
+        for message in messages_to_cancel:
+            try:
+                print(f"Canceling message {message.sid} to {message.to}...")
+                message.update(status='canceled')
+                canceled_count += 1
+            except Exception as e:
+                print(f"Could not cancel message {message.sid}: {e}")
+
+        print(f"Successfully canceled {canceled_count} message(s).")
+        return canceled_count
+
+    except Exception as e:
+        print(f"An unexpected error occurred during cancellation: {e}")
+        return 0
+# --------------------------------------------------------------------------
 @app.route("/sms", methods=['POST'])
 
 def incoming_sms():
@@ -308,12 +337,8 @@ def incoming_sms():
             return "Voice Calls made.", 200       
     # --------------------------------------------------------------------------
         elif first_word == "cancel-sms":
-            print("Received 'cancel-sms' command. Attempting to cancel all outbound messages.")
-            
-            # Call our new, more efficient function
             canceled_count = cancel_all_outbound_messages()
             
-            # Send a confirmation message back to the sender
             if canceled_count > 0:
                 reply_body = f"Successfully canceled {canceled_count} scheduled message(s)."
             else:
@@ -324,7 +349,6 @@ def incoming_sms():
                 from_=twilio_number,
                 to=from_number
             )
-            
             return "Cancellation process finished.", 200
     # --------------------------------------------------------------------------
         elif first_word == "ward_ecs":
