@@ -380,15 +380,22 @@ def incoming_sms():
             return "Elders Quorum messages have been scheduled for sending.", 200
     # --------------------------------------------------------------------------
         elif first_word == "relief_society":
-            filtered_data_list = filter_gender(data_list, "F")
             
-            for data in filtered_data_list:
-                msg = f"Sister {data['Last_Name']}, \n\n"
-                msg += msg_in
-                send_text(data['Phone Number'], msg, False)
+            filtered_data_list = filter_gender(data_list, "F")
+            messages_to_send = []
     
+            for data in filtered_data_list:
+                msg = f"Brother {data['Last_Name']},\n\n{msg_in}"
+        
+                if data.get('Phone Number') and not pd.isna(data.get('Phone Number')):
+                    messages_to_send.append({
+                        'phone': data['Phone Number'],
+                        'message': msg
+                    })
+
+            sms_send(msg_in=None, data_list=None, now=False, prepared_messages=messages_to_send)
             confirm_send()
-            return "Messages sent successfully.", 200
+            return "Relief Society messages have been scheduled for sending.", 200
     # --------------------------------------------------------------------------
         elif first_word == "my_ministers":
             filtered_data_list = filter_minister(data_list)
