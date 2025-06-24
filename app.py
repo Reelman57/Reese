@@ -161,7 +161,7 @@ def process_data(data_path):
     df_filtered = df[df['Age'] > 17]
     df_filtered = df_filtered[['Name','Household','First_Name', 'Last_Name', 'Phone Number', 'E-mail', 'Gender','District','Minister1','Minister2','Minister3']]
     df_filtered = df_filtered.drop_duplicates(subset=['Phone Number'])
-    df_filtered = df[df['Last_Name'].str.upper() >= "D"]
+    df_filtered = df[df['Last_Name'].str.upper() >= "N"]
     
     with open('DO_NOT_SEND.txt', 'r') as f:
         do_not_send_numbers = set(line.strip() for line in f)
