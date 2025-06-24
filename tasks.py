@@ -25,7 +25,7 @@ def send_emails(subject, body, data_list):
          smtp.login(os.environ.get('EMAIL_ADDRESS'), os.environ.get('EMAIL_PASSWORD'))
            
          for data in data_list:
-            email = data.get('Email')
+            email = data.get('E-mail')
             if email not in sent_emails and not pd.isna(email):
                try:
                   message = f"Hello {data.get('First_Name', 'Friend')},\n{body}\n"
