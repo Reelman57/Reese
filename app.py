@@ -398,17 +398,6 @@ def incoming_sms():
             confirm_send()
             return "Emergency alerts have been queued for immediate background sending.", 200
     # --------------------------------------------------------------------------
-       """ elif first_word == "elders_quorum":
-            filtered_data_list = filter_gender(data_list, "M")
-            
-            for data in filtered_data_list:
-                msg = f"Brother {data['Last_Name']}, \n\n"
-                msg += msg_in
-                send_text(data['Phone Number'], msg, False)
-    
-            confirm_send()
-            return "Messages sent successfully.", 200
-            """
         elif first_word == "elders_quorum":
    
             filtered_data_list = filter_gender(data_list, "M")
