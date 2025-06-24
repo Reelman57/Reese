@@ -5,6 +5,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from xml.sax.saxutils import escape
+from concurrent.futures import ThreadPoolExecutor
 
 import pandas as pd
 from twilio.rest import Client
