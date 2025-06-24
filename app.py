@@ -370,29 +370,6 @@ def incoming_sms():
             q.enqueue(send_emails, subject, msg_in, data_list)
             return "Voice Calls made.", 200       
     # --------------------------------------------------------------------------
-        """elif first_word == "cancel-sms":
-            messages = client.messages.list(limit=300)  # Adjust limit as needed
-            canceled_count = 0
-            for message in messages:
-                if message.status == 'scheduled':
-                    try:
-                        client.messages(message.sid).update(status='canceled')
-                        canceled_count += 1
-                    except Exception as e:
-                        print(f"Error canceling message {message.sid}: {e}") 
-        
-            client.messages.create(
-                body=f'{canceled_count} Messages canceled',
-                from_='+12086034040',
-                to=from_number
-            )
-            return f'{canceled_count} messages canceled.', 200
-            """
-        # In app.py
-
-# ... (your other function definitions)
-# You can place the cancel_all_outbound_messages() function here
-
         elif first_word == "cancel-sms":
             print("Received 'cancel-sms' command. Attempting to cancel all outbound messages.")
             
