@@ -385,7 +385,7 @@ def incoming_sms():
             messages_to_send = []
     
             for data in filtered_data_list:
-                msg = f"Brother {data['Last_Name']},\n\n{msg_in}"
+                msg = f"Sister {data['Last_Name']},\n\n{msg_in}"
         
                 if data.get('Phone Number') and not pd.isna(data.get('Phone Number')):
                     messages_to_send.append({
