@@ -108,32 +108,6 @@ def send_voice(msg_in, data_list):
     
     return successful_calls
 # -------------------------------------------------------------------------- 
-def send_email(subject, body, data_list):
-    sent_emails = set()
-    for data in data_list:
-        email = data.get('E-mail')
-        message = f"Hello {data['First_Name']},\n"
-        message += body + "\n"
-        if email not in sent_emails and not pd.isna(email):
-            try:
-                msg = MIMEMultipart()
-                msg['From'] = os.environ.get('EMAIL_ADDRESS')
-                msg['To'] = email
-                msg['Subject'] = subject
-                msg.attach(MIMEText(message, 'plain'))
-
-                with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
-                    smtp.starttls()
-                    smtp.login(os.environ.get('EMAIL_ADDRESS'), os.environ.get('EMAIL_PASSWORD'))
-                    smtp.sendmail(msg['From'], msg['To'], msg.as_string())
-                    sent_emails.add(email)
-                print("Email - ", data['Last_Name'], "-", email) 
-            except Exception as e:
-                print(f"Error sending email to {email}: {e}")
-        else:
-            print(f"Invalid or missing email address for {data}")
-    return len(sent_emails)
-# -------------------------------------------------------------------------- 
 def send_emails(subject, body, data_list):
     sent_emails = set()
     
@@ -389,11 +363,11 @@ def incoming_sms():
             return "SMS messages scheduled.", 200
     # --------------------------------------------------------------------------
         elif first_word == "call_all":
-            send_voice(msg_in, data_list)
+            q.enqueue(send_voice, msg_in, data_list)
             return "Voice Calls made.", 200
     # --------------------------------------------------------------------------
         elif first_word == "email_all":
-            send_emails(subject, msg_in, data_list)
+            q.enqueue(send_emails, subject, msg_in, data_list)
             return "Voice Calls made.", 200       
     # --------------------------------------------------------------------------
         elif first_word == "cancel-sms":
@@ -416,11 +390,11 @@ def incoming_sms():
     # --------------------------------------------------------------------------
         elif first_word == "ward_ecs":
             subject = "Emergency Communications System"
-            send_voice(msg_in, data_list)
+            q.enqueue(send_voice, msg_in, data_list)
             sms_send(msg_in, data_list, True)
-            send_emails(subject, msg_in, data_list)
+            q.enqueue(send_emails, subject, msg_in, data_list)
             confirm_send()
-            return "Emergency Communications System messages sent.", 200
+            return "Emergency alerts have been queued for immediate background sending.", 200
     # --------------------------------------------------------------------------
         elif first_word == "elders_quorum":
             filtered_data_list = filter_gender(data_list, "M")
