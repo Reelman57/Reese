@@ -349,9 +349,9 @@ def incoming_sms():
                         'message': msg
                     })
 
-        sms_send(msg_in=None, data_list=None, now=False, prepared_messages=messages_to_send)
-        confirm_send()
-        return "Elders Quorum messages have been scheduled for sending.", 200
+            sms_send(msg_in=None, data_list=None, now=False, prepared_messages=messages_to_send)
+            confirm_send()
+            return "Elders Quorum messages have been scheduled for sending.", 200
     # --------------------------------------------------------------------------
         elif first_word == "relief_society":
             filtered_data_list = filter_gender(data_list, "F")
