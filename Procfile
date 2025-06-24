@@ -1,2 +1,3 @@
 web: gunicorn app:app
-worker: python Birthday_Text.py
+email_worker: python worker.py
+birthday_worker: python Birthday_Text.py
