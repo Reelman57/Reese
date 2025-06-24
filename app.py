@@ -396,7 +396,7 @@ def incoming_sms():
             confirm_send()
             return "Emergency alerts have been queued for immediate background sending.", 200
     # --------------------------------------------------------------------------
-        elif first_word == "elders_quorum":
+       """ elif first_word == "elders_quorum":
             filtered_data_list = filter_gender(data_list, "M")
             
             for data in filtered_data_list:
@@ -406,6 +406,24 @@ def incoming_sms():
     
             confirm_send()
             return "Messages sent successfully.", 200
+            """
+        elif first_word == "elders_quorum":
+   
+            filtered_data_list = filter_gender(data_list, "M")
+            messages_to_send = []
+    
+            for data in filtered_data_list:
+                msg = f"Brother {data['Last_Name']},\n\n{msg_in}"
+        
+                if data.get('Phone Number') and not pd.isna(data.get('Phone Number')):
+                    messages_to_send.append({
+                        'phone': data['Phone Number'],
+                        'message': msg
+                    })
+
+    sms_send(msg_in=None, data_list=None, now=False, prepared_messages=messages_to_send)
+    confirm_send()
+    return "Elders Quorum messages have been scheduled for sending.", 200
     # --------------------------------------------------------------------------
         elif first_word == "relief_society":
             filtered_data_list = filter_gender(data_list, "F")
