@@ -370,7 +370,7 @@ def incoming_sms():
             q.enqueue(send_emails, subject, msg_in, data_list)
             return "Voice Calls made.", 200       
     # --------------------------------------------------------------------------
-        elif first_word == "cancel-sms":
+        """elif first_word == "cancel-sms":
             messages = client.messages.list(limit=300)  # Adjust limit as needed
             canceled_count = 0
             for message in messages:
@@ -387,6 +387,31 @@ def incoming_sms():
                 to=from_number
             )
             return f'{canceled_count} messages canceled.', 200
+            """
+        # In app.py
+
+# ... (your other function definitions)
+# You can place the cancel_all_outbound_messages() function here
+
+        elif first_word == "cancel-sms":
+            print("Received 'cancel-sms' command. Attempting to cancel all outbound messages.")
+            
+            # Call our new, more efficient function
+            canceled_count = cancel_all_outbound_messages()
+            
+            # Send a confirmation message back to the sender
+            if canceled_count > 0:
+                reply_body = f"Successfully canceled {canceled_count} scheduled message(s)."
+            else:
+                reply_body = "No scheduled messages were found to cancel."
+                
+            client.messages.create(
+                body=reply_body,
+                from_=twilio_number,
+                to=from_number
+            )
+            
+            return "Cancellation process finished.", 200
     # --------------------------------------------------------------------------
         elif first_word == "ward_ecs":
             subject = "Emergency Communications System"
