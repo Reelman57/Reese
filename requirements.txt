@@ -5,3 +5,5 @@ twilio==9.3.7
 gunicorn
 pandas
 phonenumbers
+rq
+redis
