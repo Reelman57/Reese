@@ -1,7 +1,6 @@
 import os
 import redis
 from rq import Worker, Queue 
-
 from app import send_emails, send_voice
 
 listen = ['high', 'default', 'low']
