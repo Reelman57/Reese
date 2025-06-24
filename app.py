@@ -254,9 +254,11 @@ def is_user_authenticated(from_number, csv_path="User_UnitNbr.csv"):
 def cancel_all_outbound_messages():
    
     try:
-        queued_messages = client.messages.list(status='queued')
-        scheduled_messages = client.messages.list(status='scheduled')
-        messages_to_cancel = queued_messages + scheduled_messages
+        all_messages = client.messages.list(limit=200)
+        messages_to_cancel = []
+        for msg in all_messages:
+            if msg.status in ['queued', 'scheduled']:
+                messages_to_cancel.append(msg)
 
         if not messages_to_cancel:
             print("No queued or scheduled messages found to cancel.")
