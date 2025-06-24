@@ -353,8 +353,8 @@ def incoming_sms():
     if is_user_authenticated(from_number):
         
         unit_nbr = get_unitnbr(from_number)
-        data_file = unit_nbr[0] + "_datafile.csv"
-        #data_file = "test_file.csv"
+        #data_file = unit_nbr[0] + "_datafile.csv"
+        data_file = "test_file.csv"
         data_list = process_data(data_file)
     # --------------------------------------------------------------------------
         if first_word == "entire_ward":
