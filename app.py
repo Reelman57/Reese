@@ -1,42 +1,44 @@
-from itertools import count
-from datetime import datetime, timedelta
+# --- 1. Standard Library Imports ---
 import os
-import re
 import csv
-import sys
+import re
+import smtplib
 import time
 import uuid
-import smtplib
+from datetime import datetime, timedelta
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from xml.sax.saxutils import escape
+from concurrent.futures import ThreadPoolExecutor # For your concurrent voice calls
 
+# --- 2. Third-Party Library Imports ---
+import pandas as pd
+import pytz
 import redis
-from rq import Queue # In app.py
+from flask import Flask, request, Response
+from rq import Queue
+from twilio.rest import Client
+from twilio.twiml.messaging_response import MessagingResponse
+
+# --- 3. Application Setup (AFTER imports) ---
+
+# Flask App Initialization
+app = Flask(__name__)
+
+# Twilio Client Initialization
+account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
+auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
+messaging_sid = os.environ.get('TWILIO_MSGNG_SID')
+twilio_number = "+12086034040"
+client = Client(account_sid, auth_token)
+
+# Redis Queue Connection
 redis_url = os.getenv('REDISCLOUD_URL', os.getenv('REDIS_URL', 'redis://localhost:6379'))
 redis_conn = redis.from_url(redis_url)
 q = Queue(connection=redis_conn)
 
-# In worker.py
-conn = redis.from_url(redis_url)
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from concurrent.futures import ThreadPoolExecutor
-from xml.sax.saxutils import escape
-
-import pandas as pd
-import numpy as np
-import pytz
-import phonenumbers
-from flask import Flask, request, Response
-from twilio.rest import Client
-from twilio.twiml.messaging_response import MessagingResponse
-
-app = Flask(__name__)
-account_sid = os.environ['TWILIO_ACCOUNT_SID']
-auth_token = os.environ['TWILIO_AUTH_TOKEN']
-messaging_sid = os.environ['TWILIO_MSGNG_SID']
-twilio_number = "+12086034040"
-
-client = Client(account_sid, auth_token)
-x=0
+# Global variables
+x = 0
 sent_texts = set()
 
 # --------------------------------------------------------------------------
