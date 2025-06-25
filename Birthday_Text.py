@@ -51,6 +51,7 @@ def get_send_time():
 # --------------------------------------------------------------------------
     
 def send_text(text_nbr, message):
+    send_at = get_send_time()
     print(f"Attempting to schedule for {text_nbr}. send_at value: {send_at}, type: {type(send_at)}")
 
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
