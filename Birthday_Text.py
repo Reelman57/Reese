@@ -1,25 +1,54 @@
-from itertools import count
-import pandas as pd
-import numpy as np
-from datetime import datetime
-from twilio.rest import Client
-import time
-import pytz
+# --- 1. Standard Library Imports ---
 import os
+import csv
+import re
+import smtplib
+import time
+import uuid
 from datetime import datetime, timedelta
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from xml.sax.saxutils import escape
+from concurrent.futures import ThreadPoolExecutor # For your concurrent voice calls
+from tasks import send_emails, send_voice
 
-account_sid = os.environ['TWILIO_ACCOUNT_SID']
-auth_token = os.environ['TWILIO_AUTH_TOKEN']
-messaging_sid= os.environ['TWILIO_MSGNG_SID']
+# --- 2. Third-Party Library Imports ---
+import pandas as pd
+import pytz
+import redis
+from flask import Flask, request, Response
+from rq import Queue
+from twilio.rest import Client
+from twilio.twiml.messaging_response import MessagingResponse
+
+# --- 3. Application Setup (AFTER imports) ---
+
+# Flask App Initialization
+app = Flask(__name__)
+
+# Twilio Client Initialization
+account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
+auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
+messaging_sid = os.environ.get('TWILIO_MSGNG_SID')
 twilio_number = "+12086034040"
+client = Client(account_sid, auth_token)
 
-Client = Client(account_sid, auth_token)
+# Redis Queue Connection
+redis_url = os.getenv('REDISCLOUD_URL', os.getenv('REDIS_URL', 'redis://localhost:6379'))
+redis_conn = redis.from_url(redis_url)
+q = Queue(connection=redis_conn)
 
+# Global variables
+x = 0
+sent_texts = set()
+
+# --------------------------------------------------------------------------
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
-    send_at = now_utc + timedelta(minutes=30)
-    return send_at
+    send_at = now_utc + timedelta(minutes=15, seconds = x)
+    return send_at.isoformat()
+# --------------------------------------------------------------------------
     
 def send_text(text_nbr, message):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
@@ -34,6 +63,7 @@ def send_text(text_nbr, message):
         )
     sent_texts.add(text_nbr)
     time.sleep(1)
+# --------------------------------------------------------------------------
     
 def get_phone_number_by_name(df, minister_name):
     minister_name_str = str(minister_name).strip().lower()
