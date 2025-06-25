@@ -432,7 +432,7 @@ def incoming_sms():
             sms_send(msg_in=None, data_list=None, now=False, prepared_messages=messages_to_send)
     
             confirm_send()
-        return "Messages sent successfully.", 200
+            return "Messages sent successfully.", 200
     # --------------------------------------------------------------------------
         elif first_word == "minister_assignments":
     
