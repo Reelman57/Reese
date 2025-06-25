@@ -434,7 +434,7 @@ def incoming_sms():
             confirm_send()
             return "Messages sent successfully.", 200
     # --------------------------------------------------------------------------
-        elif first_word == "minister_assignments":
+        elif first_word == "ministering_assignments":
     
             df = pd.read_csv(data_file)
             df_filtered = df[df['Age'] > 17]
