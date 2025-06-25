@@ -92,6 +92,9 @@ df_filtered = df_filtered[~df_filtered['Phone Number'].isin(sent_texts)]
 for index, row in df_filtered.iterrows():
     name = row['First_Name'] + ' ' + row['Last_Name']
     fname = row['First_Name']
+    min1 = row['Minister1']
+    min2 = row['Minister2']
+    min3 = row['Minister3']
 
     if row['Gender'] == 'M':
         pronoun = 'him'
@@ -152,14 +155,12 @@ for index, row in df_filtered.iterrows():
     msg = f"A person whom you minister to, {name}, has a birthday today. {UC_pronoun2} phone number is {phone}\n"
     msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
 
-    for phone_number in get_phone_number_by_name(df, row['Minister1']):
-        print(phone_number)
-        if phone_number:
-            send_text(phone_number,msg)
-    for phone_number in get_phone_number_by_name(df, row['Minister2']):
-        print(phone_number)
-        if phone_number:
-            send_text(phone_number,msg)
-    for phone_number in get_phone_number_by_name(df, row['Minister3']):
-        if phone_number:
-            send_text(phone_number,msg)
+    phone_number = get_phone_number_by_name(min1)
+    if phone_number:
+        send_text(phone_number, msg)
+    phone_number = get_phone_number_by_name(min2)
+    if phone_number:
+        send_text(phone_number, msg)
+    phone_number = get_phone_number_by_name(min3)
+    if phone_number:
+        send_text(phone_number, msg)
