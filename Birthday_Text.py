@@ -53,7 +53,7 @@ def get_send_time():
 def send_text(text_nbr, message):
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         send_at = get_send_time()
-        message = Client.messages.create(
+        message = client.messages.create(
             body=message,
             from_=twilio_number,
             to=text_nbr,
