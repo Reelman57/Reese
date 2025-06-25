@@ -234,7 +234,7 @@ def confirm_send():
         from_=twilio_number,
         to=from_number
     )
-    if from_number <> "(509) 990-2828":
+    if from_number != "(509) 990-2828":
         client.messages.create(
             body=f'{x} Messages have been scheduled by {from_number}',
             from_=twilio_number,
