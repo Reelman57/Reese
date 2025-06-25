@@ -335,22 +335,19 @@ def incoming_sms():
     # --------------------------------------------------------------------------
         elif first_word == "email_all":
             q.enqueue(send_emails, subject, msg_in, data_list)
-            return "Voice Calls made.", 200       
+            return "Emails sent.", 200       
     # --------------------------------------------------------------------------
         elif first_word == "cancel-sms":
+            resp = MessagingResponse()
+    
             canceled_count = cancel_all_outbound_messages()
-            
             if canceled_count > 0:
                 reply_body = f"Successfully canceled {canceled_count} scheduled message(s)."
             else:
                 reply_body = "No scheduled messages were found to cancel."
-                
-            client.messages.create(
-                body=reply_body,
-                from_=twilio_number,
-                to=from_number
-            )
-            return "Cancellation process finished.", 200
+            
+            resp.message(reply_body)
+            return str(resp) 
     # --------------------------------------------------------------------------
         elif first_word == "ward_ecs":
             subject = "Emergency Communications System"
