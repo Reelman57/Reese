@@ -46,7 +46,7 @@ sent_texts = set()
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
-    send_at = now_utc + timedelta(minutes=15, seconds = x)
+    send_at = now_utc + timedelta(minutes=30, seconds = x)
     return send_at.isoformat()
 # --------------------------------------------------------------------------
     
@@ -64,15 +64,13 @@ def send_text(text_nbr, message):
     sent_texts.add(text_nbr)
     time.sleep(1)
 # --------------------------------------------------------------------------
-    
 def get_phone_number_by_name(df, minister_name):
     minister_name_str = str(minister_name).strip().lower()
     match = df[df['Name'].astype(str).str.strip().str.lower() == minister_name_str]
     if not match.empty and 'Phone Number' in match.columns and pd.notna(match['Phone Number'].iloc[0]):
         return str(match['Phone Number'].iloc[0]).strip()
     return None
-
-# Read the CSV file
+# --------------------------------------------------------------------------
 df = pd.read_csv('test_file.csv')
 sent_texts = set()
 with open('DO_NOT_SEND.txt', 'r') as file:
