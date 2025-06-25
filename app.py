@@ -234,11 +234,12 @@ def confirm_send():
         from_=twilio_number,
         to=from_number
     )
-    client.messages.create(
-        body=f'{x} Messages have been scheduled by {from_number}',
-        from_=twilio_number,
-        to='+15099902828'
-    )
+    if from_number <> "(509) 990-2828":
+        client.messages.create(
+            body=f'{x} Messages have been scheduled by {from_number}',
+            from_=twilio_number,
+            to='+15099902828'
+        )
 # --------------------------------------------------------------------------
 def is_user_authenticated(from_number, csv_path="User_UnitNbr.csv"):
     
