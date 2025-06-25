@@ -51,9 +51,8 @@ def get_send_time():
 # --------------------------------------------------------------------------
     
 def send_text(text_nbr, message):
+    
     send_at = get_send_time()
-    if isinstance(send_at, str):
-        send_at = datetime.fromisoformat(send_at)
     if text_nbr not in sent_texts and not pd.isna(text_nbr):
         send_at = get_send_time()
         message = client.messages.create(
@@ -61,7 +60,7 @@ def send_text(text_nbr, message):
             from_=twilio_number,
             to=text_nbr,
             messaging_service_sid=messaging_sid,
-            send_at=send_at.isoformat(),
+            send_at=send_at,
             schedule_type="fixed"
         )
     sent_texts.add(text_nbr)
