@@ -110,7 +110,6 @@ def sms_send(msg_in, data_list, now, prepared_messages=None):
                 futures.append(future)
                 print("SMS (Prepared) - ", item.get('phone'))
         elif data_list:
-            # Mode 1: Original behavior
             for data in data_list:
                 msg = f"Hello {data['First_Name']},\n{msg_in}\n"
                 future = executor.submit(send_text, data['Phone Number'], msg, sendnow)
