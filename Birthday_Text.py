@@ -162,6 +162,7 @@ for index, row in df_filtered.iterrows():
     min_list = [min1, min2, min3]
 
     for min_val in min_list:
+        print (min_val)
         if pd.notnull(min_val):
             phone_number = get_phone_number_by_name(df_filtered, min_val)
             if phone_number:
