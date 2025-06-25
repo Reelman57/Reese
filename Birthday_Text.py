@@ -69,7 +69,6 @@ def send_text(text_nbr, message):
 def get_phone_number_by_name(df, minister_name):
     minister_name_str = str(minister_name).strip().lower()
     match = df[df['Name'].astype(str).str.strip().str.lower() == minister_name_str]
-    print (minister_name, match)
     if not match.empty and 'Phone Number' in match.columns and pd.notna(match['Phone Number'].iloc[0]):
         return str(match['Phone Number'].iloc[0]).strip()
     return None
@@ -163,10 +162,8 @@ for index, row in df_filtered.iterrows():
     min_list = [min1, min2, min3]
 
     for min_val in min_list:
-        print (min_val)
         if pd.notnull(min_val):
             phone_number = get_phone_number_by_name(df, min_val)
             if phone_number:
-                print (min_val, phone_number)
                 send_text(phone_number, msg)
  
