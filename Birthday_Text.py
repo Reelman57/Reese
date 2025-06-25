@@ -159,12 +159,17 @@ for index, row in df_filtered.iterrows():
     msg = f"A person whom you minister to, {name}, has a birthday today. {UC_pronoun2} phone number is {phone}\n"
     msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
 
-    phone_number = get_phone_number_by_name(df_filtered,min1)
-    if phone_number:
-        send_text(phone_number, msg)
-    phone_number = get_phone_number_by_name(df_filtered,min2)
-    if phone_number:
-        send_text(phone_number, msg)
-    phone_number = get_phone_number_by_name(df_filtered,min3)
-    if phone_number:
-        send_text(phone_number, msg)
+    if min1:
+        phone_number = get_phone_number_by_name(df_filtered,min1)
+        if phone_number:
+            send_text(phone_number, msg)
+            
+    if min2:
+        phone_number = get_phone_number_by_name(df_filtered,min2)
+        if phone_number:
+            send_text(phone_number, msg)
+
+    if min3:
+        phone_number = get_phone_number_by_name(df_filtered,min3)
+        if phone_number:
+            send_text(phone_number, msg)
