@@ -43,7 +43,7 @@ def get_phone_number_by_name(df, minister_name):
     return None
 
 # Read the CSV file
-df = pd.read_csv('77216_datafile.csv')
+df = pd.read_csv('test_file.csv')
 sent_texts = set()
 with open('DO_NOT_SEND.txt', 'r') as file:
   sent_texts = set(line.strip() for line in file)
@@ -120,9 +120,7 @@ for index, row in df_filtered.iterrows():
         for phone_number in ReliefSociety:
 
             send_text(phone_number,msg)
-            
-    #Ministering Brothers
-"""    
+             
     msg = f"A person whom you minister to, {name}, has a birthday today. {UC_pronoun2} phone number is {phone}\n"
     msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
 
@@ -137,4 +135,3 @@ for index, row in df_filtered.iterrows():
     for phone_number in get_phone_number_by_name(df, row['Minister3']):
         if phone_number:
             send_text(phone_number,msg)
-"""
