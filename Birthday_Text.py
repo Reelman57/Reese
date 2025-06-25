@@ -118,7 +118,7 @@ for index, row in df_filtered.iterrows():
 
     ReliefSociety = ['+1 (208) 610-2929','+1 (208) 920-1618', '+1 (509) 344-9400','+1 (310) 570-9897']
 
-    #Birthday Person
+    #Birthday Person -----------------------------------------------
 
     if not pd.isna(row['Phone Number']):
         phone = row['Phone Number']
@@ -134,7 +134,7 @@ for index, row in df_filtered.iterrows():
     else:
         phone = "not listed in LDS Tools"
 
-    #Bishopric
+    #Bishopric -----------------------------------------------
 
     msg = f"{name} has a birthday today, {pronoun2} phone number is {phone}\n\n"
     msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
@@ -143,7 +143,7 @@ for index, row in df_filtered.iterrows():
 
         send_text(phone_number,msg)
 
-    #Relief Society
+    #Relief Society -----------------------------------------------
 
     if row['Gender'] == 'F':
 
@@ -153,7 +153,9 @@ for index, row in df_filtered.iterrows():
         for phone_number in ReliefSociety:
 
             send_text(phone_number,msg)
-             
+    
+    #Ministers -----------------------------------------------
+           
     msg = f"A person whom you minister to, {name}, has a birthday today. {UC_pronoun2} phone number is {phone}\n"
     msg += f"Just click on {pronoun2} number for options on ways to message {pronoun}.\n\n"
 
