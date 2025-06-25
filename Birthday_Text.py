@@ -69,6 +69,7 @@ def send_text(text_nbr, message):
 def get_phone_number_by_name(df, minister_name):
     minister_name_str = str(minister_name).strip().lower()
     match = df[df['Name'].astype(str).str.strip().str.lower() == minister_name_str]
+    print (minister_name, match)
     if not match.empty and 'Phone Number' in match.columns and pd.notna(match['Phone Number'].iloc[0]):
         return str(match['Phone Number'].iloc[0]).strip()
     return None
