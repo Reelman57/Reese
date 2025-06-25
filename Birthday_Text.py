@@ -165,7 +165,7 @@ for index, row in df_filtered.iterrows():
     for min_val in min_list:
         print (min_val)
         if pd.notnull(min_val):
-            phone_number = get_phone_number_by_name(df_filtered, min_val)
+            phone_number = get_phone_number_by_name(df, min_val)
             if phone_number:
                 print (min_val, phone_number)
                 send_text(phone_number, msg)
