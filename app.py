@@ -48,7 +48,7 @@ def add_phone_to_do_not_send(request_body):
     try:
         words = request_body.split()
 
-        if len(words) < 2:
+        if len(words) < 1:
             print("Error: The request body does not contain a phone number as the second word.")
             return
 
