@@ -355,11 +355,9 @@ def incoming_sms():
             with open("DO_NOT_SEND.txt", "a") as file:
             file.write(formatted_number + "\n")
 
-        print(f"Successfully added {formatted_number} to DO_NOT_SEND.txt")
-
-            print(second_word)
+            print(f"Successfully added {formatted_number} to DO_NOT_SEND.txt")
     # --------------------------------------------------------------------------        
-        if first_word == "entire_ward":
+        elif first_word == "entire_ward":
             sms_send(msg_in, data_list, False)
             confirm_send()
             return "SMS messages scheduled.", 200
