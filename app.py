@@ -43,6 +43,30 @@ x = 0
 sent_texts = set()
 
 # --------------------------------------------------------------------------
+def add_phone_to_do_not_send(request_body):
+
+    try:
+        words = request_body.split()
+
+        if len(words) < 2:
+            print("Error: The request body does not contain a phone number as the second word.")
+            return
+
+        phone_number = words[1]
+
+        if len(phone_number) != 10 or not phone_number.isdigit():
+            print(f"Error: Invalid phone number format: {phone_number}")
+            return
+
+        formatted_number = f"({phone_number[0:3]}) {phone_number[3:6]}-{phone_number[6:]}"
+        with open("DO_NOT_SEND.txt", "a") as file:
+            file.write(formatted_number + "\n")
+
+        print(f"Successfully added {formatted_number} to DO_NOT_SEND.txt")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+# --------------------------------------------------------------------------
 def get_send_time():
     timezone = pytz.timezone('America/Los_Angeles')
     now_utc = datetime.now(timezone)
@@ -325,6 +349,10 @@ def incoming_sms():
         #data_file = "test_file.csv"
         data_list = process_data(data_file)
     # --------------------------------------------------------------------------
+        if first_word == "add_dnc":
+            add_phone_to_do_not_send(second_word)
+            print(second_word)
+    # --------------------------------------------------------------------------        
         if first_word == "entire_ward":
             sms_send(msg_in, data_list, False)
             confirm_send()
