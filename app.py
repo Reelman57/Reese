@@ -330,7 +330,6 @@ def incoming_sms():
             formatted_number = f"({phone_number[0:3]}) {phone_number[3:6]}-{phone_number[6:]}"
             with open("DO_NOT_SEND.txt", "a") as file:
                 file.write(formatted_number + "\n")
-                print(second_word)
                 print(f"Successfully added {formatted_number} to DO_NOT_SEND.txt")
             return "Do Not Send List Updated.", 200
     # --------------------------------------------------------------------------        
