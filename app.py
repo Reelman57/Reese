@@ -350,7 +350,13 @@ def incoming_sms():
         data_list = process_data(data_file)
     # --------------------------------------------------------------------------
         if first_word == "add_dnc":
-            add_phone_to_do_not_send(second_word)
+            phone_number = second_word
+            formatted_number = f"({phone_number[0:3]}) {phone_number[3:6]}-{phone_number[6:]}"
+            with open("DO_NOT_SEND.txt", "a") as file:
+            file.write(formatted_number + "\n")
+
+        print(f"Successfully added {formatted_number} to DO_NOT_SEND.txt")
+
             print(second_word)
     # --------------------------------------------------------------------------        
         if first_word == "entire_ward":
