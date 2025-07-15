@@ -495,7 +495,7 @@ def incoming_sms():
                             companions_formatted.append(comp.strip())
                     companions_str = ", ".join(companions_formatted) if companions_formatted else "None"
             
-                    msg = f"Brother {last_name},\n"
+                    msg = f"{first_name},\n"
                     msg += f"{msg_in}\n\n"
                     msg += f"These are the individuals you have been assigned to:\n{family_list_str}\n\n"
                     msg += f"Your Companion(s) are: {companions_str}\n\n"
