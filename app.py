@@ -327,19 +327,19 @@ def incoming_sms():
     # --------------------------------------------------------------------------
     if first_word.lower().strip() == "add_dnc":
         phone_number = second_word
-    
+
         if not phone_number.isdigit() or len(phone_number) != 10:
             resp = MessagingResponse()
             resp.message(f"Error: '{phone_number}' is not a valid 10-digit number.")
             return str(resp), 200
-    
+
         formatted_number = f"({phone_number[0:3]}) {phone_number[3:6]}-{phone_number[6:]}"
         with open("DO_NOT_SEND.txt", "a") as file:
             file.write(formatted_number + "\n")
-        
+
         resp = MessagingResponse()
         resp.message(f"Successfully added {formatted_number} to the DNC list.")
-        return str(resp), 200  
+        return str(resp), 200
     # --------------------------------------------------------------------------        
         elif first_word == "entire_ward":
             sms_send(msg_in, data_list, False)
