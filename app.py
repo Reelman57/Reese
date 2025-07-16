@@ -16,8 +16,6 @@ from tasks import send_emails, send_voice
 import pandas as pd
 import pytz
 import redis
-import os
-import psycopg2
 from flask import Flask, request, Response
 from rq import Queue
 from twilio.rest import Client
@@ -39,9 +37,6 @@ client = Client(account_sid, auth_token)
 redis_url = os.getenv('REDISCLOUD_URL', os.getenv('REDIS_URL', 'redis://localhost:6379'))
 redis_conn = redis.from_url(redis_url)
 q = Queue(connection=redis_conn)
-
-DATABASE_URL = os.environ.get('DATABASE_URL')
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Global variables
 x = 0
